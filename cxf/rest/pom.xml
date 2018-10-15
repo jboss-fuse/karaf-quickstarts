@@ -23,7 +23,7 @@
     <parent>
         <groupId>org.jboss.fuse.quickstarts</groupId>
         <artifactId>cxf</artifactId>
-        <version>7.0.0.redhat-SNAPSHOT</version>
+        <version>7.2.0.redhat-SNAPSHOT</version>
     </parent>
 
     <artifactId>cxf-rest</artifactId>
@@ -206,9 +206,9 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.cxf</groupId>
+                <groupId>org.jboss.redhat-fuse</groupId>
                 <artifactId>cxf-java2wadl-plugin</artifactId>
-                <version>${version.org.apache.cxf}</version>
+                <version>${fuse.version}</version>
                 <executions>
                     <execution>
                         <id>parsejavadoc</id>
@@ -234,7 +234,7 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.cxf</groupId>
+                <groupId>org.jboss.redhat-fuse</groupId>
                 <artifactId>cxf-java2swagger-plugin</artifactId>
                 <executions>
                     <execution>

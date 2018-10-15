@@ -20,22 +20,32 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.jboss.fuse.quickstarts</groupId>
-        <artifactId>beginner</artifactId>
-        <version>7.0.0.redhat-SNAPSHOT</version>
-    </parent>
-
+    <groupId>org.jboss.fuse.quickstarts</groupId>
     <artifactId>beginner-camel-log</artifactId>
+    <version>7.2.0.redhat-SNAPSHOT</version>
     <packaging>bundle</packaging>
 
     <name>Red Hat Fuse :: Quickstarts :: camel-log</name>
     <description>Camel Log Example</description>
 
+    <properties>
+      <fuse.version>7.2.0.fuse-720012</fuse.version>
+      <version.plugin.felix.maven-bundle-plugin>3.5.0</version.plugin.felix.maven-bundle-plugin>
+    </properties>
+
+    <dependencyManagement>
+      <dependencies>
+        <dependency>
+            <groupId>org.jboss.redhat-fuse</groupId>
+            <artifactId>fuse-karaf-bom</artifactId>
+            <version>${fuse.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+      </dependencies>
+    </dependencyManagement>
+
     <dependencies>
-        <!--
-        For this example, we will be using the OSGi Blueprint XML syntax for Apache Camel.
-        -->
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-blueprint</artifactId>
@@ -43,6 +53,16 @@
     </dependencies>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <version>${version.plugin.felix.maven-bundle-plugin}</version>
+                    <extensions>true</extensions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <finalName>shared</finalName>
         <plugins>
             <plugin>
