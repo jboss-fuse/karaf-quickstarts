@@ -19,14 +19,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-
-	<parent>
-		<groupId>org.jboss.fuse.quickstarts</groupId>
-		<artifactId>camel-quickstarts</artifactId>
-		<version>7.2.0.redhat-SNAPSHOT</version>
-	</parent>
-
+	
+	<groupId>org.jboss.fuse.quickstarts</groupId>
 	<artifactId>camel-sap</artifactId>
+	<version>7.2.0.redhat-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 
 	<name>Red Hat Fuse :: Quickstarts :: camel-sap</name>
@@ -34,6 +30,11 @@
 	<url>https://github.com/jboss-fuse/fuse-karaf/tree/master/quickstarts/camel/camel/camel-sap</url>
 
 	<properties>
+        <fuse.version>7.2.0.fuse-720012</fuse.version>
+        <version.plugin.felix.maven-bundle-plugin>3.5.0</version.plugin.felix.maven-bundle-plugin>
+        <version.plugin.maven-compiler-plugin>3.7.0</version.plugin.maven-compiler-plugin>
+		<version.plugin.maven-resources-plugin>3.0.2</version.plugin.maven-resources-plugin>
+
 		<fuse.osgi.symbolic.name>org.jboss.fuse.quickstarts.camel-sap</fuse.osgi.symbolic.name>
 		<fuse.osgi.bundle.name>Red Hat Fuse :: Quickstarts :: camel-sap</fuse.osgi.bundle.name>
 		<fuse.osgi.import>*</fuse.osgi.import>
@@ -43,6 +44,18 @@
 			org.jboss.fuse.quickstarts.sap.processor;version=${project.version}</fuse.osgi.export>
 		<fuse.osgi.private.pkg>org.jboss.fuse.quickstarts.sap.*;-split-package:=merge-first</fuse.osgi.private.pkg>
 	</properties>
+
+    <dependencyManagement>
+      <dependencies>
+        <dependency>
+            <groupId>org.jboss.redhat-fuse</groupId>
+            <artifactId>fuse-karaf-bom</artifactId>
+            <version>${fuse.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+      </dependencies>
+    </dependencyManagement>
 
 	<dependencies>
 		<dependency>
@@ -78,6 +91,26 @@
 	</dependencies>
 	
 	<build>
+	    <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <version>${version.plugin.felix.maven-bundle-plugin}</version>
+                    <extensions>true</extensions>
+                </plugin>
+				<plugin>
+					 <groupId>org.apache.maven.plugins</groupId>
+				     <artifactId>maven-compiler-plugin</artifactId>
+				     <version>${version.plugin.maven-compiler-plugin}</version>
+				</plugin>
+				<plugin>
+				     <groupId>org.apache.maven.plugins</groupId>
+				     <artifactId>maven-resources-plugin</artifactId>
+				     <version>${version.plugin.maven-resources-plugin}</version>
+				</plugin>
+            </plugins>
+        </pluginManagement>
 		<defaultGoal>install</defaultGoal>
 		<resources>
 			<resource>

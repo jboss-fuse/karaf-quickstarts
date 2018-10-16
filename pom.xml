@@ -32,7 +32,6 @@
         <module>beginner/camel-eips</module>
         <module>beginner/camel-errorhandler</module>
         <module>beginner/camel-log</module>
-<!--
         <module>camel/camel-box</module>
         <module>camel/camel-hl7</module>
         <module>camel/camel-jms</module>
@@ -42,7 +41,7 @@
         <module>custom</module>
         <module>cxf/camel-cxf-code-first</module>
         <module>cxf/camel-cxf-contract-first</module>
-        <module>cxf/rest</module>
+        <!--<module>cxf/rest</module>-->
         <module>cxf/secure-rest</module>
         <module>cxf/secure-soap</module>
         <module>cxf/soap</module>
@@ -51,7 +50,6 @@
         <module>persistence/standalone-xa</module>
         <module>persistence/javaee-xa</module>
         <module>persistence/manual</module>
-	-->
     </modules>
 
     <!-- Distribution Management                                                     -->

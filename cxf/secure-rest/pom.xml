@@ -20,17 +20,30 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.jboss.fuse.quickstarts</groupId>
-        <artifactId>cxf</artifactId>
-        <version>7.2.0.redhat-SNAPSHOT</version>
-    </parent>
-
+    <groupId>org.jboss.fuse.quickstarts</groupId>
     <artifactId>cxf-secure-rest</artifactId>
+    <version>7.2.0.redhat-SNAPSHOT</version>
     <packaging>bundle</packaging>
     
     <name>Red Hat Fuse :: Quickstarts :: secure-rest</name>
     <description>Secure Restful Web Services Example using JAX-RS Basic Authentication with Fuse</description>
+
+    <properties>
+      <fuse.version>7.2.0.fuse-720012</fuse.version>
+      <version.plugin.felix.maven-bundle-plugin>3.5.0</version.plugin.felix.maven-bundle-plugin>
+    </properties>
+
+    <dependencyManagement>
+      <dependencies>
+        <dependency>
+            <groupId>org.jboss.redhat-fuse</groupId>
+            <artifactId>fuse-karaf-bom</artifactId>
+            <version>${fuse.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+      </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <!--
@@ -125,6 +138,16 @@
     </dependencies>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <version>${version.plugin.felix.maven-bundle-plugin}</version>
+                    <extensions>true</extensions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <finalName>shared</finalName>
         <plugins>
             <plugin>
@@ -160,9 +183,9 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.cxf</groupId>
+                <groupId>org.jboss.redhat-fuse</groupId>
                 <artifactId>cxf-java2wadl-plugin</artifactId>
-                <version>${version.org.apache.cxf}</version>
+                <version>${fuse.version}</version>
                 <executions>
                     <execution>
                         <id>process-classes</id>

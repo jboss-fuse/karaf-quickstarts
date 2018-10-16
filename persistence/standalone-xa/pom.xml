@@ -20,17 +20,51 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-      <groupId>org.jboss.fuse.quickstarts</groupId>
-      <artifactId>persistence</artifactId>
-      <version>7.2.0.redhat-SNAPSHOT</version>
-    </parent>
-
+    <groupId>org.jboss.fuse.quickstarts</groupId>
     <artifactId>standalone-xa</artifactId>
+    <version>7.2.0.redhat-SNAPSHOT</version>
     <packaging>jar</packaging>
     
     <name>Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support</name>
     <description>Persistence example in standalone environment</description>
+
+    <properties>
+      <fuse.version>7.2.0.fuse-720012</fuse.version>
+      <version.plugin.felix.maven-bundle-plugin>3.5.0</version.plugin.felix.maven-bundle-plugin>
+      <version.plugin.maven-compiler-plugin>3.7.0</version.plugin.maven-compiler-plugin>
+      <version.org.postgresql>42.2.2</version.org.postgresql>
+    </properties>
+
+    <dependencyManagement>
+      <dependencies>
+        <dependency>
+            <groupId>org.jboss.redhat-fuse</groupId>
+            <artifactId>fuse-karaf-bom</artifactId>
+            <version>${fuse.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${version.org.postgresql}</version>
+        </dependency>
+      </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${version.plugin.maven-compiler-plugin}</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <dependencies>
 

@@ -20,18 +20,18 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.jboss.fuse.quickstarts</groupId>
-        <artifactId>quickstarts-parent</artifactId>
-        <version>7.2.0.redhat-SNAPSHOT</version>
-    </parent>
-
+    <groupId>org.jboss.fuse.quickstarts</groupId>
     <artifactId>custom-distro</artifactId>
+    <version>7.2.0.redhat-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Red Hat Fuse :: Quickstarts :: custom distro</name>
 
     <properties>
+      <fuse.version>7.2.0-SNAPSHOT</fuse.version>
+      <fuse.bom.version>7.2.0.fuse-720023</fuse.bom.version>
+      <version.org.apache.karaf>4.2.0.fuse-720035</version.org.apache.karaf>
+      <version.plugin.felix.maven-bundle-plugin>3.5.0</version.plugin.felix.maven-bundle-plugin>
       <version.net.java.dev.jna>4.4.0</version.net.java.dev.jna>
       <version.org.apache.servicemix.bundles.xalan>2.7.2_3</version.org.apache.servicemix.bundles.xalan>
       <version.org.apache.servicemix.bundles.xalan-serializer>2.7.2_1</version.org.apache.servicemix.bundles.xalan-serializer>
@@ -39,6 +39,18 @@
       <version.org.apache.servicemix.specs>2.9.0</version.org.apache.servicemix.specs>
       <version.org.osgi>6.0.0</version.org.osgi>
     </properties>
+
+    <dependencyManagement>
+      <dependencies>
+        <dependency>
+            <groupId>org.jboss.redhat-fuse</groupId>
+            <artifactId>fuse-karaf-bom</artifactId>
+            <version>${fuse.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+      </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <!--
@@ -263,7 +275,7 @@
                         <library>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.xalan-serializer/${version.org.apache.servicemix.bundles.xalan-serializer};type:=endorsed;export:=true</library>
                         <library>mvn:javax.annotation/javax.annotation-api/1.2;type:=endorsed;export:=true</library>
                         <!-- lib -->
-                        <library>mvn:org.jboss.fuse.modules/fuse-branding/${project.version};type:=default;export:=false</library>
+                        <library>mvn:org.jboss.fuse.modules/fuse-branding/${fuse.bom.version};type:=default;export:=false</library>
                         <library>mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.activator/${version.org.apache.servicemix.specs};type:=default;export:=true</library>
                         <library>mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.locator/${version.org.apache.servicemix.specs};type:=default;export:=true</library>
                         <!-- lib/boot -->
