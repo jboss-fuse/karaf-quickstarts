@@ -22,17 +22,19 @@
 
     <groupId>org.jboss.fuse.quickstarts</groupId>
     <artifactId>standalone-xa</artifactId>
-    <version>7.2.0.redhat-SNAPSHOT</version>
+    <version>7.3.0.redhat-SNAPSHOT</version>
     <packaging>jar</packaging>
     
     <name>Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support</name>
     <description>Persistence example in standalone environment</description>
 
     <properties>
-      <fuse.version>7.2.0.fuse-720012</fuse.version>
+      <fuse.version>7.3.0-SNAPSHOT</fuse.version>
       <version.plugin.felix.maven-bundle-plugin>3.5.0</version.plugin.felix.maven-bundle-plugin>
       <version.plugin.maven-compiler-plugin>3.7.0</version.plugin.maven-compiler-plugin>
       <version.org.postgresql>42.2.2</version.org.postgresql>
+
+      <skip.quickstarts.tests>true</skip.quickstarts.tests>
     </properties>
 
     <dependencyManagement>
@@ -61,6 +63,14 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <!-- Skip tests by default and enable them only in "qtest" profile -->
+                    <skipTests>${skip.quickstarts.tests}</skipTests>
                 </configuration>
             </plugin>
         </plugins>
@@ -274,6 +284,15 @@
                     <scope>test</scope>
                 </dependency>
             </dependencies>
+        </profile>
+        <profile>
+            <id>qtest</id>
+            <properties>
+                <skip.quickstarts.tests>false</skip.quickstarts.tests>
+            </properties>
+            <build>
+                <defaultGoal>verify</defaultGoal>
+            </build>
         </profile>
     </profiles>
 

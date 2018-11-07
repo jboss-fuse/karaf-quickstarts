@@ -22,7 +22,7 @@
 	
 	<groupId>org.jboss.fuse.quickstarts</groupId>
 	<artifactId>camel-sap</artifactId>
-	<version>7.2.0.redhat-SNAPSHOT</version>
+	<version>7.3.0.redhat-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 
 	<name>Red Hat Fuse :: Quickstarts :: camel-sap</name>
@@ -30,19 +30,19 @@
 	<url>https://github.com/jboss-fuse/fuse-karaf/tree/master/quickstarts/camel/camel/camel-sap</url>
 
 	<properties>
-        <fuse.version>7.2.0.fuse-720012</fuse.version>
-        <version.plugin.felix.maven-bundle-plugin>3.5.0</version.plugin.felix.maven-bundle-plugin>
-        <version.plugin.maven-compiler-plugin>3.7.0</version.plugin.maven-compiler-plugin>
-		<version.plugin.maven-resources-plugin>3.0.2</version.plugin.maven-resources-plugin>
+            <fuse.version>7.3.0-SNAPSHOT</fuse.version>
+            <version.plugin.felix.maven-bundle-plugin>3.5.0</version.plugin.felix.maven-bundle-plugin>
+            <version.plugin.maven-compiler-plugin>3.7.0</version.plugin.maven-compiler-plugin>
+            <version.plugin.maven-resources-plugin>3.0.2</version.plugin.maven-resources-plugin>
 
-		<fuse.osgi.symbolic.name>org.jboss.fuse.quickstarts.camel-sap</fuse.osgi.symbolic.name>
-		<fuse.osgi.bundle.name>Red Hat Fuse :: Quickstarts :: camel-sap</fuse.osgi.bundle.name>
-		<fuse.osgi.import>*</fuse.osgi.import>
-		<fuse.osgi.export>org.jboss.fuse.quickstarts.sap;version=${project.version},
-			org.jboss.fuse.quickstarts.sap.bean;version=${project.version},
-			org.jboss.fuse.quickstarts.sap.jaxb;version=${project.version},
-			org.jboss.fuse.quickstarts.sap.processor;version=${project.version}</fuse.osgi.export>
-		<fuse.osgi.private.pkg>org.jboss.fuse.quickstarts.sap.*;-split-package:=merge-first</fuse.osgi.private.pkg>
+            <fuse.osgi.symbolic.name>org.jboss.fuse.quickstarts.camel-sap</fuse.osgi.symbolic.name>
+            <fuse.osgi.bundle.name>Red Hat Fuse :: Quickstarts :: camel-sap</fuse.osgi.bundle.name>
+            <fuse.osgi.import>*</fuse.osgi.import>
+            <fuse.osgi.export>org.jboss.fuse.quickstarts.sap;version=${project.version},
+                org.jboss.fuse.quickstarts.sap.bean;version=${project.version},
+                org.jboss.fuse.quickstarts.sap.jaxb;version=${project.version},
+                org.jboss.fuse.quickstarts.sap.processor;version=${project.version}</fuse.osgi.export>
+           <fuse.osgi.private.pkg>org.jboss.fuse.quickstarts.sap.*;-split-package:=merge-first</fuse.osgi.private.pkg>
 	</properties>
 
     <dependencyManagement>

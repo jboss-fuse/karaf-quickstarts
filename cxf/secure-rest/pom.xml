@@ -22,15 +22,17 @@
 
     <groupId>org.jboss.fuse.quickstarts</groupId>
     <artifactId>cxf-secure-rest</artifactId>
-    <version>7.2.0.redhat-SNAPSHOT</version>
+    <version>7.3.0.redhat-SNAPSHOT</version>
     <packaging>bundle</packaging>
     
     <name>Red Hat Fuse :: Quickstarts :: secure-rest</name>
     <description>Secure Restful Web Services Example using JAX-RS Basic Authentication with Fuse</description>
 
     <properties>
-      <fuse.version>7.2.0.fuse-720012</fuse.version>
+      <fuse.version>7.3.0-SNAPSHOT</fuse.version>
       <version.plugin.felix.maven-bundle-plugin>3.5.0</version.plugin.felix.maven-bundle-plugin>
+
+      <skip.quickstarts.tests>true</skip.quickstarts.tests>
     </properties>
 
     <dependencyManagement>
@@ -222,7 +224,25 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <!-- Skip tests by default and enable them only in "qtest" profile -->
+                    <skipTests>${skip.quickstarts.tests}</skipTests>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
+    <profiles>
+        <profile>
+            <id>qtest</id>
+            <properties>
+                <skip.quickstarts.tests>false</skip.quickstarts.tests>
+            </properties>
+            <build>
+                <defaultGoal>verify</defaultGoal>
+            </build>
+        </profile>
+    </profiles>
 </project>

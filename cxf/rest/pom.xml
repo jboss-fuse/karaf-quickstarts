@@ -22,14 +22,14 @@
 
     <groupId>org.jboss.fuse.quickstarts</groupId>
     <artifactId>cxf-rest</artifactId>
-    <version>7.2.0.redhat-SNAPSHOT</version>
+    <version>7.3.0.redhat-SNAPSHOT</version>
     <packaging>bundle</packaging>
   
     <name>Red Hat Fuse :: Quickstarts :: rest</name>
     <description>RESTful WebService Example using JAX-RS with Red Hat Fuse</description>
 
     <properties>
-      <fuse.version>7.2.0.fuse-720012</fuse.version>
+      <fuse.version>7.3.0-SNAPSHOT</fuse.version>
       <version.plugin.felix.maven-bundle-plugin>3.5.0</version.plugin.felix.maven-bundle-plugin>
       <version.plugin.maven-compiler-plugin>3.7.0</version.plugin.maven-compiler-plugin>
     </properties>

@@ -22,13 +22,13 @@
 
     <groupId>org.jboss.fuse.quickstarts</groupId>
     <artifactId>custom-distro</artifactId>
-    <version>7.2.0.redhat-SNAPSHOT</version>
+    <version>7.3.0.redhat-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Red Hat Fuse :: Quickstarts :: custom distro</name>
 
     <properties>
-      <fuse.version>7.2.0-SNAPSHOT</fuse.version>
+      <fuse.version>7.3.0-SNAPSHOT</fuse.version>
       <fuse.bom.version>7.2.0.fuse-720023</fuse.bom.version>
       <version.org.apache.karaf>4.2.0.fuse-720035</version.org.apache.karaf>
       <version.plugin.felix.maven-bundle-plugin>3.5.0</version.plugin.felix.maven-bundle-plugin>
