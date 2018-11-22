@@ -18,96 +18,200 @@
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-	<modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>org.jboss.fuse.quickstarts</groupId>
-		<artifactId>camel-quickstarts</artifactId>
-		<version>7.3.0.redhat-SNAPSHOT</version>
-	</parent>
+    <groupId>org.jboss.fuse.quickstarts</groupId>
+    <artifactId>camel-sap</artifactId>
+    <version>7.3.0.redhat-SNAPSHOT</version>
+    <packaging>bundle</packaging>
 
-	<artifactId>camel-sap</artifactId>
-	<packaging>bundle</packaging>
+    <name>Red Hat Fuse :: Quickstarts :: camel-sap</name>
+    <description>SAP Camel Components Example</description>
 
-	<name>Red Hat Fuse :: Quickstarts :: camel-sap</name>
-	<description>SAP Camel Components Example</description>
-	<url>https://github.com/jboss-fuse/fuse-karaf/tree/master/quickstarts/camel/camel/camel-sap</url>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-	<properties>
-		<fuse.osgi.symbolic.name>org.jboss.fuse.quickstarts.camel-sap</fuse.osgi.symbolic.name>
-		<fuse.osgi.bundle.name>Red Hat Fuse :: Quickstarts :: camel-sap</fuse.osgi.bundle.name>
-		<fuse.osgi.import>*</fuse.osgi.import>
-		<fuse.osgi.export>org.jboss.fuse.quickstarts.sap;version=${project.version},
-			org.jboss.fuse.quickstarts.sap.bean;version=${project.version},
-			org.jboss.fuse.quickstarts.sap.jaxb;version=${project.version},
-			org.jboss.fuse.quickstarts.sap.processor;version=${project.version}</fuse.osgi.export>
-		<fuse.osgi.private.pkg>org.jboss.fuse.quickstarts.sap.*;-split-package:=merge-first</fuse.osgi.private.pkg>
-	</properties>
+        <skip.quickstarts.tests>true</skip.quickstarts.tests>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-blueprint</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-jaxb</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.fusesource</groupId>
-			<artifactId>camel-sap</artifactId>
-		</dependency>
+        <!-- version of BOM -->
+        <version.org.jboss.redhat-fuse>7.3.0.fuse-730003</version.org.jboss.redhat-fuse>
 
-		<!-- logging -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-		</dependency>
-	</dependencies>
-	
-	<build>
-		<defaultGoal>install</defaultGoal>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
-			</resource>
-			<resource>
-				<directory>src/main/fuse</directory>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<configuration>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
+        <!-- versions of Maven plugins -->
+        <version.plugin.felix.maven-bundle-plugin>3.5.1</version.plugin.felix.maven-bundle-plugin>
+        <!-- Plugins from org.apache.maven.plugins -->
+        <version.plugin.maven-compiler-plugin>3.7.0</version.plugin.maven-compiler-plugin>
+        <version.plugin.maven-deploy-plugin>2.8.2</version.plugin.maven-deploy-plugin>
+        <version.plugin.maven-install-plugin>2.5.2</version.plugin.maven-install-plugin>
+        <version.plugin.maven-resources-plugin>3.0.2</version.plugin.maven-resources-plugin>
+        <version.plugin.maven-surefire-plugin>2.20.1</version.plugin.maven-surefire-plugin>
+    </properties>
 
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-				<extensions>true</extensions>
-			</plugin>
-		</plugins>
-	</build>
+    <repositories>
+        <repository>
+            <id>redhat-ga-repository</id>
+            <url>https://maven.repository.redhat.com/ga</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>redhat-ga-repository</id>
+            <url>https://maven.repository.redhat.com/ga</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Fuse BOM to import all non-plugin dependencies -->
+            <dependency>
+                <groupId>org.jboss.redhat-fuse</groupId>
+                <artifactId>fuse-karaf-bom</artifactId>
+                <version>${version.org.jboss.redhat-fuse}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-blueprint</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jaxb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.fusesource</groupId>
+            <artifactId>camel-sap</artifactId>
+        </dependency>
+
+        <!-- logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <defaultGoal>install</defaultGoal>
+
+        <pluginManagement>
+            <plugins>
+
+                <!-- Core plugins -->
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${version.plugin.maven-compiler-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${version.plugin.maven-deploy-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${version.plugin.maven-install-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${version.plugin.maven-resources-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${version.plugin.maven-surefire-plugin}</version>
+                </plugin>
+
+                <!-- Felix plugins -->
+
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <version>${version.plugin.felix.maven-bundle-plugin}</version>
+                    <extensions>true</extensions>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/fuse</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <obrRepository>NONE</obrRepository>
+                    <instructions>
+                        <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Name>${project.name}</Bundle-Name>
+                        <Import-Package>*</Import-Package>
+                        <Export-Package>
+                            org.jboss.fuse.quickstarts.sap;version=${project.version},
+                            org.jboss.fuse.quickstarts.sap.bean;version=${project.version},
+                            org.jboss.fuse.quickstarts.sap.jaxb;version=${project.version},
+                            org.jboss.fuse.quickstarts.sap.processor;version=${project.version}
+                        </Export-Package>
+                        <Private-Package>
+                            org.jboss.fuse.quickstarts.sap.*;-split-package:=merge-first
+                        </Private-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

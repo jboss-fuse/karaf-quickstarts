@@ -21,14 +21,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-      <groupId>org.jboss.fuse.quickstarts</groupId>
-      <artifactId>quickstarts-parent</artifactId>
-      <version>7.3.0.redhat-SNAPSHOT</version>
+        <groupId>org.jboss.fuse.quickstarts</groupId>
+        <artifactId>quickstarts-parent</artifactId>
+        <version>7.3.0.redhat-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>camel-quickstarts</artifactId>
     <packaging>pom</packaging>
-    
+
     <name>Red Hat Fuse :: Quickstarts :: camel</name>
 
     <modules>
@@ -50,4 +51,5 @@
             </modules>
         </profile>
     </profiles>
+
 </project>

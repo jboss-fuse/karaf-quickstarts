@@ -20,18 +20,71 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-      <groupId>org.jboss.fuse.quickstarts</groupId>
-      <artifactId>camel-quickstarts</artifactId>
-      <version>7.3.0.redhat-SNAPSHOT</version>
-    </parent>
-
+    <groupId>org.jboss.fuse.quickstarts</groupId>
     <artifactId>camel-box</artifactId>
+    <version>7.3.0.redhat-SNAPSHOT</version>
     <packaging>bundle</packaging>
-    
+
     <name>Red Hat Fuse :: Quickstarts :: camel-box</name>
     <description>Camel Box.com Example</description>
-    <url>https://github.com/jboss-fuse/fuse-karaf/tree/master/quickstarts/camel/camel-box</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <skip.quickstarts.tests>true</skip.quickstarts.tests>
+
+        <!-- version of BOM -->
+        <version.org.jboss.redhat-fuse>7.3.0.fuse-730003</version.org.jboss.redhat-fuse>
+
+        <!-- versions of Maven plugins -->
+        <version.plugin.felix.maven-bundle-plugin>3.5.1</version.plugin.felix.maven-bundle-plugin>
+        <!-- Plugins from org.apache.maven.plugins -->
+        <version.plugin.maven-compiler-plugin>3.7.0</version.plugin.maven-compiler-plugin>
+        <version.plugin.maven-deploy-plugin>2.8.2</version.plugin.maven-deploy-plugin>
+        <version.plugin.maven-install-plugin>2.5.2</version.plugin.maven-install-plugin>
+        <version.plugin.maven-resources-plugin>3.0.2</version.plugin.maven-resources-plugin>
+        <version.plugin.maven-surefire-plugin>2.20.1</version.plugin.maven-surefire-plugin>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>redhat-ga-repository</id>
+            <url>https://maven.repository.redhat.com/ga</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>redhat-ga-repository</id>
+            <url>https://maven.repository.redhat.com/ga</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Fuse BOM to import all non-plugin dependencies -->
+            <dependency>
+                <groupId>org.jboss.redhat-fuse</groupId>
+                <artifactId>fuse-karaf-bom</artifactId>
+                <version>${version.org.jboss.redhat-fuse}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -52,6 +105,50 @@
 
     <build>
         <finalName>${project.artifactId}</finalName>
+
+        <pluginManagement>
+            <plugins>
+
+                <!-- Core plugins -->
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${version.plugin.maven-compiler-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${version.plugin.maven-deploy-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${version.plugin.maven-install-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${version.plugin.maven-resources-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${version.plugin.maven-surefire-plugin}</version>
+                </plugin>
+
+                <!-- Felix plugins -->
+
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <version>${version.plugin.felix.maven-bundle-plugin}</version>
+                    <extensions>true</extensions>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.felix</groupId>
@@ -60,4 +157,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>
