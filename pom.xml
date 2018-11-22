@@ -189,9 +189,9 @@
             <!-- Fuse BOM to import all non-plugin dependencies -->
 
             <dependency>
-                <groupId>org.jboss.fuse</groupId>
-                <artifactId>jboss-fuse-parent</artifactId>
-                <version>7.3.0.redhat-SNAPSHOT</version>
+                <groupId>org.jboss.redhat-fuse</groupId>
+                <artifactId>fuse-karaf-bom</artifactId>
+                <version>7.3.0.fuse-730003</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
