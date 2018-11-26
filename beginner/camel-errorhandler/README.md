@@ -24,7 +24,7 @@ In studying this quick start you will learn:
 
 This example picks up XML files, and depending on the error that occurs during processing, they are routed to different endpoints, as shown in figure below.
 
-![Camel DLC diagram](https://raw.githubusercontent.com/jboss-fuse/fabric8/1.2.0.redhat-6-3-x/docs/images/camel-errorhandler-diagram.jpg)   
+![Camel DLC diagram](https://raw.githubusercontent.com/jboss-fuse/karaf-quickstarts/7.x.redhat-7-x/docs/images/camel-errorhandler-diagram.jpg)   
 
 For more information see:
 

@@ -22,7 +22,7 @@ Then we want to store the orders in separate directories by geographical region.
 
 Finally, we want to filter out the orders that contain more than 100 animals and generate a message for the strategic account team. This is done using a Filter EIP, as shown in the figure below.
 
-![Camel EIP diagram](https://raw.githubusercontent.com/jboss-fuse/fabric8/1.2.0.redhat-6-3-x/docs/images/camel-eips-diagram.jpg)
+![Camel EIP diagram](https://raw.githubusercontent.com/jboss-fuse/karaf-quickstarts/7.x.redhat-7-x/docs/images/camel-eips-diagram.jpg)
 
 
 

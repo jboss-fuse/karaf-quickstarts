@@ -24,7 +24,7 @@ In studying this quick start you will learn:
 
 This example picks up incoming XML files, and depending on the content of the XML files, they are routed to different endpoints, as shown in figure below.
 
-![Camel CBR diagram](https://raw.githubusercontent.com/jboss-fuse/fabric8/1.2.0.redhat-6-3-x/docs/images/camel-cbr-diagram.jpg)
+![Camel CBR diagram](https://raw.githubusercontent.com/jboss-fuse/karaf-quickstarts/7.x.redhat-7-x/docs/images/camel-cbr-diagram.jpg)
 
 For more information see:
 
