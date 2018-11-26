@@ -75,7 +75,9 @@
 
     <dependencyManagement>
         <dependencies>
+
             <!-- Fuse BOM to import all non-plugin dependencies -->
+
             <dependency>
                 <groupId>org.jboss.redhat-fuse</groupId>
                 <artifactId>fuse-karaf-bom</artifactId>
@@ -83,10 +85,14 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
+
+        <!-- Camel dependencies -->
+
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-core</artifactId>
@@ -105,7 +111,8 @@
             <artifactId>camel-sap</artifactId>
         </dependency>
 
-        <!-- logging -->
+        <!-- Logging dependencies -->
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -113,16 +120,12 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
+            <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-        </dependency>
+
     </dependencies>
 
     <build>
-        <defaultGoal>install</defaultGoal>
-
         <pluginManagement>
             <plugins>
 
@@ -178,17 +181,28 @@
         </resources>
 
         <plugins>
+
+            <!-- Core plugins -->
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
+                <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <encoding>UTF-8</encoding>
+                    <!-- Skip tests by default and enable them only in "qtest" profile -->
+                    <skipTests>${skip.quickstarts.tests}</skipTests>
                 </configuration>
             </plugin>
+
+            <!-- Felix plugins -->
+
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
@@ -196,7 +210,7 @@
                 <configuration>
                     <obrRepository>NONE</obrRepository>
                     <instructions>
-                        <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Import-Package>*</Import-Package>
                         <Export-Package>
@@ -211,7 +225,20 @@
                     </instructions>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>qtest</id>
+            <properties>
+                <skip.quickstarts.tests>false</skip.quickstarts.tests>
+            </properties>
+            <build>
+                <defaultGoal>verify</defaultGoal>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

@@ -37,9 +37,12 @@
         <!-- version of BOM -->
         <version.org.jboss.redhat-fuse>7.3.0.fuse-730003</version.org.jboss.redhat-fuse>
 
+        <version.org.apache.camel>2.21.0.fuse-730010</version.org.apache.camel>
+
         <!-- versions of Maven plugins -->
         <version.plugin.felix.maven-bundle-plugin>3.5.1</version.plugin.felix.maven-bundle-plugin>
         <version.plugin.mojo.build-helper-maven-plugin>3.0.0</version.plugin.mojo.build-helper-maven-plugin>
+        <version.plugin.mojo.properties-maven-plugin>1.0.0</version.plugin.mojo.properties-maven-plugin>
         <!-- Plugins from org.apache.maven.plugins -->
         <version.plugin.maven-compiler-plugin>3.7.0</version.plugin.maven-compiler-plugin>
         <version.plugin.maven-deploy-plugin>2.8.2</version.plugin.maven-deploy-plugin>
@@ -76,7 +79,9 @@
 
     <dependencyManagement>
         <dependencies>
+
             <!-- Fuse BOM to import all non-plugin dependencies -->
+
             <dependency>
                 <groupId>org.jboss.redhat-fuse</groupId>
                 <artifactId>fuse-karaf-bom</artifactId>
@@ -84,32 +89,27 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
-        <!--
-         For this example, we will be using the OSGi Blueprint XML syntax for Apache Camel.
-         The camel-blueprint bundle is installed in Red Hat Fuse by default,
-         so we are setting the dependency's scope to 'provided'.
-       -->
+
+        <!-- Camel dependencies -->
+
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-blueprint</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!--
-          Salesforce component dependency for compiling SObject POJOs
-        -->
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-salesforce</artifactId>
         </dependency>
+
     </dependencies>
 
     <build>
-        <finalName>${project.artifactId}</finalName>
-
         <pluginManagement>
             <plugins>
 
@@ -141,6 +141,14 @@
                     <version>${version.plugin.maven-surefire-plugin}</version>
                 </plugin>
 
+                <!-- Camel plugins -->
+
+                <plugin>
+                    <groupId>org.apache.camel.maven</groupId>
+                    <artifactId>camel-salesforce-maven-plugin</artifactId>
+                    <version>${version.org.apache.camel}</version>
+                </plugin>
+
                 <!-- Felix plugins -->
 
                 <plugin>
@@ -157,26 +165,68 @@
                     <artifactId>build-helper-maven-plugin</artifactId>
                     <version>${version.plugin.mojo.build-helper-maven-plugin}</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>properties-maven-plugin</artifactId>
+                    <version>${version.plugin.mojo.properties-maven-plugin}</version>
+                </plugin>
 
             </plugins>
         </pluginManagement>
 
         <plugins>
+
+            <!-- Core plugins -->
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <!-- Skip tests by default and enable them only in "qtest" profile -->
+                    <skipTests>${skip.quickstarts.tests}</skipTests>
+                </configuration>
+            </plugin>
+
+            <!-- Felix plugins -->
+
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
+                    <obrRepository>NONE</obrRepository>
                     <instructions>
-                        <Export-Package>org.apache.camel.salesforce.dto,org.jboss.fuse.quickstarts.salesforce</Export-Package>
+                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                        <Export-Package>
+                            org.apache.camel.salesforce.dto,
+                            org.jboss.fuse.quickstarts.salesforce
+                        </Export-Package>
                         <Import-Package>*</Import-Package>
                     </instructions>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 
     <profiles>
+        <profile>
+            <id>qtest</id>
+            <properties>
+                <skip.quickstarts.tests>false</skip.quickstarts.tests>
+            </properties>
+            <build>
+                <defaultGoal>verify</defaultGoal>
+            </build>
+        </profile>
         <profile>
             <!-- Include sample DTO code by default to avoid compilation errors -->
             <id>sample-pojos</id>

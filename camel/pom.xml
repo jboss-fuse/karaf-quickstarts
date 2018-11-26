@@ -30,7 +30,7 @@
     <artifactId>camel</artifactId>
     <packaging>pom</packaging>
 
-    <name>Red Hat Fuse :: Quickstarts :: camel</name>
+    <name>Red Hat Fuse :: Quickstarts :: Camel</name>
 
     <modules>
         <module>camel-box</module>
@@ -43,8 +43,10 @@
 
     <profiles>
         <profile>
-            <!-- Define the SAP example in a separate profile Requires access to the 
-                proprietary SAP JCO and IDoc libraries at build-time -->
+            <!--
+                Define the SAP example in a separate profile.
+                Requires access to proprietary SAP JCO and IDoc libraries at build-time
+            -->
             <id>sap</id>
             <modules>
                 <module>camel-sap</module>
