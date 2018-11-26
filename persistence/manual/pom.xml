@@ -37,8 +37,12 @@
         <!-- version of BOM -->
         <version.org.jboss.redhat-fuse>7.3.0.fuse-730003</version.org.jboss.redhat-fuse>
 
-        <!-- versions of Maven plugins -->
-        <version.plugin.felix.maven-bundle-plugin>3.5.1</version.plugin.felix.maven-bundle-plugin>
+        <!-- versions of dependencies not inherited from BOM -->
+        <version.org.postgresql>42.2.2</version.org.postgresql>
+
+        <!-- versions of Maven plugins (and their important dependencies) -->
+        <version.plugin.asciidoctor-maven-plugin>1.5.6</version.plugin.asciidoctor-maven-plugin>
+        <version.org.asciidoctor>1.5.8</version.org.asciidoctor>
         <!-- Plugins from org.apache.maven.plugins -->
         <version.plugin.maven-compiler-plugin>3.7.0</version.plugin.maven-compiler-plugin>
         <version.plugin.maven-deploy-plugin>2.8.2</version.plugin.maven-deploy-plugin>
@@ -87,6 +91,23 @@
     </dependencyManagement>
 
     <build>
+
+        <pluginManagement>
+
+            <plugins>
+
+                <!-- Other plugins -->
+
+                <plugin>
+                    <groupId>org.asciidoctor</groupId>
+                    <artifactId>asciidoctor-maven-plugin</artifactId>
+                    <version>${version.plugin.asciidoctor-maven-plugin}</version>
+                </plugin>
+
+            </plugins>
+
+        </pluginManagement>
+
         <plugins>
 
             <!-- Other plugins -->
