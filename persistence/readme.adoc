@@ -24,7 +24,7 @@ containing in-depth information about JDBC, JMS, transactions, data source manag
 This documentation can be built using:
 [listing,options="nowrap"]
 ----
-$ cd quickstarts/persistence/manual
+$ cd persistence/manual
 $ mvn clean process-resources
 [INFO] Scanning for projects...
 [INFO]
@@ -33,14 +33,14 @@ $ mvn clean process-resources
 [INFO] --------------------------------[ pom ]---------------------------------
 [INFO]
 ...
-[INFO] Rendered */quickstarts/persistence/manual/src/main/asciidoc/index.adoc
+[INFO] Rendered */persistence/manual/src/main/asciidoc/index.adoc
 ----
 
-Final documentation can be found in `quickstarts/persistence/manual/target/generated-docs/index.html`.
+Final documentation can be found in `persistence/manual/target/generated-docs/index.html`.
 
 == Database and configuration scripts
 
-`quickstarts/persistence/databases` directory contains different scripts and examples which are not itself part of Maven artifact:
+`persistence/databases` directory contains different scripts and examples which are not itself part of Maven artifact:
 
 * `scripts` contains SQL scripts, referred to from chapter 1 of the manual (_Database configuration_)
 
@@ -53,7 +53,7 @@ provide _deployment method_ to configure JDBC data sources.
 
 == Message broker and configuration scripts
 
-`quickstarts/persistence/message-brokers` directory contains different examples which are not itself part of Maven artifact:
+`persistence/message-brokers` directory contains different examples which are not itself part of Maven artifact:
 
 * `cm` contains sample Configuration Admin factory configuration that may be used to configure JMS connection pool
 using `pax-jms` features
@@ -91,7 +91,7 @@ drwxrwxr-x. 5 ggrzybek ggrzybek    4096 04-13 16:22 ..
 -rw-rw-r--. 1 ggrzybek ggrzybek   77116 04-13 16:20 providerutil.jar
 
 $ pwd
-/home/ggrzybek/sources/github.com/jboss-fuse/fuse-karaf/quickstarts/persistence
+/home/ggrzybek/sources/github.com/jboss-fuse/karaf-quickstarts/persistence
 
 $ mvn clean test -Pqtest -Pwmq9 -f standalone-xa/ -Dmq9library.path='/data/downloads/ibm.com/IBM MQ/9.0.5.0-IBM-MQ-Install-Java-All/JavaSE' -Dtest=StandaloneWMQ9AccessTest
 [INFO] Scanning for projects...
