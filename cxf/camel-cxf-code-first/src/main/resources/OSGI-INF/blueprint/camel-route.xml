@@ -26,7 +26,7 @@
 
   <cxf:cxfEndpoint id="orderEndpoint"
                    address="/order/"
-                   serviceClass="camelinaction.order.OrderEndpoint"/>
+                   serviceClass="org.jboss.fuse.quickstarts.cxf.codefirst.OrderEndpoint"/>
 
   <camelContext xmlns="http://camel.apache.org/schema/blueprint">
   
