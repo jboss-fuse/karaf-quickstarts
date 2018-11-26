@@ -27,7 +27,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>camel-quickstarts</artifactId>
+    <artifactId>camel</artifactId>
     <packaging>pom</packaging>
 
     <name>Red Hat Fuse :: Quickstarts :: camel</name>
