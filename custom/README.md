@@ -18,7 +18,7 @@ The `beginner-camel-log` quickstart will be used as an example of an application
 
 In studying this quick start you will learn:
 
-* how to use Karaf's Features Maven plugin to create a new custom Fuse 7 distro
+* how to use Karaf's Maven plugin to create a new custom Fuse 7 distro
 
 For more information see:
 
@@ -37,15 +37,15 @@ Build the custom assembly
 -------------------------
 
 * Run `mvn clean install` to build the quickstart.
-* After the build has finished, you will find the `target/custom-distro-${project.version}.zip` file with the custom assembly.
+* After the build has finished, you will find the `target/custom-${project.version}.zip` file with the custom assembly.
 
 Run your custom assembly
 ------------------------
 
 In `target/assembly` there is the unziped version of the custom distro that can be used to quickly locally run it:
-1. run `target/assembly/bin/karaf`
+1. run `target/assembly/bin/fuse`
 2. the custom distro should startup and in Red Hat Fuse command prompt should run `log:tail`
-3. a message similar to `| >>> Hello from Fuse based Camel route! :` should be printed every 5 seconds. This is because the custom distro already contains our application (The `beginner-camel-log` quickstart).
+3. a message similar to `| >>> Hello from Fuse based Camel route! : root` should be printed every 5 seconds. This is because the custom distro already contains our application (The `beginner-camel-log` quickstart).
 4. to exit the command use `Ctrl+C`
 5. to stop Red Hat Fuse use `Ctrl+D`, intentionally no `system:*` commands were part of the custom distro so is not possible to use `system:shutdown`.
 
