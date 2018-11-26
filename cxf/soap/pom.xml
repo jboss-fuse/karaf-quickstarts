@@ -25,7 +25,7 @@
     <version>7.3.0.redhat-SNAPSHOT</version>
     <packaging>bundle</packaging>
 
-    <name>Red Hat Fuse :: Quickstarts :: soap</name>
+    <name>Red Hat Fuse :: Quickstarts :: CXF :: soap</name>
     <description>SOAP example using JAXWS</description>
 
     <properties>
@@ -79,7 +79,9 @@
 
     <dependencyManagement>
         <dependencies>
+
             <!-- Fuse BOM to import all non-plugin dependencies -->
+
             <dependency>
                 <groupId>org.jboss.redhat-fuse</groupId>
                 <artifactId>fuse-karaf-bom</artifactId>
@@ -87,40 +89,13 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
-        <!--
-            For coding the example, we don't actually depend on any CXF classes - we only use the JAX-WS
-            standard annotations and API
-        -->
-        <dependency>
-            <groupId>org.apache.servicemix.specs</groupId>
-            <artifactId>org.apache.servicemix.specs.jaxws-api-2.2</artifactId>
-        </dependency>
 
-        <!--
-            For logging, we will use SLF4J, which is also available in the container by default.
-        -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-        </dependency>
-        <!--
-          Add the slf4j-log4j12 dependency jar for testing
-        -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Test Dependencies -->
+        <!-- Test dependencies -->
 
         <dependency>
             <groupId>junit</groupId>
@@ -128,11 +103,32 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Logging dependencies -->
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+        </dependency>
+
+        <!-- Other dependencies -->
+
+        <dependency>
+            <groupId>org.apache.servicemix.specs</groupId>
+            <artifactId>org.apache.servicemix.specs.jaxws-api-2.2</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
-        <finalName>shared</finalName>
-
         <pluginManagement>
             <plugins>
 
@@ -164,6 +160,14 @@
                     <version>${version.plugin.maven-surefire-plugin}</version>
                 </plugin>
 
+                <!-- CXF plugins -->
+
+                <plugin>
+                    <groupId>org.apache.cxf</groupId>
+                    <artifactId>cxf-java2ws-plugin</artifactId>
+                    <version>${version.org.apache.cxf}</version>
+                </plugin>
+
                 <!-- Felix plugins -->
 
                 <plugin>
@@ -171,14 +175,6 @@
                     <artifactId>maven-bundle-plugin</artifactId>
                     <version>${version.plugin.felix.maven-bundle-plugin}</version>
                     <extensions>true</extensions>
-                </plugin>
-
-                <!-- CXF plugins -->
-
-                <plugin>
-                    <groupId>org.apache.cxf</groupId>
-                    <artifactId>cxf-java2ws-plugin</artifactId>
-                    <version>${version.org.apache.cxf}</version>
                 </plugin>
 
                 <!-- MojoHaus plugins -->
@@ -204,30 +200,16 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-
             <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <extensions>true</extensions>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <instructions>
-                        <Import-Package>
-                            javax.jws;version="[0,3)",
-                            javax.wsdl,
-                            javax.xml.namespace,
-                            org.apache.cxf.helpers,
-                            org.osgi.service.blueprint,
-                            org.apache.cxf.transport.http
-                        </Import-Package>
-                        <Import-Service>org.apache.aries.blueprint.NamespaceHandler;
-                            osgi.service.blueprint.namespace=http://cxf.apache.org/transports/http/configuration
-                        </Import-Service>
-                        <Export-Package>
-                            org.jboss.fuse.quickstarts.cxf.soap
-                        </Export-Package>
-                    </instructions>
+                    <!-- Skip tests by default and enable them only in "qtest" profile -->
+                    <skipTests>${skip.quickstarts.tests}</skipTests>
                 </configuration>
             </plugin>
+
+            <!-- CXF plugins -->
 
             <plugin>
                 <groupId>org.apache.cxf</groupId>
@@ -248,7 +230,48 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Felix plugins -->
+
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <obrRepository>NONE</obrRepository>
+                    <instructions>
+                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                        <Import-Package>
+                            javax.jws;version="[0,3)",
+                            javax.wsdl,
+                            javax.xml.namespace,
+                            org.apache.cxf.helpers,
+                            org.osgi.service.blueprint,
+                            org.apache.cxf.transport.http
+                        </Import-Package>
+                        <Import-Service>org.apache.aries.blueprint.NamespaceHandler;
+                            osgi.service.blueprint.namespace=http://cxf.apache.org/transports/http/configuration
+                        </Import-Service>
+                        <Export-Package>
+                            org.jboss.fuse.quickstarts.cxf.soap
+                        </Export-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>qtest</id>
+            <properties>
+                <skip.quickstarts.tests>false</skip.quickstarts.tests>
+            </properties>
+            <build>
+                <defaultGoal>verify</defaultGoal>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
