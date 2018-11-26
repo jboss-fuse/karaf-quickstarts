@@ -5,7 +5,7 @@ Level: Intermediate
 Technologies: Keycloak, PAX-WEB, Camel, CXF, Blueprint
 Summary: This directory contains various quickstart projects show how to integrate Camel, CXF and Blueprint with Keycloak  
 Target Product: Fuse  
-Source: <https://github.com/jboss-fuse/fuse-karaf/tree/7.1.x.redhat-7-1-x/quickstarts/security/keycloak>  
+Source: <https://github.com/jboss-fuse/karaf-quickstarts/tree/7.x.redhat-7-x/security/keycloak>
 
 The following quickstarts are provided out of the box:
 

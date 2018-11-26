@@ -5,7 +5,7 @@ Level: Beginner
 Technologies: Camel, CXF, REST, SOAP, JPA, JDBC, JTA, JMS, Keycloak
 Summary: These quickstarts demonstrate a variety of ways to get started with Fuse and many of it's technologies  
 Target Product: Fuse  
-Source: <https://github.com/jboss-fuse/karaf-quickstarts/tree/7.x.redhat-7-x/quickstarts>
+Source: <https://github.com/jboss-fuse/karaf-quickstarts/tree/7.x.redhat-7-x>
 
 Various quickstart projects for getting you started with Red Hat Fuse
 

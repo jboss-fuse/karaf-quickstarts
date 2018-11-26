@@ -5,7 +5,7 @@ Level: Beginner
 Technologies: Camel, Blueprint, JBoss Data Virtualization  
 Summary: This quickstart demonstrates how to use the camel-salesforce component in Camel to integrate with Salesforce  
 Target Product: Fuse  
-Source: <https://github.com/jboss-fuse/fuse-karaf/tree/master/quickstarts/camel/camel-salesforce>  
+Source: <https://github.com/jboss-fuse/karaf-quickstarts/tree/7.x.redhat-7-x/camel/camel-salesforce>
 
 
 

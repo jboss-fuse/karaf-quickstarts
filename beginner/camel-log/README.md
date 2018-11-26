@@ -5,7 +5,7 @@ Level: Beginner
 Technologies: Camel  
 Summary: This quickstart shows a simple Apache Camel application that logs a message to the server log every 5th second.  
 Target Product: Fuse  
-Source: <https://github.com/jboss-fuse/fuse-karaf/tree/master/quickstarts>  
+Source: <https://github.com/jboss-fuse/karaf-quickstarts/tree/7.x.redhat-7-x/beginner/camel-log>
 
 What is it?
 -----------

@@ -5,7 +5,7 @@ Level: Intermediate
 Technologies: Keycloak, PAX-WEB, Blueprint
 Summary: a bundle that uses PAX-WEB HTTP Whiteboard Service and blueprint XML to register servlets with Keycloak authentication
 Target Product: Fuse  
-Source: <https://github.com/jboss-fuse/fuse-karaf/tree/7.1.x.redhat-7-1-x/quickstarts/security/keycloak>
+Source: <https://github.com/jboss-fuse/karaf-quickstarts/tree/7.x.redhat-7-x/security/keycloak/keycloak-whiteboard-blueprint>
 
 
 What is it?

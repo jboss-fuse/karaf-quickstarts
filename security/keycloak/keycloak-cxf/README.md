@@ -5,7 +5,7 @@ Level: Intermediate
 Technologies: Keycloak, PAX-WEB, Blueprint, CXF
 Summary: a bundle that registers CXF endpoints that are protected using Keycloak
 Target Product: Fuse  
-Source: <https://github.com/jboss-fuse/fuse-karaf/tree/7.1.x.redhat-7-1-x/quickstarts/security/keycloak>
+Source: <https://github.com/jboss-fuse/karaf-quickstarts/tree/7.x.redhat-7-x/security/keycloak/keycloak-cxf>
 
 
 What is it?

@@ -5,7 +5,7 @@ Level: Beginner
 Technologies: Camel, Blueprint  
 Summary: This quickstart demonstrates how to use the camel-box component in Camel in order to upload files to Box.com  
 Target Product: Fuse  
-Source: <https://github.com/jboss-fuse/fuse-karaf/tree/master/quickstarts/camel/camel-box>  
+Source: <https://github.com/jboss-fuse/karaf-quickstarts/tree/7.x.redhat-7-x/camel/camel-box>
 
 
 

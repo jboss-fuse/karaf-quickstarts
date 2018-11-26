@@ -5,7 +5,7 @@ Level: Beginner
 Technologies: Fuse, OSGi, CXF, WS-Security  
 Summary: This quickstart demonstrates how to create a SOAP Web service with Apache CXF and expose it through the OSGi HTTP Service.
 Target Product: Fuse  
-Source: <https://github.com/jboss-fuse/fuse-karaf/tree/master/quickstarts>
+Source: <https://github.com/jboss-fuse/karaf-quickstarts/tree/7.x.redhat-7-x/cxf/secure-soap>
 
 What is it?
 -----------

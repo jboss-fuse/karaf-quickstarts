@@ -5,7 +5,7 @@ Level: Beginner
 Technologies: Camel,Blueprint  
 Summary: This quickstart demonstrates how to combine multiple EIPs in Camel in order to solve integration problems.
 Target Product: Fuse  
-Source: <https://github.com/jboss-fuse/fuse-karaf/tree/master/quickstarts>
+Source: <https://github.com/jboss-fuse/karaf-quickstarts/tree/7.x.redhat-7-x/beginner/camel-eips>
 
 What is it?
 -----------

@@ -5,7 +5,7 @@ Level: Beginner
 Technologies: Camel, AMQ 7  
 Summary: This quickstart demonstrates how to use the camel-jms component to connect to an AMQ 7 broker and use JMS messaging between two Camel routes.  
 Target Product: Fuse  
-Source: <https://github.com/jboss-fuse/fuse-karaf/tree/master/quickstarts/camel/camel-jms>  
+Source: <https://github.com/jboss-fuse/karaf-quickstarts/tree/7.x.redhat-7-x/camel/camel-jms>
 
 
 What is it?

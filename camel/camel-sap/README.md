@@ -5,7 +5,7 @@ Level: Beginner
 Technologies: Camel, SAP  
 Summary: This quickstart demonstrates how to use the Red Hat Fuse SAP camel components in Camel in order to integrate with SAP  
 Target Product: Fuse  
-Source: <https://github.com/jboss-fuse/fuse-karaf/tree/master/quickstarts/camel/camel-sap>  
+Source: <https://github.com/jboss-fuse/karaf-quickstarts/tree/7.x.redhat-7-x/camel/camel-sap>
 
 
 What is it?  

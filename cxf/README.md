@@ -5,7 +5,7 @@ Level: Beginner
 Technologies: Camel, CXF, REST  
 Summary: This directory contains various quickstart projects using [Apache CXF](http://cxf.apache.org) for web services and REST.  
 Target Product: Fuse  
-Source: <https://github.com/jboss-fuse/fuse-karaf/tree/master/quickstarts>  
+Source: <https://github.com/jboss-fuse/karaf-quickstarts/tree/7.x.redhat-7-x/cxf>
 
 The following quickstarts are provided out of the box:
 

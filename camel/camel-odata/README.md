@@ -7,7 +7,7 @@ Summary: Demonstrates how to use the camel-olingo4 component in Camel to integra
 OData 4.0 remote TripPinservice published on http://services.odata.org/TripPinRESTierService by creating
 two People who's data are loaded from a directory.  
 Target Product: Fuse  
-Source: <https://github.com/jboss-fuse/fuse-karaf/tree/master/quickstarts/camel-odata>  
+Source: <https://github.com/jboss-fuse/karaf-quickstarts/tree/7.x.redhat-7-x/camel/camel-odata>
 
 
 

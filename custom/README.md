@@ -5,7 +5,7 @@ Level: Intermediate
 Technologies: Red Hat Fuse, Maven
 Summary: This quickstart demonstrates how to use Maven to create a custom assembly of Red Hat Fuse
 Target Product: Fuse  
-Source: <https://github.com/jboss-fuse/fuse-karaf/tree/master/quickstarts>  
+Source: <https://github.com/jboss-fuse/karaf-quickstarts/tree/7.x.redhat-7-x/custom>
 
 What is it?
 -----------

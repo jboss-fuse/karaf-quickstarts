@@ -5,7 +5,7 @@ Level: Beginner
 Technologies: Camel, Blueprint, ActiveMQ  
 Summary: This quickstart demonstrates how to use Apache Camel to route messages using the Content Based Router (cbr) pattern.
 Target Product: Fuse  
-Source: <https://github.com/jboss-fuse/fuse-karaf/tree/master/quickstarts>
+Source: <https://github.com/jboss-fuse/karaf-quickstarts/tree/7.x.redhat-7-x/beginner/camel-cbr>
 
 
 

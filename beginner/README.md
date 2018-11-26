@@ -5,7 +5,7 @@ Level: Beginner
 Technologies: Fuse  
 Summary: This directory contains the beginner quickstarts which demonstrate how to use fuse with various technologies.  
 Target Product: Fuse  
-Source: <https://github.com/jboss-fuse/fuse-karaf/tree/master/quickstarts>  
+Source: <https://github.com/jboss-fuse/karaf-quickstarts/tree/7.x.redhat-7-x/beginner>
 
 The following quickstarts are beginner examples that use Apache Camel and which we recommend for first time users
 

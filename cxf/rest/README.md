@@ -5,7 +5,7 @@ Level: Beginner
 Technologies: Fuse, OSGi, CXF  
 Summary: This quickstart demonstrates how to create a RESTful (JAX-RS) web service using CXF and expose it through the OSGi HTTP Service.
 Target Product: Fuse  
-Source: <https://github.com/jboss-fuse/fuse-karaf/tree/master/quickstarts>
+Source: <https://github.com/jboss-fuse/karaf-quickstarts/tree/7.x.redhat-7-x/cxf/rest>
 
 What is it?
 -----------

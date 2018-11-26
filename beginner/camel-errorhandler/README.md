@@ -5,7 +5,7 @@ Level: Beginner
 Technologies: Fuse, OSGi, Camel  
 Summary: This quickstart demonstrates how to handle exceptions that can occur while routing messages with Camel.
 Target Product: Fuse  
-Source: <https://github.com/jboss-fuse/fuse-karaf/tree/master/quickstarts>
+Source: <https://github.com/jboss-fuse/karaf-quickstarts/tree/7.x.redhat-7-x/beginner/camel-error-handler>
 
 What is it?
 -----------

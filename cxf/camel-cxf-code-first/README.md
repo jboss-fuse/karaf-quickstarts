@@ -5,7 +5,7 @@ Level: Beginner
 Technologies: Camel, CXF, SOAP  
 Summary: This quickstart demonstrates creating a SOAP Web service, using code first style, with Apache CXF and Camel and expose it through the OSGi HTTP Service.  
 Target Product: Fuse  
-Source: <https://github.com/jboss-fuse/fuse-karaf/tree/master/quickstarts>  
+Source: <https://github.com/jboss-fuse/karaf-quickstarts/tree/7.x.redhat-7-x/cxf/camel-cxf-code-first>
 
 We are using code first style, which means the web service is defined using Java code, and the JAX-WS annotations. The web service is then exposed as an endpoint in a Camel route.
 

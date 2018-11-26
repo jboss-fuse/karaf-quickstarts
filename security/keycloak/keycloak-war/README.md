@@ -5,7 +5,7 @@ Level: Intermediate
 Technologies: Keycloak, PAX-WEB
 Summary: a WAR that uses `KEYCLOAK` authentication method
 Target Product: Fuse  
-Source: <https://github.com/jboss-fuse/fuse-karaf/tree/7.1.x.redhat-7-1-x/quickstarts/security/keycloak>
+Source: <https://github.com/jboss-fuse/karaf-quickstarts/tree/7.x.redhat-7-x/security/keycloak/keycloak-war>
 
 
 What is it?

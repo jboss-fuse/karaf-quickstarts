@@ -5,7 +5,7 @@ Level: Intermediate
 Technologies: Keycloak, PAX-WEB, Blueprint, Camel
 Summary: a bundle with Camel route that uses `undertow-keycloak` component
 Target Product: Fuse  
-Source: <https://github.com/jboss-fuse/fuse-karaf/tree/7.1.x.redhat-7-1-x/quickstarts/security/keycloak>
+Source: <https://github.com/jboss-fuse/karaf-quickstarts/tree/7.x.redhat-7-x/security/keycloak/keycloak-camel-blueprint>
 
 
 What is it?
