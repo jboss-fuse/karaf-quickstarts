@@ -808,6 +808,8 @@ Where `hs-blueprint-info` client is configured using:
 
 Embedding `keycloak.json` inside a bundle has some benefits, but usually external configuration is preferred.
 
+We can check this example by browsing to http://localhost:8181/app2/info.
+
 === pax-web-extender-whiteboard
 
 There's 3rd option to register web _components_ (servlets, filters, ...) in OSGi. We don't have to explicitly call
@@ -907,6 +909,8 @@ and `whiteboard-info` Keycloak _client_ again uses:
 * Web Origins: `+`
 * Role: `admin`
 
+We can check this example by browsing to http://localhost:8181/app3/info.
+
 ==== Blueprint approach
 
 `mvn:org.jboss.fuse.quickstarts.security/keycloak-whiteboard-blueprint/<version>` quickstarts builds on what was
@@ -1001,6 +1005,8 @@ And the `etc/app4-keycloak.json` is:
   "principal-attribute": "preferred_username"
 }
 ----
+
+We can check this example by browsing to http://localhost:8181/app4/info.
 
 == Configuring Camel
 
