@@ -413,6 +413,7 @@ Let's start with minimal Maven project that can be used to build WAR bundle.
                     </execution>
                 </executions>
                 <configuration>
+                    <obrRepository>NONE</obrRepository>
                     <supportedProjectTypes>
                         <supportedProjectType>bundle</supportedProjectType>
                         <supportedProjectType>jar</supportedProjectType>

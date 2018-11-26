@@ -45,6 +45,7 @@
         <version.plugin.maven-install-plugin>2.5.2</version.plugin.maven-install-plugin>
         <version.plugin.maven-resources-plugin>3.0.2</version.plugin.maven-resources-plugin>
         <version.plugin.maven-surefire-plugin>2.20.1</version.plugin.maven-surefire-plugin>
+        <version.plugin.maven-war-plugin>3.1.0</version.plugin.maven-war-plugin>
     </properties>
 
     <repositories>
@@ -75,7 +76,9 @@
 
     <dependencyManagement>
         <dependencies>
+
             <!-- Fuse BOM to import all non-plugin dependencies -->
+
             <dependency>
                 <groupId>org.jboss.redhat-fuse</groupId>
                 <artifactId>fuse-karaf-bom</artifactId>
@@ -83,6 +86,7 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -115,7 +119,6 @@
     </dependencies>
 
     <build>
-
         <pluginManagement>
             <plugins>
 
@@ -147,6 +150,14 @@
                     <version>${version.plugin.maven-surefire-plugin}</version>
                 </plugin>
 
+                <!-- Packaging types/tools -->
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>${version.plugin.maven-war-plugin}</version>
+                </plugin>
+
                 <!-- Felix plugins -->
 
                 <plugin>
@@ -161,7 +172,27 @@
 
         <plugins>
 
+            <!-- Core plugins -->
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <!-- Skip tests by default and enable them only in "qtest" profile -->
+                    <skipTests>${skip.quickstarts.tests}</skipTests>
+                </configuration>
+            </plugin>
+
             <!-- Packaging types / tools -->
+
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
@@ -171,7 +202,9 @@
                     </archive>
                 </configuration>
             </plugin>
-            <!-- Felix -->
+
+            <!-- Felix plugins -->
+
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
@@ -186,12 +219,14 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <obrRepository>NONE</obrRepository>
                     <supportedProjectTypes>
                         <supportedProjectType>bundle</supportedProjectType>
                         <supportedProjectType>jar</supportedProjectType>
                         <supportedProjectType>war</supportedProjectType>
                     </supportedProjectTypes>
                     <instructions>
+                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Web-ContextPath>/keycloak-war</Web-ContextPath>
                         <Import-Package>
                             javax.servlet,
@@ -209,7 +244,18 @@
             </plugin>
 
         </plugins>
-
     </build>
+
+    <profiles>
+        <profile>
+            <id>qtest</id>
+            <properties>
+                <skip.quickstarts.tests>false</skip.quickstarts.tests>
+            </properties>
+            <build>
+                <defaultGoal>verify</defaultGoal>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

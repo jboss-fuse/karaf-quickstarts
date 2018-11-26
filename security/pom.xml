@@ -29,7 +29,7 @@
 
     <artifactId>security</artifactId>
     <packaging>pom</packaging>
-    
+
     <name>Red Hat Fuse :: Quickstarts :: Security</name>
 
     <modules>
