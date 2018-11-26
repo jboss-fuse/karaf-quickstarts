@@ -24,6 +24,7 @@
         <groupId>org.jboss.fuse.quickstarts</groupId>
         <artifactId>quickstarts-parent</artifactId>
         <version>7.3.0.redhat-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>security</artifactId>
