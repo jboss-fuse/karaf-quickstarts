@@ -87,6 +87,7 @@
     </dependencyManagement>
 
     <dependencies>
+
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-blueprint</artifactId>
@@ -175,7 +176,9 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Export-Package>org.jboss.fuse.quickstarts.cxf.codefirst</Export-Package>
+                        <Export-Package>
+                            org.jboss.fuse.quickstarts.cxf.codefirst
+                        </Export-Package>
                     </instructions>
                 </configuration>
             </plugin>
