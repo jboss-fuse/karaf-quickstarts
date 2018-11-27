@@ -47,8 +47,6 @@
         <version.org.apache.servicemix.specs>2.9.0</version.org.apache.servicemix.specs>
         <version.org.osgi>6.0.0</version.org.osgi>
 
-        <!-- versions of Maven plugins -->
-        <version.plugin.felix.maven-bundle-plugin>3.5.1</version.plugin.felix.maven-bundle-plugin>
         <!-- Plugins from org.apache.maven.plugins -->
         <version.plugin.maven-compiler-plugin>3.7.0</version.plugin.maven-compiler-plugin>
         <version.plugin.maven-deploy-plugin>2.8.2</version.plugin.maven-deploy-plugin>
@@ -212,14 +210,14 @@
                 <!-- Karaf plugins -->
 
                 <plugin>
-                    <groupId>org.apache.karaf.tooling</groupId>
+                    <groupId>org.jboss.redhat-fuse</groupId>
                     <artifactId>karaf-maven-plugin</artifactId>
-                    <version>${version.org.apache.karaf}</version>
+                    <version>${version.org.jboss.redhat-fuse}</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.karaf.tooling</groupId>
+                    <groupId>org.jboss.redhat-fuse</groupId>
                     <artifactId>karaf-services-maven-plugin</artifactId>
-                    <version>${version.org.apache.karaf}</version>
+                    <version>${version.org.jboss.redhat-fuse}</version>
                 </plugin>
 
             </plugins>
@@ -248,7 +246,7 @@
                      - <stage>PropertiesFile
                      - <stage>Repositories
                 -->
-                <groupId>org.apache.karaf.tooling</groupId>
+                <groupId>org.jboss.redhat-fuse</groupId>
                 <artifactId>karaf-maven-plugin</artifactId>
                 <executions>
                     <execution>
