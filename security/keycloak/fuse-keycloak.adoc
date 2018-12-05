@@ -174,7 +174,7 @@ Finally, ssh console has to switch the realm:
 ----
 karaf@root()> config:property-list --pid org.apache.karaf.shell
    completionMode = GLOBAL
-   hostKey = /data/servers/fuse-karaf-${project.version}/etc/host.key
+   hostKey = /data/servers/fuse-karaf-${version.org.jboss.fuse-karaf}/etc/host.key
    hostKeyFormat = simple
    sftpEnabled = true
    sshHost = 0.0.0.0
@@ -197,7 +197,7 @@ Logging in as admin
 |  _ <  __/ (_| | |  _  | (_| | |_  |  _|| |_| \__ \  __/
 |_| \_\___|\__,_| |_| |_|\__,_|\__| |_|   \__,_|___/___|
 
-  Red Hat Fuse (${project.version})
+  Red Hat Fuse (${version.org.jboss.fuse-karaf})
 ...
 
 $ ssh -p 8101 admin@localhost
@@ -209,7 +209,7 @@ Password:
 |  _ <  __/ (_| | |  _  | (_| | |_  |  _|| |_| \__ \  __/
 |_| \_\___|\__,_| |_| |_|\__,_|\__| |_|   \__,_|___/___|
 
-  Red Hat Fuse (${project.version})
+  Red Hat Fuse (${version.org.jboss.fuse-karaf})
 ...
 ----
 
@@ -1450,7 +1450,7 @@ We should see something like this in logs (indication of servlet context process
 +
 [listing,options="nowrap"]
 ----
-2018-06-26 18:06:01,880 INFO  {fileinstall-/data/servers/fuse-karaf-${project.version}/etc} (PaxLoggingServiceImpl.java:398) : Creating configuration from org.ops4j.pax.web.context-cxf.cfg
+2018-06-26 18:06:01,880 INFO  {fileinstall-/data/servers/fuse-karaf-${version.org.jboss.fuse-karaf}/etc} (PaxLoggingServiceImpl.java:398) : Creating configuration from org.ops4j.pax.web.context-cxf.cfg
 2018-06-26 18:06:01,891 INFO  {CM Configuration Updater (Update: pid=org.ops4j.pax.web.context.96c5265c-ac6e-45ef-8c26-7f2f7bab9144)} (HttpContextProcessing.java:88) : Updated configuration for pid=org.ops4j.pax.web.context.96c5265c-ac6e-45ef-8c26-7f2f7bab9144
 2018-06-26 18:06:01,901 INFO  {paxweb-context-3-thread-1} (HttpContextProcessing.java:366) : Found bundle "org.apache.cxf.cxf-rt-transports-http", scheduling customization of its WebContainer
 2018-06-26 18:06:01,903 INFO  {paxweb-context-3-thread-1} (HttpContextProcessing.java:216) : Customizing WebContainer for bundle org.apache.cxf.cxf-rt-transports-http/3.1.11.fuse-000276
