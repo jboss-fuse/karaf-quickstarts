@@ -22,7 +22,7 @@
 
     <groupId>org.jboss.fuse.quickstarts</groupId>
     <artifactId>camel-salesforce</artifactId>
-    <version>7.3.0.redhat-SNAPSHOT</version>
+    <version>7.3.0.fuse-730004</version>
     <packaging>bundle</packaging>
 
     <name>Red Hat Fuse :: Quickstarts :: camel-salesforce</name>
@@ -35,9 +35,9 @@
         <skip.quickstarts.tests>true</skip.quickstarts.tests>
 
         <!-- version of BOM -->
-        <version.org.jboss.redhat-fuse>7.3.0.fuse-730003</version.org.jboss.redhat-fuse>
+        <version.org.jboss.redhat-fuse>7.3.0.fuse-730018</version.org.jboss.redhat-fuse>
 
-        <version.org.apache.camel>2.21.0.fuse-730010</version.org.apache.camel>
+        <version.org.apache.camel>2.21.0.fuse-730033</version.org.apache.camel>
 
         <!-- versions of Maven plugins -->
         <version.plugin.felix.maven-bundle-plugin>3.5.1</version.plugin.felix.maven-bundle-plugin>
