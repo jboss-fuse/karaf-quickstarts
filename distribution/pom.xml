@@ -32,7 +32,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- version of BOM -->
-        <version.org.jboss.redhat-fuse>7.3.0.fuse-730004</version.org.jboss.redhat-fuse>
+        <version.org.jboss.redhat-fuse>7.3.0.fuse-730027</version.org.jboss.redhat-fuse>
 
         <!-- versions of dependencies not inherited from BOM, but required to filter adoc/md files in assembly -->
         <version.io.hawt>2.0.0.fuse-730008</version.io.hawt>

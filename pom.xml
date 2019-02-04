@@ -30,7 +30,7 @@
     <modules>
         <module>beginner</module>
         <module>camel</module>
-        <module>custom</module>
+        <!--<module>custom</module>-->
         <module>cxf</module>
         <module>persistence</module>
         <module>security</module>
