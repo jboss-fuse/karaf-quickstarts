@@ -33,9 +33,9 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- version of BOM -->
-        <version.org.jboss.redhat-fuse>7.3.0.fuse-730003</version.org.jboss.redhat-fuse>
+        <version.org.jboss.redhat-fuse>7.3.0.fuse-730027</version.org.jboss.redhat-fuse>
         <!-- version of Fuse Karaf - to use in karaf-maven-plugin configuration -->
-        <version.org.jboss.fuse-karaf>7.3.0.fuse-730014</version.org.jboss.fuse-karaf>
+        <version.org.jboss.fuse-karaf>7.3.0.fuse-730040</version.org.jboss.fuse-karaf>
 
         <!-- versions of dependencies not inherited from BOM -->
         <version.net.java.dev.jna>4.4.0</version.net.java.dev.jna>
