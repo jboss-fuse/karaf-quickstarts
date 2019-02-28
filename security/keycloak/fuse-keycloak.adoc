@@ -23,19 +23,19 @@ Here's an example of configuring default `admin` user to manage Keycloak server:
 [listing,options="nowrap"]
 ----
 $ pwd
-/data/servers/keycloak-4.4.0.Final
+/data/servers/keycloak-4.8.3.Final
 
 $ bin/add-user-keycloak.sh -u admin
 Press ctrl-d (Unix) or ctrl-z (Windows) to exit
-Password: passw0rd
-Added 'admin' to '/data/servers/keycloak-4.4.0.Final/standalone/configuration/keycloak-add-user.json', restart server to load user
+Password:
+Added 'admin' to '/data/servers/keycloak-4.8.3.Final/standalone/configuration/keycloak-add-user.json', restart server to load user
 ----
 
 The keycloak server is running using standard distribution with shifted ports:
 
 [listing,options="nowrap"]
 ----
-$ bin/standalone.sh -Djboss.socket.binding.port-offset=100 --debug 5006
+$ bin/standalone.sh -Djboss.socket.binding.port-offset=100
 ----
 
 The base URL of keycloak/RH-SSO server (used in following examples) is: `http://127.0.0.1:8180/auth`.
@@ -96,7 +96,7 @@ login modules:
  `keycloak-config-file=\${karaf.base}/etc/keycloak-direct-access.json` by default. This module implements
  _Resource Owner Password Credentials Grant_ OAuth2 flow
 * `org.keycloak.adapters.jaas.BearerTokenLoginModule` (_sufficient_) with
- `keycloak-config-file=\${karaf.base}/etc/keycloak-hawtio.json` by default. This module is used we already have OAuth2
+ `keycloak-config-file=\${karaf.base}/etc/keycloak-hawtio.json` by default. This module is used if we already have OAuth2
  access token (bearer token) available - usually after performing standard OAuth2 flow using browser redirects.
 
 These files have to be customized and they are not provided by default (e.g., by installing the features).
@@ -518,12 +518,12 @@ From technical point of view, `org.keycloak.keycloak-pax-web-undertow` is a frag
 ----
 karaf@root()> la
 START LEVEL 100 , List Threshold: 0
- ID │ State    │ Lvl │ Version                     │ Name
-────┼──────────┼─────┼─────────────────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ ID │ State    │ Lvl │ Version                   │ Name
+────┼──────────┼─────┼───────────────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ...
-219 │ Active   │  80 │ 7.2.1                       │ OPS4J Pax Web - Undertow, Fragments: 359
+220 │ Active   │  80 │ 7.3.0                     │ OPS4J Pax Web - Undertow, Fragments: 234
 ...
-359 │ Resolved │  80 │ ${version.org.keycloak}                 │ Keycloak Fuse 7.0 Adapter - Undertow, Hosts: 219
+234 │ Resolved │  80 │ ${version.org.keycloak}               │ Keycloak Fuse 7.0 Adapter - Undertow, Hosts: 220
 ----
 
 Now, pax-web-undertow will look for `io.undertow.servlet.ServletExtension` which is now exposed by
@@ -562,7 +562,7 @@ used in Blueprint container, where we can configure the resolver directly and us
 `org.keycloak.adapters.osgi.undertow.CxfKeycloakAuthHandler`.
 * (See https://issues.jboss.org/browse/KEYCLOAK-7703)
 `org.keycloak.adapters.osgi.HierarchicalPathBasedKeycloakConfigResolver` - enhanced version of `PathBasedKeycloakConfigResolver`
-where for given URI path (for example `/cxf/jax-rs/customers/customer` URI, configuration locations are checked from
+where for given URI path (for example `/cxf/jax-rs/customers/customer` URI), configuration locations are checked from
 most to least specific:
 ** `etc/cxf-jax-rs-customers-customer-keycloak.json`
 ** `etc/cxf-jax-rs-customers-keycloak.json`
@@ -1120,7 +1120,7 @@ these steps:
 . Sends initial `POST` to token endpoint of Keycloak server to obtain the token. Because _Direct Access Grants Flow_
 is used, POST includes credentials of the _resource owner_ (A Keycloak user with `admin` role assigned).
 
-* `Authorization` header contains HTTP Basic credentials of the _client_ (not _user_ == _resource owner_), which is
+* `Authorization` header contains HTTP Basic credentials of the _client_ (not _user_ which is _resource owner_), which is
 `BASE64(<client-id>:<secret>)` (`BASE64(camel-undertow-endpoint:f591a8ae-5a82-40de-9190-ea84ceca05a7)`).
 * `Content-Type` is set to `application/x-www-form-urlencoded`
 * body contains `grant_type=password&username=admin&password=passw0rd`

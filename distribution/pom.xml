@@ -38,7 +38,7 @@
         <version.io.hawt>2.0.0.fuse-730048</version.io.hawt>
         <version.org.fusesource.camel-sap>7.3.0.fuse-730054</version.org.fusesource.camel-sap>
         <version.org.keycloak>4.8.3.Final</version.org.keycloak>
-        <version.org.keycloak.product>3.4.12.Final-redhat-2</version.org.keycloak.product>
+        <version.org.keycloak.product>4.8.3.Final-redhat-00001</version.org.keycloak.product>
         <version.org.keycloak.rhsso>7.3.0.GA</version.org.keycloak.rhsso>
 
         <!-- Plugins from org.apache.maven.plugins -->
