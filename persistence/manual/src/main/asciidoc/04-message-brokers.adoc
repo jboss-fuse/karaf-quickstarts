@@ -205,26 +205,27 @@ Even if it seems that `9.0.5.0-IBM-MQ-Install-Java-All` package should be used t
 
 == A-MQ 7 installation (Artemis)
 
-This time we'll run standalone (no docker) version of `amq-broker-7.1.0-bin.zip`.
+This time we'll run standalone (no docker) version of `amq-broker-7.2.3-bin.zip`.
 
 [listing,options="nowrap"]
 ----
 $ pwd
-/data/servers/amq-broker-7.1.0
+/data/servers/amq-broker-7.2.3
 
 $ bin/artemis create --user fuse --password fuse --require-login amq7
-Creating ActiveMQ Artemis instance at: /data/servers/amq-broker-7.1.0/amq7
+Creating ActiveMQ Artemis instance at: /data/servers/amq-broker-7.2.3/amq7
 
 Auto tuning journal ...
-done! Your system can make 27.78 writes per millisecond, your journal-buffer-timeout will be 36000
+done! Your system can make 22.73 writes per millisecond, your journal-buffer-timeout will be 44000
 
 You can now start the broker by executing:
 
-   "/data/servers/amq-broker-7.1.0/amq7/bin/artemis" run
+   "/data/servers/amq-broker-7.2.3/amq7/bin/artemis" run
 
 Or you can run the broker in the background using:
 
-   "/data/servers/amq-broker-7.1.0/amq7/bin/artemis-service" start
+   "/data/servers/amq-broker-7.2.3/amq7/bin/artemis-service" start
+
 
 $ amq7/bin/artemis run
            __  __  ____    ____            _
@@ -234,10 +235,10 @@ $ amq7/bin/artemis run
   / ____ \| |  | | |__| | | |_) | | | (_) |   <  __/ |
  /_/    \_\_|  |_|\___\_\ |____/|_|  \___/|_|\_\___|_|
 
- Red Hat JBoss AMQ 7.1.0.GA
+ Red Hat JBoss AMQ 7.2.3.GA
 
 
-2018-04-16 15:02:25,082 INFO  [org.apache.activemq.artemis.integration.bootstrap] AMQ101000: Starting ActiveMQ Artemis Server
+2019-02-27 14:49:22,262 INFO  [org.apache.activemq.artemis.integration.bootstrap] AMQ101000: Starting ActiveMQ Artemis Server
 ...
 ----
 
@@ -245,12 +246,12 @@ $ amq7/bin/artemis run
 
 Artemis libraries are available in Maven Central or Red Hat repository. I used:
 
-* `mvn:org.apache.activemq/artemis-core-client/2.4.0.amq-710008-redhat-1`
-* `mvn:org.apache.activemq/artemis-jms-client/2.4.0.amq-710008-redhat-1`
+* `mvn:org.apache.activemq/artemis-core-client/2.6.3.redhat-00015`
+* `mvn:org.apache.activemq/artemis-jms-client/2.6.3.redhat-00015`
 
 == A-MQ 6 installation
 
-For A-MQ 6 we'll run standalone (no docker) version of `jboss-a-mq-6.3.0.redhat-344.zip`.
+For A-MQ 6 we'll run standalone (no docker) version of `jboss-a-mq-6.3.0.redhat-377.zip`.
 
 .Add authentication entries
 
@@ -265,7 +266,7 @@ fuse=fuse,Operator
 [listing,options="nowrap"]
 ----
 $ pwd
-/data/servers/jboss-a-mq-6.3.0.redhat-344
+/data/servers/jboss-a-mq-6.3.0.redhat-377
 
 $ bin/amq
 Please wait, JBoss A-MQ is initializing...
@@ -278,7 +279,7 @@ Please wait, JBoss A-MQ is initializing...
 | |__| | |_) | (_) \__ \__ \  / ____ \     | |  | | |__| |
  \____/|____/ \___/|___/___/ /_/    \_\    |_|  |_|\___\_\
 
-  JBoss A-MQ (6.3.0.redhat-344)
+  JBoss A-MQ (6.3.0.redhat-377)
   http://www.redhat.com/products/jbossenterprisemiddleware/amq/
 
 Hit '<tab>' for a list of available commands
@@ -293,23 +294,23 @@ connectorName = ws
 
 connectorName = openwire
 
-Name = KahaDBPersistenceAdapter[/data/servers/jboss-a-mq-6.3.0.redhat-344/data/amq/kahadb,Index:/data/servers/jboss-a-mq-6.3.0.redhat-344/data/amq/kahadb]
-
 
 BrokerName = amq
 TotalEnqueueCount = 1
 TotalDequeueCount = 0
 TotalMessageCount = 0
 TotalConsumerCount = 0
-Uptime = 18.398 seconds
+Uptime = 5.817 seconds
 
 connectorName = amqp
 
 connectorName = mqtt
+
+Name = KahaDBPersistenceAdapter[/data/servers/jboss-a-mq-6.3.0.redhat-377/data/amq/kahadb,Index:/data/servers/jboss-a-mq-6.3.0.redhat-377/data/amq/kahadb]
 ----
 
 === Client libraries
 
 Libraries are available in Maven Central or Red Hat repository. I used:
 
-* `mvn:org.apache.activemq/activemq-client/5.11.0.redhat-630344`
+* `mvn:org.apache.activemq/activemq-client/5.11.0.redhat-630377`

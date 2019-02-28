@@ -43,6 +43,8 @@
         <version.plugin.maven-install-plugin>2.5.2</version.plugin.maven-install-plugin>
         <version.plugin.maven-resources-plugin>3.0.2</version.plugin.maven-resources-plugin>
         <version.plugin.maven-surefire-plugin>2.20.1</version.plugin.maven-surefire-plugin>
+
+        <version.plugin.maven-bundle-plugin>3.5.1</version.plugin.maven-bundle-plugin>
     </properties>
 
     <repositories>
@@ -147,9 +149,9 @@
                 <!-- Felix plugins -->
 
                 <plugin>
-                    <groupId>org.jboss.redhat-fuse</groupId>
+                    <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
-                    <version>${version.org.jboss.redhat-fuse}</version>
+                    <version>${version.plugin.maven-bundle-plugin}</version>
                     <extensions>true</extensions>
                 </plugin>
 
@@ -180,7 +182,7 @@
             <!-- Felix plugins -->
 
             <plugin>
-                <groupId>org.jboss.redhat-fuse</groupId>
+                <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
