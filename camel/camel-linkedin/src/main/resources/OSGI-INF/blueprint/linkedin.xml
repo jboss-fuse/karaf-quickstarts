@@ -40,8 +40,7 @@
     <bean id="linkedin" class="org.apache.camel.component.linkedin.LinkedInComponent">
         <property name="configuration">
             <bean class="org.apache.camel.component.linkedin.LinkedInConfiguration">
-                <property name="userName" value="${userName}"/>
-                <property name="userPassword" value="${userPassword}"/>
+                <property name="accessToken" value="${accessToken}"/>
                 <property name="clientId" value="${clientId}"/>
                 <property name="clientSecret" value="${clientSecret}"/>
                 <property name="redirectUri" value="${redirectUri}"/>
