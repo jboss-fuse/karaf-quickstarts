@@ -84,4 +84,7 @@ Undeploy the Archive
 
 To stop and undeploy the bundle in Fuse:
 
-`uninstall camel-example-olingo4-blueprint`
+1. Enter `bundle:list` command to retrieve your bundle id
+2. To stop and uninstall the bundle enter
+
+        bundle:uninstall <id>
