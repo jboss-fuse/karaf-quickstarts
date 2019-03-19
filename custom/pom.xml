@@ -94,6 +94,12 @@
                 <type>pom</type>
             </dependency>
 
+            <dependency>
+                <groupId>org.jboss.fuse.modules</groupId>
+                <artifactId>fuse-branding</artifactId>
+                <version>${version.org.jboss.fuse-karaf}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
