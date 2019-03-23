@@ -23,7 +23,7 @@ In studying this quick start you will learn:
 * how to use OSGi config admin in Red Hat Fuse
 * how to use the Camel LinkedIn component
 
-NOTE: LinkedIn has started responding to login forms using a CAPTCHA, which makes it impossible to use the username/password login approach for a standalone headless Fuse process. As an alternative the component was enhanced so that a LinkedIn access token can be generated and configured in an `accessToken` component property. Also an `expiryTime` property allows configuring the token expiry time in milliseconds since the Unix Epoch, which defaults to 60 days if not provided. The component tries to login again if the token expires, but the username/password approach is likely to result in a CAPTCHA response and a failed login. Hence the component is unable to automatically refresh tokens on its own.
+NOTE: LinkedIn has started responding to login forms using a CAPTCHA, which makes it impossible to use the username/password login approach for a standalone headless Fuse process. As an alternative the component was enhanced so that a LinkedIn access token can be generated and configured in an `accessToken` component property. Also an `expiryTime` property allows configuring the token expiry time in milliseconds since the Unix Epoch, which defaults to 60 days if not provided. The component tries to login again if the token expires, but the username/password approach is likely to result in a CAPTCHA response and a failed login. Hence the component is unable to automatically refresh tokens on its own. In a future version, if accessToken is provided all other properties will be made optional.
 
 The token can be generated using a web browser and a utility such as curl and following the OAuth login process for LinkedIn as documented at https://developer.linkedin.com/docs/oauth2. As the document describes, user needs to login using a browser to generate an authorization code, which in turn is used to generate an access token to be configured in the LinkedIn component. The generated token is valid for 60 days, so the process has to be repeated periodically to manually update the token and the Fuse application needs to be restarted with the refreshed token.
 
@@ -52,6 +52,8 @@ Build and Deploy the Quickstart
   InstallDir/etc/org.jboss.fuse.quickstarts.camel.linkedin.cfg
   Edit the org.jboss.fuse.quickstarts.camel.linkedin.cfg file with a text editor and add the following contents:
 
+  userName=<LinkedIn account user name>
+  userPassword=<LinkedIn account password>
   accessToken=<LinkedIn access token>
   clientId=<LinkedIn client id>
   clientSecret=<LinkedIn client secret>
