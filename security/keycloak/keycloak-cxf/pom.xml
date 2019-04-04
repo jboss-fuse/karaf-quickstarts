@@ -36,6 +36,7 @@
 
         <!-- version of BOM -->
         <version.org.jboss.redhat-fuse>7.3.0.fuse-730051</version.org.jboss.redhat-fuse>
+        <version.javax.ws.rs>2.1.1</version.javax.ws.rs>
 
         <!-- Plugins from org.apache.maven.plugins -->
         <version.plugin.maven-compiler-plugin>3.7.0</version.plugin.maven-compiler-plugin>
@@ -117,6 +118,7 @@
         <dependency>
             <groupId>javax.ws.rs</groupId>
             <artifactId>javax.ws.rs-api</artifactId>
+            <version>${version.javax.ws.rs}</version>
         </dependency>
 
         <dependency>
