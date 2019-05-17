@@ -22,7 +22,7 @@
 
     <groupId>org.jboss.fuse.quickstarts</groupId>
     <artifactId>standalone-xa</artifactId>
-    <version>7.3.0.redhat-SNAPSHOT</version>
+    <version>7.3.1.redhat-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support</name>
