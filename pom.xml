@@ -22,7 +22,7 @@
 
     <groupId>org.jboss.fuse.quickstarts</groupId>
     <artifactId>quickstarts-parent</artifactId>
-    <version>7.4.0.fuse-740016</version>
+    <version>7.4.0.fuse-740016-redhat-00001</version>
     <packaging>pom</packaging>
 
     <name>Red Hat Fuse :: Quickstarts</name>
