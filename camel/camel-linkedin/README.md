@@ -52,11 +52,8 @@ Build and Deploy the Quickstart
   InstallDir/etc/org.jboss.fuse.quickstarts.camel.linkedin.cfg
   Edit the org.jboss.fuse.quickstarts.camel.linkedin.cfg file with a text editor and add the following contents:
 
-  userName=<LinkedIn account user name>
-  userPassword=<LinkedIn account password>
   accessToken=<LinkedIn access token>
-  clientId=<LinkedIn client id>
-  clientSecret=<LinkedIn client secret>
+  redirectUri=<LinkedIn redirect URI>
 
 * In the Red Hat Fuse console, enter the following commands:
 
