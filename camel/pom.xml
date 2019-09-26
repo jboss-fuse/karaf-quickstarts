@@ -36,7 +36,6 @@
         <module>camel-box</module>
         <module>camel-hl7</module>
         <module>camel-jms</module>
-        <module>camel-linkedin</module>
         <module>camel-odata</module>
         <module>camel-salesforce</module>
     </modules>
