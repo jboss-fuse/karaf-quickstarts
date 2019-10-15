@@ -22,7 +22,7 @@
 
     <groupId>org.jboss.fuse.quickstarts</groupId>
     <artifactId>fuse-karaf-quickstarts</artifactId>
-    <version>7.5.0.redhat-SNAPSHOT</version>
+    <version>7.5.0.fuse-750016</version>
     <packaging>pom</packaging>
 
     <name>Red Hat Fuse :: Quickstarts :: Distribution</name>
@@ -32,11 +32,11 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- version of BOM -->
-        <version.org.jboss.redhat-fuse>7.3.0.fuse-730027</version.org.jboss.redhat-fuse>
+        <version.org.jboss.redhat-fuse>7.5.0.fuse-750026</version.org.jboss.redhat-fuse>
 
         <!-- versions of dependencies not inherited from BOM, but required to filter adoc/md files in assembly -->
-        <version.io.hawt>2.0.0.fuse-730048</version.io.hawt>
-        <version.org.fusesource.camel-sap>7.3.0.fuse-730054</version.org.fusesource.camel-sap>
+        <version.io.hawt>2.0.0.fuse-750019</version.io.hawt>
+        <version.org.fusesource.camel-sap>7.5.0.fuse-750030</version.org.fusesource.camel-sap>
         <version.org.keycloak>4.8.11.Final-redhat-00001</version.org.keycloak>
         <version.org.keycloak.product>4.8.11.Final-redhat-00001</version.org.keycloak.product>
         <version.org.keycloak.rhsso>7.3.3.GA</version.org.keycloak.rhsso>
