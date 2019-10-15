@@ -53,6 +53,7 @@ Build and Deploy the Quickstart
   clientId=<Box.com client id>
   clientSecret=<Box.com client secret>
 
+* Set the following system-property: `jackson.deserialization.whitelist.packages com.box.boxjavalibv2.dao`
 * In the Red Hat Fuse console, enter the following commands:
 
         feature:install camel-box
