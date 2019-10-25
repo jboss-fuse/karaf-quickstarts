@@ -282,8 +282,8 @@
                     </plugin>
                     <!-- Generate POJOs for Salesforce SObjects -->
                     <plugin>
-                        <groupId>org.apache.camel.maven</groupId>
-                        <artifactId>org.jboss.redhat-fuse</artifactId>
+                        <groupId>org.jboss.redhat-fuse</groupId>
+                        <artifactId>camel-salesforce-maven-plugin</artifactId>
                         <executions>
                             <execution>
                                 <goals>
