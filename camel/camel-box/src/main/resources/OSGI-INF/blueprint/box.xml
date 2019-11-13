@@ -82,7 +82,7 @@
                 <simple>${body}</simple>
             </setHeader>
             
-            <to uri="box:files/uploadFile"/>
+            <to uri="box:files/uploadFile?check=false"/>
             <log message="Done uploading ${file:name}"/>
         </route>
     </camelContext>
