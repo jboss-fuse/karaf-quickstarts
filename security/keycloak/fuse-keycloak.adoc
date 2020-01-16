@@ -10,7 +10,7 @@ This guide was tested with two configurations:
 * Running on community version of Keycloak ${version.org.keycloak}
 * Running on Red Hat SSO ${version.org.keycloak.rhsso} that uses Keycloak ${version.org.keycloak.product}
 
-The examples use Keycloak ${version.org.keycloak}, but all examples will work on RH-SSO ${version.org.keycloak.rhsso}.
+The examples use RH-SSO ${version.org.keycloak.rhsso}, but all examples will work on Keycloak ${version.org.keycloak}.
 
 The below sections refer to single Keycloak _realm_ created in Keycloak/RH-SSO server for the purpose
 of Fuse 7 Security/Keycloak quickstarts.
@@ -23,12 +23,12 @@ Here's an example of configuring default `admin` user to manage Keycloak server:
 [listing,options="nowrap"]
 ----
 $ pwd
-/data/servers/keycloak-4.8.3.Final
+/data/servers/rh-sso-7.3.5
 
 $ bin/add-user-keycloak.sh -u admin
 Press ctrl-d (Unix) or ctrl-z (Windows) to exit
 Password:
-Added 'admin' to '/data/servers/keycloak-4.8.3.Final/standalone/configuration/keycloak-add-user.json', restart server to load user
+Added 'admin' to '/data/servers/rh-sso-7.3.5/standalone/configuration/keycloak-add-user.json', restart server to load user
 ----
 
 The keycloak server is running using standard distribution with shifted ports:
@@ -50,7 +50,7 @@ different roles assigned (as required by given scenario). I'll only use roles as
 no realm-wide roles assigned to user(s).
 
 In order to import `etc/fuse7karaf-realm-export.json` or `etc/fuse7karaf-realm-export-rh-sso.json` into
-Keycloak/RH-SSI instance, we can't log into `master` realm and click `Import`, We have to click
+Keycloak/RH-SSO instance, we can't log into `master` realm and click `Import`, We have to click
 `Add realm` and select JSON file there - `fuse7karaf` realm name will be taken from the imported file.
 
 == SSH
@@ -93,10 +93,10 @@ the credentials from `etc/users.properties`.
 login modules:
 
 * `org.keycloak.adapters.jaas.DirectAccessGrantsLoginModule` (_sufficient_) with
- `keycloak-config-file=\${karaf.base}/etc/keycloak-direct-access.json` by default. This module implements
+ `keycloak-config-file=${karaf.base}/etc/keycloak-direct-access.json` by default. This module implements
  _Resource Owner Password Credentials Grant_ OAuth2 flow
 * `org.keycloak.adapters.jaas.BearerTokenLoginModule` (_sufficient_) with
- `keycloak-config-file=\${karaf.base}/etc/keycloak-hawtio.json` by default. This module is used if we already have OAuth2
+ `keycloak-config-file=${karaf.base}/etc/keycloak-hawtio.json` by default. This module is used if we already have OAuth2
  access token (bearer token) available - usually after performing standard OAuth2 flow using browser redirects.
 
 These files have to be customized and they are not provided by default (e.g., by installing the features).
@@ -237,7 +237,7 @@ result = {javax.security.auth.Subject@12433} "Subject:\n\tPrincipal: ClientPrinc
 JMX, as SSH, requires `DirectAccessGrantsLoginModule` which uses Oauth2
 https://tools.ietf.org/html/rfc6749#section-4.3[_Resource Owner Password Credentials Grant_].
 
-As with SSH, the same keycloak features are required and the same `\${karaf.base}/etc/keycloak-direct-access.json` may
+As with SSH, the same keycloak features are required and the same `${karaf.base}/etc/keycloak-direct-access.json` may
 be used. If it points to the same _client_ in keycloak server, we only have to switch realm for JMS Access:
 
 [listing,options="nowrap"]
@@ -287,8 +287,8 @@ overridden by system properties. Altering `etc/system.properties` requires resta
 ----
 # io.hawt.web.auth.AuthenticationConfiguration#keycloakEnabled
 hawtio.keycloakEnabled = true
-# io.hawt.web.auth.keycloak.KeycloakServlet#keycloakConfig - defaults to \${karaf.base}/etc/keycloak.json
-hawtio.keycloakClientConfig = \${karaf.etc}/keycloak-hawtio-client.json
+# io.hawt.web.auth.keycloak.KeycloakServlet#keycloakConfig - defaults to ${karaf.base}/etc/keycloak.json
+hawtio.keycloakClientConfig = ${karaf.etc}/keycloak-hawtio-client.json
 hawtio.realm = keycloak
 # split by ",", not by "\s*,\s*"
 hawtio.rolePrincipalClasses = org.keycloak.adapters.jaas.RolePrincipal,org.apache.karaf.jaas.boot.principal.RolePrincipal
@@ -327,12 +327,12 @@ So let's create `hawtio-server` client in keycloak UI. With:
 * Roles: `ssh`, `systembundles`, `manager`, `admin`, `viewer`
 
 By definition (in blueprint.xml inside `mvn:org.keycloak/keycloak-osgi-jaas/${version.org.keycloak}` bundle),
-`org.keycloak.adapters.jaas.BearerTokenLoginModule` requires `\${karaf.base}/etc/keycloak-hawtio.json`.
+`org.keycloak.adapters.jaas.BearerTokenLoginModule` requires `${karaf.base}/etc/keycloak-hawtio.json`.
 
-The default location (`\${karaf.base}/etc/keycloak-hawtio.json`) can be changed using `org.keycloak` PID:
+The default location (`${karaf.base}/etc/keycloak-hawtio.json`) can be changed using `org.keycloak` PID:
 [listing,options="nowrap"]
 ----
-karaf@root()> config:property-set --pid org.keycloak jaasBearerKeycloakConfigFile "\${karaf.base}/etc/keycloak-hawtio-server.json"
+karaf@root()> config:property-set --pid org.keycloak jaasBearerKeycloakConfigFile "${karaf.base}/etc/keycloak-hawtio-server.json"
 ----
 
 This configuration can be taken from _Installation_ tab of `hawtio-server` client in keycloak admin UI. We have to
@@ -395,7 +395,7 @@ Let's start with minimal Maven project that can be used to build WAR bundle.
                     <failOnMissingWebXml>true</failOnMissingWebXml>
                     <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>
                     <archive>
-                        <manifestFile>\${basedir}/target/classes/META-INF/MANIFEST.MF</manifestFile>
+                        <manifestFile>${basedir}/target/classes/META-INF/MANIFEST.MF</manifestFile>
                     </archive>
                 </configuration>
             </plugin>
@@ -421,7 +421,7 @@ Let's start with minimal Maven project that can be used to build WAR bundle.
                     </supportedProjectTypes>
                     <instructions>
                         <Web-ContextPath>/war-keycloak</Web-ContextPath>
-                        <Bundle-SymbolicName>\${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Import-Package>
                             javax.servlet,
                             javax.servlet.http,
@@ -713,14 +713,14 @@ The profiles select different bundle activators which register the web elements 
 The difference between _deafult_ and named contexts affects Keycloak configuration. Both examples use
 `org.keycloak.adapters.osgi.PathBasedKeycloakConfigResolver`. This Keycloak configuration resolver
 analyzes request path (see https://issues.jboss.org/browse/KEYCLOAK-7523) and try to find _context name_.
-In case of `app1` context, `\${karaf.etc}/app1-keycloak.json` is used. In case of _default_ context, actual
+In case of `app1` context, `${karaf.etc}/app1-keycloak.json` is used. In case of _default_ context, actual
 servlet mapping is used and first _segment_ of URI after `host:port` is used.
 
 So if the example registers two servlets (`/info` and `/logout`), actually two Keycloak configurations are
 needed:
 
-* `\${karaf.etc}/info-keycloak.json`
-* `\${karaf.etc}/logout-keycloak.json`
+* `${karaf.etc}/info-keycloak.json`
+* `${karaf.etc}/logout-keycloak.json`
 
 The reason for that is that _default_ context is a _place_ where totally different servlets may be registered.
 For example, CXF's `org.apache.cxf.transport.http.osgi.ServletExporter` registers `/cxf` servlet
@@ -1061,7 +1061,7 @@ The config resolver is specified as:
 better.
 
 Previously (when configuring security for WARs, servlets and OSGi HTTP Service) we were using `PathBasedKeycloakConfigResolver`
-which was looking for configuration files under `\${karaf.etc}/<context-path>-keycloak.json` - there's nothing
+which was looking for configuration files under `${karaf.etc}/<context-path>-keycloak.json` - there's nothing
 that prevents us using this resolver for Camel routes.
 
 .Authentication
@@ -1358,7 +1358,7 @@ The documentation is available here: https://ops4j1.jira.com/wiki/spaces/paxweb/
 This time instead of using (with blueprint.xml) Keycloak-specific `<bean>` declarations that re-register `/cxf`
 servlet we can do the same using configuration admin configurations.
 
-If we create `\${karaf.etc}/org.ops4j.pax.web.context-<anyName>.cfg` file, It'll be treated as _factory PID_ configuration
+If we create `${karaf.etc}/org.ops4j.pax.web.context-<anyName>.cfg` file, It'll be treated as _factory PID_ configuration
 that is _tracked_ by `pax-web-runtime` bundle. Such configuration may contain the following properties:
 
 [listing,options="nowrap"]
@@ -1450,15 +1450,15 @@ We should see something like this in logs (indication of servlet context process
 +
 [listing,options="nowrap"]
 ----
-2018-06-26 18:06:01,880 INFO  {fileinstall-/data/servers/fuse-karaf-${version.org.jboss.fuse-karaf}/etc} (PaxLoggingServiceImpl.java:398) : Creating configuration from org.ops4j.pax.web.context-cxf.cfg
-2018-06-26 18:06:01,891 INFO  {CM Configuration Updater (Update: pid=org.ops4j.pax.web.context.96c5265c-ac6e-45ef-8c26-7f2f7bab9144)} (HttpContextProcessing.java:88) : Updated configuration for pid=org.ops4j.pax.web.context.96c5265c-ac6e-45ef-8c26-7f2f7bab9144
-2018-06-26 18:06:01,901 INFO  {paxweb-context-3-thread-1} (HttpContextProcessing.java:366) : Found bundle "org.apache.cxf.cxf-rt-transports-http", scheduling customization of its WebContainer
-2018-06-26 18:06:01,903 INFO  {paxweb-context-3-thread-1} (HttpContextProcessing.java:216) : Customizing WebContainer for bundle org.apache.cxf.cxf-rt-transports-http/3.1.11.fuse-000276
-2018-06-26 18:06:01,905 INFO  {paxweb-context-3-thread-1} (HttpContextProcessing.java:233) : Setting context parameters in WebContainer for bundle "org.apache.cxf.cxf-rt-transports-http": {keycloak.config.resolver=org.keycloak.adapters.osgi.HierarchicalPathBasedKeycloakConfigResolver}
-2018-06-26 18:06:01,905 INFO  {paxweb-context-3-thread-1} (Context.java:171) : Stopping context /
-2018-06-26 18:06:01,907 INFO  {paxweb-context-3-thread-1} (Context.java:227) : destroying context DefaultHttpContext [bundle=org.apache.cxf.cxf-rt-transports-http [102], contextID=default], with context path:
-2018-06-26 18:06:01,914 INFO  {paxweb-context-3-thread-1} (HttpContextProcessing.java:239) : Registering login configuration in WebContainer for bundle "org.apache.cxf.cxf-rt-transports-http": method=KEYCLOAK, realm=76b1af0a-6a60-46fb-b4aa-aceb52fa6d28
-2018-06-26 18:06:01,916 INFO  {paxweb-context-3-thread-1} (HttpContextProcessing.java:251) : Registering security mappings in WebContainer for bundle "org.apache.cxf.cxf-rt-transports-http": SecurityConstraintsMapping{name='cxf', url='/cxf/*', roles=[admin, superuser]}
+2020-01-16 09:46:02,371 INFO  {fileinstall-/data/servers/fuse-karaf-7.6.0.fuse-760014/etc} [org.apache.felix.fileinstall.internal.Util$OsgiLogger.log()] (Util.java:205) : Creating configuration from org.ops4j.pax.web.context-cxf.cfg
+2020-01-16 09:46:10,383 INFO  {CM Configuration Updater (Update: pid=org.ops4j.pax.web.context.7a930319-1180-4298-af2a-e2dad296dcca)} [org.ops4j.pax.web.service.internal.HttpContextProcessing.updated()] (HttpContextProcessing.java:88) : Updated configuration for pid=org.ops4j.pax.web.context.7a930319-1180-4298-af2a-e2dad296dcca
+2020-01-16 09:46:10,384 INFO  {paxweb-context-3-thread-1} [org.ops4j.pax.web.service.internal.HttpContextProcessing$HttpContextTracker.addingBundle()] (HttpContextProcessing.java:366) : Found bundle "org.apache.cxf.cxf-rt-transports-http", scheduling customization of its WebContainer
+2020-01-16 09:46:10,384 INFO  {paxweb-context-3-thread-1} [org.ops4j.pax.web.service.internal.HttpContextProcessing$HttpContextTracker.processContext()] (HttpContextProcessing.java:216) : Customizing WebContainer for bundle org.apache.cxf.cxf-rt-transports-http/3.2.7.fuse-760017
+2020-01-16 09:46:10,385 INFO  {paxweb-context-3-thread-1} [org.ops4j.pax.web.service.internal.HttpContextProcessing$HttpContextTracker.processContext()] (HttpContextProcessing.java:233) : Setting context parameters in WebContainer for bundle "org.apache.cxf.cxf-rt-transports-http": {keycloak.config.resolver=org.keycloak.adapters.osgi.HierarchicalPathBasedKeycloakConfigResolver}
+2020-01-16 09:46:10,385 INFO  {paxweb-context-3-thread-1} [org.ops4j.pax.web.service.undertow.internal.Context.stop()] (Context.java:176) : Stopping context /
+2020-01-16 09:46:10,386 INFO  {paxweb-context-3-thread-1} [org.ops4j.pax.web.service.undertow.internal.Context.destroy()] (Context.java:232) : destroying context DefaultHttpContext [bundle=org.apache.cxf.cxf-rt-transports-http [109], contextID=default], with context path:
+2020-01-16 09:46:10,391 INFO  {paxweb-context-3-thread-1} [org.ops4j.pax.web.service.internal.HttpContextProcessing$HttpContextTracker.processContext()] (HttpContextProcessing.java:239) : Registering login configuration in WebContainer for bundle "org.apache.cxf.cxf-rt-transports-http": method=KEYCLOAK, realm=6419636e-9437-4388-8606-b5ce3a082710
+2020-01-16 09:46:10,392 INFO  {paxweb-context-3-thread-1} [org.ops4j.pax.web.service.internal.HttpContextProcessing$HttpContextTracker.processContext()] (HttpContextProcessing.java:251) : Registering security mappings in WebContainer for bundle "org.apache.cxf.cxf-rt-transports-http": SecurityConstraintsMapping{name='cxf', url='/cxf/*', roles=[admin, superuser]}
 ----
 . Install the example:
 +
