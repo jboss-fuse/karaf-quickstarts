@@ -38,10 +38,10 @@
         <version.org.jboss.redhat-fuse>7.3.0.fuse-730027</version.org.jboss.redhat-fuse>
 
         <!-- versions of dependencies not inherited from BOM -->
-        <version.mysql>5.1.46</version.mysql>
-        <version.org.apache.derby>10.14.1.0</version.org.apache.derby>
-        <version.org.mariadb.jdbc>2.2.3</version.org.mariadb.jdbc>
-        <version.org.postgresql>42.2.2</version.org.postgresql>
+        <version.mysql>8.0.20</version.mysql>
+        <version.org.apache.derby>10.15.2.0</version.org.apache.derby>
+        <version.org.mariadb.jdbc>2.6.0</version.org.mariadb.jdbc>
+        <version.org.postgresql>42.2.12</version.org.postgresql>
 
         <!-- Plugins from org.apache.maven.plugins -->
         <version.plugin.maven-compiler-plugin>3.7.0</version.plugin.maven-compiler-plugin>
@@ -377,7 +377,7 @@
         <profile>
             <id>wmq9</id>
             <properties>
-                <!--<mq9library.path>/data/downloads/ibm.com/IBM MQ/9.0.5.0-IBM-MQ-Install-Java-All/JavaSE</mq9library.path>-->
+                <!--<mq9library.path>/data/downloads/ibm.com/IBM MQ/9.1.5.0-IBM-MQ-Install-Java-All/wmq/JavaSE</mq9library.path>-->
                 <mq9library.path>/path/to/location/of/com.ibm.mq.allclient.jar</mq9library.path>
             </properties>
             <!-- IBM MQ 9 specific dependencies, available from https://developer.ibm.com/messaging/mq-downloads -->
@@ -385,7 +385,7 @@
                 <dependency>
                     <groupId>com.ibm.mq</groupId>
                     <artifactId>com.ibm.mq.allclient</artifactId>
-                    <version>9.0.5.0</version>
+                    <version>9.1.5.0</version>
                     <scope>system</scope>
                     <systemPath>${mq9library.path}/com.ibm.mq.allclient.jar</systemPath>
                 </dependency>

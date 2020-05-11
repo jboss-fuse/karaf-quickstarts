@@ -85,7 +85,7 @@
                 <prop key="initialConnectAttempts" value="3" />
                 <!-- Properties needed by pooled-jms-specific org.ops4j.pax.jms.service.PooledConnectionFactoryFactory -->
                 <prop key="pool.maxConnections" value="10" />
-                <prop key="pool.idleTimeout" value="10000" />
+                <prop key="pool.connectionIdleTimeout" value="10000" />
             </props>
         </argument>
     </bean>

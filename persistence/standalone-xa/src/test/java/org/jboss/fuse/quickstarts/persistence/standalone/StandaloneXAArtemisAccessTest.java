@@ -92,7 +92,7 @@ public class StandaloneXAArtemisAccessTest {
         pool.setTransactionManager(transactionManager);
         // non broker-specific configuration
         pool.setMaxConnections(10);
-        pool.setIdleTimeout(10000);
+        pool.setConnectionIdleTimeout(10000);
         // ...
 
         // JMS code

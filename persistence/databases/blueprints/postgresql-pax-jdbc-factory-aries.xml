@@ -24,7 +24,7 @@
         With this method, we map the activities done with pax-jdbc-config and described in
         "3.2. PAX-JDBC configuration service" of quickstarts/persistence/manual
         We need:
-         - mvn:org.postgresql/postgresql/42.2.2 bundle
+         - mvn:org.postgresql/postgresql/42.2.12 bundle
          - jdbc feature (which includes pax-jdbc and pax-jdbc-config)
          - pax-jdbc-pool-dbcp2
 
@@ -46,12 +46,12 @@
     <!--
         A database-specific org.osgi.service.jdbc.DataSourceFactory that can create DataSource/XADataSource/
         /ConnectionPoolDataSource/Driver using properties. It's registered by pax-jdbc-* or for example
-        mvn:org.postgresql/postgresql/42.2.2 bundle natively
+        mvn:org.postgresql/postgresql/42.2.12 bundle natively
 
         PostgreSQL driver registers its data source factory with these properties:
          - osgi.jdbc.driver.name = PostgreSQL JDBC Driver
          - osgi.jdbc.driver.class = org.postgresql.Driver
-         - osgi.jdbc.driver.version = 42.2.2
+         - osgi.jdbc.driver.version = 42.2.12
 
         pax-jdbc-mysql registers its data source factory with these properties:
          - osgi.jdbc.driver.name = mysql
