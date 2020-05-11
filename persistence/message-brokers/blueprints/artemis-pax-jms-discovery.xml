@@ -60,7 +60,7 @@
             <!--<entry key="name" value="jms/artemis" />-->
             <!-- Other properties, that normally are needed by e.g., pax-jms-pool-pooledjms -->
             <entry key="pool.maxConnections" value="10" />
-            <entry key="pool.idleTimeout" value="10000" />
+            <entry key="pool.connectionIdleTimeout" value="10000" />
         </service-properties>
     </service>
 
