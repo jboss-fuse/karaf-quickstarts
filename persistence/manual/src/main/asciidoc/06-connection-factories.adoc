@@ -268,85 +268,54 @@ Require-Bundle =
 	com.ibm.mq.osgi.allclientprereqs;visibility:=reexport
 ----
 
-So without a _hack_ with installing an empty bundle with `com.ibm.mq.osgi.allclientprereqs` symbolic name, we actually
-can't use `com.ibm.mq.osgi.allclient_9.1.5.0.jar` bundle.
+Fuse 7.7 redefines `pax-jms-ibmmq` feature and adds single bundle `mvn:org.jboss.fuse.modules/fuse-pax-jms-ibmmq-compatibility/${version.org.jboss.fuse-karaf}` that satisfies the above requirement and prevents the situation where more bundles provide `javax.jms` package.
 
-With IBM MQ 9.0 drivers described in karaf-quickstarts for Fuse 7.6.0 version and earlier, I've presented the method to extract Java OSGi libraries from `mqadv_dev914_linux_x86-64.tar.gz`. However, with version 9.1 there are miscellaneous issues related to OSGi imports and exports and I wasn't able to find proper combination of libraries to use.
-
-When simply installing two bundles:
+So the way to install IBM MQ drivers is:
 [listing,options="nowrap"]
 ----
-310 │ Active    │  80 │ 9.1.5.0                   │ file:///data/downloads/ibm.com/IBM%20MQ/9.1.5.0-IBM-MQ-Install-Java-All/wmq/OSGi/com.ibm.mq.osgi.allclientprereqs_9.1.5.0.jar
-311 │ Active    │  80 │ 9.1.5.0                   │ file:///data/downloads/ibm.com/IBM%20MQ/9.1.5.0-IBM-MQ-Install-Java-All/wmq/OSGi/com.ibm.mq.osgi.allclient_9.1.5.0.jar
-----
-
-We can get this error:
-[listing,options="nowrap"]
-----
-2020-05-11 17:21:44,951 ERROR {FelixDispatchQueue} [org.apache.felix.framework.EventDispatcher.invokeFrameworkListenerCallback()] (EventDispatcher.java:881) : FrameworkEvent ERROR
-org.osgi.framework.BundleException: Uses constraint violation. Unable to resolve resource org.ops4j.pax.jms.pax-jms-ibmmq [org.ops4j.pax.jms.pax-jms-ibmmq [295](R 295.0)] because it is exposed to package 'javax.jms' from resources com.ibm.mq.osgi.allclientprereqs [com.ibm.mq.osgi.allclientprereqs [310](R 310.0)] and javax.jms-api [javax.jms-api [41](R 41.0)] via two dependency chains.
-
-Chain 1:
-  org.ops4j.pax.jms.pax-jms-ibmmq [org.ops4j.pax.jms.pax-jms-ibmmq [295](R 295.0)]
-    import: (&(osgi.wiring.package=javax.jms)(version>=2.0.0)(!(version>=3.0.0)))
-     |
-    export: osgi.wiring.package: javax.jms
-  com.ibm.mq.osgi.allclientprereqs [com.ibm.mq.osgi.allclientprereqs [310](R 310.0)]
-
-Chain 2:
-  org.ops4j.pax.jms.pax-jms-ibmmq [org.ops4j.pax.jms.pax-jms-ibmmq [295](R 295.0)]
-    import: (&(osgi.wiring.package=org.ops4j.pax.jms.service)(version>=1.0.0)(!(version>=2.0.0)))
-     |
-    export: osgi.wiring.package=org.ops4j.pax.jms.service; uses:=javax.jms
-  org.ops4j.pax.jms.pax-jms-api [org.ops4j.pax.jms.pax-jms-api [270](R 270.0)]
-    import: (&(osgi.wiring.package=javax.jms)(version>=2.0.0)(!(version>=3.0.0)))
-     |
-    export: osgi.wiring.package: javax.jms
-  javax.jms-api [javax.jms-api [41](R 41.0)] Unresolved requirements: [[org.ops4j.pax.jms.pax-jms-ibmmq [295](R 295.0)] osgi.wiring.package; (&(osgi.wiring.package=org.ops4j.pax.jms.service)(version>=1.0.0)(!(version>=2.0.0)))]
-	at org.apache.felix.framework.Felix.resolveBundleRevision(Felix.java:4149) ~[?:?]
-	at org.apache.felix.framework.Felix.startBundle(Felix.java:2119) ~[?:?]
-	at org.apache.felix.framework.Felix$RefreshHelper.restart(Felix.java:5097) ~[?:?]
-	at org.apache.felix.framework.Felix.refreshPackages(Felix.java:4291) ~[?:?]
-	at org.apache.felix.framework.FrameworkWiringImpl.run(FrameworkWiringImpl.java:188) ~[?:?]
-	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_241]
-----
-
-The problem is that `javax.jms` package is now exported from two different bundles:
-
-* `mvn:javax.jms/javax.jms-api/2.0.1`
-* `com.ibm.mq.osgi.allclientprereqs_9.1.5.0.jar`
-
-But instead of trying to find better bundles than `com.ibm.mq.osgi.allclientprereqs_9.1.5.0.jar`, we'll uninstall `mvn:javax.jms/javax.jms-api/2.0.1` instead.
-
-[listing,options="nowrap"]
-----
-karaf@root()> la -l|grep jms
- 41 │ Active    │  20 │ 2.0.1                     │ mvn:javax.jms/javax.jms-api/2.0.1
-karaf@root()> uninstall 41
-
-karaf@root()> install 'file:///data/downloads/ibm.com/IBM%20MQ/9.1.5.0-IBM-MQ-Install-Java-All/wmq/OSGi/com.ibm.mq.osgi.allclientprereqs_9.1.5.0.jar'
-Bundle ID: 310
 karaf@root()> install 'file:///data/downloads/ibm.com/IBM%20MQ/9.1.5.0-IBM-MQ-Install-Java-All/wmq/OSGi/com.ibm.mq.osgi.allclient_9.1.5.0.jar'
-Bundle ID: 311
-karaf@root()> start 310
-karaf@root()> start 311
-karaf@root()> refresh
+Bundle ID: 243
+karaf@root()> feature:install pax-jms-ibmmq
+karaf@root()> start 243
+karaf@root()> feature:install pax-jms-config
+karaf@root()> la -l
+START LEVEL 100 , List Threshold: 0
+ ID │ State    │ Lvl │ Version                  │ Location
+────┼──────────┼─────┼──────────────────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+...
+243 │ Resolved │  80 │ 9.1.5.0                  │ file:///data/downloads/ibm.com/IBM%20MQ/9.1.5.0-IBM-MQ-Install-Java-All/wmq/OSGi/com.ibm.mq.osgi.allclient_9.1.5.0.jar
+244 │ Active   │  35 │ 7.7.0.fuse-770003        │ mvn:org.jboss.fuse.modules/fuse-pax-jms-ibmmq-compatibility/7.7.0.fuse-770003
+245 │ Active   │  80 │ 1.0.7                    │ mvn:org.ops4j.pax.jms/pax-jms-api/1.0.7
+246 │ Active   │  80 │ 1.0.7                    │ mvn:org.ops4j.pax.jms/pax-jms-ibmmq/1.0.7
+247 │ Active   │  80 │ 1.0.7                    │ mvn:org.ops4j.pax.jms/pax-jms-config/1.0.7
 ----
-+
-These bundles could also be put into custom feature and installed using `feature:install` command.
+
+IMPORTANT: When installing `com.ibm.mq.osgi.allclient_9.1.5.0.jar` bundle first, we can't start it, because it requires the _prerequisites_ bundle provided by `pax-jms-ibmmq` feature. Only after feature installation, we can start `com.ibm.mq.osgi.allclient_9.1.5.0.jar` bundle. It can't stay at `RESOLVED` state, because only after start it provides necessary services.
+
+We can however prepare custom Karaf feature, where both `pax-jms-ibmmq` and the driver will be installed. Here's the example:
+[source,option="nowrap",xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<features name="xa-connection-factories-clients" xmlns="http://karaf.apache.org/xmlns/features/v1.5.0">
+    <feature name="ibmmq9-jms-client">
+        <feature>pax-jms-ibmmq</feature>
+        <bundle>file:///path/to/com.ibm.mq.osgi.allclient_9.1.5.0.jar</bundle>
+    </feature>
+</features>
+----
+
+`<bundle>` should point to custom location of the driver, which can't be distributed with {f7}.
 
 And now:
 [listing,options="nowrap"]
 ----
-karaf@root()> feature:install pax-jms-ibmmq
-
 karaf@root()> bundle:services -p org.ops4j.pax.jms.pax-jms-ibmmq
 
-OPS4J Pax JMS IBM MQ Support (295) provides:
+OPS4J Pax JMS IBM MQ Support (246) provides:
 --------------------------------------------
 objectClass = [org.ops4j.pax.jms.service.ConnectionFactoryFactory]
-service.bundleid = 295
-service.id = 390
+service.bundleid = 246
+service.id = 254
 service.scope = singleton
 type = ibmmq
 ----
@@ -369,7 +338,7 @@ karaf@root()> config:update
 
 karaf@root()> config:list '(service.factoryPid=org.ops4j.connectionfactory)'
 ----------------------------------------------------------------
-Pid:            org.ops4j.connectionfactory.48fb6947-686b-4ffe-a65b-0fdc4990521b
+Pid:            org.ops4j.connectionfactory.ef956272-3604-46f6-b127-7856c246d9ee
 FactoryPid:     org.ops4j.connectionfactory
 BundleLocation: ?
 Properties:
@@ -383,7 +352,7 @@ Properties:
    jms.transportType = 1
    osgi.jndi.service.name = jms/mq9
    service.factoryPid = org.ops4j.connectionfactory
-   service.pid = org.ops4j.connectionfactory.48fb6947-686b-4ffe-a65b-0fdc4990521b
+   service.pid = org.ops4j.connectionfactory.ef956272-3604-46f6-b127-7856c246d9ee
    type = ibmmq
 ----
 
@@ -404,14 +373,14 @@ karaf@root()> service:list javax.jms.ConnectionFactory
  jms.transportType = 1
  osgi.jndi.service.name = jms/mq9
  pax.jms.managed = true
- service.bundleid = 272
+ service.bundleid = 247
  service.factoryPid = org.ops4j.connectionfactory
- service.id = 391
- service.pid = org.ops4j.connectionfactory.48fb6947-686b-4ffe-a65b-0fdc4990521b
+ service.id = 257
+ service.pid = org.ops4j.connectionfactory.ef956272-3604-46f6-b127-7856c246d9ee
  service.scope = singleton
  type = ibmmq
 Provided by :
- OPS4J Pax JMS Config (272)
+ OPS4J Pax JMS Config (247)
 ----
 
 . Test the connection
@@ -437,7 +406,7 @@ karaf@root()> jms:send -u app -p fuse jms/mq9 DEV.QUEUE.1 "Hello IBM MQ 9 from P
 karaf@root()> jms:browse -u app -p fuse jms/mq9 DEV.QUEUE.1
 Message ID                                          │ Content                     │ Charset │ Type │ Correlation ID │ Delivery Mode │ Destination          │ Expiration │ Priority │ Redelivered │ ReplyTo │ Timestamp
 ────────────────────────────────────────────────────┼─────────────────────────────┼─────────┼──────┼────────────────┼───────────────┼──────────────────────┼────────────┼──────────┼─────────────┼─────────┼──────────────────────────────
-ID:414d512046555345514d202020202020964ab95e033bdc24 │ Hello IBM MQ 9 from PAX-JMS │ UTF-8   │      │                │ Persistent    │ queue:///DEV.QUEUE.1 │ Never      │ 4        │ false       │         │ Mon May 11 17:33:34 CEST 2020
+ID:414d512046555345514d20202020202041a0bb5e03f5ff24 │ Hello IBM MQ 9 from PAX-JMS │ UTF-8   │      │                │ Persistent    │ queue:///DEV.QUEUE.1 │ Never      │ 4        │ false       │         │ Wed May 13 10:25:33 CEST 2020
 ----
 
 We can check if the message was sent also from IBM MQ Explorer or from [web console].

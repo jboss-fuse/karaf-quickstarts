@@ -33,6 +33,8 @@
 
         <!-- version of BOM -->
         <version.org.jboss.redhat-fuse>7.3.0.fuse-730027</version.org.jboss.redhat-fuse>
+        <!-- version of Fuse Karaf - to use in karaf-maven-plugin configuration -->
+        <version.org.jboss.fuse-karaf>7.3.0.fuse-730040</version.org.jboss.fuse-karaf>
 
         <!-- versions of dependencies not inherited from BOM, but required to filter adoc/md files in assembly -->
         <version.io.hawt>2.0.0.fuse-730048</version.io.hawt>

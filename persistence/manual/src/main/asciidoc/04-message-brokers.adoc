@@ -61,7 +61,7 @@ We need to override security configuration for `DEV.APP.SVRCONN` channel which w
 .Connect to docker container and run `runmqsc` command as `mqm` user:
 [listing,options="nowrap"]
 ----
-$ docker exec -ti fuse-webspheremq9 /bin/bash
+$ podman exec -ti fuse-webspheremq9 /bin/bash
 
 bash-4.4$ id
 uid=888(mqm) gid=888(mqm) groups=888(mqm),0(root)
@@ -169,8 +169,10 @@ uid=1001(app) gid=1002(app) groups=1002(app),1001(mqclient)
 
 For completeness, here's the list of libraries that should be used with IBM MQ 9.
 
+IMPORTANT: The examples refer to version 9.1.5.0 of IBM MQ Client libraries, but please consult official documentation for supported version of the libraries.
+
 If we go to https://developer.ibm.com/messaging/mq-downloads/ -> https://ibm.biz/mq91cdredistclients,
-we can download `9.0.5.0-IBM-MQC-Redist-Java` package, but it doesn't contain everything we need.
+we can download `9.1.5.0-IBM-MQC-Redist-Java` package, but it doesn't contain OSGi libraries, only JavaSE/JavaEE ones.
 
 However, we can change criteria in _Change your selection_ box in strange way:
 
@@ -188,33 +190,13 @@ $ sha1sum 9.1.5.0-IBM*
 304bb3c3f6e1c65de1243b6735809dd37d972f81  9.1.5.0-IBM-MQ-Install-Java-All.jar
 ----
 
-Additionally, after downloading developer version of IBM MQ 9 (`mqadv_dev914_linux_x86-64.tar.gz`), we
-can find additional library package:
+`9.1.5.0-IBM-MQ-Install-Java-All` package contains three subdirectories in this package:
 
-`MQSeriesJava-9.1.4-0.x86_64.rpm` -> `MQSeriesJava-9.1.4-0.x86_64.cpio`.
-After unpacking cpio package, we can see even more complete set of libraries.
+* `wmq/JavaEE` contains resource adapter archive (`wmq.jmsra.rar`)
+* `wmq/JavaSE` contains `com.ibm.mq.allclient.jar` library and dependencies
+* `wmq/OSGi` contains respective `com.ibm.mq.osgi.allclient_9.1.5.0.jar` and dependencies
 
-Even if it seems that `9.1.5.0-IBM-MQ-Install-Java-All` package should be used there are some OSGi issues
-<<ibmmq-osgi-package,described here>>. There are three subdirectories in this package:
-
-* `JavaEE` contains resource adapter archive (`wmq.jmsra.rar`)
-* `JavaSE` contains `com.ibm.mq.allclient.jar` library and dependencies
-* `OSGi` contains respective `com.ibm.mq.osgi.allclient_9.1.5.0.jar` and dependencies
-
-`MQSeriesJava-9.1.4-0.x86_64.cpio` contains (`/opt/mqm/java/lib/OSGi`) these OSGi packages:
-
-* `com.ibm.mq.osgi.allclientprereqs_9.1.4.0.jar` - should not be used
-* `com.ibm.mq.osgi.allclient_9.1.4.0.jar` - depends on the above, so should not be used
-* `com.ibm.mq.osgi.java_9.1.4.0.jar`
-* `com.ibm.msg.client.osgi.commonservices.j2se_9.1.4.0.jar`
-* `com.ibm.msg.client.osgi.jms_9.1.4.0.jar` - should not be used
-* `com.ibm.msg.client.osgi.jms.prereq_9.1.4.0.jar`
-* `com.ibm.msg.client.osgi.nls_9.1.4.0.jar`
-* `com.ibm.msg.client.osgi.wmq_9.1.4.0.jar`
-* `com.ibm.msg.client.osgi.wmq.nls_9.1.4.0.jar`
-* `com.ibm.msg.client.osgi.wmq.prereq_9.1.4.0.jar`
-
-This quickstarts manual is not a definitive guide about which IBM MQ access methods are the canonical ones.
+IMPORTANT: This quickstarts manual is not a definitive guide about which IBM MQ access methods are the canonical ones.
 
 == A-MQ 7 installation (Artemis)
 
