@@ -200,26 +200,26 @@ IMPORTANT: This quickstarts manual is not a definitive guide about which IBM MQ 
 
 == A-MQ 7 installation (Artemis)
 
-This time we'll run standalone (no docker) version of `amq-broker-7.6.0-bin.zip`.
+This time we'll run standalone (no docker) version of `amq-broker-7.7.0-bin.zip`.
 
 [listing,options="nowrap"]
 ----
 $ pwd
-/data/servers/amq-broker-7.6.0
+/data/servers/amq-broker-7.7.0
 
 $ bin/artemis create --user fuse --password fuse --require-login amq7
-Creating ActiveMQ Artemis instance at: /data/servers/amq-broker-7.6.0/amq7
+Creating ActiveMQ Artemis instance at: /data/servers/amq-broker-7.7.0/amq7
 
 Auto tuning journal ...
-done! Your system can make 50 writes per millisecond, your journal-buffer-timeout will be 20000
+done! Your system can make 41.67 writes per millisecond, your journal-buffer-timeout will be 24000
 
 You can now start the broker by executing:
 
-   "/data/servers/amq-broker-7.6.0/amq7/bin/artemis" run
+   "/data/servers/amq-broker-7.7.0/amq7/bin/artemis" run
 
 Or you can run the broker in the background using:
 
-   "/data/servers/amq-broker-7.6.0/amq7/bin/artemis-service" start
+   "/data/servers/amq-broker-7.7.0/amq7/bin/artemis-service" start
 
 
 $ amq7/bin/artemis run
@@ -230,10 +230,10 @@ $ amq7/bin/artemis run
   / ____ \| |  | | |__| | | |_) | | | (_) |   <  __/ |
  /_/    \_\_|  |_|\___\_\ |____/|_|  \___/|_|\_\___|_|
 
- Red Hat AMQ 7.6.0.GA
+ Red Hat AMQ 7.7.0.GA
 
 
-2020-05-11 15:40:21,742 INFO  [org.apache.activemq.artemis.integration.bootstrap] AMQ101000: Starting ActiveMQ Artemis Server
+2020-05-28 14:01:14,119 INFO  [org.apache.activemq.artemis.integration.bootstrap] AMQ101000: Starting ActiveMQ Artemis Server
 ...
 ----
 
@@ -241,8 +241,8 @@ $ amq7/bin/artemis run
 
 Artemis libraries are available in Maven Central or Red Hat repository. I used:
 
-* `mvn:org.apache.activemq/artemis-core-client/2.11.0.redhat-00005`
-* `mvn:org.apache.activemq/artemis-jms-client/2.11.0.redhat-00005`
+* `mvn:org.apache.activemq/artemis-core-client/2.13.0.redhat-00003`
+* `mvn:org.apache.activemq/artemis-jms-client/2.13.0.redhat-00003`
 
 == A-MQ 6 installation
 
