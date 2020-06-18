@@ -199,7 +199,7 @@ karaf@root()> jms:info -u fuse -p fuse jms/artemis
 Property │ Value
 ─────────┼────────────────────
 product  │ ActiveMQ
-version  │ 2.13.0.redhat-00004
+version  │ 2.13.0.redhat-00005
 
 karaf@root()> jms:send -u fuse -p fuse jms/artemis DEV.QUEUE.1 "Hello Artemis from PAX-JMS"
 
@@ -471,7 +471,7 @@ karaf@root()> jms:info -u fuse -p fuse jms/artemis
 Property │ Value
 ─────────┼────────────────────
 product  │ ActiveMQ
-version  │ 2.13.0.redhat-00004
+version  │ 2.13.0.redhat-00005
 
 karaf@root()> jms:send -u fuse -p fuse jms/artemis DEV.QUEUE.1 "Hello Artemis from PAX-JMS"
 
@@ -910,7 +910,7 @@ karaf@root()> jms:info -u fuse -p fuse jms/artemis
 Property │ Value
 ─────────┼────────────────────
 product  │ ActiveMQ
-version  │ 2.13.0.redhat-00004
+version  │ 2.13.0.redhat-00005
 ----
 
 As shown in the above listing, blueprint bundle exports `javax.jms.ConnectionFactory` service which
@@ -1026,7 +1026,7 @@ karaf@root()> jms:info -u fuse -p fuse jms/artemis
 Property │ Value
 ─────────┼────────────────────
 product  │ ActiveMQ
-version  │ 2.13.0.redhat-00004
+version  │ 2.13.0.redhat-00005
 ----
 
 As shown in the above listing, blueprint bundle exports `javax.jms.ConnectionFactory` service which
@@ -1147,7 +1147,7 @@ karaf@root()> jms:info -u fuse -p fuse jms/artemis
 Property │ Value
 ─────────┼────────────────────
 product  │ ActiveMQ
-version  │ 2.13.0.redhat-00004
+version  │ 2.13.0.redhat-00005
 ----
 
 This time, `jms:connectionfactories` shows only one service, but that's becuase this command removes duplicate names.
