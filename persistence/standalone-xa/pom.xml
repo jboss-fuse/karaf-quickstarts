@@ -41,7 +41,7 @@
         <version.mysql>8.0.20</version.mysql>
         <version.org.apache.derby>10.15.2.0</version.org.apache.derby>
         <version.org.mariadb.jdbc>2.6.0</version.org.mariadb.jdbc>
-        <version.org.postgresql>42.2.12</version.org.postgresql>
+        <version.org.postgresql>42.2.14</version.org.postgresql>
 
         <!-- Plugins from org.apache.maven.plugins -->
         <version.plugin.maven-compiler-plugin>3.7.0</version.plugin.maven-compiler-plugin>
