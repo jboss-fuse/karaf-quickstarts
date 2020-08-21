@@ -55,11 +55,11 @@ The quickstart includes `org.jboss.fuse.quickstarts.security.keycloak.camel.Came
 
 The unit test can be run inside `keycloak-camel-restdsl-blueprint` directory:
 
-    18:28 $ mvn test -Pqtest
+    16:37 $ mvn test -Pqtest
     [INFO] Scanning for projects...
     [INFO] 
     [INFO] --< org.jboss.fuse.quickstarts.security:keycloak-camel-restdsl-blueprint >--
-    [INFO] Building Red Hat Fuse :: Quickstarts :: Security :: Keycloak :: Camel REST DSL/Blueprint ${project.version}
+    [INFO] Building Red Hat Fuse :: Quickstarts :: Security :: Keycloak :: Camel REST DSL/Blueprint 7.7.0.fuse-780012
     [INFO] -------------------------------[ bundle ]-------------------------------
     [INFO] 
     [INFO] --- maven-resources-plugin:3.0.2:resources (default-resources) @ keycloak-camel-restdsl-blueprint ---
@@ -84,40 +84,40 @@ The unit test can be run inside `keycloak-camel-restdsl-blueprint` directory:
     [INFO]  T E S T S
     [INFO] -------------------------------------------------------
     [INFO] Running org.jboss.fuse.quickstarts.security.keycloak.camel.CamelClientTest
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "POST /auth/realms/fuse7karaf/protocol/openid-connect/token HTTP/1.1[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Authorization: Basic Y2FtZWwtdW5kZXJ0b3ctcmVzdGRzbC1lbmRwb2ludDo5NGZiOTg4Mi01NzIwLTQwN2QtOWNjOC0xM2Q1Yjk5MjA3ZTQ=[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Content-Length: 52[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Content-Type: application/x-www-form-urlencoded[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Host: localhost:8180[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Connection: Keep-Alive[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "User-Agent: Apache-HttpClient/4.5.5 (Java/1.8.0_241)[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "grant_type=password&username=admin&password=passw0rd"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-0 << "HTTP/1.1 200 OK[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Connection: keep-alive[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Cache-Control: no-store[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Set-Cookie: KC_RESTART=; Version=1; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Max-Age=0; Path=/auth/realms/fuse7karaf/; HttpOnly[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Pragma: no-cache[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Content-Type: application/json[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Content-Length: 3955[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Date: Mon, 11 May 2020 16:28:36 GMT[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-0 << "[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-0 << "{"access_token":"<token>","expires_in":300,"refresh_expires_in":1800,"refresh_token":"<token>","token_type":"bearer","not-before-policy":0,"session_state":"ce062b15-ec2e-4d9f-844c-903462fea938","scope":"email profile"}"
-    18:28:36 INFO [org.jboss.fuse.quickstarts.security.keycloak.camel.CamelClientTest] : token: <token>
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "GET /restdsl/info HTTP/1.1[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "Authorization: Bearer <token>[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "Host: localhost:8484[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "Connection: Keep-Alive[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "User-Agent: Apache-HttpClient/4.5.5 (Java/1.8.0_241)[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-1 << "HTTP/1.1 200 OK[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Connection: keep-alive[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Content-Length: 40[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Date: Mon, 11 May 2020 16:28:36 GMT[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-1 << "[\r][\n]"
-    18:28:36 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Hello admin! Your full name is John Doe."
-    18:28:36 INFO [org.jboss.fuse.quickstarts.security.keycloak.camel.CamelClientTest] : response: Hello admin! Your full name is John Doe.
-    [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.527 s - in org.jboss.fuse.quickstarts.security.keycloak.camel.CamelClientTest
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "POST /auth/realms/fuse7karaf/protocol/openid-connect/token HTTP/1.1[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Authorization: Basic Y2FtZWwtdW5kZXJ0b3ctcmVzdGRzbC1lbmRwb2ludDo5NGZiOTg4Mi01NzIwLTQwN2QtOWNjOC0xM2Q1Yjk5MjA3ZTQ=[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Content-Length: 52[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Content-Type: application/x-www-form-urlencoded[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Host: localhost:8180[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Connection: Keep-Alive[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "User-Agent: Apache-HttpClient/4.5.5 (Java/1.8.0_261)[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "grant_type=password&username=admin&password=passw0rd"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-0 << "HTTP/1.1 200 OK[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Connection: keep-alive[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Cache-Control: no-store[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Set-Cookie: KC_RESTART=; Version=1; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Max-Age=0; Path=/auth/realms/fuse7karaf/; HttpOnly[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Pragma: no-cache[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Content-Type: application/json[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Content-Length: 3955[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Date: Fri, 21 Aug 2020 14:37:51 GMT[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-0 << "[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-0 << "{"access_token":"<token>","expires_in":300,"refresh_expires_in":1800,"refresh_token":"<token>","token_type":"bearer","not-before-policy":0,"session_state":"5ff98ddb-b94d-436a-9c32-b481bb05e1bd","scope":"profile email"}"
+    16:37:51 INFO [org.jboss.fuse.quickstarts.security.keycloak.camel.CamelClientTest] : token: <token>
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "GET /restdsl/info HTTP/1.1[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "Authorization: Bearer <token>[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "Host: localhost:8484[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "Connection: Keep-Alive[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "User-Agent: Apache-HttpClient/4.5.5 (Java/1.8.0_261)[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-1 << "HTTP/1.1 200 OK[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Connection: keep-alive[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Content-Length: 40[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Date: Fri, 21 Aug 2020 14:37:51 GMT[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-1 << "[\r][\n]"
+    16:37:51 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Hello admin! Your full name is John Doe."
+    16:37:51 INFO [org.jboss.fuse.quickstarts.security.keycloak.camel.CamelClientTest] : response: Hello admin! Your full name is John Doe.
+    [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.103 s - in org.jboss.fuse.quickstarts.security.keycloak.camel.CamelClientTest
     [INFO] 
     [INFO] Results:
     [INFO] 
@@ -126,8 +126,8 @@ The unit test can be run inside `keycloak-camel-restdsl-blueprint` directory:
     [INFO] ------------------------------------------------------------------------
     [INFO] BUILD SUCCESS
     [INFO] ------------------------------------------------------------------------
-    [INFO] Total time:  4.372 s
-    [INFO] Finished at: 2020-05-11T18:28:37+02:00
+    [INFO] Total time:  4.269 s
+    [INFO] Finished at: 2020-08-21T16:37:52+02:00
     [INFO] ------------------------------------------------------------------------
 
 
