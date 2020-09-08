@@ -22,7 +22,7 @@
 
     <groupId>org.jboss.fuse.quickstarts</groupId>
     <artifactId>camel-sap</artifactId>
-    <version>7.7.0.redhat-SNAPSHOT</version>
+    <version>7.8.0.redhat-SNAPSHOT</version>
     <packaging>bundle</packaging>
 
     <name>Red Hat Fuse :: Quickstarts :: camel-sap</name>
