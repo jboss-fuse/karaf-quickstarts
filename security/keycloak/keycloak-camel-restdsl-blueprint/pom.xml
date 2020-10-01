@@ -273,7 +273,7 @@
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Import-Package>
-                            org.keycloak.*;version="[3.4,5)",
+                            org.keycloak.*;version="[4,10)",
                             *
                         </Import-Package>
                         <Export-Package />
