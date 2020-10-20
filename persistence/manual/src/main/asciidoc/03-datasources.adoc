@@ -63,7 +63,7 @@ utility. If we install any standard JDBC driver, `pax-jdbc` bundle will register
 karaf@root()> install -s mvn:org.ops4j.pax.jdbc/pax-jdbc/1.4.5
 Bundle ID: 245
 
-karaf@root()> install -s mvn:org.postgresql/postgresql/42.2.12
+karaf@root()> install -s mvn:org.postgresql/postgresql/42.2.14
 Bundle ID: 246
 
 karaf@root()> bundle:services -p 246
@@ -73,7 +73,7 @@ PostgreSQL JDBC Driver JDBC42 (246) provides:
 objectClass = [org.osgi.service.jdbc.DataSourceFactory]
 osgi.jdbc.driver.class = org.postgresql.Driver
 osgi.jdbc.driver.name = PostgreSQL JDBC Driver
-osgi.jdbc.driver.version = 42.2.12
+osgi.jdbc.driver.version = 42.2.14
 service.bundleid = 246
 service.id = 255
 service.scope = singleton
@@ -98,7 +98,7 @@ karaf@root()> service:list org.osgi.service.jdbc.DataSourceFactory
 -----------------------------------------
  osgi.jdbc.driver.class = org.postgresql.Driver
  osgi.jdbc.driver.name = PostgreSQL JDBC Driver
- osgi.jdbc.driver.version = 42.2.12
+ osgi.jdbc.driver.version = 42.2.14
  service.bundleid = 246
  service.id = 255
  service.scope = singleton
@@ -126,7 +126,7 @@ The above intermediary `org.osgi.service.jdbc.DataSourceFactory` service can be 
 We can't obtain `javax.sql.ConnectionPoolDataSource` or `javax.sql.XADataSource` from the generic
 `org.osgi.service.jdbc.DataSourceFactory` created by non database-specific `pax-jdbc` bundle.
 
-NOTE: `mvn:org.postgresql/postgresql/42.2.12` bundle correctly implements OSGi JDBC specification and registers
+NOTE: `mvn:org.postgresql/postgresql/42.2.14` bundle correctly implements OSGi JDBC specification and registers
 an `org.osgi.service.jdbc.DataSourceFactory` with all methods implemented - also the ones creating XA and ConnectionPool
 data sources.
 
@@ -1017,7 +1017,7 @@ that show how it should be used:
 
 [listing,options="nowrap"]
 ----
-karaf@root()> install -s mvn:org.postgresql/postgresql/42.2.12
+karaf@root()> install -s mvn:org.postgresql/postgresql/42.2.14
 Bundle ID: 243
 karaf@root()> install -s mvn:org.apache.commons/commons-pool2/2.8.0
 Bundle ID:78
@@ -1076,7 +1076,7 @@ Here's the Blueprint XML example:
 <!--
     A database-specific org.osgi.service.jdbc.DataSourceFactory that can create DataSource/XADataSource/
     /ConnectionPoolDataSource/Driver using properties. It's registered by pax-jdbc-* or for example
-    mvn:org.postgresql/postgresql/42.2.12 bundle natively
+    mvn:org.postgresql/postgresql/42.2.14 bundle natively
 -->
 <reference id="dataSourceFactory"
         interface="org.osgi.service.jdbc.DataSourceFactory"
@@ -1139,7 +1139,7 @@ Here's how it looks like in Fuse/Karaf shell:
 
 [listing,options="nowrap"]
 ----
-karaf@root()> install -s mvn:org.postgresql/postgresql/42.2.12
+karaf@root()> install -s mvn:org.postgresql/postgresql/42.2.14
 Bundle ID: 243
 karaf@root()> feature:install jdbc pax-jdbc-config pax-jdbc-pool-dbcp2
 karaf@root()> install -s blueprint:file://$PQ_HOME/databases/blueprints/postgresql-pax-jdbc-factory-dbcp2.xml
@@ -1232,7 +1232,7 @@ Here's how it looks like in Fuse/Karaf shell:
 
 [listing,options="nowrap"]
 ----
-karaf@root()> install -s mvn:org.postgresql/postgresql/42.2.12
+karaf@root()> install -s mvn:org.postgresql/postgresql/42.2.14
 Bundle ID: 243
 karaf@root()> feature:install jdbc pax-jdbc-config pax-jdbc-pool-dbcp2
 karaf@root()> install -s blueprint:file://$PQ_HOME/databases/blueprints/postgresql-pax-jdbc-discovery.xml
