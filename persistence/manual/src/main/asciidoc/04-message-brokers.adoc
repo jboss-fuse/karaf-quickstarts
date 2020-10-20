@@ -19,16 +19,16 @@ The sources for Dockerfile are stored in https://github.com/ibm-messaging/mq-doc
 +
 [listing,options="nowrap"]
 ----
-$ podman run -d --name fuse-webspheremq9 --env LICENSE=accept --env MQ_QMGR_NAME=FUSEQM --publish 1414:1414 --publish 19443:9443 ibmcom/mq:9.1.4.0-r1
-Trying to pull docker.io/ibmcom/mq:9.1.4.0-r1...
+$ podman run -d --name fuse-webspheremq9 --env LICENSE=accept --env MQ_QMGR_NAME=FUSEQM --publish 1414:1414 --publish 19443:9443 ibmcom/mq:9.1.3.0
+Trying to pull docker.io/ibmcom/mq:9.1.3.0...
 Getting image source signatures
 ...
 Storing signatures
-512326c8def0cd7d7a6e5fa5010ceae1fe74ad69780d3ae6fc0b50853837ac22
+d166e90f08009602171742ff9ac4e4c3cf976d69de9aa5c4001ca5b0179759bc
 
-$ podman ps
-CONTAINER ID  IMAGE                           COMMAND  CREATED        STATUS            PORTS                                            NAMES
-512326c8def0  docker.io/ibmcom/mq:9.1.4.0-r1           6 seconds ago  Up 5 seconds ago  0.0.0.0:19443->9443/tcp, 0.0.0.0:1414->1414/tcp  fuse-webspheremq9
+ podman ps
+CONTAINER ID  IMAGE                        COMMAND  CREATED         STATUS             PORTS                                            NAMES
+d166e90f0800  docker.io/ibmcom/mq:9.1.3.0           12 seconds ago  Up 12 seconds ago  0.0.0.0:19443->9443/tcp, 0.0.0.0:1414->1414/tcp  fuse-webspheremq9
 ----
 
 . Check if web console works
@@ -63,13 +63,12 @@ We need to override security configuration for `DEV.APP.SVRCONN` channel which w
 ----
 $ podman exec -ti fuse-webspheremq9 /bin/bash
 
-bash-4.4$ id
-uid=888(mqm) gid=888(mqm) groups=888(mqm),0(root)
+bash-4.2$ id
+uid=888(mqm) gid=888(mqm) groups=888(mqm)
 
-bash-4.4$ runmqsc
+bash-4.2$ runmqsc
 5724-H72 (C) Copyright IBM Corp. 1994, 2019.
 Starting MQSC for queue manager FUSEQM.
-AMQ8521I: Command completion and history unavailable.
 ----
 
 .Check current configuration of the channel
@@ -79,7 +78,7 @@ display channel (DEV.APP.SVRCONN)
      1 : display channel (DEV.APP.SVRCONN)
 AMQ8414I: Display Channel details.
    CHANNEL(DEV.APP.SVRCONN)                CHLTYPE(SVRCONN)
-   ALTDATE(2020-05-11)                     ALTTIME(12.52.39)
+   ALTDATE(2020-10-20)                     ALTTIME(11.21.46)
    CERTLABL( )                             COMPHDR(NONE)
    COMPMSG(NONE)                           DESCR( )
    DISCINT(0)                              HBINT(300)
@@ -143,24 +142,25 @@ AMQ8560I: IBM MQ security cache refreshed.
 
 exit
      8 : exit
-...
+7 MQSC commands read.
+No commands have a syntax error.
+2 valid MQSC commands could not be processed.
 ----
 
 .Change password of `app` user
 After exiting `runmqsc` we have to use the only allowed (in `/etc/sudoers.d/mq-dev-config`) command to change the password of `app` user (hit `CTRL-D` after specifying `app:fuse`):
 [listing,options="nowrap"]
 ----
-bash-4.4$ id
-uid=888(mqm) gid=888(mqm) groups=888(mqm),0(root)
+bash-4.2$ id
+uid=888(mqm) gid=888(mqm) groups=888(mqm)
 
-bash-4.4$ sudo /usr/sbin/chpasswd
+bash-4.2$ sudo /usr/sbin/chpasswd
 app:fuse
 ^D
 
-bash-4.4$ su - app
+bash-4.2$ su - app
 Password:
-Last login: Mon May 11 13:12:31 UTC 2020 on pts/0
-[app@512326c8def0 ~]$ id
+[app@d166e90f0800 ~]$ id
 uid=1001(app) gid=1002(app) groups=1002(app),1001(mqclient)
 ----
 
@@ -169,32 +169,32 @@ uid=1001(app) gid=1002(app) groups=1002(app),1001(mqclient)
 
 For completeness, here's the list of libraries that should be used with IBM MQ 9.
 
-IMPORTANT: The examples refer to version 9.1.5.0 of IBM MQ Client libraries, but please consult official documentation for supported version of the libraries.
+IMPORTANT: The examples refer to version 9.1.0.6 of IBM MQ Client libraries, but please consult official documentation for supported version of the libraries.
 
-If we go to https://developer.ibm.com/messaging/mq-downloads/ -> https://ibm.biz/mq91cdredistclients,
-we can download `9.1.5.0-IBM-MQC-Redist-Java` package, but it doesn't contain OSGi libraries, only JavaSE/JavaEE ones.
+If we go to https://developer.ibm.com/messaging/mq-downloads/ -> https://developer.ibm.com/components/ibm-mq/articles/mq-downloads#java,
+we can download `IBM-MQC-Redist-Java` package. The links may vary, but I was able to download version 9.1.0.6 after clicking https://ibm.biz/ibm-mq-clients-all-lts_91 link and manioulating search criteria.
 
 However, we can change criteria in _Change your selection_ box in strange way:
 
 * click in _Product selector_ and don't change anything - accept existing _WebSphere MQ_
 * without changing product, we actually change lower box from _Upgrades to version_ to _Applies to version_
-* select _9.1.5_, _Platform_ = _all_ and click _Submit_
-* then we can find the _official_ client library package: `9.1.5.0-IBM-MQ-Install-Java-All.jar`
+* select _9.1.0.6_, _Platform_ = _all_ and click _Submit_
+* then we can find the _official_ client library package: `9.1.0.6-IBM-MQ-Install-Java-All.jar`
 
 To be precise, here are the checksums:
 
 [listing,options="nowrap"]
 ----
-$ sha1sum 9.1.5.0-IBM*
-0387ff4e4173e9f2eb80183a699717bfe1fab26f  9.1.5.0-IBM-MQC-Redist-Java.zip
-304bb3c3f6e1c65de1243b6735809dd37d972f81  9.1.5.0-IBM-MQ-Install-Java-All.jar
+$ sha1sum 9.1.0.6-IBM*
+8bc61ac15256e13d378d6b0f3c805097c6068528  9.1.0.6-IBM-MQC-Redist-Java.zip
+4d2840347b8ff68f13e6a2df7a6998f972530672  9.1.0.6-IBM-MQ-Install-Java-All.jar
 ----
 
-`9.1.5.0-IBM-MQ-Install-Java-All` package contains three subdirectories in this package:
+`9.1.0.6-IBM-MQ-Install-Java-All` package contains three subdirectories in this package:
 
 * `wmq/JavaEE` contains resource adapter archive (`wmq.jmsra.rar`)
 * `wmq/JavaSE` contains `com.ibm.mq.allclient.jar` library and dependencies
-* `wmq/OSGi` contains respective `com.ibm.mq.osgi.allclient_9.1.5.0.jar` and dependencies
+* `wmq/OSGi` contains respective `com.ibm.mq.osgi.allclient_9.1.0.6.jar` and dependencies
 
 IMPORTANT: This quickstarts manual is not a definitive guide about which IBM MQ access methods are the canonical ones.
 
@@ -233,7 +233,7 @@ $ amq7/bin/artemis run
  Red Hat AMQ 7.7.0.GA
 
 
-2020-05-28 14:01:14,119 INFO  [org.apache.activemq.artemis.integration.bootstrap] AMQ101000: Starting ActiveMQ Artemis Server
+2020-10-20 14:01:24,041 INFO  [org.apache.activemq.artemis.integration.bootstrap] AMQ101000: Starting ActiveMQ Artemis Server
 ...
 ----
 
@@ -246,7 +246,7 @@ Artemis libraries are available in Maven Central or Red Hat repository. I used:
 
 == A-MQ 6 installation
 
-For A-MQ 6 we'll run standalone (no docker) version of `jboss-a-mq-6.3.0.redhat-446.zip`.
+For A-MQ 6 we'll run standalone (no docker) version of `jboss-a-mq-6.3.0.redhat-475.zip`.
 
 .Add authentication entries
 
@@ -261,7 +261,7 @@ fuse=fuse,Operator
 [listing,options="nowrap"]
 ----
 $ pwd
-/data/servers/jboss-a-mq-6.3.0.redhat-446
+/data/servers/jboss-a-mq-6.3.0.redhat-475
 
 $ bin/amq
 Please wait, JBoss A-MQ is initializing...
@@ -274,7 +274,7 @@ Please wait, JBoss A-MQ is initializing...
 | |__| | |_) | (_) \__ \__ \  / ____ \     | |  | | |__| |
  \____/|____/ \___/|___/___/ /_/    \_\    |_|  |_|\___\_\
 
-  JBoss A-MQ (6.3.0.redhat-446)
+  JBoss A-MQ (6.3.0.redhat-475)
   http://www.redhat.com/products/jbossenterprisemiddleware/amq/
 
 Hit '<tab>' for a list of available commands
@@ -287,9 +287,9 @@ Hit '<ctrl-d>' or 'osgi:shutdown' to shutdown JBoss A-MQ.
 JBossA-MQ:karaf@root> bstat
 connectorName = ws
 
-Name = KahaDBPersistenceAdapter[/data/servers/jboss-a-mq-6.3.0.redhat-446/data/amq/kahadb,Index:/data/servers/jboss-a-mq-6.3.0.redhat-446/data/amq/kahadb]
-
 connectorName = openwire
+
+Name = KahaDBPersistenceAdapter[/data/servers/jboss-a-mq-6.3.0.redhat-475/data/amq/kahadb,Index:/data/servers/jboss-a-mq-6.3.0.redhat-475/data/amq/kahadb]
 
 
 BrokerName = amq
@@ -297,7 +297,7 @@ TotalEnqueueCount = 1
 TotalDequeueCount = 0
 TotalMessageCount = 0
 TotalConsumerCount = 0
-Uptime = 2.105 seconds
+Uptime = 4.812 seconds
 
 connectorName = amqp
 
@@ -308,4 +308,4 @@ connectorName = mqtt
 
 Libraries are available in Maven Central or Red Hat repository. I used:
 
-* `mvn:org.apache.activemq/activemq-client/5.11.0.redhat-630446`
+* `mvn:org.apache.activemq/activemq-client/5.11.0.redhat-630475`
