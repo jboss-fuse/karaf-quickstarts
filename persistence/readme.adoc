@@ -97,7 +97,7 @@ $ pwd
 [INFO] Scanning for projects...
 [INFO]
 [INFO] --------------< org.jboss.fuse.quickstarts:standalone-xa >--------------
-[INFO] Building Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support 7.8.0.redhat-SNAPSHOT
+[INFO] Building Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support 7.9.0.redhat-SNAPSHOT
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO]
 [INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ standalone-xa ---
@@ -177,7 +177,7 @@ without specifying any profile (except `-Pqtest`).
 [INFO] Scanning for projects...
 [INFO]
 [INFO] --------------< org.jboss.fuse.quickstarts:standalone-xa >--------------
-[INFO] Building Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support 7.8.0.redhat-SNAPSHOT
+[INFO] Building Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support 7.9.0.redhat-SNAPSHOT
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO]
 [INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ standalone-xa ---
@@ -237,7 +237,7 @@ with `-Pamq6` Maven profile.
 [INFO] Scanning for projects...
 [INFO]
 [INFO] --------------< org.jboss.fuse.quickstarts:standalone-xa >--------------
-[INFO] Building Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support 7.8.0.redhat-SNAPSHOT
+[INFO] Building Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support 7.9.0.redhat-SNAPSHOT
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO]
 [INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ standalone-xa ---
