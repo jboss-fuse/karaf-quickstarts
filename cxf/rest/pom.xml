@@ -99,6 +99,10 @@
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-frontend-jaxrs</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-service-description-openapi-v3</artifactId>
+        </dependency>
 
         <!-- Test dependencies -->
 
@@ -158,18 +162,6 @@
             <optional>true</optional>
         </dependency>
 
-        <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-jaxrs</artifactId>
-            <optional>true</optional>
-            <exclusions>
-                <!-- avoid this old dependency which breaks CXF -->
-                <exclusion>
-                    <groupId>javax.ws.rs</groupId>
-                    <artifactId>jsr311-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
 
     </dependencies>
 
@@ -338,19 +330,20 @@
                     <obrRepository>NONE</obrRepository>
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-                        <Import-Package>
-                            javax.ws.rs,
+                        <Import-Package>javax.ws.rs,
                             javax.ws.rs.core,
+                            javax.ws.rs.container,
                             javax.xml.bind.annotation,
                             org.osgi.service.blueprint,
-                            org.apache.cxf.jaxrs.swagger,
-                            io.swagger.jaxrs.config,
-                            io.swagger.jaxrs.listing,
-                            io.swagger.annotations,
+                            org.apache.cxf.jaxrs.openapi,
+                            io.swagger.v3.oas.annotations,
+                            io.swagger.v3.oas.models,
+                            io.swagger.v3.jaxrs2,
                             org.apache.cxf.transport.http,
                             javax.annotation;version="[1.1.0,2.0.0)",
                             com.fasterxml.jackson.annotation, com.fasterxml.jackson.core,
                             com.fasterxml.jackson.databind,
+                            com.fasterxml.jackson.jaxrs.base,
                             com.fasterxml.jackson.jaxrs.json, javax.ws.rs.ext,*
                         </Import-Package>
                         <Import-Service>org.apache.aries.blueprint.NamespaceHandler;

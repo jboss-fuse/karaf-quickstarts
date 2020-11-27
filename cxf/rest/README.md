@@ -77,10 +77,6 @@ Use this URL to display the XML representation for customer 123:
 
     http://localhost:8181/cxf/crm/customerservice/customers/123
 
-You can also access the XML representation for order 223 ...
-
-    http://localhost:8181/cxf/crm/customerservice/orders/223
-
 ... or the XML representation of product 323 in order 223 with
 
     http://localhost:8181/cxf/crm/customerservice/orders/223/products/323
@@ -122,6 +118,9 @@ You can use a command-line utility, such as cURL or wget, to perform the HTTP re
   
              curl -X DELETE http://localhost:8181/cxf/crm/customerservice/customers/123
 
+### To access OpenApi
+
+    * Can access OpenApi from http://localhost:8181/cxf/crm/openapi.json
 
 ### Changing /cxf servlet alias
 

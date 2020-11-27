@@ -39,6 +39,18 @@
       - a list of service beans
         in this example, we refer to another bean defined in this Blueprint XML file with a <ref/> element
     -->
+    <bean id="customizer" class="org.apache.cxf.jaxrs.openapi.OpenApiCustomizer">
+        <property name="dynamicBasePath" value="true"/>
+    </bean>
+    <bean id="openApiFeature" class="org.apache.cxf.jaxrs.openapi.OpenApiFeature">
+        <property name="title" value="Fuse:CXF:Quickstarts - Customer Service" />
+        <property name="description" value="Sample REST-based Customer Service" />
+        <property name="version" value="${project.version}" />
+        <property name="prettyPrint" value="true"/>
+        <property name="customizer">
+            <ref component-id="customizer"/>
+        </property>
+    </bean>
     <jaxrs:server id="customerService" address="/crm">
         <jaxrs:serviceBeans>
             <ref component-id="customerSvc"/>
@@ -47,11 +59,7 @@
            <bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
         </jaxrs:providers>
         <jaxrs:features>
-            <bean class="org.apache.cxf.jaxrs.swagger.Swagger2Feature">
-                <property name="title" value="Fuse:CXF:Quickstarts - Customer Service" />
-                <property name="description" value="Sample REST-based Customer Service" />
-                <property name="version" value="${project.version}" />
-            </bean>
+            <ref component-id="openApiFeature" />
         </jaxrs:features>
     </jaxrs:server>
  
