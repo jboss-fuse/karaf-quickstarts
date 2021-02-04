@@ -37,7 +37,7 @@ Build and Deploy the Quickstart
 2. Run `mvn clean install` to build the quickstart.
 3. Start Red Hat Fuse 7 by running bin/fuse (on Linux) or bin\fuse.bat (on Windows).
 4. In the Red Hat Fuse console, enter the following command:
-
+        feature:install cxf-rs-description-openapi-v3
         bundle:install -s mvn:org.jboss.fuse.quickstarts/cxf-rest/${project.version}
 
 5. Fuse should give you an id when the bundle is deployed
