@@ -43,6 +43,7 @@
         <property name="dynamicBasePath" value="true"/>
     </bean>
     <bean id="openApiFeature" class="org.apache.cxf.jaxrs.openapi.OpenApiFeature">
+        <property name="scan" value="false" />
         <property name="title" value="Fuse:CXF:Quickstarts - Customer Service" />
         <property name="description" value="Sample REST-based Customer Service" />
         <property name="version" value="${project.version}" />
