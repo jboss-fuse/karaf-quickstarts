@@ -24,11 +24,11 @@ Trying to pull docker.io/ibmcom/mq:9.1.3.0...
 Getting image source signatures
 ...
 Storing signatures
-d166e90f08009602171742ff9ac4e4c3cf976d69de9aa5c4001ca5b0179759bc
+1e397bb7318d027e27be7c2ad02eeee6c0c61ea7fb069071dcda51747fadf6f8
 
  podman ps
-CONTAINER ID  IMAGE                        COMMAND  CREATED         STATUS             PORTS                                            NAMES
-d166e90f0800  docker.io/ibmcom/mq:9.1.3.0           12 seconds ago  Up 12 seconds ago  0.0.0.0:19443->9443/tcp, 0.0.0.0:1414->1414/tcp  fuse-webspheremq9
+CONTAINER ID  IMAGE                            COMMAND   CREATED         STATUS             PORTS                                            NAMES
+1e397bb7318d  docker.io/ibmcom/mq:9.1.3.0                9 seconds ago   Up 10 seconds ago  0.0.0.0:1414->1414/tcp, 0.0.0.0:19443->9443/tcp  fuse-webspheremq9
 ----
 
 . Check if web console works
@@ -78,7 +78,7 @@ display channel (DEV.APP.SVRCONN)
      1 : display channel (DEV.APP.SVRCONN)
 AMQ8414I: Display Channel details.
    CHANNEL(DEV.APP.SVRCONN)                CHLTYPE(SVRCONN)
-   ALTDATE(2020-10-20)                     ALTTIME(11.21.46)
+   ALTDATE(2021-03-31)                     ALTTIME(16.16.44)
    CERTLABL( )                             COMPHDR(NONE)
    COMPMSG(NONE)                           DESCR( )
    DISCINT(0)                              HBINT(300)
@@ -99,7 +99,7 @@ AMQ8878I: Display channel authentication record details.
    CHLAUTH(DEV.APP.SVRCONN)                TYPE(ADDRESSMAP)
    ADDRESS(*)                              USERSRC(CHANNEL)
 ...
-AMQ8878I: Display channel authentication record details.
+MQ8878I: Display channel authentication record details.
    CHLAUTH(*)                              TYPE(ADDRESSMAP)
    ADDRESS(*)                              USERSRC(NOACCESS)
 AMQ8878I: Display channel authentication record details.
@@ -159,8 +159,8 @@ app:fuse
 ^D
 
 bash-4.2$ su - app
-Password:
-[app@d166e90f0800 ~]$ id
+Password: fuse
+[app@1e397bb7318d ~]$ id
 uid=1001(app) gid=1002(app) groups=1002(app),1001(mqclient)
 ----
 
@@ -169,57 +169,50 @@ uid=1001(app) gid=1002(app) groups=1002(app),1001(mqclient)
 
 For completeness, here's the list of libraries that should be used with IBM MQ 9.
 
-IMPORTANT: The examples refer to version 9.1.0.6 of IBM MQ Client libraries, but please consult official documentation for supported version of the libraries.
+IMPORTANT: The examples refer to version 9.1.0.7 of IBM MQ Client libraries, but please consult official documentation for supported version of the libraries.
 
-If we go to https://developer.ibm.com/messaging/mq-downloads/ -> https://developer.ibm.com/components/ibm-mq/articles/mq-downloads#java,
-we can download `IBM-MQC-Redist-Java` package. The links may vary, but I was able to download version 9.1.0.6 after clicking https://ibm.biz/ibm-mq-clients-all-lts_91 link and manioulating search criteria.
-
-However, we can change criteria in _Change your selection_ box in strange way:
-
-* click in _Product selector_ and don't change anything - accept existing _WebSphere MQ_
-* without changing product, we actually change lower box from _Upgrades to version_ to _Applies to version_
-* select _9.1.0.6_, _Platform_ = _all_ and click _Submit_
-* then we can find the _official_ client library package: `9.1.0.6-IBM-MQ-Install-Java-All.jar`
+If we go to https://www.ibm.com/support/pages/mqc91-ibm-mq-clients,
+we can download `IBM MQ 9.1.0.7 LTS Clients` package. The links may vary, but I was able to download version 9.1.0.7 after clicking https://ibm.biz/ibm-mq-clients-all-lts_91 link and manipulating search criteria.
 
 To be precise, here are the checksums:
 
 [listing,options="nowrap"]
 ----
-$ sha1sum 9.1.0.6-IBM*
-8bc61ac15256e13d378d6b0f3c805097c6068528  9.1.0.6-IBM-MQC-Redist-Java.zip
-4d2840347b8ff68f13e6a2df7a6998f972530672  9.1.0.6-IBM-MQ-Install-Java-All.jar
+$ sha1sum 9.1.0.7-IBM*
+8d8933b5d871ea64467eb9d25873c073200923de  9.1.0.7-IBM-MQC-Redist-Java.zip
+ec376298c55ddc53aa05c5056bd0bf241dd7e6a7  9.1.0.7-IBM-MQ-Install-Java-All.jar
 ----
 
-`9.1.0.6-IBM-MQ-Install-Java-All` package contains three subdirectories in this package:
+`9.1.0.7-IBM-MQ-Install-Java-All` package contains three subdirectories in this package:
 
 * `wmq/JavaEE` contains resource adapter archive (`wmq.jmsra.rar`)
 * `wmq/JavaSE` contains `com.ibm.mq.allclient.jar` library and dependencies
-* `wmq/OSGi` contains respective `com.ibm.mq.osgi.allclient_9.1.0.6.jar` and dependencies
+* `wmq/OSGi` contains respective `com.ibm.mq.osgi.allclient_9.1.0.7.jar` and dependencies
 
 IMPORTANT: This quickstarts manual is not a definitive guide about which IBM MQ access methods are the canonical ones.
 
 == A-MQ 7 installation (Artemis)
 
-This time we'll run standalone (no docker) version of `amq-broker-7.7.0-bin.zip`.
+This time we'll run standalone (no docker) version of `amq-broker-7.8.1-bin.zip`.
 
 [listing,options="nowrap"]
 ----
 $ pwd
-/data/servers/amq-broker-7.7.0
+/data/servers/amq-broker-7.8.1
 
 $ bin/artemis create --user fuse --password fuse --require-login amq7
-Creating ActiveMQ Artemis instance at: /data/servers/amq-broker-7.7.0/amq7
+Creating ActiveMQ Artemis instance at: /data/servers/amq-broker-7.8.1/amq7
 
 Auto tuning journal ...
-done! Your system can make 41.67 writes per millisecond, your journal-buffer-timeout will be 24000
+done! Your system can make 31.25 writes per millisecond, your journal-buffer-timeout will be 32000
 
 You can now start the broker by executing:
 
-   "/data/servers/amq-broker-7.7.0/amq7/bin/artemis" run
+   "/data/servers/amq-broker-7.8.1/amq7/bin/artemis" run
 
 Or you can run the broker in the background using:
 
-   "/data/servers/amq-broker-7.7.0/amq7/bin/artemis-service" start
+   "/data/servers/amq-broker-7.8.1/amq7/bin/artemis-service" start
 
 
 $ amq7/bin/artemis run
@@ -230,10 +223,10 @@ $ amq7/bin/artemis run
   / ____ \| |  | | |__| | | |_) | | | (_) |   <  __/ |
  /_/    \_\_|  |_|\___\_\ |____/|_|  \___/|_|\_\___|_|
 
- Red Hat AMQ 7.7.0.GA
+ Red Hat AMQ 7.8.1.GA
 
 
-2020-10-20 14:01:24,041 INFO  [org.apache.activemq.artemis.integration.bootstrap] AMQ101000: Starting ActiveMQ Artemis Server
+2021-03-31 18:30:00,353 INFO  [org.apache.activemq.artemis.integration.bootstrap] AMQ101000: Starting ActiveMQ Artemis Server
 ...
 ----
 
@@ -241,12 +234,12 @@ $ amq7/bin/artemis run
 
 Artemis libraries are available in Maven Central or Red Hat repository. I used:
 
-* `mvn:org.apache.activemq/artemis-core-client/2.13.0.redhat-00006`
-* `mvn:org.apache.activemq/artemis-jms-client/2.13.0.redhat-00006`
+* `mvn:org.apache.activemq/artemis-core-client/2.16.0.redhat-00012`
+* `mvn:org.apache.activemq/artemis-jms-client/2.16.0.redhat-00012`
 
 == A-MQ 6 installation
 
-For A-MQ 6 we'll run standalone (no docker) version of `jboss-a-mq-6.3.0.redhat-475.zip`.
+For A-MQ 6 we'll run standalone (no docker) version of `jboss-a-mq-6.3.0.redhat-495.zip`.
 
 .Add authentication entries
 
@@ -261,7 +254,7 @@ fuse=fuse,Operator
 [listing,options="nowrap"]
 ----
 $ pwd
-/data/servers/jboss-a-mq-6.3.0.redhat-475
+/data/servers/jboss-a-mq-6.3.0.redhat-495
 
 $ bin/amq
 Please wait, JBoss A-MQ is initializing...
@@ -274,7 +267,7 @@ Please wait, JBoss A-MQ is initializing...
 | |__| | |_) | (_) \__ \__ \  / ____ \     | |  | | |__| |
  \____/|____/ \___/|___/___/ /_/    \_\    |_|  |_|\___\_\
 
-  JBoss A-MQ (6.3.0.redhat-475)
+  JBoss A-MQ (6.3.0.redhat-495)
   http://www.redhat.com/products/jbossenterprisemiddleware/amq/
 
 Hit '<tab>' for a list of available commands
@@ -289,15 +282,15 @@ connectorName = ws
 
 connectorName = openwire
 
-Name = KahaDBPersistenceAdapter[/data/servers/jboss-a-mq-6.3.0.redhat-475/data/amq/kahadb,Index:/data/servers/jboss-a-mq-6.3.0.redhat-475/data/amq/kahadb]
-
 
 BrokerName = amq
 TotalEnqueueCount = 1
 TotalDequeueCount = 0
 TotalMessageCount = 0
 TotalConsumerCount = 0
-Uptime = 4.812 seconds
+Uptime = 1.360 seconds
+
+Name = KahaDBPersistenceAdapter[/data/servers/jboss-a-mq-6.3.0.redhat-495/data/amq/kahadb,Index:/data/servers/jboss-a-mq-6.3.0.redhat-495/data/amq/kahadb]
 
 connectorName = amqp
 
@@ -308,4 +301,4 @@ connectorName = mqtt
 
 Libraries are available in Maven Central or Red Hat repository. I used:
 
-* `mvn:org.apache.activemq/activemq-client/5.11.0.redhat-630475`
+* `mvn:org.apache.activemq/activemq-client/5.11.0.redhat-630495`

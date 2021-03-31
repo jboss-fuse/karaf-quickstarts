@@ -377,15 +377,15 @@
         <profile>
             <id>wmq9</id>
             <properties>
-                <!--<mq9library.path>/data/downloads/ibm.com/IBM MQ/9.1.0.6-IBM-MQ-Install-Java-All/wmq/JavaSE</mq9library.path>-->
-                <mq9library.path>/path/to/location/of/com.ibm.mq.allclient.jar</mq9library.path>
+                <mq9library.path>/data/downloads/ibm.com/IBM MQ/9.1.0.7-IBM-MQ-Install-Java-All/wmq/JavaSE</mq9library.path>
+<!--                <mq9library.path>/path/to/location/of/com.ibm.mq.allclient.jar</mq9library.path>-->
             </properties>
             <!-- IBM MQ 9 specific dependencies, available from https://developer.ibm.com/messaging/mq-downloads -->
             <dependencies>
                 <dependency>
                     <groupId>com.ibm.mq</groupId>
                     <artifactId>com.ibm.mq.allclient</artifactId>
-                    <version>9.1.0.6</version>
+                    <version>9.1.0.7</version>
                     <scope>system</scope>
                     <systemPath>${mq9library.path}/com.ibm.mq.allclient.jar</systemPath>
                 </dependency>

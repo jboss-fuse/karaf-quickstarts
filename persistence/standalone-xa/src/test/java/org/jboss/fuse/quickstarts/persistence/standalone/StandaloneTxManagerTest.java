@@ -63,7 +63,7 @@ public class StandaloneTxManagerTest {
 
         // as in EAP 7.1
 //        properties.setProperty("com.arjuna.ats.arjuna.common.ObjectStoreEnvironmentBean.objectStoreType", "com.arjuna.ats.internal.arjuna.objectstore.ShadowNoFileLockStore");
-        // as in narayana-osgi-jta-5.5.31.Final-redhat-1.jar (requires Artemis)
+        // as in narayana-osgi-jta-5.10.6.Final-redhat-00001.jar (requires Artemis)
 //        properties.setProperty("com.arjuna.ats.arjuna.objectstore.ObjectStoreEnvironmentBean.objectStoreType", "com.arjuna.ats.internal.arjuna.objectstore.hornetq.HornetqObjectStoreAdaptor");
 
         // there are 3 stores actually

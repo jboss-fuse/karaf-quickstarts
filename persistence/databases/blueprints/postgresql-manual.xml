@@ -24,9 +24,9 @@
         With this method, it is not required to use pax-jdbc bundles at all. Instead both database-specific
         and generic data sources are declared as Blueprint beans.
         We need:
-         - mvn:org.postgresql/postgresql/42.2.14 bundle
-         - mvn:org.apache.commons/commons-pool2/2.8.0 bundle
-         - mvn:org.apache.commons/commons-dbcp2/2.7.0 bundle
+         - mvn:org.postgresql/postgresql/42.2.19 bundle
+         - mvn:org.apache.commons/commons-pool2/2.9.0 bundle
+         - mvn:org.apache.commons/commons-dbcp2/2.8.0 bundle
         Optionally, "jdbc" Karaf feature gives us jdbc:* commands to list and use datasources from shell
 
         This Blueprint XML can be directly dropped to ${karaf.home}/deploy or archived in typical /OSGI-INF/blueprint

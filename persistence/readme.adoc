@@ -78,26 +78,26 @@ of MQ drivers.
 +
 [listing,options="nowrap"]
 ----
-$ ls -la '/data/downloads/ibm.com/IBM MQ/9.1.0.6-IBM-MQ-Install-Java-All/wmq/JavaSE'
-total 13552
-drwxr-xr-x. 2 ggrzybek ggrzybek    4096 07-03 17:58 .
-drwxr-xr-x. 5 ggrzybek ggrzybek    4096 07-03 17:58 ..
--rw-r--r--. 1 ggrzybek ggrzybek  879164 07-03 17:58 bcpkix-jdk15on.jar
--rw-r--r--. 1 ggrzybek ggrzybek 4460240 07-03 17:58 bcprov-jdk15on.jar
--rw-r--r--. 1 ggrzybek ggrzybek 8312451 07-03 17:58 com.ibm.mq.allclient.jar
--rw-r--r--. 1 ggrzybek ggrzybek   43710 07-03 17:58 com.ibm.mq.traceControl.jar
--rw-r--r--. 1 ggrzybek ggrzybek   22769 07-03 17:58 fscontext.jar
--rw-r--r--. 1 ggrzybek ggrzybek   58349 07-03 17:58 jms.jar
--rw-r--r--. 1 ggrzybek ggrzybek   77116 07-03 17:58 providerutil.jar
+$ ls -la '/data/downloads/ibm.com/IBM MQ/9.1.0.7-IBM-MQ-Install-Java-All/wmq/JavaSE'
+total 14932
+drwxr-xr-x. 2 ggrzybek ggrzybek    4096 11-26 17:22 .
+drwxr-xr-x. 5 ggrzybek ggrzybek    4096 11-26 17:22 ..
+-rw-r--r--. 1 ggrzybek ggrzybek  880303 11-26 17:22 bcpkix-jdk15on.jar
+-rw-r--r--. 1 ggrzybek ggrzybek 5884134 11-26 17:22 bcprov-jdk15on.jar
+-rw-r--r--. 1 ggrzybek ggrzybek 8303918 11-26 17:22 com.ibm.mq.allclient.jar
+-rw-r--r--. 1 ggrzybek ggrzybek   43711 11-26 17:22 com.ibm.mq.traceControl.jar
+-rw-r--r--. 1 ggrzybek ggrzybek   22769 11-26 17:22 fscontext.jar
+-rw-r--r--. 1 ggrzybek ggrzybek   58349 11-26 17:22 jms.jar
+-rw-r--r--. 1 ggrzybek ggrzybek   77116 11-26 17:22 providerutil.jar
 
 $ pwd
 /home/ggrzybek/sources/github.com/jboss-fuse/karaf-quickstarts/persistence
 
-13:58 $ mvn clean test -Pqtest -Pwmq9 -f standalone-xa/ -Dmq9library.path='/data/downloads/ibm.com/IBM MQ/9.1.0.6-IBM-MQ-Install-Java-All/wmq/JavaSE' -Dtest=StandaloneWMQ9AccessTest
+$ mvn clean test -Pqtest -Pwmq9 -f standalone-xa/ -Dmq9library.path='/data/downloads/ibm.com/IBM MQ/9.1.0.7-IBM-MQ-Install-Java-All/wmq/JavaSE' -Dtest=StandaloneWMQ9AccessTest
 [INFO] Scanning for projects...
 [INFO]
 [INFO] --------------< org.jboss.fuse.quickstarts:standalone-xa >--------------
-[INFO] Building Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support 7.9.0.redhat-SNAPSHOT
+[INFO] Building Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support 7.9.0.fuse-790038
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO]
 [INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ standalone-xa ---
@@ -124,9 +124,9 @@ $ pwd
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running org.jboss.fuse.quickstarts.persistence.standalone.StandaloneWMQ9AccessTest
-13:58:45 INFO [StandaloneWMQ9AccessTest] (StandaloneWMQ9AccessTest.java:41) : Using WMQ9 queue: com.ibm.mq.jms.MQQueue
-13:58:46 INFO [StandaloneWMQ9AccessTest] (StandaloneWMQ9AccessTest.java:58) : MESSAGE: Hello IBM MQ 9
-13:58:46 INFO [StandaloneWMQ9AccessTest] (StandaloneWMQ9AccessTest.java:59) : MESSAGE:
+19:06:06 INFO [StandaloneWMQ9AccessTest] (StandaloneWMQ9AccessTest.java:41) : Using WMQ9 queue: com.ibm.mq.jms.MQQueue
+19:06:06 INFO [StandaloneWMQ9AccessTest] (StandaloneWMQ9AccessTest.java:58) : MESSAGE: Hello IBM MQ 9
+19:06:06 INFO [StandaloneWMQ9AccessTest] (StandaloneWMQ9AccessTest.java:59) : MESSAGE:
   JMSMessage class: jms_text
   JMSType:          null
   JMSDeliveryMode:  2
@@ -134,13 +134,13 @@ $ pwd
   JMSDeliveryTime:  0
   JMSExpiration:    0
   JMSPriority:      4
-  JMSMessageID:     ID:414d512046555345514d20202020202049c88e5f02553d25
-  JMSTimestamp:     1603195125939
+  JMSMessageID:     ID:414d512046555345514d2020202020206ca064600230e121
+  JMSTimestamp:     1617210203894
   JMSCorrelationID: null
   JMSDestination:   queue:///DEV.QUEUE.1
   JMSReplyTo:       null
   JMSRedelivered:   false
-    JMSXAppID: jar
+    JMSXAppID: rt.junit.JUnitStarter
     JMSXDeliveryCount: 1
     JMSXUserID: app
     JMS_IBM_Character_Set: UTF-8
@@ -148,10 +148,10 @@ $ pwd
     JMS_IBM_Format: MQSTR
     JMS_IBM_MsgType: 8
     JMS_IBM_PutApplType: 28
-    JMS_IBM_PutDate: 20201020
-    JMS_IBM_PutTime: 11584595
+    JMS_IBM_PutDate: 20210331
+    JMS_IBM_PutTime: 17032390
 Hello IBM MQ 9
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.362 s - in org.jboss.fuse.quickstarts.persistence.standalone.StandaloneWMQ9AccessTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.262 s - in org.jboss.fuse.quickstarts.persistence.standalone.StandaloneWMQ9AccessTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -160,8 +160,8 @@ Hello IBM MQ 9
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.159 s
-[INFO] Finished at: 2020-10-20T13:58:46+02:00
+[INFO] Total time:  4.016 s
+[INFO] Finished at: 2021-03-31T19:06:07+02:00
 [INFO] ------------------------------------------------------------------------
 ----
 
@@ -170,14 +170,14 @@ without specifying any profile (except `-Pqtest`).
 +
 [listing,options="nowrap"]
 ----
-14:02 $ pwd
+$ pwd
 /home/ggrzybek/sources/github.com/jboss-fuse/karaf-quickstarts/persistence/standalone-xa
 
-14:02 $ mvn clean test -Pqtest -Dtest=StandaloneArtemisAccessTest,StandaloneXAArtemisAccessTest
+$ mvn clean test -Pqtest -Dtest=StandaloneArtemisAccessTest,StandaloneXAArtemisAccessTest
 [INFO] Scanning for projects...
 [INFO]
 [INFO] --------------< org.jboss.fuse.quickstarts:standalone-xa >--------------
-[INFO] Building Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support 7.9.0.redhat-SNAPSHOT
+[INFO] Building Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support 7.9.0.fuse-790038
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO]
 [INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ standalone-xa ---
@@ -204,17 +204,16 @@ without specifying any profile (except `-Pqtest`).
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running org.jboss.fuse.quickstarts.persistence.standalone.StandaloneArtemisAccessTest
-14:02:33 INFO [StandaloneArtemisAccessTest] (StandaloneArtemisAccessTest.java:45) : Using Artemis queue: org.apache.activemq.artemis.jms.client.ActiveMQQueue
-14:02:33 INFO [SaslMechanismFinder] (SaslMechanismFinder.java:106) : Best match for SASL auth was: SASL-PLAIN
-14:02:33 INFO [JmsConnection] (JmsConnection.java:1333) : Connection ID:03ab27d3-74e2-4b48-9109-5bc65433ebc7:1 connected to remote Broker: amqp://localhost:61616
-14:02:33 INFO [StandaloneArtemisAccessTest] (StandaloneArtemisAccessTest.java:60) : Using QPid queue: org.apache.qpid.jms.JmsQueue
-14:02:33 INFO [StandaloneArtemisAccessTest] (StandaloneArtemisAccessTest.java:64) : MESSAGE: Hello Artemis from PAX-JMS
-14:02:33 INFO [StandaloneArtemisAccessTest] (StandaloneArtemisAccessTest.java:65) : MESSAGE: JmsTextMessage { org.apache.qpid.jms.provider.amqp.message.AmqpJmsTextMessageFacade@754777cd }
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.265 s - in org.jboss.fuse.quickstarts.persistence.standalone.StandaloneArtemisAccessTest
+19:07:32 INFO [StandaloneArtemisAccessTest] (StandaloneArtemisAccessTest.java:45) : Using Artemis queue: org.apache.activemq.artemis.jms.client.ActiveMQQueue
+19:07:33 INFO [JmsConnection] (JmsConnection.java:1339) : Connection ID:c6ee9eae-4908-46b7-a694-9261ad93435f:1 connected to server: amqp://localhost:61616
+19:07:33 INFO [StandaloneArtemisAccessTest] (StandaloneArtemisAccessTest.java:60) : Using QPid queue: org.apache.qpid.jms.JmsQueue
+19:07:33 INFO [StandaloneArtemisAccessTest] (StandaloneArtemisAccessTest.java:64) : MESSAGE: Hello Artemis from PAX-JMS
+19:07:33 INFO [StandaloneArtemisAccessTest] (StandaloneArtemisAccessTest.java:65) : MESSAGE: JmsTextMessage { org.apache.qpid.jms.provider.amqp.message.AmqpJmsTextMessageFacade@517bd097 }
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.333 s - in org.jboss.fuse.quickstarts.persistence.standalone.StandaloneArtemisAccessTest
 [INFO] Running org.jboss.fuse.quickstarts.persistence.standalone.StandaloneXAArtemisAccessTest
-14:02:33 INFO [JmsPoolXAConnectionFactory] (JmsPoolXAConnectionFactory.java:77) : Provided ConnectionFactory is JMS 2.0+ capable.
-14:02:33 INFO [TransactionStatusManager] (TransactionStatusManager.java:138) : ARJUNA012170: TransactionStatusManager started on port 46011 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.189 s - in org.jboss.fuse.quickstarts.persistence.standalone.StandaloneXAArtemisAccessTest
+19:07:33 INFO [JmsPoolXAConnectionFactory] (JmsPoolXAConnectionFactory.java:77) : Provided ConnectionFactory is JMS 2.0+ capable.
+19:07:33 INFO [TransactionStatusManager] (TransactionStatusManager.java:138) : ARJUNA012170: TransactionStatusManager started on port 33465 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.149 s - in org.jboss.fuse.quickstarts.persistence.standalone.StandaloneXAArtemisAccessTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -223,8 +222,8 @@ without specifying any profile (except `-Pqtest`).
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  6.027 s
-[INFO] Finished at: 2020-10-20T14:02:34+02:00
+[INFO] Total time:  4.016 s
+[INFO] Finished at: 2021-03-31T19:07:33+02:00
 [INFO] ------------------------------------------------------------------------
 ----
 
@@ -233,11 +232,11 @@ with `-Pamq6` Maven profile.
 +
 [listing,options="nowrap"]
 ----
-14:07 $ mvn clean test -Pqtest,_indy -Pamq6 -Dtest=StandaloneAMQ6AccessTest
+$ mvn clean test -Pqtest,_indy -Pamq6 -Dtest=StandaloneAMQ6AccessTest
 [INFO] Scanning for projects...
 [INFO]
 [INFO] --------------< org.jboss.fuse.quickstarts:standalone-xa >--------------
-[INFO] Building Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support 7.9.0.redhat-SNAPSHOT
+[INFO] Building Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support 7.9.0.fuse-790038
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO]
 [INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ standalone-xa ---
@@ -264,11 +263,11 @@ with `-Pamq6` Maven profile.
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running org.jboss.fuse.quickstarts.persistence.standalone.StandaloneAMQ6AccessTest
-14:08:25 INFO [StandaloneAMQ6AccessTest] (StandaloneAMQ6AccessTest.java:45) : Using A-MQ 6 queue: org.apache.activemq.command.ActiveMQQueue
-14:08:25 INFO [StandaloneAMQ6AccessTest] (StandaloneAMQ6AccessTest.java:59) : Using A-MQ 6 queue: org.apache.activemq.command.ActiveMQQueue
-14:08:25 INFO [StandaloneAMQ6AccessTest] (StandaloneAMQ6AccessTest.java:63) : MESSAGE: Hello A-MQ 6
-14:08:25 INFO [StandaloneAMQ6AccessTest] (StandaloneAMQ6AccessTest.java:64) : MESSAGE: ActiveMQTextMessage {commandId = 5, responseRequired = true, messageId = ID:everfree.forest-36917-1603195705457-1:1:1:1:1, originalDestination = null, originalTransactionId = null, producerId = ID:everfree.forest-36917-1603195705457-1:1:1:1, destination = queue://amqp://localhost:61616, transactionId = null, expiration = 0, timestamp = 1603195705704, arrival = 0, brokerInTime = 1603195705706, brokerOutTime = 1603195705749, correlationId = null, replyTo = null, persistent = true, type = null, priority = 4, groupID = null, groupSequence = 0, targetConsumerId = null, compressed = false, userID = null, content = null, marshalledProperties = null, dataStructure = null, redeliveryCounter = 0, size = 0, properties = null, readOnlyProperties = true, readOnlyBody = true, droppable = false, jmsXGroupFirstForConsumer = false, text = Hello A-MQ 6}
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.137 s - in org.jboss.fuse.quickstarts.persistence.standalone.StandaloneAMQ6AccessTest
+19:08:17 INFO [StandaloneAMQ6AccessTest] (StandaloneAMQ6AccessTest.java:45) : Using A-MQ 6 queue: org.apache.activemq.command.ActiveMQQueue
+19:08:17 INFO [StandaloneAMQ6AccessTest] (StandaloneAMQ6AccessTest.java:59) : Using A-MQ 6 queue: org.apache.activemq.command.ActiveMQQueue
+19:08:17 INFO [StandaloneAMQ6AccessTest] (StandaloneAMQ6AccessTest.java:63) : MESSAGE: Hello A-MQ 6
+19:08:17 INFO [StandaloneAMQ6AccessTest] (StandaloneAMQ6AccessTest.java:64) : MESSAGE: ActiveMQTextMessage {commandId = 5, responseRequired = true, messageId = ID:everfree.forest-41415-1617210496795-1:1:1:1:1, originalDestination = null, originalTransactionId = null, producerId = ID:everfree.forest-41415-1617210496795-1:1:1:1, destination = queue://amqp://localhost:61616, transactionId = null, expiration = 0, timestamp = 1617210497051, arrival = 0, brokerInTime = 1617210497053, brokerOutTime = 1617210497087, correlationId = null, replyTo = null, persistent = true, type = null, priority = 4, groupID = null, groupSequence = 0, targetConsumerId = null, compressed = false, userID = null, content = null, marshalledProperties = null, dataStructure = null, redeliveryCounter = 0, size = 0, properties = null, readOnlyProperties = true, readOnlyBody = true, droppable = false, jmsXGroupFirstForConsumer = false, text = Hello A-MQ 6}
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.942 s - in org.jboss.fuse.quickstarts.persistence.standalone.StandaloneAMQ6AccessTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -277,8 +276,8 @@ with `-Pamq6` Maven profile.
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  5.232 s
-[INFO] Finished at: 2020-10-20T14:08:26+02:00
+[INFO] Total time:  3.665 s
+[INFO] Finished at: 2021-03-31T19:08:17+02:00
 [INFO] ------------------------------------------------------------------------
 ----
 
@@ -296,22 +295,22 @@ to configure docker-based PostgreSQL database (as presented in Persistence Manua
 Using fresh {f7} instance, we can (after building the example):
 [listing,options="nowrap"]
 ----
-karaf@root()> install -s mvn:org.postgresql/postgresql/42.2.14
-Bundle ID: 248
+karaf@root()> install -s mvn:org.postgresql/postgresql/42.2.19
+Bundle ID: 274
 karaf@root()> feature:install jdbc pax-jdbc-pool-dbcp2
 
 karaf@root()> install -s mvn:org.jboss.fuse.quickstarts/camel-jdbc/${project.version}
-Bundle ID: 253
+Bundle ID: 279
 ----
 
 After installing the example, we'll see this log output every 20 seconds:
 
 [listing,options="nowrap"]
 ----
-2020-10-20 14:10:42,293 | INFO  | #2 - timer://webinar | trigger-database                 | 64 - org.apache.camel.camel-core - 2.23.0.fuse-780002 | *** Select all : {id=1, date=2018-02-20 08:00:00.0, name=User 1, summary=Incident 1, details=This is a report incident 001, email=user1@redhat.com}
-2020-10-20 14:10:42,294 | INFO  | #2 - timer://webinar | trigger-database                 | 64 - org.apache.camel.camel-core - 2.23.0.fuse-780002 | *** Select all : {id=2, date=2018-02-20 08:10:00.0, name=User 2, summary=Incident 2, details=This is a report incident 002, email=user2@redhat.com}
-2020-10-20 14:10:42,295 | INFO  | #2 - timer://webinar | trigger-database                 | 64 - org.apache.camel.camel-core - 2.23.0.fuse-780002 | *** Select all : {id=3, date=2018-02-20 08:20:00.0, name=User 3, summary=Incident 3, details=This is a report incident 003, email=user3@redhat.com}
-2020-10-20 14:10:42,295 | INFO  | #2 - timer://webinar | trigger-database                 | 64 - org.apache.camel.camel-core - 2.23.0.fuse-780002 | *** Select all : {id=4, date=2018-02-20 08:30:00.0, name=User 4, summary=Incident 4, details=This is a report incident 004, email=user4@redhat.com}
+2021-03-31 19:09:07,225 INFO  {Camel (camel) thread #2 - timer://webinar} [org.apache.camel.util.CamelLogger.log()] (CamelLogger.java:159) : *** Select all : {id=1, date=2018-02-20 08:00:00.0, name=User 1, summary=Incident 1, details=This is a report incident 001, email=user1@redhat.com}
+2021-03-31 19:09:07,225 INFO  {Camel (camel) thread #2 - timer://webinar} [org.apache.camel.util.CamelLogger.log()] (CamelLogger.java:159) : *** Select all : {id=2, date=2018-02-20 08:10:00.0, name=User 2, summary=Incident 2, details=This is a report incident 002, email=user2@redhat.com}
+2021-03-31 19:09:07,226 INFO  {Camel (camel) thread #2 - timer://webinar} [org.apache.camel.util.CamelLogger.log()] (CamelLogger.java:159) : *** Select all : {id=3, date=2018-02-20 08:20:00.0, name=User 3, summary=Incident 3, details=This is a report incident 003, email=user3@redhat.com}
+2021-03-31 19:09:07,226 INFO  {Camel (camel) thread #2 - timer://webinar} [org.apache.camel.util.CamelLogger.log()] (CamelLogger.java:159) : *** Select all : {id=4, date=2018-02-20 08:30:00.0, name=User 4, summary=Incident 4, details=This is a report incident 004, email=user4@redhat.com}
 ----
 
 Additionally, if a file will be created in `$FUSE_HOME/data/camel-jdbc`, additional query will be performed:
@@ -323,10 +322,10 @@ $ echo -n '1,3' > data/camel-jdbc/query1.txt
 After triggering `key-from-file` route using the above command, we'll see this in the log:
 [listing,options="nowrap"]
 ----
-2020-10-20 14:11:44,694 | INFO  | le://data/camel-jdbc | key-from-file                    | 64 - org.apache.camel.camel-core - 2.23.0.fuse-780002 | >>> SQL Query : select * from report.incident where id = '1'
-2020-10-20 14:11:44,701 | INFO  | le://data/camel-jdbc | key-from-file                    | 64 - org.apache.camel.camel-core - 2.23.0.fuse-780002 | >>> Select using key : [{id=1, date=2018-02-20 08:00:00.0, name=User 1, summary=Incident 1, details=This is a report incident 001, email=user1@redhat.com}]
-2020-10-20 14:11:44,702 | INFO  | le://data/camel-jdbc | key-from-file                    | 64 - org.apache.camel.camel-core - 2.23.0.fuse-780002 | >>> SQL Query : select * from report.incident where id = '3'
-2020-10-20 14:11:44,704 | INFO  | le://data/camel-jdbc | key-from-file                    | 64 - org.apache.camel.camel-core - 2.23.0.fuse-780002 | >>> Select using key : [{id=3, date=2018-02-20 08:20:00.0, name=User 3, summary=Incident 3, details=This is a report incident 003, email=user3@redhat.com}]
+2021-03-31 19:09:42,632 INFO  {Camel (camel) thread #1 - file://data/camel-jdbc} [org.apache.camel.util.CamelLogger.log()] (CamelLogger.java:159) : >>> SQL Query : select * from report.incident where id = '1'
+2021-03-31 19:09:42,643 INFO  {Camel (camel) thread #1 - file://data/camel-jdbc} [org.apache.camel.util.CamelLogger.log()] (CamelLogger.java:159) : >>> Select using key : [{id=1, date=2018-02-20 08:00:00.0, name=User 1, summary=Incident 1, details=This is a report incident 001, email=user1@redhat.com}]
+2021-03-31 19:09:42,644 INFO  {Camel (camel) thread #1 - file://data/camel-jdbc} [org.apache.camel.util.CamelLogger.log()] (CamelLogger.java:159) : >>> SQL Query : select * from report.incident where id = '3'
+2021-03-31 19:09:42,649 INFO  {Camel (camel) thread #1 - file://data/camel-jdbc} [org.apache.camel.util.CamelLogger.log()] (CamelLogger.java:159) : >>> Select using key : [{id=3, date=2018-02-20 08:20:00.0, name=User 3, summary=Incident 3, details=This is a report incident 003, email=user3@redhat.com}]
 ----
 
 == Camel XA example
@@ -349,8 +348,8 @@ in Persistence Manual) and Artemis broker accessible at `tcp://localhost:61616` 
 Using fresh {f7} instance, we can (after building the example):
 [listing,options="nowrap"]
 ----
-karaf@root()> install -s mvn:org.postgresql/postgresql/42.2.14
-Bundle ID: 224
+karaf@root()> install -s mvn:org.postgresql/postgresql/42.2.19
+Bundle ID: 274
 karaf@root()> feature:install jdbc jms jndi
 karaf@root()> feature:install pax-jdbc-pool-narayana pax-jms-pool-narayana pax-jms-artemis pax-jdbc-config pax-jms-config
 karaf@root()> feature:install camel-blueprint camel-jpa camel-jms
@@ -362,22 +361,22 @@ we can install file-based blueprints:
 
 [listing,options="nowrap"]
 ----
-karaf@root()> install -s blueprint:file://$FUSE_HOME/quickstarts/persistence/camel-xa/src/main/blueprint/connection-factory.xml
-Bundle ID: 314
-karaf@root()> install -s blueprint:file://$FUSE_HOME/quickstarts/persistence/camel-xa/src/main/blueprint/xa-datasource.xml
-Bundle ID: 315
+karaf@root()> install -s blueprint:file://$FUSE_HOME/camel-xa/src/main/blueprint/connection-factory.xml
+Bundle ID: 308
+karaf@root()> install -s blueprint:file://$FUSE_HOME/camel-xa/src/main/blueprint/xa-datasource.xml
+Bundle ID: 309
 ----
 
 Install the example:
 [listing,options="nowrap"]
 ----
 karaf@root()> install -s mvn:org.jboss.fuse.quickstarts/camel-xa/${project.version}
-Bundle ID: 316
+Bundle ID: 310
 
 karaf@root()> camel:route-list
  Context                     Route                   Status              Total #       Failed #     Inflight #   Uptime
  -------                     -----                   ------              -------       --------     ----------   ------
- xa-transaction-jms-ok-way   transactedTargetOkWay   Started                   0              0              0   8.539 seconds
+ xa-transaction-jms-ok-way   transactedTargetOkWay   Started                   0              0              0   19.100 seconds
 ----
 
 We can test the route now:
@@ -409,7 +408,7 @@ Message ID │ Content │ Charset │ Type │ Correlation ID │ Delivery Mode
 karaf@root()> jms:browse -u fuse -p fuse jms/artemisXAConnectionFactory xa2Queue
 Message ID                              │ Content        │ Charset │ Type │ Correlation ID │ Delivery Mode │ Destination             │ Expiration │ Priority │ Redelivered │ ReplyTo │ Timestamp
 ────────────────────────────────────────┼────────────────┼─────────┼──────┼────────────────┼───────────────┼─────────────────────────┼────────────┼──────────┼─────────────┼─────────┼──────────────────────────────
-ID:d653e4c1-12cd-11eb-895a-54e1ad3055fb │ Hello Camel XA │ UTF-8   │      │                │ Persistent    │ ActiveMQQueue[xa2Queue] │ Never      │ 4        │ false       │         │ Tue Oct 20 14:14:43 CEST 2020
+ID:87658235-9244-11eb-b22c-54e1ad3055fb │ Hello Camel XA │ UTF-8   │      │                │ Persistent    │ ActiveMQQueue[xa2Queue] │ Never      │ 4        │ false       │         │ Wed Mar 31 19:14:19 CEST 2021
 
 karaf@root()> camel:route-list
  Context                     Route                   Status              Total #       Failed #     Inflight #   Uptime
