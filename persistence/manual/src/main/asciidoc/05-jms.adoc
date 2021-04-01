@@ -25,7 +25,7 @@ The libraries that contain the objects I'm going to describe are:
 * A-MQ 6: `mvn:org.apache.activemq/activemq-client/<version>`
 * A-MQ 7 (Artemis): `mvn:org.apache.activemq/artemis-jms-client/<version>`
 or `mvn:org.apache.qpid/qpid-jms-client/<version>`
-* IBM MQ 9: download `9.1.0.6-IBM-MQ-Install-Java-All.jar` starting from https://developer.ibm.com/messaging/mq-downloads/
+* IBM MQ 9: download `9.1.0.7-IBM-MQ-Install-Java-All.jar` starting from https://developer.ibm.com/messaging/mq-downloads/
 
 If we check existing implementation (contained in _driver JARs_) we can find:
 

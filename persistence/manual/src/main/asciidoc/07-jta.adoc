@@ -14,16 +14,16 @@ UserTransaction tx = (UserTransaction) context.lookup("java:comp/UserTransaction
 tx.begin();
 ----
 
-in JavaEE environment (e.g., servlet running in EAP 7.1), we go through several layers/libraries.
+in JavaEE environment (e.g., servlet running in EAP 7.4), we go through several layers/libraries.
 
 `javax.transaction` classes come from `javax.transaction.api` module (`mvn:org.jboss.spec.javax.transaction/jboss-transaction-api_1.2_spec/1.0.1.Final-redhat-1`).
 
-Implementation classes come from `org.wildfly.transaction.client` module (`mvn:org.wildfly.transaction/wildfly-transaction-client/1.0.2.Final-redhat-1`).
+Implementation classes come from `org.wildfly.transaction.client` module (`mvn:org.wildfly.transaction/wildfly-transaction-client/1.1.7.Final`).
 
 `javax.transaction.TransactionManager` implementation is `com.arjuna.ats.jbossatx.jta.TransactionManagerDelegate`
-from `org.jboss.jts.integration` module (`mvn:org.jboss.narayana.jts/narayana-jts-integration/5.5.30.Final-redhat-1`)
+from `org.jboss.jts.integration` module (`mvn:org.jboss.narayana.jts/narayana-jts-integration/5.10.6.Final-redhat-00001`)
 which delegates to `com.arjuna.ats.internal.jta.transaction.arjunacore.TransactionManagerImple`
-from `org.jboss.jts` module (`mvn:org.jboss.narayana.jts/narayana-jts-idlj/5.5.30.Final-redhat-1`).
+from `org.jboss.jts` module (`mvn:org.jboss.narayana.jts/narayana-jts-idlj/5.10.6.Final-redhat-00001`).
 
 `narayana-jts-idlj` is an uber-jar which contains classes from these maven artifacts:
 
