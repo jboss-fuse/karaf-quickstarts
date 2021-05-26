@@ -38,9 +38,11 @@
         <version.org.jboss.redhat-fuse>7.8.0.fuse-sb2-780030</version.org.jboss.redhat-fuse>
 
         <!-- versions of dependencies not inherited from BOM -->
+        <version.com.h2database>1.4.200</version.com.h2database>
         <version.mysql>8.0.21</version.mysql>
         <version.org.apache.derby>10.15.2.0</version.org.apache.derby>
         <version.org.mariadb.jdbc>2.6.0</version.org.mariadb.jdbc>
+        <version.org.ops4j.pax.jdbc>1.5.1</version.org.ops4j.pax.jdbc>
         <version.org.postgresql>42.2.19</version.org.postgresql>
 
         <!-- Plugins from org.apache.maven.plugins -->
@@ -117,6 +119,17 @@
                 <artifactId>mariadb-java-client</artifactId>
                 <version>${version.org.mariadb.jdbc}</version>
             </dependency>
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${version.com.h2database}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.ops4j.pax.jdbc</groupId>
+                <artifactId>pax-jdbc-pool-narayana</artifactId>
+                <version>${version.org.ops4j.pax.jdbc}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
@@ -163,6 +176,11 @@
             <artifactId>spring-jms</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <scope>test</scope>
+        </dependency>
 
         <!-- JavaEE dependencies -->
 
@@ -177,6 +195,16 @@
         <dependency>
             <groupId>javax.resource</groupId>
             <artifactId>javax.resource-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>javax.persistence-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <!-- Other dependencies -->
@@ -201,6 +229,12 @@
         <dependency>
             <groupId>org.messaginghub</groupId>
             <artifactId>pooled-jms</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.ops4j.pax.jdbc</groupId>
+            <artifactId>pax-jdbc-pool-narayana</artifactId>
             <scope>test</scope>
         </dependency>
 
@@ -233,6 +267,11 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
             <scope>test</scope>
         </dependency>
 
