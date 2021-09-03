@@ -97,7 +97,7 @@ $ mvn clean test -Pqtest -Pwmq9 -f standalone-xa/ -Dmq9library.path='/data/downl
 [INFO] Scanning for projects...
 [INFO]
 [INFO] --------------< org.jboss.fuse.quickstarts:standalone-xa >--------------
-[INFO] Building Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support 7.9.0.fuse-790038
+[INFO] Building Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support 7.10.0.fuse-7_10_0038
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO]
 [INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ standalone-xa ---
@@ -177,7 +177,7 @@ $ mvn clean test -Pqtest -Dtest=StandaloneArtemisAccessTest,StandaloneXAArtemisA
 [INFO] Scanning for projects...
 [INFO]
 [INFO] --------------< org.jboss.fuse.quickstarts:standalone-xa >--------------
-[INFO] Building Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support 7.9.0.fuse-790038
+[INFO] Building Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support 7.10.0.fuse-7_10_0038
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO]
 [INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ standalone-xa ---
@@ -236,7 +236,7 @@ $ mvn clean test -Pqtest,_indy -Pamq6 -Dtest=StandaloneAMQ6AccessTest
 [INFO] Scanning for projects...
 [INFO]
 [INFO] --------------< org.jboss.fuse.quickstarts:standalone-xa >--------------
-[INFO] Building Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support 7.9.0.fuse-790038
+[INFO] Building Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support 7.10.0.fuse-7_10_0038
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO]
 [INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ standalone-xa ---
