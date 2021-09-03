@@ -82,7 +82,7 @@ directory:
     [INFO] Scanning for projects...
     [INFO] 
     [INFO] ----------< org.jboss.fuse.quickstarts.security:keycloak-cxf >----------
-    [INFO] Building Red Hat Fuse :: Quickstarts :: Security :: Keycloak :: CXF 7.9.0.fuse-790038
+    [INFO] Building Red Hat Fuse :: Quickstarts :: Security :: Keycloak :: CXF 7.10.0.fuse-7_10_0038
     [INFO] -------------------------------[ bundle ]-------------------------------
     [INFO] 
     [INFO] --- maven-resources-plugin:3.0.2:resources (default-resources) @ keycloak-cxf ---
@@ -247,7 +247,7 @@ directory:
     [INFO] Scanning for projects...
     [INFO] 
     [INFO] ----------< org.jboss.fuse.quickstarts.security:keycloak-cxf >----------
-    [INFO] Building Red Hat Fuse :: Quickstarts :: Security :: Keycloak :: CXF 7.9.0.fuse-790038
+    [INFO] Building Red Hat Fuse :: Quickstarts :: Security :: Keycloak :: CXF 7.10.0.fuse-7_10_0038
     [INFO] -------------------------------[ bundle ]-------------------------------
     [INFO] 
     [INFO] --- maven-resources-plugin:3.0.2:resources (default-resources) @ keycloak-cxf ---

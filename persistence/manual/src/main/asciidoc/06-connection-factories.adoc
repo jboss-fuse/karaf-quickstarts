@@ -291,7 +291,7 @@ START LEVEL 100 , List Threshold: 0
 ...
 karaf@root()> la -l | grep ibm
 273 │ Active   │  80 │ 9.1.0.7                   │ file:///data/downloads/ibm.com/IBM%20MQ/9.1.0.7-IBM-MQ-Install-Java-All/wmq/OSGi/com.ibm.mq.osgi.allclient_9.1.0.7.jar
-274 │ Active   │  35 │ 7.9.0.fuse-790046         │ mvn:org.jboss.fuse.modules/fuse-pax-jms-ibmmq-compatibility/7.9.0.fuse-790046
+274 │ Active   │  35 │ 7.10.0.fuse-7_10_0046         │ mvn:org.jboss.fuse.modules/fuse-pax-jms-ibmmq-compatibility/7.10.0.fuse-7_10_0046
 275 │ Active   │  80 │ 1.1.0                     │ mvn:org.ops4j.pax.jms/pax-jms-ibmmq/1.1.0
 ----
 
@@ -348,7 +348,7 @@ FactoryPid:     org.ops4j.connectionfactory
 BundleLocation: ?
 Properties:
    connectionFactoryType = ConnectionFactory
-   felix.fileinstall.filename = file:/data/servers/fuse-karaf-7.9.0.fuse-790046/etc/org.ops4j.connectionfactory-ibmmq.cfg
+   felix.fileinstall.filename = file:/data/servers/fuse-karaf-7.10.0.fuse-7_10_0046/etc/org.ops4j.connectionfactory-ibmmq.cfg
    jms.CCSID = 1208
    jms.channel = DEV.APP.SVRCONN
    jms.hostName = localhost
@@ -369,7 +369,7 @@ karaf@root()> service:list javax.jms.ConnectionFactory
 [javax.jms.ConnectionFactory]
 -----------------------------
  connectionFactoryType = ConnectionFactory
- felix.fileinstall.filename = file:/data/servers/fuse-karaf-7.9.0.fuse-790046/etc/org.ops4j.connectionfactory-ibmmq.cfg
+ felix.fileinstall.filename = file:/data/servers/fuse-karaf-7.10.0.fuse-7_10_0046/etc/org.ops4j.connectionfactory-ibmmq.cfg
  jms.CCSID = 1208
  jms.channel = DEV.APP.SVRCONN
  jms.hostName = localhost
