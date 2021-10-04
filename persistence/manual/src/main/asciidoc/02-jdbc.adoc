@@ -13,8 +13,8 @@ learn how to _obtain_ it.
 The libraries that contain the objects I'm going to describe are:
 
 * PostgreSQL: `mvn:org.postgresql/postgresql/42.2.19`
-* MariaDB: `mvn:org.mariadb.jdbc/mariadb-java-client/2.6.0`
-* MySQL: `mvn:mysql/mysql-connector-java/8.0.20`
+* MariaDB: `mvn:org.mariadb.jdbc/mariadb-java-client/2.7.4`
+* MySQL: `mvn:mysql/mysql-connector-java/8.0.26`
 * Derby: `mvn:org.apache.derby/derbyclient/10.15.2.0` and `mvn:org.apache.derby/derby/10.15.2.0` (for embedded driver)
 
 If we check existing implementation (contained in _driver JARs_) we can find:
