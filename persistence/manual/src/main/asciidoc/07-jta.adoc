@@ -21,9 +21,9 @@ in JavaEE environment (e.g., servlet running in EAP 7.4), we go through several 
 Implementation classes come from `org.wildfly.transaction.client` module (`mvn:org.wildfly.transaction/wildfly-transaction-client/1.1.7.Final`).
 
 `javax.transaction.TransactionManager` implementation is `com.arjuna.ats.jbossatx.jta.TransactionManagerDelegate`
-from `org.jboss.jts.integration` module (`mvn:org.jboss.narayana.jts/narayana-jts-integration/5.10.6.Final-redhat-00001`)
+from `org.jboss.jts.integration` module (`mvn:org.jboss.narayana.jts/narayana-jts-integration/5.11.3.Final-redhat-00001`)
 which delegates to `com.arjuna.ats.internal.jta.transaction.arjunacore.TransactionManagerImple`
-from `org.jboss.jts` module (`mvn:org.jboss.narayana.jts/narayana-jts-idlj/5.10.6.Final-redhat-00001`).
+from `org.jboss.jts` module (`mvn:org.jboss.narayana.jts/narayana-jts-idlj/5.11.3.Final-redhat-00001`).
 
 `narayana-jts-idlj` is an uber-jar which contains classes from these maven artifacts:
 

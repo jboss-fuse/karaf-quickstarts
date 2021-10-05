@@ -19,16 +19,16 @@ The sources for Dockerfile are stored in https://github.com/ibm-messaging/mq-doc
 +
 [listing,options="nowrap"]
 ----
-$ podman run -d --name fuse-webspheremq9 --env LICENSE=accept --env MQ_QMGR_NAME=FUSEQM --publish 1414:1414 --publish 19443:9443 ibmcom/mq:9.1.3.0
+$ podman run -d --name fuse-webspheremq9 --env LICENSE=accept --env MQ_QMGR_NAME=FUSEQM --env MQ_APP_PASSWORD=fuse --publish 1414:1414 --publish 19443:9443 ibmcom/mq:9.2.3.0-r1
 Trying to pull docker.io/ibmcom/mq:9.1.3.0...
 Getting image source signatures
 ...
 Storing signatures
-1e397bb7318d027e27be7c2ad02eeee6c0c61ea7fb069071dcda51747fadf6f8
+9365e6a57097a461007ee1740f950c574ab6300f2a83ecf5c9c4e6ed4611ff64
 
- podman ps
-CONTAINER ID  IMAGE                            COMMAND   CREATED         STATUS             PORTS                                            NAMES
-1e397bb7318d  docker.io/ibmcom/mq:9.1.3.0                9 seconds ago   Up 10 seconds ago  0.0.0.0:1414->1414/tcp, 0.0.0.0:19443->9443/tcp  fuse-webspheremq9
+$ podman ps
+CONTAINER ID  IMAGE                           COMMAND     CREATED        STATUS            PORTS                                            NAMES
+9365e6a57097  docker.io/ibmcom/mq:9.2.3.0-r1              6 seconds ago  Up 6 seconds ago  0.0.0.0:1414->1414/tcp, 0.0.0.0:19443->9443/tcp  fuse-webspheremq9
 ----
 
 . Check if web console works
@@ -56,113 +56,7 @@ In order to test the examples, we have to configure proper channel security. htt
 points us to https://www.ibm.com/developerworks/community/blogs/messaging/entry/getting_going_without_turning_off_mq_security?lang=en[article about security configuration].
 There's also another article https://www.ibm.com/developerworks/community/blogs/aimsupport/entry/chlauth_allow_some_privileged_admins?lang=en[here].
 
-We need to override security configuration for `DEV.APP.SVRCONN` channel which we'll use for client connections.
-
-.Connect to docker container and run `runmqsc` command as `mqm` user:
-[listing,options="nowrap"]
-----
-$ podman exec -ti fuse-webspheremq9 /bin/bash
-
-bash-4.2$ id
-uid=888(mqm) gid=888(mqm) groups=888(mqm)
-
-bash-4.2$ runmqsc
-5724-H72 (C) Copyright IBM Corp. 1994, 2019.
-Starting MQSC for queue manager FUSEQM.
-----
-
-.Check current configuration of the channel
-[listing,options="nowrap"]
-----
-display channel (DEV.APP.SVRCONN)
-     1 : display channel (DEV.APP.SVRCONN)
-AMQ8414I: Display Channel details.
-   CHANNEL(DEV.APP.SVRCONN)                CHLTYPE(SVRCONN)
-   ALTDATE(2021-03-31)                     ALTTIME(16.16.44)
-   CERTLABL( )                             COMPHDR(NONE)
-   COMPMSG(NONE)                           DESCR( )
-   DISCINT(0)                              HBINT(300)
-   KAINT(AUTO)                             MAXINST(999999999)
-   MAXINSTC(999999999)                     MAXMSGL(4194304)
-   MCAUSER(app)                            MONCHL(QMGR)
-   RCVDATA( )                              RCVEXIT( )
-   SCYDATA( )                              SCYEXIT( )
-   SENDDATA( )                             SENDEXIT( )
-   SHARECNV(10)                            SSLCAUTH(REQUIRED)
-   SSLCIPH( )                              SSLPEER( )
-   TRPTYPE(TCP)
-
-display chlauth('*')
-     2 : display chlauth('*')
-...
-AMQ8878I: Display channel authentication record details.
-   CHLAUTH(DEV.APP.SVRCONN)                TYPE(ADDRESSMAP)
-   ADDRESS(*)                              USERSRC(CHANNEL)
-...
-MQ8878I: Display channel authentication record details.
-   CHLAUTH(*)                              TYPE(ADDRESSMAP)
-   ADDRESS(*)                              USERSRC(NOACCESS)
-AMQ8878I: Display channel authentication record details.
-   CHLAUTH(*)                              TYPE(BLOCKUSER)
-   USERLIST(*MQADMIN)
-----
-
-Default auth configuration blocks authenticated users by default.
-
-.Override blocking by specifying different list of blocked users
-[listing,options="nowrap"]
-----
-SET CHLAUTH(DEV.APP.SVRCONN) TYPE(BLOCKUSER) USERLIST('nobody') DESCR('Allow privileged users on this channel')
-     3 : SET CHLAUTH(DEV.APP.SVRCONN) TYPE(BLOCKUSER) USERLIST('nobody') DESCR('Allow privileged users on this channel')
-AMQ8877I: IBM MQ channel authentication record set.
-----
-
-.Enable client connection on `DEV.APP.SVRCONN` channel
-[listing,options="nowrap"]
-----
-SET CHLAUTH('*') TYPE(ADDRESSMAP) ADDRESS('*') USERSRC(NOACCESS) DESCR('BackStop rule')
-     4 : SET CHLAUTH('*') TYPE(ADDRESSMAP) ADDRESS('*') USERSRC(NOACCESS) DESCR('BackStop rule')
-AMQ8883E: Channel authentication record already exists.
-
-SET CHLAUTH(DEV.APP.SVRCONN) TYPE(ADDRESSMAP) ADDRESS('*') USERSRC(CHANNEL) CHCKCLNT(REQUIRED)
-     5 : SET CHLAUTH(DEV.APP.SVRCONN) TYPE(ADDRESSMAP) ADDRESS('*') USERSRC(CHANNEL) CHCKCLNT(REQUIRED)
-AMQ8883E: Channel authentication record already exists.
-----
-
-.Enable password authentication (instead of _runas_ authentication)
-[listing,options="nowrap"]
-----
-ALTER AUTHINFO(SYSTEM.DEFAULT.AUTHINFO.IDPWOS) AUTHTYPE(IDPWOS) ADOPTCTX(YES)
-     6 : ALTER AUTHINFO(SYSTEM.DEFAULT.AUTHINFO.IDPWOS) AUTHTYPE(IDPWOS) ADOPTCTX(YES)
-AMQ8567I: IBM MQ authentication information changed.
-
-REFRESH SECURITY TYPE(CONNAUTH)
-     7 : REFRESH SECURITY TYPE(CONNAUTH)
-AMQ8560I: IBM MQ security cache refreshed.
-
-exit
-     8 : exit
-7 MQSC commands read.
-No commands have a syntax error.
-2 valid MQSC commands could not be processed.
-----
-
-.Change password of `app` user
-After exiting `runmqsc` we have to use the only allowed (in `/etc/sudoers.d/mq-dev-config`) command to change the password of `app` user (hit `CTRL-D` after specifying `app:fuse`):
-[listing,options="nowrap"]
-----
-bash-4.2$ id
-uid=888(mqm) gid=888(mqm) groups=888(mqm)
-
-bash-4.2$ sudo /usr/sbin/chpasswd
-app:fuse
-^D
-
-bash-4.2$ su - app
-Password: fuse
-[app@1e397bb7318d ~]$ id
-uid=1001(app) gid=1002(app) groups=1002(app),1001(mqclient)
-----
+Using `MQ_APP_PASSWORD` environment variable, we've specified the password for `app` user. It is required now when connecting to IBM MQ Broker.
 
 [[ibmmq-client-libraries]]
 === Client libraries
@@ -198,21 +92,21 @@ This time we'll run standalone (no docker) version of `amq-broker-7.8.1-bin.zip`
 [listing,options="nowrap"]
 ----
 $ pwd
-/data/servers/amq-broker-7.8.1
+/data/servers/amq-broker-7.8.2
 
 $ bin/artemis create --user fuse --password fuse --require-login amq7
-Creating ActiveMQ Artemis instance at: /data/servers/amq-broker-7.8.1/amq7
+Creating ActiveMQ Artemis instance at: /data/servers/amq-broker-7.8.2/amq7
 
 Auto tuning journal ...
-done! Your system can make 31.25 writes per millisecond, your journal-buffer-timeout will be 32000
+done! Your system can make 7.81 writes per millisecond, your journal-buffer-timeout will be 32000
 
 You can now start the broker by executing:
 
-   "/data/servers/amq-broker-7.8.1/amq7/bin/artemis" run
+   "/data/servers/amq-broker-7.8.2/amq7/bin/artemis" run
 
 Or you can run the broker in the background using:
 
-   "/data/servers/amq-broker-7.8.1/amq7/bin/artemis-service" start
+   "/data/servers/amq-broker-7.8.2/amq7/bin/artemis-service" start
 
 
 $ amq7/bin/artemis run
@@ -223,10 +117,10 @@ $ amq7/bin/artemis run
   / ____ \| |  | | |__| | | |_) | | | (_) |   <  __/ |
  /_/    \_\_|  |_|\___\_\ |____/|_|  \___/|_|\_\___|_|
 
- Red Hat AMQ 7.8.1.GA
+ Red Hat AMQ 7.8.2.GA
 
 
-2021-03-31 18:30:00,353 INFO  [org.apache.activemq.artemis.integration.bootstrap] AMQ101000: Starting ActiveMQ Artemis Server
+2021-10-04 16:20:21,244 INFO  [org.apache.activemq.artemis.integration.bootstrap] AMQ101000: Starting ActiveMQ Artemis Server
 ...
 ----
 
@@ -234,8 +128,8 @@ $ amq7/bin/artemis run
 
 Artemis libraries are available in Maven Central or Red Hat repository. I used:
 
-* `mvn:org.apache.activemq/artemis-core-client/2.16.0.redhat-00012`
-* `mvn:org.apache.activemq/artemis-jms-client/2.16.0.redhat-00012`
+* `mvn:org.apache.activemq/artemis-core-client/2.16.0.redhat-00022`
+* `mvn:org.apache.activemq/artemis-jms-client/2.16.0.redhat-00022`
 
 == A-MQ 6 installation
 
@@ -288,7 +182,7 @@ TotalEnqueueCount = 1
 TotalDequeueCount = 0
 TotalMessageCount = 0
 TotalConsumerCount = 0
-Uptime = 1.360 seconds
+Uptime = 7.391 seconds
 
 Name = KahaDBPersistenceAdapter[/data/servers/jboss-a-mq-6.3.0.redhat-495/data/amq/kahadb,Index:/data/servers/jboss-a-mq-6.3.0.redhat-495/data/amq/kahadb]
 

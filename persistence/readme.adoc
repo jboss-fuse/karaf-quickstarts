@@ -97,7 +97,7 @@ $ mvn clean test -Pqtest -Pwmq9 -f standalone-xa/ -Dmq9library.path='/data/downl
 [INFO] Scanning for projects...
 [INFO]
 [INFO] --------------< org.jboss.fuse.quickstarts:standalone-xa >--------------
-[INFO] Building Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support 7.10.0.fuse-7_10_0038
+[INFO] Building Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support 7.10.0.fuse-7_10_0-00004
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO]
 [INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ standalone-xa ---
@@ -116,7 +116,7 @@ $ mvn clean test -Pqtest -Pwmq9 -f standalone-xa/ -Dmq9library.path='/data/downl
 [INFO]
 [INFO] --- maven-compiler-plugin:3.7.0:testCompile (default-testCompile) @ standalone-xa ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 6 source files to /data/sources/github.com/jboss-fuse/karaf-quickstarts/persistence/standalone-xa/target/test-classes
+[INFO] Compiling 8 source files to /data/sources/github.com/jboss-fuse/karaf-quickstarts/persistence/standalone-xa/target/test-classes
 [INFO]
 [INFO] --- maven-surefire-plugin:2.20.1:test (default-test) @ standalone-xa ---
 [INFO]
@@ -124,9 +124,9 @@ $ mvn clean test -Pqtest -Pwmq9 -f standalone-xa/ -Dmq9library.path='/data/downl
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running org.jboss.fuse.quickstarts.persistence.standalone.StandaloneWMQ9AccessTest
-19:06:06 INFO [StandaloneWMQ9AccessTest] (StandaloneWMQ9AccessTest.java:41) : Using WMQ9 queue: com.ibm.mq.jms.MQQueue
-19:06:06 INFO [StandaloneWMQ9AccessTest] (StandaloneWMQ9AccessTest.java:58) : MESSAGE: Hello IBM MQ 9
-19:06:06 INFO [StandaloneWMQ9AccessTest] (StandaloneWMQ9AccessTest.java:59) : MESSAGE:
+17:29:06 INFO [StandaloneWMQ9AccessTest] (StandaloneWMQ9AccessTest.java:41) : Using WMQ9 queue: com.ibm.mq.jms.MQQueue
+17:29:06 INFO [StandaloneWMQ9AccessTest] (StandaloneWMQ9AccessTest.java:58) : MESSAGE: Hello IBM MQ 9
+17:29:06 INFO [StandaloneWMQ9AccessTest] (StandaloneWMQ9AccessTest.java:59) : MESSAGE:
   JMSMessage class: jms_text
   JMSType:          null
   JMSDeliveryMode:  2
@@ -134,13 +134,13 @@ $ mvn clean test -Pqtest -Pwmq9 -f standalone-xa/ -Dmq9library.path='/data/downl
   JMSDeliveryTime:  0
   JMSExpiration:    0
   JMSPriority:      4
-  JMSMessageID:     ID:414d512046555345514d2020202020206ca064600230e121
-  JMSTimestamp:     1617210203894
+  JMSMessageID:     ID:414d512046555345514d2020202020208b0c5b6101a70040
+  JMSTimestamp:     1633361308828
   JMSCorrelationID: null
   JMSDestination:   queue:///DEV.QUEUE.1
   JMSReplyTo:       null
   JMSRedelivered:   false
-    JMSXAppID: rt.junit.JUnitStarter
+    JMSXAppID: jar
     JMSXDeliveryCount: 1
     JMSXUserID: app
     JMS_IBM_Character_Set: UTF-8
@@ -148,10 +148,10 @@ $ mvn clean test -Pqtest -Pwmq9 -f standalone-xa/ -Dmq9library.path='/data/downl
     JMS_IBM_Format: MQSTR
     JMS_IBM_MsgType: 8
     JMS_IBM_PutApplType: 28
-    JMS_IBM_PutDate: 20210331
-    JMS_IBM_PutTime: 17032390
+    JMS_IBM_PutDate: 20211004
+    JMS_IBM_PutTime: 15282883
 Hello IBM MQ 9
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.262 s - in org.jboss.fuse.quickstarts.persistence.standalone.StandaloneWMQ9AccessTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.809 s - in org.jboss.fuse.quickstarts.persistence.standalone.StandaloneWMQ9AccessTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -160,8 +160,8 @@ Hello IBM MQ 9
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.016 s
-[INFO] Finished at: 2021-03-31T19:06:07+02:00
+[INFO] Total time:  5.193 s
+[INFO] Finished at: 2021-10-04T17:29:07+02:00
 [INFO] ------------------------------------------------------------------------
 ----
 
@@ -177,7 +177,7 @@ $ mvn clean test -Pqtest -Dtest=StandaloneArtemisAccessTest,StandaloneXAArtemisA
 [INFO] Scanning for projects...
 [INFO]
 [INFO] --------------< org.jboss.fuse.quickstarts:standalone-xa >--------------
-[INFO] Building Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support 7.10.0.fuse-7_10_0038
+[INFO] Building Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support 7.10.0.fuse-7_10_0-00004
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO]
 [INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ standalone-xa ---
@@ -196,24 +196,92 @@ $ mvn clean test -Pqtest -Dtest=StandaloneArtemisAccessTest,StandaloneXAArtemisA
 [INFO]
 [INFO] --- maven-compiler-plugin:3.7.0:testCompile (default-testCompile) @ standalone-xa ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 6 source files to /data/sources/github.com/jboss-fuse/karaf-quickstarts/persistence/standalone-xa/target/test-classes
+[INFO] Compiling 8 source files to /data/sources/github.com/jboss-fuse/karaf-quickstarts/persistence/standalone-xa/target/test-classes
 [INFO]
 [INFO] --- maven-surefire-plugin:2.20.1:test (default-test) @ standalone-xa ---
 [INFO]
 [INFO] -------------------------------------------------------
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
-[INFO] Running org.jboss.fuse.quickstarts.persistence.standalone.StandaloneArtemisAccessTest
-19:07:32 INFO [StandaloneArtemisAccessTest] (StandaloneArtemisAccessTest.java:45) : Using Artemis queue: org.apache.activemq.artemis.jms.client.ActiveMQQueue
-19:07:33 INFO [JmsConnection] (JmsConnection.java:1339) : Connection ID:c6ee9eae-4908-46b7-a694-9261ad93435f:1 connected to server: amqp://localhost:61616
-19:07:33 INFO [StandaloneArtemisAccessTest] (StandaloneArtemisAccessTest.java:60) : Using QPid queue: org.apache.qpid.jms.JmsQueue
-19:07:33 INFO [StandaloneArtemisAccessTest] (StandaloneArtemisAccessTest.java:64) : MESSAGE: Hello Artemis from PAX-JMS
-19:07:33 INFO [StandaloneArtemisAccessTest] (StandaloneArtemisAccessTest.java:65) : MESSAGE: JmsTextMessage { org.apache.qpid.jms.provider.amqp.message.AmqpJmsTextMessageFacade@517bd097 }
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.333 s - in org.jboss.fuse.quickstarts.persistence.standalone.StandaloneArtemisAccessTest
 [INFO] Running org.jboss.fuse.quickstarts.persistence.standalone.StandaloneXAArtemisAccessTest
-19:07:33 INFO [JmsPoolXAConnectionFactory] (JmsPoolXAConnectionFactory.java:77) : Provided ConnectionFactory is JMS 2.0+ capable.
-19:07:33 INFO [TransactionStatusManager] (TransactionStatusManager.java:138) : ARJUNA012170: TransactionStatusManager started on port 33465 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.149 s - in org.jboss.fuse.quickstarts.persistence.standalone.StandaloneXAArtemisAccessTest
+17:30:05 DEBUG [JTAEnvironmentBean] (JTAEnvironmentBean.java:418) : Setting up node identifiers '[1]' for which recovery will be performed
+17:30:06 INFO [JmsPoolXAConnectionFactory] (JmsPoolXAConnectionFactory.java:77) : Provided ConnectionFactory is JMS 2.0+ capable.
+17:30:06 TRACE [BaseTransaction] (BaseTransaction.java:58) : BaseTransaction.begin
+17:30:06 TRACE [ClassloadingUtility] (ClassloadingUtility.java:77) : Loading class com.arjuna.ats.arjuna.recovery.ActionStatusService
+17:30:06 TRACE [ClassloadingUtility] (ClassloadingUtility.java:77) : Loading class com.arjuna.ats.internal.arjuna.objectstore.ShadowNoFileLockStore
+17:30:06 TRACE [FileSystemStore] (FileSystemStore.java:791) : FileSystemStore.createHierarchy(target/tx/ShadowNoFileLockStore/defaultStore/)
+17:30:06 DEBUG [TransactionStatusManager] (TransactionStatusManager.java:88) : com.arjuna.ats.arjuna.recovery.ActionStatusService starting
+17:30:06 TRACE [ClassloadingUtility] (ClassloadingUtility.java:77) : Loading class com.arjuna.ats.internal.arjuna.utils.SocketProcessId
+17:30:06 DEBUG [TransactionStatusManagerItem] (TransactionStatusManagerItem.java:327) : TransactionStatusManagerItem host: {0} port: {1}
+17:30:06 TRACE [OutputObjectState] (OutputObjectState.java:59) : OutputObjectState::OutputObjectState()
+17:30:06 TRACE [ClassloadingUtility] (ClassloadingUtility.java:77) : Loading class com.arjuna.ats.internal.arjuna.objectstore.ShadowNoFileLockStore
+17:30:06 TRACE [FileSystemStore] (FileSystemStore.java:791) : FileSystemStore.createHierarchy(target/tx/ShadowNoFileLockStore/communicationStore/)
+17:30:06 TRACE [FileSystemStore] (FileSystemStore.java:136) : FileSystemStore.write_committed(0:ffffc0a800dd:b369:615b1dfe:0, /Recovery/TransactionStatusManager)
+17:30:06 TRACE [ShadowingStore] (ShadowingStore.java:569) : ShadowingStore.write_state(0:ffffc0a800dd:b369:615b1dfe:0, /Recovery/TransactionStatusManager, StateType.OS_ORIGINAL)
+17:30:06 TRACE [ShadowingStore] (ShadowingStore.java:345) : ShadowingStore.genPathName(0:ffffc0a800dd:b369:615b1dfe:0, /Recovery/TransactionStatusManager, StateType.OS_ORIGINAL)
+17:30:06 TRACE [FileSystemStore] (FileSystemStore.java:712) : FileSystemStore.genPathName(0:ffffc0a800dd:b369:615b1dfe:0, /Recovery/TransactionStatusManager, 11)
+17:30:06 TRACE [FileSystemStore] (FileSystemStore.java:490) : FileSystemStore.openAndLock(target/tx/ShadowNoFileLockStore/communicationStore/Recovery/TransactionStatusManager/0_ffffc0a800dd_b369_615b1dfe_0, FileLock.F_WRLCK, true)
+17:30:06 TRACE [FileSystemStore] (FileSystemStore.java:791) : FileSystemStore.createHierarchy(target/tx/ShadowNoFileLockStore/communicationStore/Recovery/TransactionStatusManager/0_ffffc0a800dd_b369_615b1dfe_0)
+17:30:06 TRACE [FileSystemStore] (FileSystemStore.java:442) : FileSystemStore.closeAndUnlock(target/tx/ShadowNoFileLockStore/communicationStore/Recovery/TransactionStatusManager/0_ffffc0a800dd_b369_615b1dfe_0, null, java.io.FileOutputStream@4145bad8)
+17:30:06 INFO [TransactionStatusManager] (TransactionStatusManager.java:138) : ARJUNA012170: TransactionStatusManager started on port 41159 and host 127.0.0.1 with service com.arjuna.ats.arjuna.recovery.ActionStatusService
+17:30:06 TRACE [StateManager] (StateManager.java:816) : StateManager::StateManager( 2, 0 )
+17:30:06 TRACE [BasicAction] (BasicAction.java:80) : BasicAction::BasicAction()
+17:30:06 TRACE [ClassloadingUtility] (ClassloadingUtility.java:77) : Loading class com.arjuna.ats.internal.arjuna.coordinator.CheckedActionFactoryImple
+17:30:06 TRACE [BasicAction] (BasicAction.java:1376) : BasicAction::Begin() for action-id 0:ffffc0a800dd:b369:615b1dfe:2
+17:30:06 TRACE [BasicAction] (BasicAction.java:3560) : BasicAction::actionInitialise() for action-id 0:ffffc0a800dd:b369:615b1dfe:2
+17:30:06 TRACE [ActionHierarchy] (ActionHierarchy.java:64) : ActionHierarchy::ActionHierarchy(1)
+17:30:06 TRACE [ActionHierarchy] (ActionHierarchy.java:199) : ActionHierarchy::add(0:ffffc0a800dd:b369:615b1dfe:2, 1)
+17:30:06 TRACE [BasicAction] (BasicAction.java:598) : BasicAction::addChildThread () action 0:ffffc0a800dd:b369:615b1dfe:2 adding Thread[main,5,main]
+17:30:06 TRACE [BasicAction] (BasicAction.java:625) : BasicAction::addChildThread () action 0:ffffc0a800dd:b369:615b1dfe:2 adding Thread[main,5,main] result = true
+17:30:06 TRACE [TransactionReaper] (TransactionReaper.java:869) : TransactionReaper::instantiate()
+17:30:06 TRACE [TransactionReaper] (TransactionReaper.java:71) : TransactionReaper::TransactionReaper ( 9223372036854775807 )
+17:30:06 TRACE [ReaperThread] (ReaperThread.java:61) : ReaperThread.run ()
+17:30:06 TRACE [ReaperWorkerThread] (ReaperWorkerThread.java:53) : ReaperWorkerThread.run ()
+17:30:06 TRACE [ReaperThread] (ReaperThread.java:87) : Thread Thread[Transaction Reaper,5,main] sleeping for 9223370403493369535
+17:30:06 TRACE [ReaperWorkerThread] (ReaperWorkerThread.java:62) : Thread Thread[Transaction Reaper Worker 0,5,main] waiting for transaction check tasks
+17:30:06 TRACE [TransactionReaper] (TransactionReaper.java:573) : TransactionReaper::insert ( BasicAction: 0:ffffc0a800dd:b369:615b1dfe:2 status: ActionStatus.RUNNING, 60 )
+17:30:06 TRACE [ReaperElement] (ReaperElement.java:55) : ReaperElement::ReaperElement ( BasicAction: 0:ffffc0a800dd:b369:615b1dfe:2 status: ActionStatus.RUNNING, 60 )
+17:30:06 TRACE [ReaperThread] (ReaperThread.java:103) : ReaperThread.run ()
+17:30:06 TRACE [TransactionReaper] (TransactionReaper.java:116) : TransactionReaper::check ()
+17:30:06 TRACE [TransactionReaper] (TransactionReaper.java:127) : TransactionReaper::check comparing now=1633361406274 to next=1633361466273
+17:30:06 TRACE [ReaperThread] (ReaperThread.java:87) : Thread Thread[Transaction Reaper,5,main] sleeping for 59999
+17:30:06 TRACE [TransactionImple] (TransactionImple.java:356) : TransactionImple.getStatus: javax.transaction.Status.STATUS_ACTIVE
+17:30:06 TRACE [TransactionImple] (TransactionImple.java:373) : TransactionImple.registerSynchronization - Class: class org.messaginghub.pooled.jms.pool.PooledXAConnection$Synchronization HashCode: 605101809 toString: org.messaginghub.pooled.jms.pool.PooledXAConnection$Synchronization@24111ef1
+17:30:06 TRACE [TransactionImple] (TransactionImple.java:430) : TransactionImple.enlistResource ( ClientSessionImpl [name=f3d138e4-2527-11ec-9acb-083a885f3339, username=fuse, closed=false, factory = org.apache.activemq.artemis.core.client.impl.ClientSessionFactoryImpl@5386659f, metaData=(jms-session=,)]@2766ca9d )
+17:30:06 TRACE [TransactionImple] (TransactionImple.java:356) : TransactionImple.getStatus: javax.transaction.Status.STATUS_ACTIVE
+17:30:06 TRACE [StateManager] (StateManager.java:816) : StateManager::StateManager( 1, 0 )
+17:30:06 TRACE [AbstractRecord] (AbstractRecord.java:627) : AbstractRecord::AbstractRecord (0:ffffc0a800dd:b369:615b1dfe:5, 1)
+17:30:06 TRACE [XAResourceRecord] (XAResourceRecord.java:111) : XAResourceRecord.XAResourceRecord ( < formatId=131077, gtrid_length=29, bqual_length=36, tx_uid=0:ffffc0a800dd:b369:615b1dfe:2, node_name=1, branch_uid=0:ffffc0a800dd:b369:615b1dfe:4, subordinatenodename=null, eis_name=0 >, ClientSessionImpl [name=f3d138e4-2527-11ec-9acb-083a885f3339, username=fuse, closed=false, factory = org.apache.activemq.artemis.core.client.impl.ClientSessionFactoryImpl@5386659f, metaData=(jms-session=,)]@2766ca9d ), record id=0:ffffc0a800dd:b369:615b1dfe:5
+17:30:06 TRACE [RecordList] (RecordList.java:404) : RecordList::insert(RecordList: empty) : appending /StateManager/AbstractRecord/XAResourceRecord for 0:ffffc0a800dd:b369:615b1dfe:5
+17:30:06 TRACE [BaseTransaction] (BaseTransaction.java:118) : BaseTransaction.commit
+17:30:06 TRACE [TransactionImple] (TransactionImple.java:1273) : TransactionImple.commitAndDisassociate
+17:30:06 TRACE [SynchronizationImple] (SynchronizationImple.java:71) : SynchronizationImple.beforeCompletion - Class: class org.messaginghub.pooled.jms.pool.PooledXAConnection$Synchronization HashCode: 605101809 toString: org.messaginghub.pooled.jms.pool.PooledXAConnection$Synchronization@24111ef1
+17:30:06 TRACE [BasicAction] (BasicAction.java:1457) : BasicAction::End() for action-id 0:ffffc0a800dd:b369:615b1dfe:2
+17:30:06 TRACE [BasicAction] (BasicAction.java:2364) : BasicAction::onePhaseCommit() for action-id 0:ffffc0a800dd:b369:615b1dfe:2
+17:30:06 TRACE [XAResourceRecord] (XAResourceRecord.java:602) : XAResourceRecord.topLevelOnePhaseCommit for XAResourceRecord < resource:ClientSessionImpl [name=f3d138e4-2527-11ec-9acb-083a885f3339, username=fuse, closed=false, factory = org.apache.activemq.artemis.core.client.impl.ClientSessionFactoryImpl@5386659f, metaData=(jms-session=,)]@2766ca9d, txid:< formatId=131077, gtrid_length=29, bqual_length=36, tx_uid=0:ffffc0a800dd:b369:615b1dfe:2, node_name=1, branch_uid=0:ffffc0a800dd:b369:615b1dfe:4, subordinatenodename=null, eis_name=0 >, heuristic: TwoPhaseOutcome.FINISH_OK com.arjuna.ats.internal.jta.resources.arjunacore.XAResourceRecord@a22cb6a >, record id=0:ffffc0a800dd:b369:615b1dfe:5
+17:30:06 TRACE [BasicAction] (BasicAction.java:1557) : BasicAction::End() result for action-id (0:ffffc0a800dd:b369:615b1dfe:2) is (TwoPhaseOutcome.PREPARE_OK) node id: (1)
+17:30:06 TRACE [SynchronizationImple] (SynchronizationImple.java:87) : SynchronizationImple.afterCompletion - Class: class org.messaginghub.pooled.jms.pool.PooledXAConnection$Synchronization HashCode: 605101809 toString: org.messaginghub.pooled.jms.pool.PooledXAConnection$Synchronization@24111ef1
+17:30:06 TRACE [BasicAction] (BasicAction.java:657) : BasicAction::removeChildThread () action 0:ffffc0a800dd:b369:615b1dfe:2 removing 1
+17:30:06 TRACE [BasicAction] (BasicAction.java:680) : BasicAction::removeChildThread () action 0:ffffc0a800dd:b369:615b1dfe:2 removing 1 result = true
+17:30:06 TRACE [TransactionReaper] (TransactionReaper.java:626) : TransactionReaper::remove ( BasicAction: 0:ffffc0a800dd:b369:615b1dfe:2 status: ActionStatus.COMMITTED )
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.201 s - in org.jboss.fuse.quickstarts.persistence.standalone.StandaloneXAArtemisAccessTest
+[INFO] Running org.jboss.fuse.quickstarts.persistence.standalone.StandaloneArtemisAccessTest
+17:30:06 INFO [StandaloneArtemisAccessTest] (StandaloneArtemisAccessTest.java:45) : Using Artemis queue: org.apache.activemq.artemis.jms.client.ActiveMQQueue
+17:30:07 INFO [JmsConnection] (JmsConnection.java:1339) : Connection ID:7aaa06cb-e7e3-491f-b6cd-b76f77f531b8:1 connected to server: amqp://localhost:61616
+17:30:07 INFO [StandaloneArtemisAccessTest] (StandaloneArtemisAccessTest.java:60) : Using QPid queue: org.apache.qpid.jms.JmsQueue
+17:30:07 INFO [StandaloneArtemisAccessTest] (StandaloneArtemisAccessTest.java:64) : MESSAGE: Hello Artemis from PAX-JMS
+17:30:07 INFO [StandaloneArtemisAccessTest] (StandaloneArtemisAccessTest.java:65) : MESSAGE: JmsTextMessage { org.apache.qpid.jms.provider.amqp.message.AmqpJmsTextMessageFacade@6ebd78d1 }
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.572 s - in org.jboss.fuse.quickstarts.persistence.standalone.StandaloneArtemisAccessTest
+17:30:07 DEBUG [Listener] (Listener.java:155) : Recovery listener existing com.arjuna.ats.arjuna.recovery.ActionStatusService
+17:30:07 TRACE [FileSystemStore] (FileSystemStore.java:118) : FileSystemStore.remove_committed(0:ffffc0a800dd:b369:615b1dfe:0, /Recovery/TransactionStatusManager)
+17:30:07 TRACE [ShadowingStore] (ShadowingStore.java:487) : ShadowingStore.remove_state(0:ffffc0a800dd:b369:615b1dfe:0, /Recovery/TransactionStatusManager, StateType.OS_ORIGINAL)
+17:30:07 TRACE [ShadowingStore] (ShadowingStore.java:345) : ShadowingStore.genPathName(0:ffffc0a800dd:b369:615b1dfe:0, /Recovery/TransactionStatusManager, StateType.OS_SHADOW)
+17:30:07 TRACE [FileSystemStore] (FileSystemStore.java:712) : FileSystemStore.genPathName(0:ffffc0a800dd:b369:615b1dfe:0, /Recovery/TransactionStatusManager, 10)
+17:30:07 TRACE [ShadowingStore] (ShadowingStore.java:345) : ShadowingStore.genPathName(0:ffffc0a800dd:b369:615b1dfe:0, /Recovery/TransactionStatusManager, StateType.OS_ORIGINAL)
+17:30:07 TRACE [FileSystemStore] (FileSystemStore.java:712) : FileSystemStore.genPathName(0:ffffc0a800dd:b369:615b1dfe:0, /Recovery/TransactionStatusManager, 11)
+17:30:07 TRACE [ShadowingStore] (ShadowingStore.java:113) : ShadowingStore.currentState(0:ffffc0a800dd:b369:615b1dfe:0, /Recovery/TransactionStatusManager) - returning StateStatus.OS_COMMITTED
+17:30:07 TRACE [ShadowingStore] (ShadowingStore.java:345) : ShadowingStore.genPathName(0:ffffc0a800dd:b369:615b1dfe:0, /Recovery/TransactionStatusManager, StateType.OS_ORIGINAL)
+17:30:07 TRACE [FileSystemStore] (FileSystemStore.java:712) : FileSystemStore.genPathName(0:ffffc0a800dd:b369:615b1dfe:0, /Recovery/TransactionStatusManager, 11)
 [INFO]
 [INFO] Results:
 [INFO]
@@ -222,8 +290,8 @@ $ mvn clean test -Pqtest -Dtest=StandaloneArtemisAccessTest,StandaloneXAArtemisA
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.016 s
-[INFO] Finished at: 2021-03-31T19:07:33+02:00
+[INFO] Total time:  4.939 s
+[INFO] Finished at: 2021-10-04T17:30:07+02:00
 [INFO] ------------------------------------------------------------------------
 ----
 
@@ -236,7 +304,7 @@ $ mvn clean test -Pqtest,_indy -Pamq6 -Dtest=StandaloneAMQ6AccessTest
 [INFO] Scanning for projects...
 [INFO]
 [INFO] --------------< org.jboss.fuse.quickstarts:standalone-xa >--------------
-[INFO] Building Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support 7.10.0.fuse-7_10_0038
+[INFO] Building Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support 7.10.0.fuse-7_10_0-00004
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO]
 [INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ standalone-xa ---
@@ -255,7 +323,7 @@ $ mvn clean test -Pqtest,_indy -Pamq6 -Dtest=StandaloneAMQ6AccessTest
 [INFO]
 [INFO] --- maven-compiler-plugin:3.7.0:testCompile (default-testCompile) @ standalone-xa ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 6 source files to /data/sources/github.com/jboss-fuse/karaf-quickstarts/persistence/standalone-xa/target/test-classes
+[INFO] Compiling 8 source files to /data/sources/github.com/jboss-fuse/karaf-quickstarts/persistence/standalone-xa/target/test-classes
 [INFO]
 [INFO] --- maven-surefire-plugin:2.20.1:test (default-test) @ standalone-xa ---
 [INFO]
@@ -263,11 +331,11 @@ $ mvn clean test -Pqtest,_indy -Pamq6 -Dtest=StandaloneAMQ6AccessTest
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running org.jboss.fuse.quickstarts.persistence.standalone.StandaloneAMQ6AccessTest
-19:08:17 INFO [StandaloneAMQ6AccessTest] (StandaloneAMQ6AccessTest.java:45) : Using A-MQ 6 queue: org.apache.activemq.command.ActiveMQQueue
-19:08:17 INFO [StandaloneAMQ6AccessTest] (StandaloneAMQ6AccessTest.java:59) : Using A-MQ 6 queue: org.apache.activemq.command.ActiveMQQueue
-19:08:17 INFO [StandaloneAMQ6AccessTest] (StandaloneAMQ6AccessTest.java:63) : MESSAGE: Hello A-MQ 6
-19:08:17 INFO [StandaloneAMQ6AccessTest] (StandaloneAMQ6AccessTest.java:64) : MESSAGE: ActiveMQTextMessage {commandId = 5, responseRequired = true, messageId = ID:everfree.forest-41415-1617210496795-1:1:1:1:1, originalDestination = null, originalTransactionId = null, producerId = ID:everfree.forest-41415-1617210496795-1:1:1:1, destination = queue://amqp://localhost:61616, transactionId = null, expiration = 0, timestamp = 1617210497051, arrival = 0, brokerInTime = 1617210497053, brokerOutTime = 1617210497087, correlationId = null, replyTo = null, persistent = true, type = null, priority = 4, groupID = null, groupSequence = 0, targetConsumerId = null, compressed = false, userID = null, content = null, marshalledProperties = null, dataStructure = null, redeliveryCounter = 0, size = 0, properties = null, readOnlyProperties = true, readOnlyBody = true, droppable = false, jmsXGroupFirstForConsumer = false, text = Hello A-MQ 6}
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.942 s - in org.jboss.fuse.quickstarts.persistence.standalone.StandaloneAMQ6AccessTest
+17:31:11 INFO [StandaloneAMQ6AccessTest] (StandaloneAMQ6AccessTest.java:45) : Using A-MQ 6 queue: org.apache.activemq.command.ActiveMQQueue
+17:31:11 INFO [StandaloneAMQ6AccessTest] (StandaloneAMQ6AccessTest.java:59) : Using A-MQ 6 queue: org.apache.activemq.command.ActiveMQQueue
+17:31:11 INFO [StandaloneAMQ6AccessTest] (StandaloneAMQ6AccessTest.java:63) : MESSAGE: Hello A-MQ 6
+17:31:11 INFO [StandaloneAMQ6AccessTest] (StandaloneAMQ6AccessTest.java:64) : MESSAGE: ActiveMQTextMessage {commandId = 5, responseRequired = true, messageId = ID:everfree.forest-44081-1633361471385-1:1:1:1:1, originalDestination = null, originalTransactionId = null, producerId = ID:everfree.forest-44081-1633361471385-1:1:1:1, destination = queue://amqp://localhost:61616, transactionId = null, expiration = 0, timestamp = 1633361471628, arrival = 0, brokerInTime = 1633361471630, brokerOutTime = 1633361471663, correlationId = null, replyTo = null, persistent = true, type = null, priority = 4, groupID = null, groupSequence = 0, targetConsumerId = null, compressed = false, userID = null, content = null, marshalledProperties = null, dataStructure = null, redeliveryCounter = 0, size = 0, properties = null, readOnlyProperties = true, readOnlyBody = true, droppable = false, jmsXGroupFirstForConsumer = false, text = Hello A-MQ 6}
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.041 s - in org.jboss.fuse.quickstarts.persistence.standalone.StandaloneAMQ6AccessTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -276,8 +344,8 @@ $ mvn clean test -Pqtest,_indy -Pamq6 -Dtest=StandaloneAMQ6AccessTest
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  3.665 s
-[INFO] Finished at: 2021-03-31T19:08:17+02:00
+[INFO] Total time:  4.162 s
+[INFO] Finished at: 2021-10-04T17:31:12+02:00
 [INFO] ------------------------------------------------------------------------
 ----
 
@@ -307,10 +375,10 @@ After installing the example, we'll see this log output every 20 seconds:
 
 [listing,options="nowrap"]
 ----
-2021-03-31 19:09:07,225 INFO  {Camel (camel) thread #2 - timer://webinar} [org.apache.camel.util.CamelLogger.log()] (CamelLogger.java:159) : *** Select all : {id=1, date=2018-02-20 08:00:00.0, name=User 1, summary=Incident 1, details=This is a report incident 001, email=user1@redhat.com}
-2021-03-31 19:09:07,225 INFO  {Camel (camel) thread #2 - timer://webinar} [org.apache.camel.util.CamelLogger.log()] (CamelLogger.java:159) : *** Select all : {id=2, date=2018-02-20 08:10:00.0, name=User 2, summary=Incident 2, details=This is a report incident 002, email=user2@redhat.com}
-2021-03-31 19:09:07,226 INFO  {Camel (camel) thread #2 - timer://webinar} [org.apache.camel.util.CamelLogger.log()] (CamelLogger.java:159) : *** Select all : {id=3, date=2018-02-20 08:20:00.0, name=User 3, summary=Incident 3, details=This is a report incident 003, email=user3@redhat.com}
-2021-03-31 19:09:07,226 INFO  {Camel (camel) thread #2 - timer://webinar} [org.apache.camel.util.CamelLogger.log()] (CamelLogger.java:159) : *** Select all : {id=4, date=2018-02-20 08:30:00.0, name=User 4, summary=Incident 4, details=This is a report incident 004, email=user4@redhat.com}
+2021-10-04 17:32:10,578 INFO  {Camel (camel) thread #5 - timer://webinar} [org.apache.camel.util.CamelLogger.log()] (CamelLogger.java:159) : *** Select all : {id=1, date=2018-02-20 08:00:00.0, name=User 1, summary=Incident 1, details=This is a report incident 001, email=user1@redhat.com}
+2021-10-04 17:32:10,579 INFO  {Camel (camel) thread #5 - timer://webinar} [org.apache.camel.util.CamelLogger.log()] (CamelLogger.java:159) : *** Select all : {id=2, date=2018-02-20 08:10:00.0, name=User 2, summary=Incident 2, details=This is a report incident 002, email=user2@redhat.com}
+2021-10-04 17:32:10,579 INFO  {Camel (camel) thread #5 - timer://webinar} [org.apache.camel.util.CamelLogger.log()] (CamelLogger.java:159) : *** Select all : {id=3, date=2018-02-20 08:20:00.0, name=User 3, summary=Incident 3, details=This is a report incident 003, email=user3@redhat.com}
+2021-10-04 17:32:10,579 INFO  {Camel (camel) thread #5 - timer://webinar} [org.apache.camel.util.CamelLogger.log()] (CamelLogger.java:159) : *** Select all : {id=4, date=2018-02-20 08:30:00.0, name=User 4, summary=Incident 4, details=This is a report incident 004, email=user4@redhat.com}
 ----
 
 Additionally, if a file will be created in `$FUSE_HOME/data/camel-jdbc`, additional query will be performed:
@@ -322,10 +390,10 @@ $ echo -n '1,3' > data/camel-jdbc/query1.txt
 After triggering `key-from-file` route using the above command, we'll see this in the log:
 [listing,options="nowrap"]
 ----
-2021-03-31 19:09:42,632 INFO  {Camel (camel) thread #1 - file://data/camel-jdbc} [org.apache.camel.util.CamelLogger.log()] (CamelLogger.java:159) : >>> SQL Query : select * from report.incident where id = '1'
-2021-03-31 19:09:42,643 INFO  {Camel (camel) thread #1 - file://data/camel-jdbc} [org.apache.camel.util.CamelLogger.log()] (CamelLogger.java:159) : >>> Select using key : [{id=1, date=2018-02-20 08:00:00.0, name=User 1, summary=Incident 1, details=This is a report incident 001, email=user1@redhat.com}]
-2021-03-31 19:09:42,644 INFO  {Camel (camel) thread #1 - file://data/camel-jdbc} [org.apache.camel.util.CamelLogger.log()] (CamelLogger.java:159) : >>> SQL Query : select * from report.incident where id = '3'
-2021-03-31 19:09:42,649 INFO  {Camel (camel) thread #1 - file://data/camel-jdbc} [org.apache.camel.util.CamelLogger.log()] (CamelLogger.java:159) : >>> Select using key : [{id=3, date=2018-02-20 08:20:00.0, name=User 3, summary=Incident 3, details=This is a report incident 003, email=user3@redhat.com}]
+2021-10-04 17:32:30,977 INFO  {Camel (camel) thread #4 - file://data/camel-jdbc} [org.apache.camel.util.CamelLogger.log()] (CamelLogger.java:159) : >>> SQL Query : select * from report.incident where id = '1'
+2021-10-04 17:32:30,994 INFO  {Camel (camel) thread #4 - file://data/camel-jdbc} [org.apache.camel.util.CamelLogger.log()] (CamelLogger.java:159) : >>> Select using key : [{id=1, date=2018-02-20 08:00:00.0, name=User 1, summary=Incident 1, details=This is a report incident 001, email=user1@redhat.com}]
+2021-10-04 17:32:30,995 INFO  {Camel (camel) thread #4 - file://data/camel-jdbc} [org.apache.camel.util.CamelLogger.log()] (CamelLogger.java:159) : >>> SQL Query : select * from report.incident where id = '3'
+2021-10-04 17:32:30,996 INFO  {Camel (camel) thread #4 - file://data/camel-jdbc} [org.apache.camel.util.CamelLogger.log()] (CamelLogger.java:159) : >>> Select using key : [{id=3, date=2018-02-20 08:20:00.0, name=User 3, summary=Incident 3, details=This is a report incident 003, email=user3@redhat.com}]
 ----
 
 == Camel XA example
@@ -362,21 +430,21 @@ we can install file-based blueprints:
 [listing,options="nowrap"]
 ----
 karaf@root()> install -s blueprint:file://$FUSE_HOME/camel-xa/src/main/blueprint/connection-factory.xml
-Bundle ID: 308
+Bundle ID: 307
 karaf@root()> install -s blueprint:file://$FUSE_HOME/camel-xa/src/main/blueprint/xa-datasource.xml
-Bundle ID: 309
+Bundle ID: 308
 ----
 
 Install the example:
 [listing,options="nowrap"]
 ----
 karaf@root()> install -s mvn:org.jboss.fuse.quickstarts/camel-xa/${project.version}
-Bundle ID: 310
+Bundle ID: 309
 
 karaf@root()> camel:route-list
  Context                     Route                   Status              Total #       Failed #     Inflight #   Uptime
  -------                     -----                   ------              -------       --------     ----------   ------
- xa-transaction-jms-ok-way   transactedTargetOkWay   Started                   0              0              0   19.100 seconds
+ xa-transaction-jms-ok-way   transactedTargetOkWay   Started                   0              0              0   47.187 seconds
 ----
 
 We can test the route now:
@@ -408,7 +476,7 @@ Message ID │ Content │ Charset │ Type │ Correlation ID │ Delivery Mode
 karaf@root()> jms:browse -u fuse -p fuse jms/artemisXAConnectionFactory xa2Queue
 Message ID                              │ Content        │ Charset │ Type │ Correlation ID │ Delivery Mode │ Destination             │ Expiration │ Priority │ Redelivered │ ReplyTo │ Timestamp
 ────────────────────────────────────────┼────────────────┼─────────┼──────┼────────────────┼───────────────┼─────────────────────────┼────────────┼──────────┼─────────────┼─────────┼──────────────────────────────
-ID:87658235-9244-11eb-b22c-54e1ad3055fb │ Hello Camel XA │ UTF-8   │      │                │ Persistent    │ ActiveMQQueue[xa2Queue] │ Never      │ 4        │ false       │         │ Wed Mar 31 19:14:19 CEST 2021
+ID:b87a39d9-2528-11ec-afbd-083a885f3339 │ Hello Camel XA │ UTF-8   │      │                │ Persistent    │ ActiveMQQueue[xa2Queue] │ Never      │ 4        │ false       │         │ Mon Oct 04 17:35:36 CEST 2021
 
 karaf@root()> camel:route-list
  Context                     Route                   Status              Total #       Failed #     Inflight #   Uptime

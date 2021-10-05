@@ -12,21 +12,21 @@ installation in `$FUSE_HOME/quickstarts/persistence`.
 We can use *official* PostgreSQL image available at https://hub.docker.com/_/postgres/[docker hub].
 Any method of accessing PostgreSQL server may be used (e.g., mapping ports or connecting to container's IP address directly).
 
-. Start PostgreSQL 13.2 server container:
+. Start PostgreSQL 13.4 server container:
 +
 [listing,options="nowrap"]
 ----
-$ podman run -d --name fuse-postgresql-server -e POSTGRES_USER=fuse -e POSTGRES_PASSWORD=fuse -p 5432:5432 postgres:12.2
-Trying to pull docker.io/library/postgres:13.2...
+$ podman run -d --name fuse-postgresql-server -e POSTGRES_USER=fuse -e POSTGRES_PASSWORD=fuse -p 5432:5432 postgres:13.4
+Trying to pull docker.io/library/postgres:13.4...
 Getting image source signatures
 ...
 Writing manifest to image destination
 Storing signatures
-37536acdaee553d629acd542d062aaf484c4ed6631a05f3a973c3d98aceff487
+5ab9fecc3bc4f163f5dd8eb5350d567a5e98742aba2160c3bf43a67052531fcb
 
 $ podman ps
-CONTAINER ID  IMAGE                            COMMAND   CREATED         STATUS             PORTS                   NAMES
-37536acdaee5  docker.io/library/postgres:13.2  postgres  12 seconds ago  Up 13 seconds ago  0.0.0.0:5432->5432/tcp  fuse-postgresql-server
+CONTAINER ID  IMAGE                            COMMAND     CREATED         STATUS             PORTS                   NAMES
+5ab9fecc3bc4  docker.io/library/postgres:13.4  postgres    20 seconds ago  Up 20 seconds ago  0.0.0.0:5432->5432/tcp  fuse-postgresql-server
 ----
 
 . Create `reportdb` database from the `fuse-postgresql-server` container:
@@ -34,8 +34,8 @@ CONTAINER ID  IMAGE                            COMMAND   CREATED         STATUS 
 [listing,options="nowrap"]
 ----
 $ podman exec -ti fuse-postgresql-server /bin/bash
-root@37536acdaee5:/# psql -U fuse -d fuse
-psql (13.2 (Debian 13.2-1.pgdg100+1))
+root@5ab9fecc3bc4:/# psql -U fuse -d fuse
+psql (13.4 (Debian 13.4-4.pgdg110+1))
 Type "help" for help.
 
 fuse=# create database reportdb owner fuse encoding 'utf8';
@@ -43,7 +43,7 @@ CREATE DATABASE
 fuse=# \c reportdb
 You are now connected to database "reportdb" as user "fuse".
 reportdb=# \q
-root@37536acdaee5:/# exit
+root@5ab9fecc3bc4:/# exit
 exit
 ----
 
@@ -54,7 +54,7 @@ exit
 $ cd $PQ_HOME/databases/scripts
 $ podman cp reportdb-postgresql-script.sql fuse-postgresql-server:/tmp
 $ podman exec -ti fuse-postgresql-server /bin/bash
-root@37536acdaee5:/# psql -U fuse -d reportdb -f /tmp/reportdb-postgresql-script.sql
+root@5ab9fecc3bc4:/# psql -U fuse -d reportdb -f /tmp/reportdb-postgresql-script.sql
 psql:/tmp/reportdb-postgresql-script.sql:17: NOTICE:  schema "report" does not exist, skipping
 DROP SCHEMA
 CREATE SCHEMA
@@ -63,8 +63,8 @@ INSERT 0 1
 INSERT 0 1
 INSERT 0 1
 INSERT 0 1
-root@37536acdaee5:/# psql -U fuse -d reportdb
-psql (13.2 (Debian 13.2-1.pgdg100+1))
+root@5ab9fecc3bc4:/# psql -U fuse -d reportdb
+psql (13.4 (Debian 13.4-4.pgdg110+1))
 Type "help" for help.
 
 reportdb=# \c reportdb
@@ -88,26 +88,26 @@ reportdb=# select * from incident;
 (4 rows)
 
 reportdb=# \q
-root@37536acdaee5:/# exit
+root@5ab9fecc3bc4:/# exit
 exit
 ----
 
 . Configure PostgreSQL database to allow XA transactions:
 +
 We have to set `max_prepared_transactions` to the value equal or greater than `max_connections` setting
-(`100` in the case of `postgres:13.2` image).
+(`100` in the case of `postgres:13.4` image).
 +
 [listing,options="nowrap"]
 ----
 $ podman exec -ti fuse-postgresql-server /bin/bash
-root@37536acdaee5:/# grep max_prepared_transactions /var/lib/postgresql/data/postgresql.conf
+root@5ab9fecc3bc4:/# grep max_prepared_transactions /var/lib/postgresql/data/postgresql.conf
 #max_prepared_transactions = 0		# zero disables the feature
 # Caution: it is not advisable to set max_prepared_transactions nonzero unless
-root@37536acdaee5:/# sed -i 's/^#max_prepared_transactions = 0/max_prepared_transactions = 200/' /var/lib/postgresql/data/postgresql.conf
+root@5ab9fecc3bc4:/# sed -i 's/^#max_prepared_transactions = 0/max_prepared_transactions = 200/' /var/lib/postgresql/data/postgresql.conf
 root@37536acdaee5:/# grep max_prepared_transactions /var/lib/postgresql/data/postgresql.conf
 max_prepared_transactions = 200		# zero disables the feature
 # Caution: it is not advisable to set max_prepared_transactions nonzero unless
-root@37536acdaee5:/# exit
+root@5ab9fecc3bc4:/# exit
 exit
 ----
 
@@ -116,33 +116,33 @@ exit
 [listing,options="nowrap"]
 ----
 $ podman stop fuse-postgresql-server
-cd5194b7ca4c241eee8df183fed1ea6d85fb9464262acbea0395320aac1cfb7c
+fuse-postgresql-server
 
 $ podman start fuse-postgresql-server
 fuse-postgresql-server
 ----
 +
-Your PostgreSQL 13.2 database is ready to use.
+Your PostgreSQL 13.4 database is ready to use.
 
 == Container based MariaDB installation
 
 Docker image is available at https://hub.docker.com/_/mariadb/[docker hub].
 
-. Start MariaDB 10.5.9 server container:
+. Start MariaDB 10.6.4 server container:
 +
 [listing,options="nowrap"]
 ----
-$ podman run -d --name fuse-mariadb-server -e MYSQL_ROOT_PASSWORD=fuse -p 3306:3306 mariadb:10.5.9
-Trying to pull docker.io/library/mariadb:10.5.9...
+$ podman run -d --name fuse-mariadb-server -e MYSQL_ROOT_PASSWORD=fuse -p 3306:3306 mariadb:10.6.4
+Trying to pull docker.io/library/mariadb:10.6.4...
 Getting image source signatures
 ...
 Writing manifest to image destination
 Storing signatures
-c1139548bf5424b9c0b435f4128f29ff2d1c0694948b58eb1c25120a738d1dc1
+666dd2909f4787a8f7ab8160ad97cdc90b6926d3e75e8cf08271774a08f9f685
 
 $ podman ps
-CONTAINER ID  IMAGE                             COMMAND   CREATED         STATUS             PORTS                   NAMES
-c1139548bf54  docker.io/library/mariadb:10.5.9  mysqld    5 seconds ago  Up 6 seconds ago   0.0.0.0:3306->3306/tcp  fuse-mariadb-server
+CONTAINER ID  IMAGE                             COMMAND     CREATED         STATUS             PORTS                   NAMES
+666dd2909f47  docker.io/library/mariadb:10.6.4  mysqld      16 seconds ago  Up 16 seconds ago  0.0.0.0:3306->3306/tcp  fuse-mariadb-server
 ----
 
 . Create `reportdb` database from the `fuse-mariadb-server` container:
@@ -150,18 +150,18 @@ c1139548bf54  docker.io/library/mariadb:10.5.9  mysqld    5 seconds ago  Up 6 se
 [listing,options="nowrap"]
 ----
 $ podman exec -ti fuse-mariadb-server /bin/bash
-root@c1139548bf54:/# mysql -p
+root@666dd2909f47:/# mysql -p
 Enter password:
 Welcome to the MariaDB monitor.  Commands end with ; or \g.
 Your MariaDB connection id is 3
-Server version: 10.5.9-MariaDB-1:10.5.9+maria~focal mariadb.org binary distribution
+Server version: 10.6.4-MariaDB-1:10.6.4+maria~focal mariadb.org binary distribution
 
 Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
 MariaDB [(none)]> create database reportdb character set 'utf8';
-Query OK, 1 row affected (0.001 sec)
+Query OK, 1 row affected (0.000 sec)
 
 MariaDB [(none)]> select password('fuse');
 +-------------------------------------------+
@@ -183,17 +183,17 @@ MariaDB [(none)]> select Host, User, authentication_string, plugin from mysql.us
 | %         | root        | *66366D5297921E017C7C9378931FD111B3951D84 | mysql_native_password |
 | %         | fuse        | *66366D5297921E017C7C9378931FD111B3951D84 | mysql_native_password |
 +-----------+-------------+-------------------------------------------+-----------------------+
-4 rows in set (0.004 sec)
+4 rows in set (0.001 sec)
 
 MariaDB [(none)]> grant all on reportdb.* to 'fuse'@'%';
-Query OK, 0 rows affected (0.008 sec)
+Query OK, 0 rows affected (0.052 sec)
 
 MariaDB [(none)]> flush privileges;
-Query OK, 0 rows affected (0.001 sec)
+Query OK, 0 rows affected (0.000 sec)
 
 MariaDB [(none)]> \q
 Bye
-root@c1139548bf54:/# exit
+root@666dd2909f47:/# exit
 exit
 ----
 
@@ -204,16 +204,16 @@ exit
 $ cd $PQ_HOME/databases/scripts
 $ podman cp reportdb-mariadb-script.sql fuse-mariadb-server:/tmp
 $ podman exec -ti fuse-mariadb-server /bin/bash
-root@c1139548bf54:/# mysql -u fuse reportdb -p < /tmp/reportdb-mariadb-script.sql
+root@666dd2909f47:/# mysql -u fuse reportdb -p < /tmp/reportdb-mariadb-script.sql
 Enter password:
-root@c1139548bf54:/# mysql -u fuse -p reportdb
+root@666dd2909f47:/# mysql -u fuse -p reportdb
 Enter password:
 Reading table information for completion of table and column names
 You can turn off this feature to get a quicker startup with -A
 
 Welcome to the MariaDB monitor.  Commands end with ; or \g.
 Your MariaDB connection id is 5
-Server version: 10.5.9-MariaDB-1:10.5.9+maria~focal mariadb.org binary distribution
+Server version: 10.6.4-MariaDB-1:10.6.4+maria~focal mariadb.org binary distribution
 
 Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
@@ -225,7 +225,7 @@ MariaDB [reportdb]> show tables;
 +--------------------+
 | incident           |
 +--------------------+
-1 row in set (0.001 sec)
+1 row in set (0.000 sec)
 
 MariaDB [reportdb]> desc incident;
 +---------+--------------+------+-----+---------------------+-------------------------------+
@@ -238,7 +238,7 @@ MariaDB [reportdb]> desc incident;
 | details | varchar(255) | YES  |     | NULL                |                               |
 | email   | varchar(60)  | YES  |     | NULL                |                               |
 +---------+--------------+------+-----+---------------------+-------------------------------+
-6 rows in set (0.006 sec)
+6 rows in set (0.001 sec)
 
 MariaDB [reportdb]> select * from incident;
 +----+---------------------+--------+------------+-------------------------------+------------------+
@@ -249,32 +249,32 @@ MariaDB [reportdb]> select * from incident;
 |  3 | 2018-02-20 08:20:00 | User 3 | Incident 3 | This is a report incident 003 | user3@redhat.com |
 |  4 | 2018-02-20 08:30:00 | User 4 | Incident 4 | This is a report incident 004 | user4@redhat.com |
 +----+---------------------+--------+------------+-------------------------------+------------------+
-4 rows in set (0.001 sec)
+4 rows in set (0.000 sec)
 
 MariaDB [reportdb]> \q
 Bye
-root@c1139548bf54:/# exit
+root@666dd2909f47:/# exit
 exit
 ----
 
 +
-Your MariaDB 10.5.9 database is ready to use.
+Your MariaDB 10.6.4 database is ready to use.
 
 === Container based MySQL installation
 
 Docker image is available at https://hub.docker.com/_/mysql/[docker hub].
 
-. Start MySQL 8.0.20 server container:
+. Start MySQL 8.0.26 server container:
 +
 [listing,options="nowrap"]
 ----
-$ podman run -d --name fuse-mysql-server -e MYSQL_ROOT_PASSWORD=fuse -p 3306:3306 mysql:8.0.20
-Trying to pull docker.io/library/mysql:8.0.20...
+$ podman run -d --name fuse-mysql-server -e MYSQL_ROOT_PASSWORD=fuse -p 3306:3306 mysql:8.0.26
+Trying to pull docker.io/library/mysql:8.0.26...
 Getting image source signatures
 ...
 Writing manifest to image destination
 Storing signatures
-105595933b8d31eeebc84a0f4a2d7bb98ec54c132397b6a5b1cafc9d7f3bdbe5
+6cc00f3c04ad3a80d82e9750a6e0b039259bd5a41814a3cc4be5b9faa71f2cbe
 ----
 
 . Create `reportdb` database from the `fuse-mysql-server` container:
@@ -282,11 +282,14 @@ Storing signatures
 [listing,options="nowrap"]
 ----
 $ podman exec -ti fuse-mysql-server /bin/bash
-root@105595933b8d:/# mysql -p
+root@6cc00f3c04ad:/# mysql -p mysql
+Enter password:
+ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)
+root@6cc00f3c04ad:/# mysql -p
 Enter password:
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 8
-Server version: 8.0.20 MySQL Community Server - GPL
+Server version: 8.0.26 MySQL Community Server - GPL
 
 Copyright (c) 2000, 2021, Oracle and/or its affiliates.
 
@@ -297,20 +300,20 @@ owners.
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
 mysql> create database reportdb character set 'utf8';
-Query OK, 1 row affected, 1 warning (0.02 sec)
+Query OK, 1 row affected, 1 warning (0.05 sec)
 
 mysql> create user 'fuse'@'%' identified with mysql_native_password by 'fuse';
-Query OK, 0 rows affected (0.03 sec)
+Query OK, 0 rows affected (0.04 sec)
 
 mysql> grant all on reportdb.* to 'fuse'@'%';
-Query OK, 0 rows affected (0.01 sec)
+Query OK, 0 rows affected (0.03 sec)
 
 mysql> flush privileges;
-Query OK, 0 rows affected (0.02 sec)
+Query OK, 0 rows affected (0.00 sec)
 
 mysql> \q
 Bye
-root@105595933b8d:/# exit
+root@6cc00f3c04ad:/# exit
 exit
 ----
 
@@ -321,16 +324,16 @@ exit
 $ cd $PQ_HOME/databases/scripts
 $ podman cp reportdb-mariadb-script.sql fuse-mysql-server:/tmp/reportdb-mysql-script.sql
 $ podman exec -ti fuse-mysql-server /bin/bash
-root@105595933b8d:/# mysql -u fuse reportdb -p < /tmp/reportdb-mysql-script.sql
+root@6cc00f3c04ad:/# mysql -u fuse reportdb -p < /tmp/reportdb-mysql-script.sql
 Enter password:
-root@105595933b8d:/# mysql -u fuse -p reportdb
+root@6cc00f3c04ad:/# mysql -u fuse -p reportdb
 Enter password:
 Reading table information for completion of table and column names
 You can turn off this feature to get a quicker startup with -A
 
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 10
-Server version: 8.0.20 MySQL Community Server - GPL
+Server version: 8.0.26 MySQL Community Server - GPL
 
 Copyright (c) 2000, 2021, Oracle and/or its affiliates.
 
@@ -374,12 +377,12 @@ mysql> select * from incident;
 
 mysql> \q
 Bye
-root@105595933b8d:/# exit
+root@6cc00f3c04ad:/# exit
 exit
 ----
 
 +
-Your MySQL 8.0.20 database is ready to use.
+Your MySQL 8.0.26 database is ready to use.
 
 == Embedded Derby database
 
