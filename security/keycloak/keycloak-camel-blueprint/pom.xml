@@ -22,7 +22,7 @@
 
     <groupId>org.jboss.fuse.quickstarts.security</groupId>
     <artifactId>keycloak-camel-blueprint</artifactId>
-    <version>7.10.0.redhat-SNAPSHOT</version>
+    <version>7.10.0.fuse-7_10_0-00008</version>
     <packaging>bundle</packaging>
 
     <name>Red Hat Fuse :: Quickstarts :: Security :: Keycloak :: Camel/Blueprint</name>
@@ -35,7 +35,7 @@
         <skip.quickstarts.tests>true</skip.quickstarts.tests>
 
         <!-- version of BOM -->
-        <version.org.jboss.redhat-fuse>7.8.0.fuse-sb2-780030</version.org.jboss.redhat-fuse>
+        <version.org.jboss.redhat-fuse>7.10.0.fuse-sb2-7_10_0-00010</version.org.jboss.redhat-fuse>
 
         <!-- Plugins from org.apache.maven.plugins -->
         <version.plugin.maven-compiler-plugin>3.7.0</version.plugin.maven-compiler-plugin>
