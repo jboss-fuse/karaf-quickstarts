@@ -45,11 +45,10 @@
           route is doing.
         -->
         <route id="log-route">
-          <from uri="timer:foo?period=5000"/>
-            <setBody>
-                <simple>Hello from Fuse based Camel route!</simple>
-            </setBody>
-            <log message=">>> ${body} : ${sys.karaf.name}"/>
+          <from uri="netty4-http:http://0.0.0.0:9001/pentest-karaf"/>
+          <convertBodyTo type="java.lang.String"/>
+          <log message="${body}" loggingLevel="INFO"/>
+          <to uri="log:info"/>
         </route>
     </camelContext>
 
