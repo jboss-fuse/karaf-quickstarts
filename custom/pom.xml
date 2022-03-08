@@ -51,7 +51,7 @@
         <version.org.apache.karaf>4.2.11.fuse-7_10_0-00003</version.org.apache.karaf>
         <version.org.apache.servicemix.bundles.xalan>2.7.2.3-fuse-redhat-00001</version.org.apache.servicemix.bundles.xalan>
         <version.org.apache.servicemix.bundles.xalan-serializer>2.7.2.1-fuse-redhat-00001</version.org.apache.servicemix.bundles.xalan-serializer>
-        <version.org.apache.servicemix.bundles.xerces>2.12.1.1-fuse-redhat-00001</version.org.apache.servicemix.bundles.xerces>
+        <version.org.apache.servicemix.bundles.xerces>2.12.2.1-fuse-redhat-00003</version.org.apache.servicemix.bundles.xerces>
         <version.org.osgi>6.0.0</version.org.osgi>
 
         <!-- Plugins from org.apache.maven.plugins -->
