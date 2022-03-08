@@ -42,7 +42,7 @@
         <version.mysql>8.0.28</version.mysql>
         <version.org.apache.derby>10.15.2.0</version.org.apache.derby>
         <version.org.mariadb.jdbc>2.6.0</version.org.mariadb.jdbc>
-        <version.org.ops4j.pax.jdbc>1.5.1</version.org.ops4j.pax.jdbc>
+        <version.org.ops4j.pax.jdbc>1.5.3</version.org.ops4j.pax.jdbc>
         <version.org.postgresql>43.3.3</version.org.postgresql>
 
         <!-- Plugins from org.apache.maven.plugins -->
