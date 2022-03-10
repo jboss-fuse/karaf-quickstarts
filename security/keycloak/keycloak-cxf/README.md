@@ -61,7 +61,7 @@ After installing `keycloak-cxf` bundle, we'll have 4 CXF endpoints exposed:
 
 We have to create file `etc/jaxws-keycloak.json` **and** `etc/jaxrs-keycloak.json` with the following
 content configuring Keycloak integration:
-   
+
        {
          "realm": "fuse7karaf",
          "auth-server-url": "http://localhost:8180/auth",
@@ -82,7 +82,7 @@ directory:
     [INFO] Scanning for projects...
     [INFO]
     [INFO] ----------< org.jboss.fuse.quickstarts.security:keycloak-cxf >----------
-    [INFO] Building Red Hat Fuse :: Quickstarts :: Security :: Keycloak :: CXF 7.10.0.fuse-7_10_0-00004
+    [INFO] Building Red Hat Fuse :: Quickstarts :: Security :: Keycloak :: CXF 7.11.0.fuse-7_11_0-00011
     [INFO] -------------------------------[ bundle ]-------------------------------
     [INFO]
     [INFO] --- maven-resources-plugin:3.0.2:resources (default-resources) @ keycloak-cxf ---
@@ -101,86 +101,86 @@ directory:
     [INFO] --- maven-compiler-plugin:3.7.0:testCompile (default-testCompile) @ keycloak-cxf ---
     [INFO] Nothing to compile - all classes are up to date
     [INFO]
-    [INFO] --- maven-surefire-plugin:2.20.1:test (default-test) @ keycloak-cxf ---
+    [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ keycloak-cxf ---
     [INFO]
     [INFO] -------------------------------------------------------
     [INFO]  T E S T S
     [INFO] -------------------------------------------------------
     [INFO] Running org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxWsClientTest
-    08:56:33 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "POST /auth/realms/fuse7karaf/protocol/openid-connect/token HTTP/1.1[\r][\n]"
-    08:56:33 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Authorization: Basic Y3hmLWV4dGVybmFsOjdlMjBhZGRkLTg3ZmMtNDUyOC04MDhjLWU5YzdjOTUwZWYyMw==[\r][\n]"
-    08:56:33 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Content-Length: 52[\r][\n]"
-    08:56:33 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Content-Type: application/x-www-form-urlencoded[\r][\n]"
-    08:56:33 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Host: localhost:8180[\r][\n]"
-    08:56:33 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Connection: Keep-Alive[\r][\n]"
-    08:56:33 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "User-Agent: Apache-HttpClient/4.5.13.redhat-00002 (Java/1.8.0_302)[\r][\n]"
-    08:56:33 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "[\r][\n]"
-    08:56:33 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "grant_type=password&username=admin&password=passw0rd"
-    08:56:33 DEBUG [org.apache.http.wire] : http-outgoing-0 << "HTTP/1.1 200 OK[\r][\n]"
-    08:56:33 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Cache-Control: no-store[\r][\n]"
-    08:56:33 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Set-Cookie: KEYCLOAK_LOCALE=; Version=1; Comment=Expiring cookie; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Max-Age=0; Path=/auth/realms/fuse7karaf/; HttpOnly[\r][\n]"
-    08:56:33 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Set-Cookie: KC_RESTART=; Version=1; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Max-Age=0; Path=/auth/realms/fuse7karaf/; HttpOnly[\r][\n]"
-    08:56:33 DEBUG [org.apache.http.wire] : http-outgoing-0 << "X-XSS-Protection: 1; mode=block[\r][\n]"
-    08:56:33 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Pragma: no-cache[\r][\n]"
-    08:56:33 DEBUG [org.apache.http.wire] : http-outgoing-0 << "X-Frame-Options: SAMEORIGIN[\r][\n]"
-    08:56:33 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Referrer-Policy: no-referrer[\r][\n]"
-    08:56:33 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Date: Tue, 05 Oct 2021 06:56:33 GMT[\r][\n]"
-    08:56:33 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Connection: keep-alive[\r][\n]"
-    08:56:33 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Strict-Transport-Security: max-age=31536000; includeSubDomains[\r][\n]"
-    08:56:33 DEBUG [org.apache.http.wire] : http-outgoing-0 << "X-Content-Type-Options: nosniff[\r][\n]"
-    08:56:33 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Content-Type: application/json[\r][\n]"
-    08:56:33 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Content-Length: 3053[\r][\n]"
-    08:56:33 DEBUG [org.apache.http.wire] : http-outgoing-0 << "[\r][\n]"
-    08:56:33 DEBUG [org.apache.http.wire] : http-outgoing-0 << "{"access_token":"<token>","expires_in":300,"refresh_expires_in":1800,"refresh_token":"<token>","token_type":"bearer","not-before-policy":0,"session_state":"41b900bd-7971-4559-bed8-11780d964198","scope":"profile email"}"
-    08:56:33 INFO [org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxWsClientTest] : token: <token>
-    08:56:33 INFO [org.apache.cxf.wsdl.service.factory.ReflectionServiceFactoryBean] : Creating Service {urn:fuse:cxf:1}JaxWsServiceService from class org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxWsService
-    08:56:34 INFO [org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxWsClientTest] : Result: [Hi]
-    [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.812 s - in org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxWsClientTest
+    14:37:35 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "POST /auth/realms/fuse7karaf/protocol/openid-connect/token HTTP/1.1[\r][\n]"
+    14:37:35 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Authorization: Basic `Y3hmLWV4dGVybmFsOjdlMjBhZGRkLTg3ZmMtNDUyOC04MDhjLWU5YzdjOTUwZWYyMw==`[\r][\n]"
+    14:37:35 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Content-Length: 52[\r][\n]"
+    14:37:35 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Content-Type: application/x-www-form-urlencoded[\r][\n]"
+    14:37:35 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Host: localhost:8180[\r][\n]"
+    14:37:35 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Connection: Keep-Alive[\r][\n]"
+    14:37:35 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "User-Agent: Apache-HttpClient/4.5.13.redhat-00002 (Java/1.8.0_322)[\r][\n]"
+    14:37:35 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "[\r][\n]"
+    14:37:35 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "grant_type=password&username=admin&password=passw0rd"
+    14:37:36 DEBUG [org.apache.http.wire] : http-outgoing-0 << "HTTP/1.1 200 OK[\r][\n]"
+    14:37:36 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Cache-Control: no-store[\r][\n]"
+    14:37:36 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Set-Cookie: KEYCLOAK_LOCALE=; Version=1; Comment=Expiring cookie; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Max-Age=0; Path=/auth/realms/fuse7karaf/; HttpOnly[\r][\n]"
+    14:37:36 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Set-Cookie: KC_RESTART=; Version=1; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Max-Age=0; Path=/auth/realms/fuse7karaf/; HttpOnly[\r][\n]"
+    14:37:36 DEBUG [org.apache.http.wire] : http-outgoing-0 << "X-XSS-Protection: 1; mode=block[\r][\n]"
+    14:37:36 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Pragma: no-cache[\r][\n]"
+    14:37:36 DEBUG [org.apache.http.wire] : http-outgoing-0 << "X-Frame-Options: SAMEORIGIN[\r][\n]"
+    14:37:36 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Referrer-Policy: no-referrer[\r][\n]"
+    14:37:36 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Date: Thu, 10 Mar 2022 13:37:36 GMT[\r][\n]"
+    14:37:36 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Connection: keep-alive[\r][\n]"
+    14:37:36 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Strict-Transport-Security: max-age=31536000; includeSubDomains[\r][\n]"
+    14:37:36 DEBUG [org.apache.http.wire] : http-outgoing-0 << "X-Content-Type-Options: nosniff[\r][\n]"
+    14:37:36 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Content-Type: application/json[\r][\n]"
+    14:37:36 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Content-Length: 3173[\r][\n]"
+    14:37:36 DEBUG [org.apache.http.wire] : http-outgoing-0 << "[\r][\n]"
+    14:37:36 DEBUG [org.apache.http.wire] : http-outgoing-0 << "{"access_token":"<token>","token_type":"Bearer","not-before-policy":0,"session_state":"c36ebaba-91a3-4621-8580-127de5731a83","scope":"profile email"}"
+    14:37:36 INFO [org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxWsClientTest] : token: <token>
+    14:37:36 INFO [org.apache.cxf.wsdl.service.factory.ReflectionServiceFactoryBean] : Creating Service {urn:fuse:cxf:1}JaxWsServiceService from class org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxWsService
+    14:37:37 INFO [org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxWsClientTest] : Result: [Hi]
+    [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.124 s - in org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxWsClientTest
     [INFO] Running org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxRsClientTest
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "POST /auth/realms/fuse7karaf/protocol/openid-connect/token HTTP/1.1[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "Authorization: Basic Y3hmLWV4dGVybmFsOjdlMjBhZGRkLTg3ZmMtNDUyOC04MDhjLWU5YzdjOTUwZWYyMw==[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "Content-Length: 52[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "Content-Type: application/x-www-form-urlencoded[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "Host: localhost:8180[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "Connection: Keep-Alive[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "User-Agent: Apache-HttpClient/4.5.13.redhat-00002 (Java/1.8.0_302)[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "grant_type=password&username=admin&password=passw0rd"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-1 << "HTTP/1.1 200 OK[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Cache-Control: no-store[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Set-Cookie: KEYCLOAK_LOCALE=; Version=1; Comment=Expiring cookie; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Max-Age=0; Path=/auth/realms/fuse7karaf/; HttpOnly[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Set-Cookie: KC_RESTART=; Version=1; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Max-Age=0; Path=/auth/realms/fuse7karaf/; HttpOnly[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-1 << "X-XSS-Protection: 1; mode=block[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Pragma: no-cache[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-1 << "X-Frame-Options: SAMEORIGIN[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Referrer-Policy: no-referrer[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Date: Tue, 05 Oct 2021 06:56:34 GMT[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Connection: keep-alive[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Strict-Transport-Security: max-age=31536000; includeSubDomains[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-1 << "X-Content-Type-Options: nosniff[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Content-Type: application/json[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Content-Length: 3053[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-1 << "[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-1 << "{"access_token":"<token>","expires_in":300,"refresh_expires_in":1800,"refresh_token":"<token>","token_type":"bearer","not-before-policy":0,"session_state":"92ba3731-3bb4-4bbc-a11c-e8f16fd058be","scope":"profile email"}"
-    08:56:34 INFO [org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxRsClientTest] : token: <token>
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-2 >> "GET /jaxrs/service/hello/hi HTTP/1.1[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-2 >> "Authorization: Bearer <token>[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-2 >> "Host: localhost:8282[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-2 >> "Connection: Keep-Alive[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-2 >> "User-Agent: Apache-HttpClient/4.5.13.redhat-00002 (Java/1.8.0_302)[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-2 >> "[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-2 << "HTTP/1.1 200 OK[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-2 << "Connection: keep-alive[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-2 << "Transfer-Encoding: chunked[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-2 << "Content-Type: application/json[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-2 << "Date: Tue, 05 Oct 2021 06:56:34 GMT[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-2 << "[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-2 << "11[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-2 << "{"result":"[hi]"}[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-2 << "0[\r][\n]"
-    08:56:34 DEBUG [org.apache.http.wire] : http-outgoing-2 << "[\r][\n]"
-    08:56:34 INFO [org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxRsClientTest] : response: {"result":"[hi]"}
-    [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.228 s - in org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxRsClientTest
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "POST /auth/realms/fuse7karaf/protocol/openid-connect/token HTTP/1.1[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "Authorization: Basic Y3hmLWV4dGVybmFsOjdlMjBhZGRkLTg3ZmMtNDUyOC04MDhjLWU5YzdjOTUwZWYyMw==[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "Content-Length: 52[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "Content-Type: application/x-www-form-urlencoded[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "Host: localhost:8180[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "Connection: Keep-Alive[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "User-Agent: Apache-HttpClient/4.5.13.redhat-00002 (Java/1.8.0_322)[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "grant_type=password&username=admin&password=passw0rd"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-1 << "HTTP/1.1 200 OK[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Cache-Control: no-store[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Set-Cookie: KEYCLOAK_LOCALE=; Version=1; Comment=Expiring cookie; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Max-Age=0; Path=/auth/realms/fuse7karaf/; HttpOnly[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Set-Cookie: KC_RESTART=; Version=1; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Max-Age=0; Path=/auth/realms/fuse7karaf/; HttpOnly[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-1 << "X-XSS-Protection: 1; mode=block[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Pragma: no-cache[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-1 << "X-Frame-Options: SAMEORIGIN[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Referrer-Policy: no-referrer[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Date: Thu, 10 Mar 2022 13:37:37 GMT[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Connection: keep-alive[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Strict-Transport-Security: max-age=31536000; includeSubDomains[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-1 << "X-Content-Type-Options: nosniff[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Content-Type: application/json[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Content-Length: 3173[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-1 << "[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-1 << "{"access_token":"<token>","expires_in":300,"refresh_expires_in":1800,"refresh_token":"<token>","token_type":"Bearer","not-before-policy":0,"session_state":"84e35007-b1a2-4094-87e9-12ddc372b265","scope":"profile email"}"
+    14:37:37 INFO [org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxRsClientTest] : token: <token>
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-2 >> "GET /jaxrs/service/hello/hi HTTP/1.1[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-2 >> "Authorization: Bearer <token>[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-2 >> "Host: localhost:8282[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-2 >> "Connection: Keep-Alive[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-2 >> "User-Agent: Apache-HttpClient/4.5.13.redhat-00002 (Java/1.8.0_322)[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-2 >> "[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-2 << "HTTP/1.1 200 OK[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-2 << "Connection: keep-alive[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-2 << "Transfer-Encoding: chunked[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-2 << "Content-Type: application/json[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-2 << "Date: Thu, 10 Mar 2022 13:37:37 GMT[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-2 << "[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-2 << "11[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-2 << "{"result":"[hi]"}[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-2 << "0[\r][\n]"
+    14:37:37 DEBUG [org.apache.http.wire] : http-outgoing-2 << "[\r][\n]"
+    14:37:37 INFO [org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxRsClientTest] : response: {"result":"[hi]"}
+    [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.212 s - in org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxRsClientTest
     [INFO]
     [INFO] Results:
     [INFO]
@@ -189,8 +189,8 @@ directory:
     [INFO] ------------------------------------------------------------------------
     [INFO] BUILD SUCCESS
     [INFO] ------------------------------------------------------------------------
-    [INFO] Total time:  4.798 s
-    [INFO] Finished at: 2021-10-05T08:56:34+02:00
+    [INFO] Total time:  5.251 s
+    [INFO] Finished at: 2022-03-10T14:37:37+01:00
     [INFO] ------------------------------------------------------------------------
 
 
@@ -224,7 +224,7 @@ The content of the file is:
 Because we've used `HierarchicalPathBasedKeycloakConfigResolver` instead of `PathBasedKeycloakConfigResolver`,
 we can separately secure two endpoints. We can do it by creating `etc/cxf-jaxrs-keycloak.json` and
 `etc/cxf-jaxws-keycloak.json` with the following content configuring Keycloak integration:
-                                                
+
     {
       "realm": "fuse7karaf",
       "auth-server-url": "http://localhost:8180/auth",
@@ -246,7 +246,7 @@ directory:
     [INFO] Scanning for projects...
     [INFO]
     [INFO] ----------< org.jboss.fuse.quickstarts.security:keycloak-cxf >----------
-    [INFO] Building Red Hat Fuse :: Quickstarts :: Security :: Keycloak :: CXF 7.10.0.fuse-7_10_0-00004
+    [INFO] Building Red Hat Fuse :: Quickstarts :: Security :: Keycloak :: CXF 7.11.0.fuse-7_11_0-00011
     [INFO] -------------------------------[ bundle ]-------------------------------
     [INFO]
     [INFO] --- maven-resources-plugin:3.0.2:resources (default-resources) @ keycloak-cxf ---
@@ -265,91 +265,91 @@ directory:
     [INFO] --- maven-compiler-plugin:3.7.0:testCompile (default-testCompile) @ keycloak-cxf ---
     [INFO] Nothing to compile - all classes are up to date
     [INFO]
-    [INFO] --- maven-surefire-plugin:2.20.1:test (default-test) @ keycloak-cxf ---
+    [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ keycloak-cxf ---
     [INFO]
     [INFO] -------------------------------------------------------
     [INFO]  T E S T S
     [INFO] -------------------------------------------------------
     [INFO] Running org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxWsClientTest
-    08:58:17 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "POST /auth/realms/fuse7karaf/protocol/openid-connect/token HTTP/1.1[\r][\n]"
-    08:58:17 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Authorization: Basic Y3hmOmYxZWM3MTZkLTIyNjItNDM0ZC04ZTk4LWJmMzFiNmI4NThkNg==[\r][\n]"
-    08:58:17 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Content-Length: 52[\r][\n]"
-    08:58:17 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Content-Type: application/x-www-form-urlencoded[\r][\n]"
-    08:58:17 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Host: localhost:8180[\r][\n]"
-    08:58:17 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Connection: Keep-Alive[\r][\n]"
-    08:58:17 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "User-Agent: Apache-HttpClient/4.5.13.redhat-00002 (Java/1.8.0_302)[\r][\n]"
-    08:58:17 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "[\r][\n]"
-    08:58:17 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "grant_type=password&username=admin&password=passw0rd"
-    08:58:17 DEBUG [org.apache.http.wire] : http-outgoing-0 << "HTTP/1.1 200 OK[\r][\n]"
-    08:58:17 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Cache-Control: no-store[\r][\n]"
-    08:58:17 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Set-Cookie: KEYCLOAK_LOCALE=; Version=1; Comment=Expiring cookie; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Max-Age=0; Path=/auth/realms/fuse7karaf/; HttpOnly[\r][\n]"
-    08:58:17 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Set-Cookie: KC_RESTART=; Version=1; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Max-Age=0; Path=/auth/realms/fuse7karaf/; HttpOnly[\r][\n]"
-    08:58:17 DEBUG [org.apache.http.wire] : http-outgoing-0 << "X-XSS-Protection: 1; mode=block[\r][\n]"
-    08:58:17 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Pragma: no-cache[\r][\n]"
-    08:58:17 DEBUG [org.apache.http.wire] : http-outgoing-0 << "X-Frame-Options: SAMEORIGIN[\r][\n]"
-    08:58:17 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Referrer-Policy: no-referrer[\r][\n]"
-    08:58:17 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Date: Tue, 05 Oct 2021 06:58:17 GMT[\r][\n]"
-    08:58:17 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Connection: keep-alive[\r][\n]"
-    08:58:17 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Strict-Transport-Security: max-age=31536000; includeSubDomains[\r][\n]"
-    08:58:17 DEBUG [org.apache.http.wire] : http-outgoing-0 << "X-Content-Type-Options: nosniff[\r][\n]"
-    08:58:17 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Content-Type: application/json[\r][\n]"
-    08:58:17 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Content-Length: 3041[\r][\n]"
-    08:58:17 DEBUG [org.apache.http.wire] : http-outgoing-0 << "[\r][\n]"
-    08:58:17 DEBUG [org.apache.http.wire] : http-outgoing-0 << "{"access_token":"<token>","expires_in":300,"refresh_expires_in":1800,"refresh_token":"<token>","token_type":"bearer","not-before-policy":0,"session_state":"069ee882-904c-47d6-8e6b-3e77a623e471","scope":"profile email"}"
-    08:58:17 INFO [org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxWsClientTest] : token: <token>
-    08:58:18 INFO [org.apache.cxf.wsdl.service.factory.ReflectionServiceFactoryBean] : Creating Service {urn:fuse:cxf:1}JaxWsServiceService from class org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxWsService
-    08:58:18 INFO [org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxWsClientTest] : Result: [Hi]
-    [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.692 s - in org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxWsClientTest
+    14:39:49 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "POST /auth/realms/fuse7karaf/protocol/openid-connect/token HTTP/1.1[\r][\n]"
+    14:39:49 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Authorization: Basic Y3hmOmYxZWM3MTZkLTIyNjItNDM0ZC04ZTk4LWJmMzFiNmI4NThkNg==[\r][\n]"
+    14:39:49 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Content-Length: 52[\r][\n]"
+    14:39:49 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Content-Type: application/x-www-form-urlencoded[\r][\n]"
+    14:39:49 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Host: localhost:8180[\r][\n]"
+    14:39:49 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "Connection: Keep-Alive[\r][\n]"
+    14:39:49 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "User-Agent: Apache-HttpClient/4.5.13.redhat-00002 (Java/1.8.0_322)[\r][\n]"
+    14:39:49 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "[\r][\n]"
+    14:39:49 DEBUG [org.apache.http.wire] : http-outgoing-0 >> "grant_type=password&username=admin&password=passw0rd"
+    14:39:49 DEBUG [org.apache.http.wire] : http-outgoing-0 << "HTTP/1.1 200 OK[\r][\n]"
+    14:39:49 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Cache-Control: no-store[\r][\n]"
+    14:39:49 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Set-Cookie: KEYCLOAK_LOCALE=; Version=1; Comment=Expiring cookie; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Max-Age=0; Path=/auth/realms/fuse7karaf/; HttpOnly[\r][\n]"
+    14:39:49 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Set-Cookie: KC_RESTART=; Version=1; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Max-Age=0; Path=/auth/realms/fuse7karaf/; HttpOnly[\r][\n]"
+    14:39:49 DEBUG [org.apache.http.wire] : http-outgoing-0 << "X-XSS-Protection: 1; mode=block[\r][\n]"
+    14:39:49 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Pragma: no-cache[\r][\n]"
+    14:39:49 DEBUG [org.apache.http.wire] : http-outgoing-0 << "X-Frame-Options: SAMEORIGIN[\r][\n]"
+    14:39:49 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Referrer-Policy: no-referrer[\r][\n]"
+    14:39:49 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Date: Thu, 10 Mar 2022 13:39:49 GMT[\r][\n]"
+    14:39:49 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Connection: keep-alive[\r][\n]"
+    14:39:49 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Strict-Transport-Security: max-age=31536000; includeSubDomains[\r][\n]"
+    14:39:49 DEBUG [org.apache.http.wire] : http-outgoing-0 << "X-Content-Type-Options: nosniff[\r][\n]"
+    14:39:49 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Content-Type: application/json[\r][\n]"
+    14:39:49 DEBUG [org.apache.http.wire] : http-outgoing-0 << "Content-Length: 3161[\r][\n]"
+    14:39:49 DEBUG [org.apache.http.wire] : http-outgoing-0 << "[\r][\n]"
+    14:39:49 DEBUG [org.apache.http.wire] : http-outgoing-0 << "{"access_token":"<token>","expires_in":300,"refresh_expires_in":1800,"refresh_token":"<token>","token_type":"Bearer","not-before-policy":0,"session_state":"f4b66877-264a-4935-958e-9d4c02cef3b1","scope":"profile email"}"
+    14:39:49 INFO [org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxWsClientTest] : token: <token>
+    14:39:49 INFO [org.apache.cxf.wsdl.service.factory.ReflectionServiceFactoryBean] : Creating Service {urn:fuse:cxf:1}JaxWsServiceService from class org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxWsService
+    14:39:50 INFO [org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxWsClientTest] : Result: [Hi]
+    [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.007 s - in org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxWsClientTest
     [INFO] Running org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxRsClientTest
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "POST /auth/realms/fuse7karaf/protocol/openid-connect/token HTTP/1.1[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "Authorization: Basic Y3hmOmYxZWM3MTZkLTIyNjItNDM0ZC04ZTk4LWJmMzFiNmI4NThkNg==[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "Content-Length: 52[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "Content-Type: application/x-www-form-urlencoded[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "Host: localhost:8180[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "Connection: Keep-Alive[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "User-Agent: Apache-HttpClient/4.5.13.redhat-00002 (Java/1.8.0_302)[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "grant_type=password&username=admin&password=passw0rd"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-1 << "HTTP/1.1 200 OK[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Cache-Control: no-store[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Set-Cookie: KEYCLOAK_LOCALE=; Version=1; Comment=Expiring cookie; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Max-Age=0; Path=/auth/realms/fuse7karaf/; HttpOnly[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Set-Cookie: KC_RESTART=; Version=1; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Max-Age=0; Path=/auth/realms/fuse7karaf/; HttpOnly[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-1 << "X-XSS-Protection: 1; mode=block[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Pragma: no-cache[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-1 << "X-Frame-Options: SAMEORIGIN[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Referrer-Policy: no-referrer[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Date: Tue, 05 Oct 2021 06:58:18 GMT[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Connection: keep-alive[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Strict-Transport-Security: max-age=31536000; includeSubDomains[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-1 << "X-Content-Type-Options: nosniff[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Content-Type: application/json[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Content-Length: 3041[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-1 << "[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-1 << "{"access_token":"<token>","expires_in":300,"refresh_expires_in":1800,"refresh_token":"<token>","token_type":"bearer","not-before-policy":0,"session_state":"617da3eb-2d57-4373-8625-c0fc03f92dd2","scope":"profile email"}"
-    08:58:18 INFO [org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxRsClientTest] : token: <token>
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-2 >> "GET /cxf/jaxrs/service/hello/hi HTTP/1.1[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-2 >> "Authorization: Bearer <token>[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-2 >> "Host: localhost:8181[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-2 >> "Connection: Keep-Alive[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-2 >> "User-Agent: Apache-HttpClient/4.5.13.redhat-00002 (Java/1.8.0_302)[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-2 >> "[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-2 << "HTTP/1.1 200 OK[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-2 << "Expires: 0[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-2 << "Cache-Control: no-cache, no-store, must-revalidate[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-2 << "X-Powered-By: Open Source[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-2 << "Server: Pax-HTTP-Undertow[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-2 << "Pragma: no-cache[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-2 << "Date: Tue, 05 Oct 2021 06:58:18 GMT[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-2 << "Connection: keep-alive[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-2 << "Transfer-Encoding: chunked[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-2 << "Content-Type: application/json[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-2 << "[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-2 << "11[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-2 << "{"result":"[hi]"}[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-2 << "0[\r][\n]"
-    08:58:18 DEBUG [org.apache.http.wire] : http-outgoing-2 << "[\r][\n]"
-    08:58:18 INFO [org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxRsClientTest] : response: {"result":"[hi]"}
-    [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.149 s - in org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxRsClientTest
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "POST /auth/realms/fuse7karaf/protocol/openid-connect/token HTTP/1.1[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "Authorization: Basic Y3hmOmYxZWM3MTZkLTIyNjItNDM0ZC04ZTk4LWJmMzFiNmI4NThkNg==[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "Content-Length: 52[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "Content-Type: application/x-www-form-urlencoded[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "Host: localhost:8180[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "Connection: Keep-Alive[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "User-Agent: Apache-HttpClient/4.5.13.redhat-00002 (Java/1.8.0_322)[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-1 >> "grant_type=password&username=admin&password=passw0rd"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-1 << "HTTP/1.1 200 OK[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Cache-Control: no-store[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Set-Cookie: KEYCLOAK_LOCALE=; Version=1; Comment=Expiring cookie; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Max-Age=0; Path=/auth/realms/fuse7karaf/; HttpOnly[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Set-Cookie: KC_RESTART=; Version=1; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Max-Age=0; Path=/auth/realms/fuse7karaf/; HttpOnly[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-1 << "X-XSS-Protection: 1; mode=block[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Pragma: no-cache[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-1 << "X-Frame-Options: SAMEORIGIN[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Referrer-Policy: no-referrer[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Date: Thu, 10 Mar 2022 13:39:50 GMT[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Connection: keep-alive[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Strict-Transport-Security: max-age=31536000; includeSubDomains[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-1 << "X-Content-Type-Options: nosniff[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Content-Type: application/json[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-1 << "Content-Length: 3161[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-1 << "[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-1 << "{"access_token":"<token>","expires_in":300,"refresh_expires_in":1800,"refresh_token":"<token>","token_type":"Bearer","not-before-policy":0,"session_state":"0ee10bce-5064-4ac6-9799-727a6fb6b5ec","scope":"profile email"}"
+    14:39:50 INFO [org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxRsClientTest] : token: <token>
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-2 >> "GET /cxf/jaxrs/service/hello/hi HTTP/1.1[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-2 >> "Authorization: Bearer <token>[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-2 >> "Host: localhost:8181[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-2 >> "Connection: Keep-Alive[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-2 >> "User-Agent: Apache-HttpClient/4.5.13.redhat-00002 (Java/1.8.0_322)[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-2 >> "[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-2 << "HTTP/1.1 200 OK[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-2 << "Expires: 0[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-2 << "Cache-Control: no-cache, no-store, must-revalidate[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-2 << "X-Powered-By: Open Source[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-2 << "Server: Pax-HTTP-Undertow[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-2 << "Pragma: no-cache[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-2 << "Date: Thu, 10 Mar 2022 13:39:50 GMT[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-2 << "Connection: keep-alive[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-2 << "Transfer-Encoding: chunked[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-2 << "Content-Type: application/json[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-2 << "[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-2 << "11[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-2 << "{"result":"[hi]"}[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-2 << "0[\r][\n]"
+    14:39:50 DEBUG [org.apache.http.wire] : http-outgoing-2 << "[\r][\n]"
+    14:39:50 INFO [org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxRsClientTest] : response: {"result":"[hi]"}
+    [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.168 s - in org.jboss.fuse.quickstarts.security.keycloak.cxf.JaxRsClientTest
     [INFO]
     [INFO] Results:
     [INFO]
@@ -358,8 +358,8 @@ directory:
     [INFO] ------------------------------------------------------------------------
     [INFO] BUILD SUCCESS
     [INFO] ------------------------------------------------------------------------
-    [INFO] Total time:  4.514 s
-    [INFO] Finished at: 2021-10-05T08:58:19+02:00
+    [INFO] Total time:  5.138 s
+    [INFO] Finished at: 2022-03-10T14:39:50+01:00
     [INFO] ------------------------------------------------------------------------
 
     
@@ -382,6 +382,6 @@ To stop and undeploy the bundle in Fuse:
 
         bundle:uninstall <id>
 
-    or (uninstall by symbolic name)
+   or (uninstall by symbolic name)
 
         bundle:uninstall keycloak-cxf

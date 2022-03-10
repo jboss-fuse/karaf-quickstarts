@@ -323,7 +323,7 @@
                         <Import-Package>
                             org.apache.cxf.transport.http,
                             org.apache.cxf.transport.http_undertow,
-                            org.keycloak.*;version="[4,10)",
+                            org.keycloak.*;version="[4,20)",
                             *
                         </Import-Package>
                         <Export-Package />
