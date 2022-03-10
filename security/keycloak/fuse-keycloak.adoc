@@ -23,12 +23,12 @@ Here's an example of configuring default `admin` user to manage Keycloak server:
 [listing,options="nowrap"]
 ----
 $ pwd
-/data/servers/rh-sso-7.4.9
+/data/servers/rh-sso-7.5.1
 
 $ bin/add-user-keycloak.sh -u admin
 Press ctrl-d (Unix) or ctrl-z (Windows) to exit
 Password: passw0rd
-Added 'admin' to '/data/servers/rh-sso-7.4.9/standalone/configuration/keycloak-add-user.json', restart server to load user
+Added 'admin' to '/data/servers/rh-sso-7.5.1/standalone/configuration/keycloak-add-user.json', restart server to load user
 ----
 
 The keycloak server is running using standard distribution with shifted ports:
@@ -244,6 +244,11 @@ be used. If it points to the same _client_ in keycloak server, we only have to s
 karaf@root()> config:property-list --pid org.apache.karaf.management
    daemon = true
    jmxRealm = karaf
+   jmxmpEnabled = false
+   jmxmpHost = 127.0.0.1
+   jmxmpObjectName = connector:name=jmxmp
+   jmxmpPort = 9999
+   jmxmpServiceUrl = service:jmx:jmxmp://127.0.0.1:9999
    objectName = connector:name=rmi
    rmiRegistryHost = 127.0.0.1
    rmiRegistryPort = 1099
@@ -476,13 +481,13 @@ It can be installed using:
 [listing,options="nowrap"]
 ----
 karaf@root()> install -s mvn:org.jboss.fuse.quickstarts.security/keycloak-war/${project.version}/war
-Bundle ID: 331
+Bundle ID: 250
 
 karaf@root()> web:list
 ID  │ State       │ Web-State   │ Level │ Web-ContextPath │ Name
-────┼─────────────┼─────────────┼───────┼─────────────────┼───────────────────────────────────────────────────────────────────────────────────
-36  │ Active      │ Deployed    │ 80    │ /hawtio         │ Fuse Console (${version.io.hawt})
-248 │ Active      │ Deployed    │ 80    │ /keycloak-war   │ Red Hat Fuse :: Quickstarts :: Security :: Keycloak :: WAR (${project.version})
+────┼─────────────┼─────────────┼───────┼─────────────────┼──────────────────────────────────────────────────────────────────────────────────────
+36  │ Active      │ Deployed    │ 80    │ /hawtio         │ hawtio :: OSGi Web Console (${version.io.hawt})
+250 │ Active      │ Deployed    │ 80    │ /keycloak-war   │ Red Hat Fuse :: Quickstarts :: Security :: Keycloak :: WAR (${project.version})
 ----
 
 When accessing `http://localhost:8181/keycloak-war/info` URL, standard Basic authentication dialog appears and we can
@@ -1449,19 +1454,16 @@ We should see something like this in logs (indication of servlet context process
 +
 [listing,options="nowrap"]
 ----
-2021-10-05 08:53:23,133 INFO  {fileinstall-/data/servers/fuse-karaf-7.10.0.fuse-7_10_0-00002/etc} [org.apache.felix.fileinstall.internal.Util$OsgiLogger.log()] (Util.java:205) : Creating configuration {org.ops4j.pax.web.context~cxf} from /data/servers/fuse-karaf-7.10.0.fuse-7_10_0-00002/etc/org.ops4j.pax.web.context-cxf.cfg
-2021-10-05 08:53:23,134 INFO  {CM Configuration Updater (Update: pid=org.ops4j.pax.web.context~cxf)} [org.ops4j.pax.web.service.internal.HttpContextProcessing.updated()] (HttpContextProcessing.java:88) : Updated configuration for pid=org.ops4j.pax.web.context~cxf
-2021-10-05 08:53:23,136 WARN  {paxweb-context-4-thread-1} [org.ops4j.pax.web.service.internal.HttpContextProcessing$HttpContextTracker.reconfigure()] (HttpContextProcessing.java:192) : Incorrect org.ops4j.pax.web.context~cxf configuration - missing bundle.symbolicName selector
-2021-10-05 08:54:02,144 INFO  {fileinstall-/data/servers/fuse-karaf-7.10.0.fuse-7_10_0-00002/etc} [org.apache.felix.fileinstall.internal.Util$OsgiLogger.log()] (Util.java:205) : Updating configuration {org.ops4j.pax.web.context~cxf} from /data/servers/fuse-karaf-7.10.0.fuse-7_10_0-00002/etc/org.ops4j.pax.web.context-cxf.cfg
-2021-10-05 08:54:02,145 INFO  {CM Configuration Updater (Update: pid=org.ops4j.pax.web.context~cxf)} [org.ops4j.pax.web.service.internal.HttpContextProcessing.updated()] (HttpContextProcessing.java:88) : Updated configuration for pid=org.ops4j.pax.web.context~cxf
-2021-10-05 08:54:02,146 INFO  {paxweb-context-4-thread-2} [org.ops4j.pax.web.service.internal.HttpContextProcessing$HttpContextTracker.addingBundle()] (HttpContextProcessing.java:366) : Found bundle "org.apache.cxf.cxf-rt-transports-http", scheduling customization of its WebContainer
-2021-10-05 08:54:02,146 INFO  {paxweb-context-4-thread-2} [org.ops4j.pax.web.service.internal.HttpContextProcessing$HttpContextTracker.processContext()] (HttpContextProcessing.java:216) : Customizing WebContainer for bundle org.apache.cxf.cxf-rt-transports-http/3.3.6.fuse-7_10_0-00011
-2021-10-05 08:54:02,147 INFO  {paxweb-context-4-thread-2} [org.ops4j.pax.web.service.internal.HttpContextProcessing$HttpContextTracker.processContext()] (HttpContextProcessing.java:233) : Setting context parameters in WebContainer for bundle "org.apache.cxf.cxf-rt-transports-http": {keycloak.config.resolver=org.keycloak.adapters.osgi.HierarchicalPathBasedKeycloakConfigResolver}
-2021-10-05 08:54:02,147 INFO  {paxweb-context-4-thread-2} [org.ops4j.pax.web.service.undertow.internal.Context.stop()] (Context.java:176) : Stopping context /
-2021-10-05 08:54:02,147 INFO  {paxweb-context-4-thread-2} [org.ops4j.pax.web.service.undertow.internal.Context.destroy()] (Context.java:232) : destroying context DefaultHttpContext [bundle=org.apache.cxf.cxf-rt-transports-http [116], contextID=default], with context path:
-2021-10-05 08:54:02,151 INFO  {paxweb-context-4-thread-2} [org.ops4j.pax.web.service.internal.HttpContextProcessing$HttpContextTracker.processContext()] (HttpContextProcessing.java:239) : Registering login configuration in WebContainer for bundle "org.apache.cxf.cxf-rt-transports-http": method=KEYCLOAK, realm=f96d56d1-27e1-4ead-b143-1ef2b67e2851
-2021-10-05 08:54:02,151 INFO  {paxweb-context-4-thread-2} [org.ops4j.pax.web.service.internal.HttpContextProcessing$HttpContextTracker.processContext()] (HttpContextProcessing.java:251) : Registering security mappings in WebContainer for bundle "org.apache.cxf.cxf-rt-transports-http": SecurityConstraintsMapping{name='cxf', url='/cxf/*', roles=[admin, superuser]}
-2021-10-05 08:54:02,152 INFO  {paxweb-context-4-thread-2} [org.ops4j.pax.web.service.undertow.internal.Context.start()] (Context.java:165) : Starting context /
+2022-03-10 14:29:42,098 INFO  {fileinstall-/data/servers/fuse-karaf-7.11.0.fuse-7_11_0-00013/etc} [org.apache.felix.fileinstall.internal.Util$OsgiLogger.log()] (Util.java:205) : Creating configuration from org.ops4j.pax.web.context-cxf.cfg
+2022-03-10 14:29:42,099 INFO  {CM Configuration Updater (Update: pid=org.ops4j.pax.web.context.9a187b65-f871-46d4-8e67-438e21168fb0)} [org.ops4j.pax.web.service.internal.HttpContextProcessing.updated()] (HttpContextProcessing.java:88) : Updated configuration for pid=org.ops4j.pax.web.context.9a187b65-f871-46d4-8e67-438e21168fb0
+2022-03-10 14:29:42,100 INFO  {paxweb-context-4-thread-1} [org.ops4j.pax.web.service.internal.HttpContextProcessing$HttpContextTracker.addingBundle()] (HttpContextProcessing.java:366) : Found bundle "org.apache.cxf.cxf-rt-transports-http", scheduling customization of its WebContainer
+2022-03-10 14:29:42,101 INFO  {paxweb-context-4-thread-1} [org.ops4j.pax.web.service.internal.HttpContextProcessing$HttpContextTracker.processContext()] (HttpContextProcessing.java:216) : Customizing WebContainer for bundle org.apache.cxf.cxf-rt-transports-http/3.3.6.fuse-7_11_0-00014
+2022-03-10 14:29:42,102 INFO  {paxweb-context-4-thread-1} [org.ops4j.pax.web.service.internal.HttpContextProcessing$HttpContextTracker.processContext()] (HttpContextProcessing.java:233) : Setting context parameters in WebContainer for bundle "org.apache.cxf.cxf-rt-transports-http": {keycloak.config.resolver=org.keycloak.adapters.osgi.HierarchicalPathBasedKeycloakConfigResolver}
+2022-03-10 14:29:42,102 INFO  {paxweb-context-4-thread-1} [org.ops4j.pax.web.service.undertow.internal.Context.stop()] (Context.java:176) : Stopping context /
+2022-03-10 14:29:42,102 INFO  {paxweb-context-4-thread-1} [org.ops4j.pax.web.service.undertow.internal.Context.destroy()] (Context.java:232) : destroying context DefaultHttpContext [bundle=org.apache.cxf.cxf-rt-transports-http [116], contextID=default], with context path:
+2022-03-10 14:29:42,109 INFO  {paxweb-context-4-thread-1} [org.ops4j.pax.web.service.internal.HttpContextProcessing$HttpContextTracker.processContext()] (HttpContextProcessing.java:239) : Registering login configuration in WebContainer for bundle "org.apache.cxf.cxf-rt-transports-http": method=KEYCLOAK, realm=c6351af6-deed-4a12-ba76-576c421685ee
+2022-03-10 14:29:42,111 INFO  {paxweb-context-4-thread-1} [org.ops4j.pax.web.service.internal.HttpContextProcessing$HttpContextTracker.processContext()] (HttpContextProcessing.java:251) : Registering security mappings in WebContainer for bundle "org.apache.cxf.cxf-rt-transports-http": SecurityConstraintsMapping{name='cxf', url='/cxf/*', roles=[admin, superuser]}
+2022-03-10 14:29:42,111 INFO  {paxweb-context-4-thread-1} [org.ops4j.pax.web.service.undertow.internal.Context.start()] (Context.java:165) : Starting context /
 ----
 . Install the example:
 +
