@@ -78,26 +78,28 @@ of MQ drivers.
 +
 [listing,options="nowrap"]
 ----
-$ ls -la '/data/downloads/ibm.com/IBM MQ/9.1.0.7-IBM-MQ-Install-Java-All/wmq/JavaSE'
-total 14932
-drwxr-xr-x. 2 ggrzybek ggrzybek    4096 11-26 17:22 .
-drwxr-xr-x. 5 ggrzybek ggrzybek    4096 11-26 17:22 ..
--rw-r--r--. 1 ggrzybek ggrzybek  880303 11-26 17:22 bcpkix-jdk15on.jar
--rw-r--r--. 1 ggrzybek ggrzybek 5884134 11-26 17:22 bcprov-jdk15on.jar
--rw-r--r--. 1 ggrzybek ggrzybek 8303918 11-26 17:22 com.ibm.mq.allclient.jar
--rw-r--r--. 1 ggrzybek ggrzybek   43711 11-26 17:22 com.ibm.mq.traceControl.jar
--rw-r--r--. 1 ggrzybek ggrzybek   22769 11-26 17:22 fscontext.jar
--rw-r--r--. 1 ggrzybek ggrzybek   58349 11-26 17:22 jms.jar
--rw-r--r--. 1 ggrzybek ggrzybek   77116 11-26 17:22 providerutil.jar
+$ la '/data/downloads/ibm.com/IBM MQ/9.2.5.0-IBM-MQ-Install-Java-All/wmq/JavaSE/lib'
+total 15580
+drwxr-xr-x. 1 ggrzybek ggrzybek     306 02-07 18:47 .
+drwxr-xr-x. 1 ggrzybek ggrzybek      12 02-07 18:47 ..
+-rw-r--r--. 1 ggrzybek ggrzybek  963713 02-07 18:47 bcpkix-jdk15on.jar
+-rw-r--r--. 1 ggrzybek ggrzybek 5867298 02-07 18:47 bcprov-jdk15on.jar
+-rw-r--r--. 1 ggrzybek ggrzybek  482530 02-07 18:47 bcutil-jdk15on.jar
+-rw-r--r--. 1 ggrzybek ggrzybek 8347996 02-07 18:47 com.ibm.mq.allclient.jar
+-rw-r--r--. 1 ggrzybek ggrzybek   44157 02-07 18:47 com.ibm.mq.traceControl.jar
+-rw-r--r--. 1 ggrzybek ggrzybek   22769 02-07 18:47 fscontext.jar
+-rw-r--r--. 1 ggrzybek ggrzybek   58349 02-07 18:47 jms.jar
+-rw-r--r--. 1 ggrzybek ggrzybek   69710 02-07 18:47 org.json.jar
+-rw-r--r--. 1 ggrzybek ggrzybek   77116 02-07 18:47 providerutil.jar
 
 $ pwd
 /home/ggrzybek/sources/github.com/jboss-fuse/karaf-quickstarts/persistence
 
-$ mvn clean test -Pqtest -Pwmq9 -f standalone-xa/ -Dmq9library.path='/data/downloads/ibm.com/IBM MQ/9.1.0.7-IBM-MQ-Install-Java-All/wmq/JavaSE' -Dtest=StandaloneWMQ9AccessTest
+$ mvn clean test -Pqtest -Pwmq9 -f standalone-xa/ -Dmq9library.path='/data/downloads/ibm.com/IBM MQ/9.2.5.0-IBM-MQ-Install-Java-All/wmq/JavaSE/lib' -Dtest=StandaloneWMQ9AccessTest
 [INFO] Scanning for projects...
 [INFO]
 [INFO] --------------< org.jboss.fuse.quickstarts:standalone-xa >--------------
-[INFO] Building Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support 7.10.0.fuse-7_10_0-00004
+[INFO] Building Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support 7.11.0.fuse-7_11_0-00011
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO]
 [INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ standalone-xa ---
@@ -118,15 +120,15 @@ $ mvn clean test -Pqtest -Pwmq9 -f standalone-xa/ -Dmq9library.path='/data/downl
 [INFO] Changes detected - recompiling the module!
 [INFO] Compiling 8 source files to /data/sources/github.com/jboss-fuse/karaf-quickstarts/persistence/standalone-xa/target/test-classes
 [INFO]
-[INFO] --- maven-surefire-plugin:2.20.1:test (default-test) @ standalone-xa ---
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ standalone-xa ---
 [INFO]
 [INFO] -------------------------------------------------------
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running org.jboss.fuse.quickstarts.persistence.standalone.StandaloneWMQ9AccessTest
-17:29:06 INFO [StandaloneWMQ9AccessTest] (StandaloneWMQ9AccessTest.java:41) : Using WMQ9 queue: com.ibm.mq.jms.MQQueue
-17:29:06 INFO [StandaloneWMQ9AccessTest] (StandaloneWMQ9AccessTest.java:58) : MESSAGE: Hello IBM MQ 9
-17:29:06 INFO [StandaloneWMQ9AccessTest] (StandaloneWMQ9AccessTest.java:59) : MESSAGE:
+12:16:55 INFO [StandaloneWMQ9AccessTest] (StandaloneWMQ9AccessTest.java:41) : Using WMQ9 queue: com.ibm.mq.jms.MQQueue
+12:16:55 INFO [StandaloneWMQ9AccessTest] (StandaloneWMQ9AccessTest.java:58) : MESSAGE: Hello IBM MQ 9
+12:16:55 INFO [StandaloneWMQ9AccessTest] (StandaloneWMQ9AccessTest.java:59) : MESSAGE:
   JMSMessage class: jms_text
   JMSType:          null
   JMSDeliveryMode:  2
@@ -134,13 +136,13 @@ $ mvn clean test -Pqtest -Pwmq9 -f standalone-xa/ -Dmq9library.path='/data/downl
   JMSDeliveryTime:  0
   JMSExpiration:    0
   JMSPriority:      4
-  JMSMessageID:     ID:414d512046555345514d2020202020208b0c5b6101a70040
-  JMSTimestamp:     1633361308828
+  JMSMessageID:     ID:414d512046555345514d202020202020b6142f6201cb0040
+  JMSTimestamp:     1647256615718
   JMSCorrelationID: null
   JMSDestination:   queue:///DEV.QUEUE.1
   JMSReplyTo:       null
   JMSRedelivered:   false
-    JMSXAppID: jar
+    JMSXAppID: ooter8453689967068188766.jar
     JMSXDeliveryCount: 1
     JMSXUserID: app
     JMS_IBM_Character_Set: UTF-8
@@ -148,10 +150,10 @@ $ mvn clean test -Pqtest -Pwmq9 -f standalone-xa/ -Dmq9library.path='/data/downl
     JMS_IBM_Format: MQSTR
     JMS_IBM_MsgType: 8
     JMS_IBM_PutApplType: 28
-    JMS_IBM_PutDate: 20211004
-    JMS_IBM_PutTime: 15282883
+    JMS_IBM_PutDate: 20220314
+    JMS_IBM_PutTime: 11165572
 Hello IBM MQ 9
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.809 s - in org.jboss.fuse.quickstarts.persistence.standalone.StandaloneWMQ9AccessTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.888 s - in org.jboss.fuse.quickstarts.persistence.standalone.StandaloneWMQ9AccessTest
 [INFO]
 [INFO] Results:
 [INFO]
@@ -160,8 +162,8 @@ Hello IBM MQ 9
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  5.193 s
-[INFO] Finished at: 2021-10-04T17:29:07+02:00
+[INFO] Total time:  5.129 s
+[INFO] Finished at: 2022-03-14T12:16:56+01:00
 [INFO] ------------------------------------------------------------------------
 ----
 
@@ -363,7 +365,7 @@ to configure docker-based PostgreSQL database (as presented in Persistence Manua
 Using fresh {f7} instance, we can (after building the example):
 [listing,options="nowrap"]
 ----
-karaf@root()> install -s mvn:org.postgresql/postgresql/42.2.19
+karaf@root()> install -s mvn:org.postgresql/postgresql/42.3.3
 Bundle ID: 274
 karaf@root()> feature:install jdbc pax-jdbc-pool-dbcp2
 
@@ -416,7 +418,7 @@ in Persistence Manual) and Artemis broker accessible at `tcp://localhost:61616` 
 Using fresh {f7} instance, we can (after building the example):
 [listing,options="nowrap"]
 ----
-karaf@root()> install -s mvn:org.postgresql/postgresql/42.2.19
+karaf@root()> install -s mvn:org.postgresql/postgresql/42.3.3
 Bundle ID: 274
 karaf@root()> feature:install jdbc jms jndi
 karaf@root()> feature:install pax-jdbc-pool-narayana pax-jms-pool-narayana pax-jms-artemis pax-jdbc-config pax-jms-config

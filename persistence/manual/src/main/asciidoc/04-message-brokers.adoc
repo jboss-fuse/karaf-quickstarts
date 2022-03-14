@@ -15,20 +15,20 @@ We'll be testing:
 We can use *official* image available at https://hub.docker.com/r/ibmcom/mq/[docker hub].
 The sources for Dockerfile are stored in https://github.com/ibm-messaging/mq-docker[github project].
 
-. Start IBM MQ 9 docker container (9.1.5.0-r1 doesn't work: https://github.com/ibm-messaging/mq-container/issues/400):
+. Start IBM MQ 9 docker container:
 +
 [listing,options="nowrap"]
 ----
-$ podman run -d --name fuse-webspheremq9 --env LICENSE=accept --env MQ_QMGR_NAME=FUSEQM --env MQ_APP_PASSWORD=fuse --publish 1414:1414 --publish 19443:9443 ibmcom/mq:9.2.3.0-r1
-Trying to pull docker.io/ibmcom/mq:9.1.3.0...
+$ podman run -d --name fuse-webspheremq9 --env LICENSE=accept --env MQ_QMGR_NAME=FUSEQM --env MQ_APP_PASSWORD=fuse --publish 1414:1414 --publish 19443:9443 ibmcom/mq:9.2.4.0-r1
+Trying to pull docker.io/ibmcom/mq:9.2.4.0-r1...
 Getting image source signatures
 ...
 Storing signatures
-9365e6a57097a461007ee1740f950c574ab6300f2a83ecf5c9c4e6ed4611ff64
+1deeb4cbeae17065ee44065d75a9d9c16b381b50302f8ddc622ece8e35e5bbd6
 
 $ podman ps
-CONTAINER ID  IMAGE                           COMMAND     CREATED        STATUS            PORTS                                            NAMES
-9365e6a57097  docker.io/ibmcom/mq:9.2.3.0-r1              6 seconds ago  Up 6 seconds ago  0.0.0.0:1414->1414/tcp, 0.0.0.0:19443->9443/tcp  fuse-webspheremq9
+CONTAINER ID  IMAGE                           COMMAND     CREATED         STATUS             PORTS                                            NAMES
+1deeb4cbeae1  docker.io/ibmcom/mq:9.2.4.0-r1              23 seconds ago  Up 23 seconds ago  0.0.0.0:1414->1414/tcp, 0.0.0.0:19443->9443/tcp  fuse-webspheremq9
 ----
 
 . Check if web console works
@@ -38,7 +38,7 @@ With the above port mapping, we can access web console at https://localhost:1944
 
 . Check if MQ Explorer works
 +
-We can install IBM MQ Explorer downloaded from https://developer.ibm.com/messaging/mq-downloads/ (check _MQ Explorer standalone download_ link).
+We can install IBM MQ Explorer downloaded from https://ibm.biz/mqexplorer.
 +
 After installing IBM MQ Explorer, we can add broker connection with these properties:
 
@@ -63,50 +63,50 @@ Using `MQ_APP_PASSWORD` environment variable, we've specified the password for `
 
 For completeness, here's the list of libraries that should be used with IBM MQ 9.
 
-IMPORTANT: The examples refer to version 9.1.0.7 of IBM MQ Client libraries, but please consult official documentation for supported version of the libraries.
+IMPORTANT: The examples refer to version 9.2.5.0 of IBM MQ Client libraries, but please consult official documentation for supported version of the libraries.
 
-If we go to https://www.ibm.com/support/pages/mqc91-ibm-mq-clients,
-we can download `IBM MQ 9.1.0.7 LTS Clients` package. The links may vary, but I was able to download version 9.1.0.7 after clicking https://ibm.biz/ibm-mq-clients-all-lts_91 link and manipulating search criteria.
+If we go to https://developer.ibm.com/articles/mq-downloads/#java,
+we can click `https://ibm.biz/IBM-MQ-Install-Java-All` link, which redirects to proper download page. I've downloaded `9.2.5.0-IBM-MQ-Install-Java-All` package. The links may vary though....
 
 To be precise, here are the checksums:
 
 [listing,options="nowrap"]
 ----
-$ sha1sum 9.1.0.7-IBM*
-8d8933b5d871ea64467eb9d25873c073200923de  9.1.0.7-IBM-MQC-Redist-Java.zip
-ec376298c55ddc53aa05c5056bd0bf241dd7e6a7  9.1.0.7-IBM-MQ-Install-Java-All.jar
+$ md5sum 9.2.5.0-IBM-MQ*.*
+ff47f87b09996c11ae2c53ac528c7bb0  9.2.5.0-IBM-MQC-Redist-Java.zip
+d5152ce6970c21c07fc8c9a6701a438e  9.2.5.0-IBM-MQ-Install-Java-All.jar
 ----
 
-`9.1.0.7-IBM-MQ-Install-Java-All` package contains three subdirectories in this package:
+`9.2.5.0-IBM-MQ-Install-Java-All` package contains three subdirectories in this package:
 
 * `wmq/JavaEE` contains resource adapter archive (`wmq.jmsra.rar`)
-* `wmq/JavaSE` contains `com.ibm.mq.allclient.jar` library and dependencies
-* `wmq/OSGi` contains respective `com.ibm.mq.osgi.allclient_9.1.0.7.jar` and dependencies
+* `wmq/JavaSE/lib` contains `com.ibm.mq.allclient.jar` library and dependencies
+* `wmq/OSGi` contains respective `com.ibm.mq.osgi.allclient_9.2.5.0.jar` and dependencies
 
 IMPORTANT: This quickstarts manual is not a definitive guide about which IBM MQ access methods are the canonical ones.
 
 == A-MQ 7 installation (Artemis)
 
-This time we'll run standalone (no docker) version of `amq-broker-7.8.1-bin.zip`.
+This time we'll run standalone (no docker) version of `amq-broker-7.8.4-bin.zip`.
 
 [listing,options="nowrap"]
 ----
 $ pwd
-/data/servers/amq-broker-7.8.2
+/data/servers/amq-broker-7.8.4
 
 $ bin/artemis create --user fuse --password fuse --require-login amq7
 Creating ActiveMQ Artemis instance at: /data/servers/amq-broker-7.8.2/amq7
 
 Auto tuning journal ...
-done! Your system can make 7.81 writes per millisecond, your journal-buffer-timeout will be 32000
+done! Your system can make 25 writes per millisecond, your journal-buffer-timeout will be 40000
 
 You can now start the broker by executing:
 
-   "/data/servers/amq-broker-7.8.2/amq7/bin/artemis" run
+   "/data/servers/amq-broker-7.8.4/amq7/bin/artemis" run
 
 Or you can run the broker in the background using:
 
-   "/data/servers/amq-broker-7.8.2/amq7/bin/artemis-service" start
+   "/data/servers/amq-broker-7.8.4/amq7/bin/artemis-service" start
 
 
 $ amq7/bin/artemis run
@@ -117,10 +117,10 @@ $ amq7/bin/artemis run
   / ____ \| |  | | |__| | | |_) | | | (_) |   <  __/ |
  /_/    \_\_|  |_|\___\_\ |____/|_|  \___/|_|\_\___|_|
 
- Red Hat AMQ 7.8.2.GA
+ Red Hat AMQ 7.8.4.GA
 
 
-2021-10-04 16:20:21,244 INFO  [org.apache.activemq.artemis.integration.bootstrap] AMQ101000: Starting ActiveMQ Artemis Server
+2022-03-14 12:19:02,505 INFO  [org.apache.activemq.artemis.integration.bootstrap] AMQ101000: Starting ActiveMQ Artemis Server
 ...
 ----
 
@@ -128,12 +128,12 @@ $ amq7/bin/artemis run
 
 Artemis libraries are available in Maven Central or Red Hat repository. I used:
 
-* `mvn:org.apache.activemq/artemis-core-client/2.16.0.redhat-00022`
-* `mvn:org.apache.activemq/artemis-jms-client/2.16.0.redhat-00022`
+* `mvn:org.apache.activemq/artemis-core-client/2.16.0.redhat-00036`
+* `mvn:org.apache.activemq/artemis-jms-client/2.16.0.redhat-00036`
 
 == A-MQ 6 installation
 
-For A-MQ 6 we'll run standalone (no docker) version of `jboss-a-mq-6.3.0.redhat-495.zip`.
+For A-MQ 6 we'll run standalone (no docker) version of `jboss-a-mq-6.3.0.redhat-516.zip`.
 
 .Add authentication entries
 
@@ -148,7 +148,7 @@ fuse=fuse,Operator
 [listing,options="nowrap"]
 ----
 $ pwd
-/data/servers/jboss-a-mq-6.3.0.redhat-495
+/data/servers/jboss-a-mq-6.3.0.redhat-516
 
 $ bin/amq
 Please wait, JBoss A-MQ is initializing...
@@ -161,7 +161,7 @@ Please wait, JBoss A-MQ is initializing...
 | |__| | |_) | (_) \__ \__ \  / ____ \     | |  | | |__| |
  \____/|____/ \___/|___/___/ /_/    \_\    |_|  |_|\___\_\
 
-  JBoss A-MQ (6.3.0.redhat-495)
+  JBoss A-MQ (6.3.0.redhat-516)
   http://www.redhat.com/products/jbossenterprisemiddleware/amq/
 
 Hit '<tab>' for a list of available commands
@@ -182,9 +182,9 @@ TotalEnqueueCount = 1
 TotalDequeueCount = 0
 TotalMessageCount = 0
 TotalConsumerCount = 0
-Uptime = 7.391 seconds
+Uptime = 13.228 seconds
 
-Name = KahaDBPersistenceAdapter[/data/servers/jboss-a-mq-6.3.0.redhat-495/data/amq/kahadb,Index:/data/servers/jboss-a-mq-6.3.0.redhat-495/data/amq/kahadb]
+Name = KahaDBPersistenceAdapter[/data/servers/jboss-a-mq-6.3.0.redhat-516/data/amq/kahadb,Index:/data/servers/jboss-a-mq-6.3.0.redhat-516/data/amq/kahadb]
 
 connectorName = amqp
 
@@ -195,4 +195,4 @@ connectorName = mqtt
 
 Libraries are available in Maven Central or Red Hat repository. I used:
 
-* `mvn:org.apache.activemq/activemq-client/5.11.0.redhat-630495`
+* `mvn:org.apache.activemq/activemq-client/5.11.0.redhat-630516`
