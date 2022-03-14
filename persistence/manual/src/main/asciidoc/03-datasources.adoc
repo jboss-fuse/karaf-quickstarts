@@ -53,44 +53,44 @@ As mentioned in <<JDBC>> chapter, plain `java.sql.Connection` connections may be
 .Generic org.osgi.service.jdbc.DataSourceFactory
 
 The simplest implementation of `org.osgi.service.jdbc.DataSourceFactory` is
-`org.ops4j.pax.jdbc.impl.DriverDataSourceFactory` provided by `mvn:org.ops4j.pax.jdbc/pax-jdbc/1.5.1` bundle. All it
+`org.ops4j.pax.jdbc.impl.DriverDataSourceFactory` provided by `mvn:org.ops4j.pax.jdbc/pax-jdbc/1.5.3` bundle. All it
 does is tracking bundles that may include `/META-INF/services/java.sql.Driver` descriptor for standard Java™ `ServiceLoader`
 utility. If we install any standard JDBC driver, `pax-jdbc` bundle will register a `DataSourceFactory` that can be used
 (not directly) to obtain connections by means of `java.sql.Driver.connect()` call.
 
 [literal, options="nowrap"]
 ----
-karaf@root()> install -s mvn:org.ops4j.pax.jdbc/pax-jdbc/1.5.1
-Bundle ID: 240
-
-karaf@root()> install -s mvn:org.postgresql/postgresql/42.2.19
+karaf@root()> install -s mvn:org.ops4j.pax.jdbc/pax-jdbc/1.5.3
 Bundle ID: 241
 
-karaf@root()> bundle:services -p 241
-
-PostgreSQL JDBC Driver (241) provides:
---------------------------------------
-objectClass = [org.osgi.service.jdbc.DataSourceFactory]
-osgi.jdbc.driver.class = org.postgresql.Driver
-osgi.jdbc.driver.name = PostgreSQL JDBC Driver
-osgi.jdbc.driver.version = 42.2.19
-service.bundleid = 241
-service.id = 246
-service.scope = singleton
-
-karaf@root()> install -s mvn:mysql/mysql-connector-java/8.0.26
+karaf@root()> install -s mvn:org.postgresql/postgresql/42.3.3
 Bundle ID: 242
 
 karaf@root()> bundle:services -p 242
 
-Oracle Corporation's JDBC and XDevAPI Driver for MySQL (242) provides:
+PostgreSQL JDBC Driver (242) provides:
+--------------------------------------
+objectClass = [org.osgi.service.jdbc.DataSourceFactory]
+osgi.jdbc.driver.class = org.postgresql.Driver
+osgi.jdbc.driver.name = PostgreSQL JDBC Driver
+osgi.jdbc.driver.version = 42.3.3
+service.bundleid = 242
+service.id = 244
+service.scope = singleton
+
+karaf@root()> install -s mvn:mysql/mysql-connector-java/8.0.28
+Bundle ID: 243
+
+karaf@root()> bundle:services -p 243
+
+Oracle Corporation's JDBC and XDevAPI Driver for MySQL (243) provides:
 ----------------------------------------------------------------------
 objectClass = [org.osgi.service.jdbc.DataSourceFactory]
 osgi.jdbc.driver.class = com.mysql.cj.jdbc.Driver
 osgi.jdbc.driver.name = com.mysql.cj-native
-osgi.jdbc.driver.version = 8.0.26
-service.bundleid = 242
-service.id = 247
+osgi.jdbc.driver.version = 8.0.28
+service.bundleid = 243
+service.id = 245
 service.scope = singleton
 
 karaf@root()> service:list org.osgi.service.jdbc.DataSourceFactory
@@ -98,23 +98,23 @@ karaf@root()> service:list org.osgi.service.jdbc.DataSourceFactory
 -----------------------------------------
  osgi.jdbc.driver.class = org.postgresql.Driver
  osgi.jdbc.driver.name = PostgreSQL JDBC Driver
- osgi.jdbc.driver.version = 42.2.19
- service.bundleid = 241
- service.id = 246
+ osgi.jdbc.driver.version = 42.3.3
+ service.bundleid = 242
+ service.id = 244
  service.scope = singleton
 Provided by :
- PostgreSQL JDBC Driver (241)
+ PostgreSQL JDBC Driver (242)
 
 [org.osgi.service.jdbc.DataSourceFactory]
 -----------------------------------------
  osgi.jdbc.driver.class = com.mysql.cj.jdbc.Driver
  osgi.jdbc.driver.name = com.mysql.cj-native
- osgi.jdbc.driver.version = 8.0.26
- service.bundleid = 242
- service.id = 247
+ osgi.jdbc.driver.version = 8.0.28
+ service.bundleid = 243
+ service.id = 245
  service.scope = singleton
 Provided by :
- Oracle Corporation's JDBC and XDevAPI Driver for MySQL (242)
+ Oracle Corporation's JDBC and XDevAPI Driver for MySQL (243)
 ----
 
 With the above commands, we still don't have `javax.sql.DataSource` service registered, but we're one step closer.
@@ -126,7 +126,7 @@ The above intermediary `org.osgi.service.jdbc.DataSourceFactory` service can be 
 We can't obtain `javax.sql.ConnectionPoolDataSource` or `javax.sql.XADataSource` from the generic
 `org.osgi.service.jdbc.DataSourceFactory` created by non database-specific `pax-jdbc` bundle.
 
-NOTE: `mvn:org.postgresql/postgresql/42.2.19` bundle correctly implements OSGi JDBC specification and registers
+NOTE: `mvn:org.postgresql/postgresql/42.3.3` bundle correctly implements OSGi JDBC specification and registers
 an `org.osgi.service.jdbc.DataSourceFactory` with all methods implemented - also the ones creating XA and ConnectionPool
 data sources.
 
@@ -134,9 +134,9 @@ data sources.
 
 There are additional bundles like:
 
-* `mvn:org.ops4j.pax.jdbc/pax-jdbc-mysql/1.5.1`
-* `mvn:org.ops4j.pax.jdbc/pax-jdbc-mariadb/1.5.1`
-* `mvn:org.ops4j.pax.jdbc/pax-jdbc-db2/1.5.1`
+* `mvn:org.ops4j.pax.jdbc/pax-jdbc-mysql/1.5.3`
+* `mvn:org.ops4j.pax.jdbc/pax-jdbc-mariadb/1.5.3`
+* `mvn:org.ops4j.pax.jdbc/pax-jdbc-db2/1.5.3`
 * ...
 
 that register database-specific `org.osgi.service.jdbc.DataSourceFactory` services that can return all kinds of
@@ -144,23 +144,21 @@ _factories_ (including `javax.sql.ConnectionPoolDataSource` and `javax.sql.XADat
 
 [literal, options="nowrap"]
 ----
-karaf@root()> install -s mvn:mysql/mysql-connector-java/8.0.26
-Bundle ID: 242
-
-karaf@root()> install -s mvn:org.ops4j.pax.jdbc/pax-jdbc-mysql/1.5.1
+karaf@root()> install -s mvn:mysql/mysql-connector-java/8.0.28
 Bundle ID: 243
 
-karaf@root()> bundle:services -p 243
+karaf@root()> install -s mvn:org.ops4j.pax.jdbc/pax-jdbc-mysql/1.5.3
+Bundle ID: 244
 
-karaf@root()> bundle:services -p 243
+karaf@root()> bundle:services -p 244
 
-OPS4J Pax JDBC MySQL Driver Adapter (243) provides:
+OPS4J Pax JDBC MySQL Driver Adapter (244) provides:
 ---------------------------------------------------
 objectClass = [org.osgi.service.jdbc.DataSourceFactory]
 osgi.jdbc.driver.class = com.mysql.jdbc.Driver
 osgi.jdbc.driver.name = mysql
-service.bundleid = 243
-service.id = 248
+service.bundleid = 244
+service.id = 246
 service.scope = singleton
 
 karaf@root()> service:list org.osgi.service.jdbc.DataSourceFactory
@@ -168,11 +166,11 @@ karaf@root()> service:list org.osgi.service.jdbc.DataSourceFactory
 -----------------------------------------
  osgi.jdbc.driver.class = com.mysql.jdbc.Driver
  osgi.jdbc.driver.name = mysql
- service.bundleid = 243
- service.id = 248
+ service.bundleid = 244
+ service.id = 246
  service.scope = singleton
 Provided by :
- OPS4J Pax JDBC MySQL Driver Adapter (243)
+ OPS4J Pax JDBC MySQL Driver Adapter (244)
 ----
 
 [[pax-jdbc-config]]
@@ -182,7 +180,7 @@ With `pax-jdbc` (or `pax-jdbc-mysql`, `pax-jdbc-oracle`, ...) bundles, we can ha
 services registered that can be used to obtain datasources for given database (see <<two-kinds-of-data-sources>>). But
 we don't have actual datasources yet.
 
-`mvn:org.ops4j.pax.jdbc/pax-jdbc-config/1.5.1` bundle provides a Managed Service Factory
+`mvn:org.ops4j.pax.jdbc/pax-jdbc-config/1.5.3` bundle provides a Managed Service Factory
 that does two things:
 
 * tracks `org.osgi.service.jdbc.DataSourceFactory` OSGi services in order to invoke its methods:
@@ -205,27 +203,27 @@ Here's the detailed, _canonical_ step-by-step guide.
 +
 [listing,options="nowrap"]
 ----
-karaf@root()> install -s mvn:mysql/mysql-connector-java/8.0.26
-Bundle ID: 242
+karaf@root()> install -s mvn:mysql/mysql-connector-java/8.0.28
+Bundle ID: 243
 ----
 
 . Install `pax-jdbc-mysql` bundle that registers _intermediary_ `org.osgi.service.jdbc.DataSourceFactory`:
 +
 [listing,options="nowrap"]
 ----
-karaf@root()> install -s mvn:org.ops4j.pax.jdbc/pax-jdbc-mysql/1.5.1
-Bundle ID: 243
+karaf@root()> install -s mvn:org.ops4j.pax.jdbc/pax-jdbc-mysql/1.5.3
+Bundle ID: 244
 
 karaf@root()> service:list org.osgi.service.jdbc.DataSourceFactory
 [org.osgi.service.jdbc.DataSourceFactory]
 -----------------------------------------
  osgi.jdbc.driver.class = com.mysql.jdbc.Driver
  osgi.jdbc.driver.name = mysql
- service.bundleid = 243
- service.id = 248
+ service.bundleid = 244
+ service.id = 246
  service.scope = singleton
 Provided by :
- OPS4J Pax JDBC MySQL Driver Adapter (243)
+ OPS4J Pax JDBC MySQL Driver Adapter (244)
 ----
 
 . Install `pax-jdbc-config` bundle that tracks `org.osgi.service.jdbc.DataSourceFactory` services *and*
@@ -233,13 +231,20 @@ Provided by :
 +
 [listing,options="nowrap"]
 ----
-karaf@root()> install -s mvn:org.ops4j.pax.jdbc/pax-jdbc-config/1.5.1
-Bundle ID: 244
-karaf@root()> bundle:services -p 244
-...
+karaf@root()> install -s mvn:org.ops4j.pax.jdbc/pax-jdbc-config/1.5.3
+Bundle ID: 245
+karaf@root()> bundle:services -p 245
+
+OPS4J Pax JDBC Config (245) provides:
+-------------------------------------
+objectClass = [org.ops4j.pax.jdbc.config.ConfigLoader]
+service.bundleid = 245
+service.id = 247
+service.scope = singleton
+-----
 objectClass = [org.osgi.service.cm.ManagedServiceFactory]
-service.bundleid = 244
-service.id = 250
+service.bundleid = 245
+service.id = 248
 service.pid = org.ops4j.datasource
 service.scope = singleton
 ----
@@ -258,7 +263,7 @@ karaf@root()> config:update
 
 karaf@root()> config:list '(service.factoryPid=org.ops4j.datasource)'
 ----------------------------------------------------------------
-Pid:            org.ops4j.datasource.9ae12d94-21fe-4d9e-b0e4-e93d12d5ba4b
+Pid:            org.ops4j.datasource.5470f5eb-e120-4c10-9954-c842f08954b3
 FactoryPid:     org.ops4j.datasource
 BundleLocation: ?
 Properties:
@@ -267,7 +272,7 @@ Properties:
    osgi.jdbc.driver.name = mysql
    password = fuse
    service.factoryPid = org.ops4j.datasource
-   service.pid = org.ops4j.datasource.9ae12d94-21fe-4d9e-b0e4-e93d12d5ba4b
+   service.pid = org.ops4j.datasource.5470f5eb-e120-4c10-9954-c842f08954b3
    url = jdbc:mysql://localhost:3306/reportdb
    user = fuse
 ----
@@ -285,15 +290,15 @@ karaf@root()> service:list javax.sql.DataSource
  osgi.jndi.service.name = mysqlds
  password = fuse
  pax.jdbc.managed = true
- service.bundleid = 244
+ service.bundleid = 245
  service.factoryPid = org.ops4j.datasource
- service.id = 251
- service.pid = org.ops4j.datasource.9ae12d94-21fe-4d9e-b0e4-e93d12d5ba4b
+ service.id = 249
+ service.pid = org.ops4j.datasource.5470f5eb-e120-4c10-9954-c842f08954b3
  service.scope = singleton
  url = jdbc:mysql://localhost:3306/reportdb
  user = fuse
 Provided by :
- OPS4J Pax JDBC Config (244)
+ OPS4J Pax JDBC Config (245)
 ----
 
 Now we have actual database-specific (no pooling yet) data source. We can already inject it where needed. For example we can
@@ -301,12 +306,12 @@ use Karaf commands to query the database:
 [listing,options="nowrap"]
 ----
 karaf@root()> feature:install -v jdbc
-Adding features: jdbc/[4.2.12.fuse-7_10_0-00002,4.2.12.fuse-7_10_0-00002]
+Adding features: jdbc/[4.2.15.fuse-7_11_0-00011,4.2.15.fuse-7_11_0-00011]
 ...
 karaf@root()> jdbc:ds-list
 Name    │ Service Id │ Product │ Version │ URL                                  │ Status
 ────────┼────────────┼─────────┼─────────┼──────────────────────────────────────┼───────
-mysqlds │ 251        │ MySQL   │ 8.0.26  │ jdbc:mysql://localhost:3306/reportdb │ OK
+mysqlds │ 249        │ MySQL   │ 8.0.28  │ jdbc:mysql://localhost:3306/reportdb │ OK
 
 karaf@root()> jdbc:query mysqlds 'select * from incident'
 date                │ summary    │ name   │ details                       │ id │ email
@@ -417,14 +422,14 @@ Here's the example:
 
 [listing,options="nowrap"]
 ----
-karaf@root()> install -s mvn:mysql/mysql-connector-java/8.0.26
-Bundle ID: 242
-
-karaf@root()> install -s mvn:org.ops4j.pax.jdbc/pax-jdbc-mysql/1.5.1
+karaf@root()> install -s mvn:mysql/mysql-connector-java/8.0.28
 Bundle ID: 243
 
-karaf@root()> install -s mvn:org.ops4j.pax.jdbc/pax-jdbc-config/1.5.1
+karaf@root()> install -s mvn:org.ops4j.pax.jdbc/pax-jdbc-mysql/1.5.3
 Bundle ID: 244
+
+karaf@root()> install -s mvn:org.ops4j.pax.jdbc/pax-jdbc-config/1.5.3
+Bundle ID: 245
 
 karaf@root()> config:edit --factory --alias mysql org.ops4j.datasource
 karaf@root()> config:property-set osgi.jdbc.driver.name mysql
@@ -438,7 +443,7 @@ karaf@root()> config:update
 
 karaf@root()> config:list '(service.factoryPid=org.ops4j.datasource)'
 ----------------------------------------------------------------
-Pid:            org.ops4j.datasource.c3d8a247-bcf8-4b74-9c1a-60f0a23c8da6
+Pid:            org.ops4j.datasource.74fd6565-37af-4497-9402-00b1ce08d46b
 FactoryPid:     org.ops4j.datasource
 BundleLocation: ?
 Properties:
@@ -451,7 +456,7 @@ Properties:
    jdbc.user = fuse
    osgi.jdbc.driver.name = mysql
    service.factoryPid = org.ops4j.datasource
-   service.pid = org.ops4j.datasource.c3d8a247-bcf8-4b74-9c1a-60f0a23c8da6
+   service.pid = org.ops4j.datasource.74fd6565-37af-4497-9402-00b1ce08d46b
 
 karaf@root()> service:list javax.sql.DataSource
 [javax.sql.DataSource]
@@ -466,13 +471,13 @@ karaf@root()> service:list javax.sql.DataSource
  osgi.jdbc.driver.name = mysql
  osgi.jndi.service.name = mysqlds
  pax.jdbc.managed = true
- service.bundleid = 244
+ service.bundleid = 245
  service.factoryPid = org.ops4j.datasource
- service.id = 254
- service.pid = org.ops4j.datasource.c3d8a247-bcf8-4b74-9c1a-60f0a23c8da6
+ service.id = 252
+ service.pid = org.ops4j.datasource.74fd6565-37af-4497-9402-00b1ce08d46b
  service.scope = singleton
 Provided by :
- OPS4J Pax JDBC Config (244)
+ OPS4J Pax JDBC Config (245)
 ----
 
 Properties `osgi.jdbc.driver.name`, `dataSourceName` and `dataSourceType` are required by `pax-jdbc-config` itself to
@@ -496,26 +501,26 @@ karaf@root()> jdbc:ds-factories
 Name │ Class │ Version │ Registration bundle
 ─────┼───────┼─────────┼────────────────────
 
-karaf@root()> install -s mvn:mysql/mysql-connector-java/8.0.26
-Bundle ID: 243
+karaf@root()> install -s mvn:mysql/mysql-connector-java/8.0.28
+Bundle ID: 244
 
 karaf@root()> jdbc:ds-factories
 Name                │ Class                    │ Version │ Registration bundle
 ────────────────────┼──────────────────────────┼─────────┼────────────────────
-com.mysql.cj-native │ com.mysql.cj.jdbc.Driver │ 8.0.26  │ com.mysql.cj [243]
+com.mysql.cj-native │ com.mysql.cj.jdbc.Driver │ 8.0.28  │ com.mysql.cj [244]
 ----
 
 .Install MySQL-specific DataSourceFactory service
 [listing,options="nowrap"]
 ----
-karaf@root()> feature:repo-add mvn:org.ops4j.pax.jdbc/pax-jdbc-features/1.5.1/xml/features-gpl
-Adding feature url mvn:org.ops4j.pax.jdbc/pax-jdbc-features/1.5.1/xml/features-gpl
+karaf@root()> feature:repo-add mvn:org.ops4j.pax.jdbc/pax-jdbc-features/1.5.3/xml/features-gpl
+Adding feature url mvn:org.ops4j.pax.jdbc/pax-jdbc-features/1.5.3/xml/features-gpl
 karaf@root()> feature:install pax-jdbc-mysql
 karaf@root()> jdbc:ds-factories
 Name                │ Class                    │ Version │ Registration bundle
 ────────────────────┼──────────────────────────┼─────────┼───────────────────────────────
-com.mysql.cj-native │ com.mysql.cj.jdbc.Driver │ 8.0.26  │ com.mysql.cj [243]
-mysql               │ com.mysql.jdbc.Driver    │         │ org.ops4j.pax.jdbc.mysql [244]
+com.mysql.cj-native │ com.mysql.cj.jdbc.Driver │ 8.0.28  │ com.mysql.cj [244]
+mysql               │ com.mysql.jdbc.Driver    │         │ org.ops4j.pax.jdbc.mysql [245]
 ----
 
 The above table may be confusing, but as mentioned above, only one of `pax-jdbc-<database>` bundles may register
@@ -530,7 +535,7 @@ karaf@root()> jdbc:ds-create -dt DataSource -dn mysql -url 'jdbc:mysql://localho
 karaf@root()> jdbc:ds-list
 Name    │ Service Id │ Product │ Version │ URL                                               │ Status
 ────────┼────────────┼─────────┼─────────┼───────────────────────────────────────────────────┼───────
-mysqlds │ 252        │ MySQL   │ 8.0.26  │ jdbc:mysql://localhost:3306/reportdb?useSSL=false │ OK
+mysqlds │ 251        │ MySQL   │ 8.0.28  │ jdbc:mysql://localhost:3306/reportdb?useSSL=false │ OK
 
 karaf@root()> jdbc:query mysqlds 'select * from incident'
 date                │ summary    │ name   │ details                       │ id │ email
@@ -542,16 +547,16 @@ date                │ summary    │ name   │ details                       
 
 karaf@root()> config:list '(service.factoryPid=org.ops4j.datasource)'
 ----------------------------------------------------------------
-Pid:            org.ops4j.datasource.adb8ac6e-dc08-4b22-8772-ce9ab1aa1f76
+Pid:            org.ops4j.datasource.8f58c4dd-7586-4270-b99a-1aaa58525745
 FactoryPid:     org.ops4j.datasource
-BundleLocation: mvn:org.ops4j.pax.jdbc/pax-jdbc-config/1.5.1
+BundleLocation: mvn:org.ops4j.pax.jdbc/pax-jdbc-config/1.5.3
 Properties:
    dataSourceName = mysqlds
    dataSourceType = DataSource
    osgi.jdbc.driver.name = mysql
    password = fuse
    service.factoryPid = org.ops4j.datasource
-   service.pid = org.ops4j.datasource.adb8ac6e-dc08-4b22-8772-ce9ab1aa1f76
+   service.pid = org.ops4j.datasource.8f58c4dd-7586-4270-b99a-1aaa58525745
    url = jdbc:mysql://localhost:3306/reportdb?useSSL=false
    user = fuse
 ----
@@ -750,24 +755,24 @@ In the above configuration, `pool` and `xa` keys are _hints_ (service filter pro
 `org.ops4j.pax.jdbc.pool.common.PooledDataSourceFactory` services. In case of dbcp2 it's:
 [listing, options="nowrap"]
 ----
-karaf@root()> install -s mvn:org.ops4j.pax.jdbc/pax-jdbc-pool-dbcp2/1.5.1
-Bundle ID: 245
+karaf@root()> install -s mvn:org.ops4j.pax.jdbc/pax-jdbc-pool-dbcp2/1.5.3
+Bundle ID: 246
 
-karaf@root()> bundle:services -p 245
+karaf@root()> bundle:services -p 246
 
-OPS4J Pax JDBC Pooling DBCP2 (245) provides:
+OPS4J Pax JDBC Pooling DBCP2 (246) provides:
 --------------------------------------------
 objectClass = [org.ops4j.pax.jdbc.pool.common.PooledDataSourceFactory]
 pool = dbcp2
-service.bundleid = 245
-service.id = 253
+service.bundleid = 246
+service.id = 252
 service.scope = singleton
 xa = false
-- - - -
+-----
 objectClass = [org.ops4j.pax.jdbc.pool.common.PooledDataSourceFactory]
 pool = dbcp2
-service.bundleid = 245
-service.id = 254
+service.bundleid = 246
+service.id = 253
 service.scope = singleton
 xa = true
 ----
@@ -781,16 +786,16 @@ For completeness, here's full example with connection pool configuration that's 
 +
 [listing,options="nowrap"]
 ----
-karaf@root()> install -s mvn:mysql/mysql-connector-java/8.0.26
-Bundle ID: 243
+karaf@root()> install -s mvn:mysql/mysql-connector-java/8.0.28
+Bundle ID: 244
 ----
 
 . Install `jdbc`, `pax-jdbc-mysql` and `pax-jdbc-pool-dbcp2` features:
 +
 [listing,options="nowrap"]
 ----
-karaf@root()> feature:repo-add mvn:org.ops4j.pax.jdbc/pax-jdbc-features/1.5.1/xml/features-gpl
-Adding feature url mvn:org.ops4j.pax.jdbc/pax-jdbc-features/1.5.1/xml/features-gpl
+karaf@root()> feature:repo-add mvn:org.ops4j.pax.jdbc/pax-jdbc-features/1.5.3/xml/features-gpl
+Adding feature url mvn:org.ops4j.pax.jdbc/pax-jdbc-features/1.5.3/xml/features-gpl
 
 karaf@root()> feature:install jdbc pax-jdbc-mysql pax-jdbc-pool-dbcp2
 
@@ -799,31 +804,31 @@ karaf@root()> service:list org.osgi.service.jdbc.DataSourceFactory
 -----------------------------------------
  osgi.jdbc.driver.class = com.mysql.cj.jdbc.Driver
  osgi.jdbc.driver.name = com.mysql.cj-native
- osgi.jdbc.driver.version = 8.0.26
- service.bundleid = 243
- service.id = 250
+ osgi.jdbc.driver.version = 8.0.28
+ service.bundleid = 244
+ service.id = 249
  service.scope = singleton
 Provided by :
- Oracle Corporation's JDBC and XDevAPI Driver for MySQL (243)
+ Oracle Corporation's JDBC and XDevAPI Driver for MySQL (244)
 
 [org.osgi.service.jdbc.DataSourceFactory]
 -----------------------------------------
  osgi.jdbc.driver.class = com.mysql.jdbc.Driver
  osgi.jdbc.driver.name = mysql
- service.bundleid = 244
- service.id = 251
+ service.bundleid = 245
+ service.id = 250
  service.scope = singleton
 Provided by :
- OPS4J Pax JDBC MySQL Driver Adapter (244)
+ OPS4J Pax JDBC MySQL Driver Adapter (245)
 Used by:
- OPS4J Pax JDBC Config (241)
+ OPS4J Pax JDBC Config (242)
 
 karaf@root()> service:list org.ops4j.pax.jdbc.pool.common.PooledDataSourceFactory
 [org.ops4j.pax.jdbc.pool.common.PooledDataSourceFactory]
 --------------------------------------------------------
  pool = narayana
  service.bundleid = 223
- service.id = 235
+ service.id = 224
  service.scope = singleton
  xa = false
 Provided by :
@@ -833,7 +838,7 @@ Provided by :
 --------------------------------------------------------
  pool = narayana
  service.bundleid = 223
- service.id = 239
+ service.id = 225
  service.scope = singleton
  xa = true
 Provided by :
@@ -842,22 +847,22 @@ Provided by :
 [org.ops4j.pax.jdbc.pool.common.PooledDataSourceFactory]
 --------------------------------------------------------
  pool = dbcp2
- service.bundleid = 245
- service.id = 253
+ service.bundleid = 246
+ service.id = 252
  service.scope = singleton
  xa = false
 Provided by :
- OPS4J Pax JDBC Pooling DBCP2 (245)
+ OPS4J Pax JDBC Pooling DBCP2 (246)
 
 [org.ops4j.pax.jdbc.pool.common.PooledDataSourceFactory]
 --------------------------------------------------------
  pool = dbcp2
- service.bundleid = 245
- service.id = 254
+ service.bundleid = 246
+ service.id = 253
  service.scope = singleton
  xa = true
 Provided by :
- OPS4J Pax JDBC Pooling DBCP2 (245)
+ OPS4J Pax JDBC Pooling DBCP2 (246)
 ----
 
 . Create _factory configuration_:
@@ -912,13 +917,13 @@ karaf@root()> service:list javax.sql.DataSource
  pool.testOnBorrow = true
  pool.testWhileIdle = alse
  pool.timeBetweenEvictionRunsMillis = 120000
- service.bundleid = 241
+ service.bundleid = 242
  service.factoryPid = org.ops4j.datasource
- service.id = 255
- service.pid = org.ops4j.datasource.6c52af90-6439-4ae3-9a68-bfe919ac97e5
+ service.id = 254
+ service.pid = org.ops4j.datasource.74759908-70bf-4c9b-9854-c1e4c67cdcbb
  service.scope = singleton
 Provided by :
- OPS4J Pax JDBC Config (241)
+ OPS4J Pax JDBC Config (242)
 ----
 
 . Use the data source
@@ -1019,11 +1024,11 @@ that show how it should be used:
 
 [listing,options="nowrap"]
 ----
-karaf@root()> install -s mvn:org.postgresql/postgresql/42.2.19
-Bundle ID: 240
-karaf@root()> install -s mvn:org.apache.commons/commons-pool2/2.9.0
-Bundle ID:241
-karaf@root()> install -s mvn:org.apache.commons/commons-dbcp2/2.8.0
+karaf@root()> install -s mvn:org.postgresql/postgresql/42.3.3
+Bundle ID: 241
+karaf@root()> install -s mvn:org.apache.commons/commons-pool2/2.11.1
+Bundle ID: 84
+karaf@root()> install -s mvn:org.apache.commons/commons-dbcp2/2.9.0
 Bundle ID: 83
 karaf@root()> install -s blueprint:file://$PQ_HOME/databases/blueprints/postgresql-manual.xml
 Bundle ID: 242
@@ -1035,22 +1040,22 @@ objectClass = [javax.sql.DataSource]
 osgi.jndi.service.name = jdbc/postgresql
 osgi.service.blueprint.compname = pool
 service.bundleid = 242
-service.id = 247
+service.id = 245
 service.scope = bundle
-----
+-----
 objectClass = [org.osgi.service.blueprint.container.BlueprintContainer]
 osgi.blueprint.container.symbolicname = postgresql-manual.xml
 osgi.blueprint.container.version = 0.0.0
 service.bundleid = 242
-service.id = 248
+service.id = 246
 service.scope = singleton
 
 karaf@root()> feature:install jdbc
 
 karaf@root()> jdbc:ds-list
 Name            │ Service Id │ Product    │ Version                        │ URL                                           │ Status
-────────────────┼────────────┼────────────┼────────────────────────────────┼────────────────────────────────────────────────────────
-jdbc/postgresql │ 342        │ PostgreSQL │ 13.4 (Debian 13.4-4.pgdg110+1) │ jdbc:postgresql://localhost:5432/reportdb?... │ OK
+────────────────┼────────────┼────────────┼────────────────────────────────┼───────────────────────────────────────────────┼────────
+jdbc/postgresql │ 245        │ PostgreSQL │ 14.2 (Debian 14.2-1.pgdg110+1) │ jdbc:postgresql://localhost:5432/reportdb?... │ OK
 
 karaf@root()> jdbc:query jdbc/postgresql 'select * from incident';
 date                │ summary    │ name   │ details                       │ id │ email
@@ -1078,7 +1083,7 @@ Here's the Blueprint XML example:
 <!--
     A database-specific org.osgi.service.jdbc.DataSourceFactory that can create DataSource/XADataSource/
     /ConnectionPoolDataSource/Driver using properties. It's registered by pax-jdbc-* or for example
-    mvn:org.postgresql/postgresql/42.2.19 bundle natively
+    mvn:org.postgresql/postgresql/42.3.3 bundle natively
 -->
 <reference id="dataSourceFactory"
         interface="org.osgi.service.jdbc.DataSourceFactory"
@@ -1141,33 +1146,33 @@ Here's how it looks like in Fuse/Karaf shell:
 
 [listing,options="nowrap"]
 ----
-karaf@root()> install -s mvn:org.postgresql/postgresql/42.2.19
-Bundle ID: 240
+karaf@root()> install -s mvn:org.postgresql/postgresql/42.3.3
+Bundle ID: 241
 karaf@root()> feature:install jdbc pax-jdbc-config pax-jdbc-pool-dbcp2
 karaf@root()> install -s blueprint:file://$PQ_HOME/databases/blueprints/postgresql-pax-jdbc-factory-dbcp2.xml
-Bundle ID: 246
-karaf@root()> bundle:services -p 246
+Bundle ID: 247
+karaf@root()> bundle:services -p 247
 
-Bundle 246 provides:
+Bundle 247 provides:
 --------------------
 objectClass = [javax.sql.DataSource]
 osgi.jndi.service.name = jdbc/postgresql
 osgi.service.blueprint.compname = pool
-service.bundleid = 246
+service.bundleid = 247
 service.id = 253
 service.scope = bundle
-----
+-----
 objectClass = [org.osgi.service.blueprint.container.BlueprintContainer]
 osgi.blueprint.container.symbolicname = postgresql-pax-jdbc-factory-dbcp2.xml
 osgi.blueprint.container.version = 0.0.0
-service.bundleid = 246
+service.bundleid = 247
 service.id = 254
 service.scope = singleton
 
 karaf@root()> jdbc:ds-list
 Name            │ Service Id │ Product    │ Version                        │ URL                                           │ Status
 ────────────────┼────────────┼────────────┼────────────────────────────────┼───────────────────────────────────────────────┼───────
-jdbc/postgresql │ 253        │ PostgreSQL │ 13.4 (Debian 13.4-4.pgdg110+1) │ jdbc:postgresql://localhost:5432/reportdb?... │ OK
+jdbc/postgresql │ 253        │ PostgreSQL │ 14.2 (Debian 14.2-1.pgdg110+1) │ jdbc:postgresql://localhost:5432/reportdb?... │ OK
 
 karaf@root()> jdbc:query jdbc/postgresql 'select * from incident';
 date                │ summary    │ name   │ details                       │ id │ email
@@ -1234,14 +1239,14 @@ Here's how it looks like in Fuse/Karaf shell:
 
 [listing,options="nowrap"]
 ----
-karaf@root()> install -s mvn:org.postgresql/postgresql/42.2.19
-Bundle ID: 240
+karaf@root()> install -s mvn:org.postgresql/postgresql/42.3.3
+Bundle ID: 241
 karaf@root()> feature:install jdbc pax-jdbc-config pax-jdbc-pool-dbcp2
 karaf@root()> install -s blueprint:file://$PQ_HOME/databases/blueprints/postgresql-pax-jdbc-discovery.xml
-Bundle ID: 245
-karaf@root()> bundle:services -p 245
+Bundle ID: 246
+karaf@root()> bundle:services -p 246
 
-Bundle 245 provides:
+Bundle 246 provides:
 --------------------
 factory.validationQuery = select schema_name from information_schema.schemata
 factory.validationQueryTimeout = 2
@@ -1255,15 +1260,15 @@ pool.maxWaitMillis = 2000
 pool.minIdle = 2
 pool.testOnBorrow = true
 pool.testWhileIdle = false
-service.bundleid = 245
-service.id = 253
+service.bundleid = 246
+service.id = 251
 service.scope = bundle
-- - - -
+-----
 objectClass = [org.osgi.service.blueprint.container.BlueprintContainer]
 osgi.blueprint.container.symbolicname = postgresql-pax-jdbc-discovery.xml
 osgi.blueprint.container.version = 0.0.0
-service.bundleid = 245
-service.id = 255
+service.bundleid = 246
+service.id = 253
 service.scope = singleton
 
 karaf@root()> service:list javax.sql.XADataSource
@@ -1280,13 +1285,13 @@ karaf@root()> service:list javax.sql.XADataSource
  pool.minIdle = 2
  pool.testOnBorrow = true
  pool.testWhileIdle = false
- service.bundleid = 245
- service.id = 253
+ service.bundleid = 246
+ service.id = 251
  service.scope = bundle
 Provided by :
- Bundle 245
+ Bundle 246
 Used by:
- OPS4J Pax JDBC Config (242)
+ OPS4J Pax JDBC Config (243)
 
 karaf@root()> service:list javax.sql.DataSource
 [javax.sql.DataSource]
@@ -1296,25 +1301,25 @@ karaf@root()> service:list javax.sql.DataSource
  osgi.jndi.service.name = jdbc/postgresql
  osgi.service.blueprint.compname = postgresql
  pax.jdbc.managed = true
- pax.jdbc.service.id.ref = 253
+ pax.jdbc.service.id.ref = 251
  pool.blockWhenExhausted = true
  pool.maxTotal = 10
  pool.maxWaitMillis = 2000
  pool.minIdle = 2
  pool.testOnBorrow = true
  pool.testWhileIdle = false
- service.bundleid = 242
- service.id = 254
+ service.bundleid = 243
+ service.id = 252
  service.ranking = 1000
  service.scope = singleton
 Provided by :
- OPS4J Pax JDBC Config (242)
+ OPS4J Pax JDBC Config (243)
 
 karaf@root()> jdbc:ds-list
 Name            │ Service Id │ Product    │ Version                        │ URL                                           │ Status
 ────────────────┼────────────┼────────────┼────────────────────────────────┼───────────────────────────────────────────────┼───────
-jdbc/postgresql │ 253        │ PostgreSQL │ 13.4 (Debian 13.4-4.pgdg110+1) │ jdbc:postgresql://localhost:5432/reportdb?... │ OK
-jdbc/postgresql │ 254        │ PostgreSQL │ 13.4 (Debian 13.4-4.pgdg110+1) │ jdbc:postgresql://localhost:5432/reportdb?... │ OK
+jdbc/postgresql │ 251        │ PostgreSQL │ 14.2 (Debian 14.2-1.pgdg110+1) │ jdbc:postgresql://localhost:5432/reportdb?... │ OK
+jdbc/postgresql │ 252        │ PostgreSQL │ 14.2 (Debian 14.2-1.pgdg110+1) │ jdbc:postgresql://localhost:5432/reportdb?... │ OK
 
 karaf@root()> jdbc:query jdbc/postgresql 'select * from incident';
 date                │ summary    │ name   │ details                       │ id │ email

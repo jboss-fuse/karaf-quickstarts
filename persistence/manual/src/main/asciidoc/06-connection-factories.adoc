@@ -39,9 +39,9 @@ For JMS we have these analogies:
 
 There are bundles like:
 
-* `mvn:org.ops4j.pax.jms/pax-jms-activemq/1.1.0`
-* `mvn:org.ops4j.pax.jms/pax-jms-artemis/1.1.0`
-* `mvn:org.ops4j.pax.jms/pax-jms-ibmmq/1.1.0`
+* `mvn:org.ops4j.pax.jms/pax-jms-activemq/1.1.1`
+* `mvn:org.ops4j.pax.jms/pax-jms-artemis/1.1.1`
+* `mvn:org.ops4j.pax.jms/pax-jms-ibmmq/1.1.1`
 
 that register broker-specific `org.ops4j.pax.jms.service.ConnectionFactoryFactory` services that can return
 JMS _factories_ (`javax.jms.ConnectionFactory` and `javax.jms.XAConnectionFactory`). For example:
@@ -53,21 +53,26 @@ karaf@root()> feature:install pax-jms-artemis
 
 karaf@root()> bundle:services -p org.ops4j.pax.jms.pax-jms-config
 
-OPS4J Pax JMS Config (247) provides:
+OPS4J Pax JMS Config (242) provides:
 ------------------------------------
+objectClass = [org.ops4j.pax.jms.config.ConfigLoader]
+service.bundleid = 242
+service.id = 244
+service.scope = singleton
+-----
 objectClass = [org.osgi.service.cm.ManagedServiceFactory]
-service.bundleid = 247
-service.id = 257
+service.bundleid = 242
+service.id = 245
 service.pid = org.ops4j.connectionfactory
 service.scope = singleton
 
 karaf@root()> bundle:services -p org.ops4j.pax.jms.pax-jms-artemis
 
-OPS4J Pax JMS Artemis Support (271) provides:
----------------------------------------------
+OPS4J Pax JMS Artemis Support (269) provides:
+-----
 objectClass = [org.ops4j.pax.jms.service.ConnectionFactoryFactory]
-service.bundleid = 271
-service.id = 265
+service.bundleid = 269
+service.id = 328
 service.scope = singleton
 type = artemis
 ----
@@ -75,7 +80,7 @@ type = artemis
 [[pax-jms-config]]
 == PAX-JMS configuration service
 
-`mvn:org.ops4j.pax.jms/pax-jms-config/1.1.0` bundle provides a Managed Service Factory
+`mvn:org.ops4j.pax.jms/pax-jms-config/1.1.1` bundle provides a Managed Service Factory
 that does two things:
 
 * tracks `org.ops4j.pax.jms.service.ConnectionFactoryFactory` OSGi services in order to invoke its methods:
@@ -104,21 +109,26 @@ karaf@root()> feature:install pax-jms-artemis
 
 karaf@root()> bundle:services -p org.ops4j.pax.jms.pax-jms-config
 
-OPS4J Pax JMS Config (241) provides:
+OPS4J Pax JMS Config (242) provides:
 ------------------------------------
+objectClass = [org.ops4j.pax.jms.config.ConfigLoader]
+service.bundleid = 242
+service.id = 244
+service.scope = singleton
+-----
 objectClass = [org.osgi.service.cm.ManagedServiceFactory]
-service.bundleid = 247
-service.id = 257
+service.bundleid = 242
+service.id = 245
 service.pid = org.ops4j.connectionfactory
 service.scope = singleton
 
 karaf@root()> bundle:services -p org.ops4j.pax.jms.pax-jms-artemis
 
-OPS4J Pax JMS Artemis Support (271) provides:
----------------------------------------------
+OPS4J Pax JMS Artemis Support (269) provides:
+-----
 objectClass = [org.ops4j.pax.jms.service.ConnectionFactoryFactory]
-service.bundleid = 271
-service.id = 265
+service.bundleid = 269
+service.id = 328
 service.scope = singleton
 type = artemis
 ----
@@ -139,7 +149,7 @@ karaf@root()> config:update
 
 karaf@root()> config:list '(service.factoryPid=org.ops4j.connectionfactory)'
 ----------------------------------------------------------------
-Pid:            org.ops4j.connectionfactory.83bc079f-61d3-40af-8df5-975ba3d2f1bb
+Pid:            org.ops4j.connectionfactory.35c7ad20-4f09-4bcd-bfad-d0f6558c4c2b
 FactoryPid:     org.ops4j.connectionfactory
 BundleLocation: ?
 Properties:
@@ -151,7 +161,7 @@ Properties:
    jms.user = fuse
    osgi.jndi.service.name = jms/artemis
    service.factoryPid = org.ops4j.connectionfactory
-   service.pid = org.ops4j.connectionfactory.83bc079f-61d3-40af-8df5-975ba3d2f1bb
+   service.pid = org.ops4j.connectionfactory.35c7ad20-4f09-4bcd-bfad-d0f6558c4c2b
    type = artemis
 ----
 +
@@ -173,14 +183,14 @@ karaf@root()> service:list javax.jms.ConnectionFactory
  jms.user = fuse
  osgi.jndi.service.name = jms/artemis
  pax.jms.managed = true
- service.bundleid = 247
+ service.bundleid = 242
  service.factoryPid = org.ops4j.connectionfactory
- service.id = 268
- service.pid = org.ops4j.connectionfactory.83bc079f-61d3-40af-8df5-975ba3d2f1bb
+ service.id = 336
+ service.pid = org.ops4j.connectionfactory.35c7ad20-4f09-4bcd-bfad-d0f6558c4c2b
  service.scope = singleton
  type = artemis
 Provided by :
- OPS4J Pax JMS Config (247)
+ OPS4J Pax JMS Config (242)
 ----
 
 Now we have actual broker-specific (no pooling yet) connection factory. We can already inject it where needed. For example we can
@@ -188,7 +198,7 @@ use Karaf commands from `jms` feature:
 [listing,options="nowrap"]
 ----
 karaf@root()> feature:install -v jms
-Adding features: jms/[4.2.12.fuse-7_10_0-00002,4.2.12.fuse-7_10_0-00002]
+Adding features: jms/[4.2.15.fuse-7_11_0-00011,4.2.15.fuse-7_11_0-00011]
 ...
 karaf@root()> jms:connectionfactories
 JMS Connection Factory
@@ -199,14 +209,14 @@ karaf@root()> jms:info -u fuse -p fuse jms/artemis
 Property │ Value
 ─────────┼────────────────────
 product  │ ActiveMQ
-version  │ 2.16.0.redhat-00022
+version  │ 2.16.0.redhat-00036
 
 karaf@root()> jms:send -u fuse -p fuse jms/artemis DEV.QUEUE.1 "Hello Artemis from PAX-JMS"
 
 karaf@root()> jms:browse -u fuse -p fuse jms/artemis DEV.QUEUE.1
 Message ID                              │ Content                    │ Charset │ Type │ Correlation ID │ Delivery Mode │ Destination                │ Expiration │ Priority │ Redelivered │ ReplyTo │ Timestamp
-────────────────────────────────────────┼────────────────────────────┼─────────┼──────┼────────────────┼───────────────┼────────────────────────────┼────────────┼──────────┼─────────────┼─────────┼──────────────────────────────
-ID:515e48d7-251f-11ec-b6f1-083a885f3339 │ Hello Artemis from PAX-JMS │ UTF-8   │      │                │ Persistent    │ ActiveMQQueue[DEV.QUEUE.1] │ Never      │ 4        │ false       │         │ Mon Oct 04 16:28:17 CEST 2021
+────────────────────────────────────────┼────────────────────────────┼─────────┼──────┼────────────────┼───────────────┼────────────────────────────┼────────────┼──────────┼─────────────┼─────────┼─────────────────────────────
+ID:e4b0ecdd-a389-11ec-93d9-083a885f3339 │ Hello Artemis from PAX-JMS │ UTF-8   │      │                │ Persistent    │ ActiveMQQueue[DEV.QUEUE.1] │ Never      │ 4        │ false       │         │ Mon Mar 14 12:28:38 CET 2022
 ----
 
 Let's switch the protocol:
@@ -214,22 +224,22 @@ Let's switch the protocol:
 ----
 karaf@root()> config:list '(service.factoryPid=org.ops4j.connectionfactory)'
 ----------------------------------------------------------------
-Pid:            org.ops4j.connectionfactory.83bc079f-61d3-40af-8df5-975ba3d2f1bb
+Pid:            org.ops4j.connectionfactory.35c7ad20-4f09-4bcd-bfad-d0f6558c4c2b
 FactoryPid:     org.ops4j.connectionfactory
 BundleLocation: ?
 Properties:
    connectionFactoryType = ConnectionFactory
-   felix.fileinstall.filename = file:${karaf.etc}/org.ops4j.connectionfactory-artemis.cfg
+   felix.fileinstall.filename = file:/data/servers/fuse-karaf-7.11.0.fuse-7_11_0-00013/etc/org.ops4j.connectionfactory-artemis.cfg
    jms.consumerMaxRate = 1234
    jms.password = fuse
    jms.url = tcp://localhost:61616
    jms.user = fuse
    osgi.jndi.service.name = jms/artemis
    service.factoryPid = org.ops4j.connectionfactory
-   service.pid = org.ops4j.connectionfactory.83bc079f-61d3-40af-8df5-975ba3d2f1bb
+   service.pid = org.ops4j.connectionfactory.35c7ad20-4f09-4bcd-bfad-d0f6558c4c2b
    type = artemis
 
-karaf@root()> config:edit org.ops4j.connectionfactory.83bc079f-61d3-40af-8df5-975ba3d2f1bb
+karaf@root()> config:edit org.ops4j.connectionfactory.35c7ad20-4f09-4bcd-bfad-d0f6558c4c2b
 karaf@root()> config:property-set protocol amqp
 karaf@root()> config:property-delete user
 karaf@root()> config:property-set username fuse # mind the difference between artemis-jms-client and qpid-jms-client
@@ -247,21 +257,21 @@ version  │ 0.54.0.redhat-00001
 For completeness, let's see how we can connect to IBM MQ 9. Even if `pax-jms-ibmmq` installs relevant `pax-jms`
 bundles, IBM MQ driver is not installed due to licensing reasons.
 
-As mentioned in <<ibm-mq,chapter about IBM MQ>>, we can download drivers from https://developer.ibm.com/messaging/mq-downloads/[IBM MQ page].
-`OSGi` directory of `9.1.0.7-IBM-MQ-Install-Java-All.jar` package contains only two bundles:
+As mentioned in <<ibm-mq,chapter about IBM MQ>>, we can download drivers from https://developer.ibm.com/articles/mq-downloads/#java[IBM MQ page].
+`OSGi` directory of `9.2.5.0-IBM-MQ-Install-Java-All.jar` package contains only two bundles:
 
-* `com.ibm.mq.osgi.allclient_9.1.0.7.jar` - actual driver
-* `com.ibm.mq.osgi.allclientprereqs_9.1.0.7.jar` - preprequisites
+* `com.ibm.mq.osgi.allclient_9.2.5.0.jar` - actual driver
+* `com.ibm.mq.osgi.allclientprereqs_9.2.5.0.jar` - preprequisites
 
-While the prerequisites JAR contain required `fscontext.jar` and `providerutil.jar` libraries, it also contains:
+While the prerequisites JAR contain required `fscontext.jar`, `org.json.jar` and `providerutil.jar` libraries, it also contains:
 
-* `bcprov-jdk15on.jar` and `bcpkix-jdk15on.jar`, while {f7} ships those (in newer version) in `$FUSE_HOME/lib/ext`
+* `bcprov-jdk15on.jar`, `bcutil-jdk15on.jar` and `bcpkix-jdk15on.jar`, while {f7} ships those (in newer version) in `$FUSE_HOME/lib/ext`
 * `jms.jar` which is exactly the same jar which is available using `mvn:javax.jms/javax.jms-api/2.0.1`
 
 We *should not* rely on the embedded `jms.jar`, otherwise we'd get `ClassCastException` when working with this driver, because
 {f7} has its own version of JMS API from `mvn:javax.jms/javax.jms-api/2.0.1`.
 
-Unfortunately, `com.ibm.mq.osgi.allclient_9.1.0.7.jar` bundle contains this manifest header:
+Unfortunately, `com.ibm.mq.osgi.allclient_9.2.5.0.jar` bundle contains this manifest header:
 [listing,options="nowrap"]
 ----
 Require-Bundle =
@@ -273,29 +283,29 @@ Fuse 7.7 and later redefines `pax-jms-ibmmq` feature and adds single bundle `mvn
 So the way to install IBM MQ drivers is:
 [listing,options="nowrap"]
 ----
-karaf@root()> install 'file:///data/downloads/ibm.com/IBM%20MQ/9.1.0.7-IBM-MQ-Install-Java-All/wmq/OSGi/com.ibm.mq.osgi.allclient_9.1.0.7.jar'
-Bundle ID: 279
+karaf@root()> install 'file:///data/downloads/ibm.com/IBM%20MQ/9.2.5.0-IBM-MQ-Install-Java-All/wmq/OSGi/com.ibm.mq.osgi.allclient_9.2.5.0.jar'
+Bundle ID: 241
 karaf@root()> feature:install pax-jms-ibmmq
-araf@root()> la -l | grep allclient
-279 │ Resolved │  80 │ 9.1.0.7                            │ file:///data/downloads/ibm.com/IBM%20MQ/9.1.0.7-IBM-MQ-Install-Java-All/wmq/OSGi/com.ibm.mq.osgi.allclient_9.1.0.7.jar
-karaf@root()> start 279
+karaf@root()> la -l | grep allclient
+241 │ Resolved │  80 │ 9.2.5.0                     │ file:///data/downloads/ibm.com/IBM%20MQ/9.2.5.0-IBM-MQ-Install-Java-All/wmq/OSGi/com.ibm.mq.osgi.allclient_9.2.5.0.jar
+karaf@root()> start 241
 karaf@root()> feature:install pax-jms-config
 karaf@root()> la -l
 START LEVEL 100 , List Threshold: 0
- ID │ State    │ Lvl │ Version                   │ Location
-────┼──────────┼─────┼───────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ ID │ State    │ Lvl │ Version                     │ Location
+────┼──────────┼─────┼─────────────────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ...
-246 │ Active   │  80 │ 1.1.0                     │ mvn:org.ops4j.pax.jms/pax-jms-api/1.1.0
-247 │ Active   │  80 │ 1.1.0                     │ mvn:org.ops4j.pax.jms/pax-jms-config/1.1.0
-281 │ Active   │  80 │ 1.1.0                     │ mvn:org.ops4j.pax.jms/pax-jms-ibmmq/1.1.0
+243 │ Active   │  80 │ 1.1.1                       │ mvn:org.ops4j.pax.jms/pax-jms-api/1.1.1
+244 │ Active   │  80 │ 1.1.1                       │ mvn:org.ops4j.pax.jms/pax-jms-ibmmq/1.1.1
+245 │ Active   │  80 │ 1.1.1                       │ mvn:org.ops4j.pax.jms/pax-jms-config/1.1.1
 ...
 karaf@root()> la -l | grep ibm
-279 │ Active   │  80 │ 9.1.0.7                            │ file:///data/downloads/ibm.com/IBM%20MQ/9.1.0.7-IBM-MQ-Install-Java-All/wmq/OSGi/com.ibm.mq.osgi.allclient_9.1.0.7.jar
-280 │ Active   │  35 │ 7.10.0.fuse-7_10_0-00002           │ mvn:org.jboss.fuse.modules/fuse-pax-jms-ibmmq-compatibility/7.10.0.fuse-7_10_0-00002
-281 │ Active   │  80 │ 1.1.0                              │ mvn:org.ops4j.pax.jms/pax-jms-ibmmq/1.1.0
+241 │ Active   │  80 │ 9.2.5.0                     │ file:///data/downloads/ibm.com/IBM%20MQ/9.2.5.0-IBM-MQ-Install-Java-All/wmq/OSGi/com.ibm.mq.osgi.allclient_9.2.5.0.jar
+242 │ Active   │  35 │ 7.11.0.fuse-7_11_0-00013    │ mvn:org.jboss.fuse.modules/fuse-pax-jms-ibmmq-compatibility/7.11.0.fuse-7_11_0-00013
+244 │ Active   │  80 │ 1.1.1                       │ mvn:org.ops4j.pax.jms/pax-jms-ibmmq/1.1.1
 ----
 
-IMPORTANT: When installing `com.ibm.mq.osgi.allclient_9.1.0.7.jar` bundle first, we can't start it, because it requires the _prerequisites_ bundle provided by `pax-jms-ibmmq` feature. Only after feature installation, we can start `com.ibm.mq.osgi.allclient_9.1.0.7.jar` bundle. It can't stay at `RESOLVED` state, because only after start it provides necessary services.
+IMPORTANT: When installing `com.ibm.mq.osgi.allclient_9.2.5.0.jar` bundle first, we can't start it, because it requires the _prerequisites_ bundle provided by `pax-jms-ibmmq` feature. Only after feature installation, we can start `com.ibm.mq.osgi.allclient_9.1.0.7.jar` bundle. It can't stay at `RESOLVED` state, because only after start it provides necessary services.
 
 We can however prepare custom Karaf feature, where both `pax-jms-ibmmq` and the driver will be installed. Here's the example:
 [source,option="nowrap",xml]
@@ -304,7 +314,7 @@ We can however prepare custom Karaf feature, where both `pax-jms-ibmmq` and the 
 <features name="xa-connection-factories-clients" xmlns="http://karaf.apache.org/xmlns/features/v1.5.0">
     <feature name="ibmmq9-jms-client">
         <feature>pax-jms-ibmmq</feature>
-        <bundle>file:///path/to/com.ibm.mq.osgi.allclient_9.1.0.7.jar</bundle>
+        <bundle>file:///path/to/com.ibm.mq.osgi.allclient_9.2.5.0.jar</bundle>
     </feature>
 </features>
 ----
@@ -316,11 +326,11 @@ And now:
 ----
 karaf@root()> bundle:services -p org.ops4j.pax.jms.pax-jms-ibmmq
 
-OPS4J Pax JMS IBM MQ Support (281) provides:
+OPS4J Pax JMS IBM MQ Support (244) provides:
 --------------------------------------------
 objectClass = [org.ops4j.pax.jms.service.ConnectionFactoryFactory]
-service.bundleid = 281
-service.id = 332
+service.bundleid = 244
+service.id = 244
 service.scope = singleton
 type = ibmmq
 ----
@@ -343,7 +353,7 @@ karaf@root()> config:update
 
 karaf@root()> config:list '(service.factoryPid=org.ops4j.connectionfactory)'
 ----------------------------------------------------------------
-Pid:            org.ops4j.connectionfactory.2cf36b59-2e9f-49b5-99f7-d0f4d4115189
+Pid:            org.ops4j.connectionfactory.87b28daf-7e0e-4f7f-9fc5-893649d66fe5
 FactoryPid:     org.ops4j.connectionfactory
 BundleLocation: ?
 Properties:
@@ -357,7 +367,7 @@ Properties:
    jms.transportType = 1
    osgi.jndi.service.name = jms/mq9
    service.factoryPid = org.ops4j.connectionfactory
-   service.pid = org.ops4j.connectionfactory.2cf36b59-2e9f-49b5-99f7-d0f4d4115189
+   service.pid = org.ops4j.connectionfactory.87b28daf-7e0e-4f7f-9fc5-893649d66fe5
    type = ibmmq
 ----
 
@@ -378,14 +388,14 @@ karaf@root()> service:list javax.jms.ConnectionFactory
  jms.transportType = 1
  osgi.jndi.service.name = jms/mq9
  pax.jms.managed = true
- service.bundleid = 247
+ service.bundleid = 245
  service.factoryPid = org.ops4j.connectionfactory
- service.id = 333
- service.pid = org.ops4j.connectionfactory.2cf36b59-2e9f-49b5-99f7-d0f4d4115189
+ service.id = 247
+ service.pid = org.ops4j.connectionfactory.87b28daf-7e0e-4f7f-9fc5-893649d66fe5
  service.scope = singleton
  type = ibmmq
 Provided by :
- OPS4J Pax JMS Config (247)
+ OPS4J Pax JMS Config (245)
 ----
 
 . Test the connection
@@ -393,7 +403,7 @@ Provided by :
 [listing,options="nowrap"]
 ----
 karaf@root()> feature:install -v jms
-Adding features: jms/[4.2.12.fuse-7_10_0-00002,4.2.12.fuse-7_10_0-00002]
+Adding features: jms/[4.2.15.fuse-7_11_0-00011,4.2.15.fuse-7_11_0-00011]
 ...
 karaf@root()> jms:connectionfactories
 JMS Connection Factory
@@ -410,8 +420,8 @@ karaf@root()> jms:send -u app -p fuse jms/mq9 DEV.QUEUE.1 "Hello IBM MQ 9 from P
 
 karaf@root()> jms:browse -u app -p fuse jms/mq9 DEV.QUEUE.1
 Message ID                                          │ Content                     │ Charset │ Type │ Correlation ID │ Delivery Mode │ Destination          │ Expiration │ Priority │ Redelivered │ ReplyTo │ Timestamp
-────────────────────────────────────────────────────┼─────────────────────────────┼─────────┼──────┼────────────────┼───────────────┼──────────────────────┼────────────┼──────────┼─────────────┼─────────┼──────────────────────────────
-ID:414d512046555345514d2020202020208b0c5b6102490040 │ Hello IBM MQ 9 from PAX-JMS │ UTF-8   │      │                │ Persistent    │ queue:///DEV.QUEUE.1 │ Never      │ 4        │ false       │         │ Mon Oct 04 16:33:09 CEST 2021
+────────────────────────────────────────────────────┼─────────────────────────────┼─────────┼──────┼────────────────┼───────────────┼──────────────────────┼────────────┼──────────┼─────────────┼─────────┼─────────────────────────────
+ID:414d512046555345514d202020202020b6142f6202cd0040 │ Hello IBM MQ 9 from PAX-JMS │ UTF-8   │      │                │ Persistent    │ queue:///DEV.QUEUE.1 │ Never      │ 4        │ false       │         │ Mon Mar 14 13:38:58 CET 2022
 ----
 
 We can check if the message was sent also from IBM MQ Explorer or from [web console].
@@ -454,12 +464,12 @@ karaf@root()> service:list javax.jms.ConnectionFactory # should be empty
 karaf@root()> service:list org.ops4j.pax.jms.service.ConnectionFactoryFactory
 [org.ops4j.pax.jms.service.ConnectionFactoryFactory]
 ----------------------------------------------------
- service.bundleid = 267
- service.id = 296
+ service.bundleid = 271
+ service.id = 332
  service.scope = singleton
  type = artemis
 Provided by :
- OPS4J Pax JMS Artemis Support (267)
+ OPS4J Pax JMS Artemis Support (271)
 ----
 
 .Create and check Artemis connection factory
@@ -476,27 +486,27 @@ karaf@root()> jms:info -u fuse -p fuse jms/artemis
 Property │ Value
 ─────────┼────────────────────
 product  │ ActiveMQ
-version  │ 2.16.0.redhat-00022
+version  │ 2.16.0.redhat-00036
 
 karaf@root()> jms:send -u fuse -p fuse jms/artemis DEV.QUEUE.1 "Hello Artemis from PAX-JMS"
 
 karaf@root()> jms:browse -u fuse -p fuse jms/artemis DEV.QUEUE.1
 Message ID                              │ Content                    │ Charset │ Type │ Correlation ID │ Delivery Mode │ Destination                │ Expiration │ Priority │ Redelivered │ ReplyTo │ Timestamp
-────────────────────────────────────────┼────────────────────────────┼─────────┼──────┼────────────────┼───────────────┼────────────────────────────┼────────────┼──────────┼─────────────┼─────────┼──────────────────────────────
-ID:b4aa697a-2524-11ec-9f0a-083a885f3339 │ Hello Artemis from PAX-JMS │ UTF-8   │      │                │ Persistent    │ ActiveMQQueue[DEV.QUEUE.1] │ Never      │ 4        │ false       │         │ Mon Oct 04 17:06:52 CEST 2021
+────────────────────────────────────────┼────────────────────────────┼─────────┼──────┼────────────────┼───────────────┼────────────────────────────┼────────────┼──────────┼─────────────┼─────────┼─────────────────────────────
+ID:e42347ce-a393-11ec-b77c-083a885f3339 │ Hello Artemis from PAX-JMS │ UTF-8   │      │                │ Persistent    │ ActiveMQQueue[DEV.QUEUE.1] │ Never      │ 4        │ false       │         │ Mon Mar 14 13:40:12 CET 2022
 
 
 karaf@root()> config:list '(service.factoryPid=org.ops4j.connectionfactory)'
 ----------------------------------------------------------------
-Pid:            org.ops4j.connectionfactory.f0106953-1da6-4560-9e62-92d3e2cd4780
+Pid:            org.ops4j.connectionfactory.82aa2811-2a16-4806-a333-bfd3587c661d
 FactoryPid:     org.ops4j.connectionfactory
-BundleLocation: mvn:org.ops4j.pax.jms/pax-jms-config/1.1.0
+BundleLocation: mvn:org.ops4j.pax.jms/pax-jms-config/1.1.1
 Properties:
    name = artemis
    osgi.jndi.service.name = jms/artemis
    password = fuse
    service.factoryPid = org.ops4j.connectionfactory
-   service.pid = org.ops4j.connectionfactory.f0106953-1da6-4560-9e62-92d3e2cd4780
+   service.pid = org.ops4j.connectionfactory.82aa2811-2a16-4806-a333-bfd3587c661d
    type = artemis
    url = tcp://localhost:61616
    user = fuse
@@ -640,19 +650,19 @@ karaf@root()> feature:install pax-jms-pool-pooledjms
 
 karaf@root()> bundle:services -p org.ops4j.pax.jms.pax-jms-pool-pooledjms
 
-OPS4J Pax JMS MessagingHub JMS Pool implementation (242) provides:
+OPS4J Pax JMS MessagingHub JMS Pool implementation (243) provides:
 ------------------------------------------------------------------
 objectClass = [org.ops4j.pax.jms.service.PooledConnectionFactoryFactory]
 pool = pooledjms
-service.bundleid = 242
-service.id = 246
+service.bundleid = 243
+service.id = 244
 service.scope = singleton
 xa = false
-- - - -
+-----
 objectClass = [org.ops4j.pax.jms.service.PooledConnectionFactoryFactory]
 pool = pooledjms
-service.bundleid = 242
-service.id = 247
+service.bundleid = 243
+service.id = 245
 service.scope = singleton
 xa = true
 ----
@@ -666,7 +676,7 @@ For completeness, here's full example with connection pool configuration:
 [listing,options="nowrap"]
 ----
 karaf@root()> feature:install -v pax-jms-pool-pooledjms pax-jms-artemis
-Adding features: pax-jms-pool-pooledjms/[1.1.0,1.1.0],pax-jms-artemis/[1.1.0,1.1.0]
+Adding features: pax-jms-pool-pooledjms/[1.1.1,1.1.1],pax-jms-artemis/[1.1.1,1.1.1]
 ...
 ----
 
@@ -679,53 +689,53 @@ karaf@root()> feature:install jms
 karaf@root()> service:list org.ops4j.pax.jms.service.ConnectionFactoryFactory
 [org.ops4j.pax.jms.service.ConnectionFactoryFactory]
 ----------------------------------------------------
- service.bundleid = 266
- service.id = 255
+ service.bundleid = 270
+ service.id = 327
  service.scope = singleton
  type = artemis
 Provided by :
- OPS4J Pax JMS Artemis Support (266)
+ OPS4J Pax JMS Artemis Support (270)
 
 karaf@root()> service:list org.ops4j.pax.jms.service.PooledConnectionFactoryFactory
 [org.ops4j.pax.jms.service.PooledConnectionFactoryFactory]
 ----------------------------------------------------------
  pool = pooledjms
- service.bundleid = 242
- service.id = 246
+ service.bundleid = 243
+ service.id = 230
  service.scope = singleton
  xa = false
 Provided by :
- OPS4J Pax JMS MessagingHub JMS Pool implementation (242)
+ OPS4J Pax JMS MessagingHub JMS Pool implementation (243)
 
 [org.ops4j.pax.jms.service.PooledConnectionFactoryFactory]
 ----------------------------------------------------------
  pool = pooledjms
- service.bundleid = 242
- service.id = 311
+ service.bundleid = 243
+ service.id = 231
  service.scope = singleton
  xa = true
 Provided by :
- OPS4J Pax JMS MessagingHub JMS Pool implementation (242)
+ OPS4J Pax JMS MessagingHub JMS Pool implementation (243)
 
 [org.ops4j.pax.jms.service.PooledConnectionFactoryFactory]
 ----------------------------------------------------------
  pool = transx
- service.bundleid = 270
- service.id = 299
+ service.bundleid = 274
+ service.id = 378
  service.scope = singleton
  xa = false
 Provided by :
- OPS4J Pax JMS Pax TRANSX JMS pool (270)
+ OPS4J Pax JMS Pax TRANSX JMS pool (274)
 
 [org.ops4j.pax.jms.service.PooledConnectionFactoryFactory]
 ----------------------------------------------------------
  pool = transx
- service.bundleid = 270
- service.id = 317
+ service.bundleid = 274
+ service.id = 379
  service.scope = singleton
  xa = true
 Provided by :
- OPS4J Pax JMS Pax TRANSX JMS pool (270)
+ OPS4J Pax JMS Pax TRANSX JMS pool (274)
 ----
 
 . Create _factory configuration_:
@@ -767,14 +777,14 @@ karaf@root()> service:list javax.jms.ConnectionFactory
  pool.connectionIdleTimeout = 10
  pool.maxConnections = 123
  protocol = amqp
- service.bundleid = 269
+ service.bundleid = 273
  service.factoryPid = org.ops4j.connectionfactory
- service.id = 319
- service.pid = org.ops4j.connectionfactory.c0b17113-da8f-4605-bf41-50607c491cd0
+ service.id = 387
+ service.pid = org.ops4j.connectionfactory.3dc3df75-ad2f-4821-8554-fb981636f31f
  service.scope = singleton
  type = artemis
 Provided by :
- OPS4J Pax JMS Config (269)
+ OPS4J Pax JMS Config (273)
 ----
 
 . Use the connection factory
@@ -796,8 +806,8 @@ karaf@root()> jms:send -u fuse -p fuse artemisCF DEV.QUEUE.1 "Hello Artemis from
 
 karaf@root()> jms:browse -u fuse -p fuse artemisCF DEV.QUEUE.1
 Message ID                                      │ Content                    │ Charset │ Type │ Correlation ID │ Delivery Mode │ Destination │ Expiration │ Priority │ Redelivered │ ReplyTo │ Timestamp
-────────────────────────────────────────────────┼────────────────────────────┼─────────┼──────┼────────────────┼───────────────┼─────────────┼────────────┼──────────┼─────────────┼─────────┼──────────────────────────────
-ID:26e7309e-7ac7-40ee-8f11-42e13607c3b3:2:1:1-1 │ Hello Artemis from PAX-JMS │ UTF-8   │      │                │ Persistent    │ DEV.QUEUE.1 │ Never      │ 4        │ false       │         │ Mon Oct 04 17:13:56 CEST 2021
+────────────────────────────────────────────────┼────────────────────────────┼─────────┼──────┼────────────────┼───────────────┼─────────────┼────────────┼──────────┼─────────────┼─────────┼─────────────────────────────
+ID:f9b9752b-3c90-4a8d-ace2-e29d65be1dda:2:1:1-1 │ Hello Artemis from PAX-JMS │ UTF-8   │      │                │ Persistent    │ DEV.QUEUE.1 │ Never      │ 4        │ false       │         │ Mon Mar 14 13:43:31 CET 2022
 ----
 
 === pax-jms-pool-narayana
@@ -880,29 +890,29 @@ Here are the shell commands that show how it should be used:
 [listing,options="nowrap"]
 ----
 karaf@root()> feature:install artemis-core-client artemis-jms-client
-karaf@root()> install -s mvn:org.apache.commons/commons-pool2/2.9.0
-Bundle ID: 261
+karaf@root()> install -s mvn:org.apache.commons/commons-pool2/2.11.1
+Bundle ID: 84
 karaf@root()> install -s mvn:org.messaginghub/pooled-jms/1.2.1.redhat-00011
-Bundle ID: 262
+Bundle ID: 265
 karaf@root()> install -s blueprint:file://$PQ_HOME/message-brokers/blueprints/artemis-manual.xml
-Bundle ID: 263
+Bundle ID: 266
 
-karaf@root()> bundle:services -p 263
+karaf@root()> bundle:services -p 266
 
-Bundle 263 provides:
+Bundle 266 provides:
 --------------------
 objectClass = [javax.jms.ConnectionFactory]
 osgi.jndi.service.name = jms/artemis
 osgi.service.blueprint.compname = pool
-service.bundleid = 263
-service.id = 255
+service.bundleid = 266
+service.id = 333
 service.scope = bundle
-----
+-----
 objectClass = [org.osgi.service.blueprint.container.BlueprintContainer]
 osgi.blueprint.container.symbolicname = artemis-manual.xml
 osgi.blueprint.container.version = 0.0.0
-service.bundleid = 263
-service.id = 256
+service.bundleid = 266
+service.id = 334
 service.scope = singleton
 
 karaf@root()> feature:install jms
@@ -916,7 +926,7 @@ karaf@root()> jms:info -u fuse -p fuse jms/artemis
 Property │ Value
 ─────────┼────────────────────
 product  │ ActiveMQ
-version  │ 2.16.0.redhat-00022
+version  │ 2.16.0.redhat-00036
 ----
 
 As shown in the above listing, blueprint bundle exports `javax.jms.ConnectionFactory` service which
@@ -1004,23 +1014,23 @@ Here's how it looks like in Fuse/Karaf shell:
 karaf@root()> feature:install jms pax-jms-artemis pax-jms-pool-pooledjms
 
 karaf@root()> install -s blueprint:file://$PQ_HOME/message-brokers/blueprints/artemis-pax-jms-factory-pooledjms.xml
-Bundle ID: 275
-karaf@root()> bundle:services -p 275
+Bundle ID: 278
+karaf@root()> bundle:services -p 278
 
-Bundle 275 provides:
+Bundle 278 provides:
 --------------------
 objectClass = [javax.jms.ConnectionFactory]
 osgi.jndi.service.name = jms/artemis
 osgi.service.blueprint.compname = pool
-service.bundleid = 275
-service.id = 361
+service.bundleid = 278
+service.id = 388
 service.scope = bundle
-----
+-----
 objectClass = [org.osgi.service.blueprint.container.BlueprintContainer]
 osgi.blueprint.container.symbolicname = artemis-pax-jms-factory-pooledjms.xml
 osgi.blueprint.container.version = 0.0.0
-service.bundleid = 275
-service.id = 362
+service.bundleid = 278
+service.id = 389
 service.scope = singleton
 
 karaf@root()> jms:connectionfactories
@@ -1032,7 +1042,7 @@ karaf@root()> jms:info -u fuse -p fuse jms/artemis
 Property │ Value
 ─────────┼────────────────────
 product  │ ActiveMQ
-version  │ 2.16.0.redhat-00022
+version  │ 2.16.0.redhat-00036
 ----
 
 As shown in the above listing, blueprint bundle exports `javax.jms.ConnectionFactory` service which
@@ -1089,11 +1099,11 @@ Here's how it looks like in Fuse/Karaf shell:
 karaf@root()> feature:install jms pax-jms-config pax-jms-artemis pax-jms-pool-pooledjms
 
 karaf@root()> install -s blueprint:file://$PQ_HOME/message-brokers/blueprints/artemis-pax-jms-discovery.xml
-Bundle ID: 273
+Bundle ID: 279
 
-karaf@root()> bundle:services -p 273
+karaf@root()> bundle:services -p 279
 
-Bundle 273 provides:
+Bundle 279 provides:
 --------------------
 objectClass = [javax.jms.XAConnectionFactory]
 osgi.jndi.service.name = jms/artemis
@@ -1101,15 +1111,15 @@ osgi.service.blueprint.compname = artemis
 pool = pooledjms
 pool.connectionIdleTimeout = 10000
 pool.maxConnections = 10
-service.bundleid = 273
-service.id = 315
+service.bundleid = 279
+service.id = 390
 service.scope = bundle
-- - - -
+-----
 objectClass = [org.osgi.service.blueprint.container.BlueprintContainer]
 osgi.blueprint.container.symbolicname = artemis-pax-jms-discovery.xml
 osgi.blueprint.container.version = 0.0.0
-service.bundleid = 273
-service.id = 317
+service.bundleid = 279
+service.id = 392
 service.scope = singleton
 
 
@@ -1121,13 +1131,13 @@ karaf@root()> service:list javax.jms.XAConnectionFactory
  pool = pooledjms
  pool.connectionIdleTimeout = 10000
  pool.maxConnections = 10
- service.bundleid = 273
- service.id = 315
+ service.bundleid = 279
+ service.id = 390
  service.scope = bundle
 Provided by :
- Bundle 273
+ Bundle 279
 Used by:
- OPS4J Pax JMS Config (268)
+ OPS4J Pax JMS Config (270)
 
 karaf@root()> service:list javax.jms.ConnectionFactory
 [javax.jms.ConnectionFactory]
@@ -1135,15 +1145,15 @@ karaf@root()> service:list javax.jms.ConnectionFactory
  osgi.jndi.service.name = jms/artemis
  osgi.service.blueprint.compname = artemis
  pax.jms.managed = true
- pax.jms.service.id.ref = 315
+ pax.jms.service.id.ref = 390
  pool.connectionIdleTimeout = 10000
  pool.maxConnections = 10
- service.bundleid = 268
- service.id = 316
+ service.bundleid = 270
+ service.id = 391
  service.ranking = 1000
  service.scope = singleton
 Provided by :
- OPS4J Pax JMS Config (268)
+ OPS4J Pax JMS Config (270)
 
 karaf@root()> jms:connectionfactories
 JMS Connection Factory
@@ -1154,7 +1164,7 @@ karaf@root()> jms:info -u fuse -p fuse jms/artemis
 Property │ Value
 ─────────┼────────────────────
 product  │ ActiveMQ
-version  │ 2.16.0.redhat-00022
+version  │ 2.16.0.redhat-00036
 ----
 
 This time, `jms:connectionfactories` shows only one service, but that's becuase this command removes duplicate names.
