@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Spring Security - Blueprint HTTP Service</title>
+  <style>
+    body { color: blue }
+  </style>
+</head>
+<body>
+Welcome, anonymous user!
+<div style="border-top: 1px solid #888; margin-top: 5px; padding-top: 5px" id="d1">
+  <form method="post" action="login">
+    <label for="user">User:</label><br />
+    <input id="user" type="text" name="username" value="" /><br />
+    <label for="pwd">Password:</label><br />
+    <input id="pwd" type="password" name="password" value="" /><br />
+    <input type="submit" value="Login" />
+  </form>
+  <hr />
+  <span style="color: red">${error}</span>
+</div>
+</body>
+</html>

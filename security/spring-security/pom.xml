@@ -22,19 +22,19 @@
 
     <parent>
         <groupId>org.jboss.fuse.quickstarts</groupId>
-        <artifactId>quickstarts-parent</artifactId>
-        <version>7.11.0.redhat-SNAPSHOT</version>
+        <artifactId>security</artifactId>
+        <version>7.11.0.fuse-7_11_0-00011</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>security</artifactId>
+    <groupId>org.jboss.fuse.quickstarts.security</groupId>
+    <artifactId>spring-security</artifactId>
     <packaging>pom</packaging>
 
-    <name>Red Hat Fuse :: Quickstarts :: Security</name>
+    <name>Red Hat Fuse :: Quickstarts :: Security :: Spring-Security</name>
 
     <modules>
-        <module>keycloak</module>
-        <module>spring-security</module>
+        <module>spring-security-httpservice-blueprint</module>
     </modules>
 
 </project>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Spring Security - Blueprint HTTP Service</title>
+  <style>
+    body { color: blue }
+  </style>
+</head>
+<body>
+Hello ${user} (${class})!<br />
+Your location: ${location}
+<div style="border-top: 1px solid #888; margin-top: 5px; padding-top: 5px">
+  <ul>
+    <li><a href="/spring-security-blueprint/user/start">User area</a></li>
+    <li><a href="/spring-security-blueprint/admin/start">Admin area</a></li>
+    <li><a href="/spring-security-blueprint/start">Main area</a></li>
+  </ul>
+</div>
+<div style="border-top: 1px solid #888; margin-top: 5px; padding-top: 5px" id="d1">
+  <form method="post" action="logout">
+    <input type="submit" value="Logout" />
+  </form>
+</div>
+</body>
+</html>
