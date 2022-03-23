@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2005-2018 Red Hat, Inc.
+
+     Red Hat licenses this file to you under the Apache License, version
+     2.0 (the "License"); you may not use this file except in compliance
+     with the License.  You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+     implied.  See the License for the specific language governing
+     permissions and limitations under the License.
+
+-->
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:security="http://www.springframework.org/schema/security"
+           xmlns:camel-security="http://camel.apache.org/schema/spring-security"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 https://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+             http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security-5.5.xsd
+             http://camel.apache.org/schema/spring-security http://camel.apache.org/schema/spring-security/camel-spring-security.xsd
+             http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
+
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider>
+            <security:user-service>
+                <security:user name="admin" password="{noop}admin" authorities="ROLE_USER, ROLE_ADMIN" />
+                <security:user name="user" password="{noop}user" authorities="ROLE_USER" />
+            </security:user-service>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+    <bean id="accessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
+        <argument>
+            <list>
+                <bean class="org.springframework.security.access.vote.RoleVoter" />
+            </list>
+        </argument>
+    </bean>
+
+    <camel-security:authorizationPolicy id="admin" access="ROLE_ADMIN"
+                                        authenticationManager="authenticationManager"
+                                        accessDecisionManager="accessDecisionManager" />
+
+    <bean id="randomSubjectProcessor" class="org.jboss.fuse.quickstarts.security.camel.RandomSubjectProcessor" />
+
+    <camelContext xmlns="http://camel.apache.org/schema/blueprint">
+        <route>
+            <from uri="timer:foo?period=5000" />
+            <process ref="randomSubjectProcessor" />
+            <policy ref="admin">
+                <to uri="log:output" />
+            </policy>
+
+            <onException>
+                <exception>org.springframework.security.access.AccessDeniedException</exception>
+                <transform>
+                    <constant>You do not have ROLE_ADMIN access!</constant>
+                </transform>
+            </onException>
+            <onException>
+                <exception>org.springframework.security.authentication.BadCredentialsException</exception>
+                <transform>
+                    <constant>Bad credentials!</constant>
+                </transform>
+            </onException>
+        </route>
+    </camelContext>
+
+</blueprint>
