@@ -22,7 +22,7 @@
 
     <groupId>org.jboss.fuse.quickstarts.security</groupId>
     <artifactId>keycloak-whiteboard</artifactId>
-    <version>7.11.0.redhat-SNAPSHOT</version>
+    <version>7.11.1.redhat-SNAPSHOT</version>
     <packaging>bundle</packaging>
 
     <name>Red Hat Fuse :: Quickstarts :: Security :: Keycloak :: HTTP Whiteboard</name>
