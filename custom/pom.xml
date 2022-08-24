@@ -22,7 +22,7 @@
 
     <groupId>org.jboss.fuse.quickstarts</groupId>
     <artifactId>custom</artifactId>
-    <version>7.11.1.redhat-SNAPSHOT</version>
+    <version>7.11.1.fuse-7_11_1-00002</version>
     <packaging>pom</packaging>
 
     <name>Red Hat Fuse :: Quickstarts :: custom distribution</name>
@@ -33,9 +33,9 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- version of BOM -->
-        <version.org.jboss.redhat-fuse>7.10.0.fuse-sb2-7_10_0-00002</version.org.jboss.redhat-fuse>
+        <version.org.jboss.redhat-fuse>7.11.1.fuse-sb2-7_11_1-00002</version.org.jboss.redhat-fuse>
         <!-- version of Fuse Karaf - to use in karaf-maven-plugin configuration -->
-        <version.org.jboss.fuse-karaf>7.9.0.fuse-7_10_0-00003</version.org.jboss.fuse-karaf>
+        <version.org.jboss.fuse-karaf>7.11.1.fuse-7_11_1-00002</version.org.jboss.fuse-karaf>
 
         <!-- versions of dependencies not inherited from BOM -->
         <version.com.sun.activation>1.2.0</version.com.sun.activation>
@@ -48,7 +48,7 @@
         <version.net.java.dev.jna>4.4.0</version.net.java.dev.jna>
         <version.org.glassfish.jaxb>2.3.2</version.org.glassfish.jaxb>
         <version.org.jline>3.6.2.redhat-2</version.org.jline>
-        <version.org.apache.karaf>4.2.11.fuse-7_10_0-00003</version.org.apache.karaf>
+        <version.org.apache.karaf>4.2.15.fuse-7_11_1-00002</version.org.apache.karaf>
         <version.org.apache.servicemix.bundles.xalan>2.7.2.3-fuse-redhat-00001</version.org.apache.servicemix.bundles.xalan>
         <version.org.apache.servicemix.bundles.xalan-serializer>2.7.2.1-fuse-redhat-00001</version.org.apache.servicemix.bundles.xalan-serializer>
         <version.org.apache.servicemix.bundles.xerces>2.12.2.1-fuse-redhat-00003</version.org.apache.servicemix.bundles.xerces>
