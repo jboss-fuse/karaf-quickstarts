@@ -22,7 +22,7 @@
 
     <groupId>org.jboss.fuse.quickstarts</groupId>
     <artifactId>fuse-karaf-quickstarts</artifactId>
-    <version>7.11.1.fuse-7_11_1-00014</version>
+    <version>7.12.0.redhat-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Red Hat Fuse :: Quickstarts :: Distribution</name>
