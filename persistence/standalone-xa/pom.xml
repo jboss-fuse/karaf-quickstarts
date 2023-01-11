@@ -22,7 +22,7 @@
 
     <groupId>org.jboss.fuse.quickstarts</groupId>
     <artifactId>standalone-xa</artifactId>
-    <version>7.11.0.redhat-SNAPSHOT</version>
+    <version>7.12.0.redhat-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Red Hat Fuse :: Quickstarts :: persistence :: standalone transaction support</name>
@@ -35,15 +35,15 @@
         <skip.quickstarts.tests>true</skip.quickstarts.tests>
 
         <!-- version of BOM -->
-        <version.org.jboss.redhat-fuse>7.8.0.fuse-sb2-780030</version.org.jboss.redhat-fuse>
+        <version.org.jboss.redhat-fuse>7.11.1.fuse-sb2-7_11_1-00017</version.org.jboss.redhat-fuse>
 
         <!-- versions of dependencies not inherited from BOM -->
         <version.com.h2database>2.1.210</version.com.h2database>
         <version.mysql>8.0.28</version.mysql>
         <version.org.apache.derby>10.15.2.0</version.org.apache.derby>
         <version.org.mariadb.jdbc>2.6.0</version.org.mariadb.jdbc>
-        <version.org.ops4j.pax.jdbc>1.5.3</version.org.ops4j.pax.jdbc>
-        <version.org.postgresql>42.3.3</version.org.postgresql>
+        <version.org.ops4j.pax.jdbc>1.5.5</version.org.ops4j.pax.jdbc>
+        <version.org.postgresql>42.4.2</version.org.postgresql>
 
         <!-- Plugins from org.apache.maven.plugins -->
         <version.plugin.maven-compiler-plugin>3.7.0</version.plugin.maven-compiler-plugin>
