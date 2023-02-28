@@ -23,12 +23,12 @@ Here's an example of configuring default `admin` user to manage Keycloak server:
 [listing,options="nowrap"]
 ----
 $ pwd
-/data/servers/rh-sso-7.6.0
+/data/servers/rh-sso-7.6.2
 
 $ bin/add-user-keycloak.sh -u admin
 Press ctrl-d (Unix) or ctrl-z (Windows) to exit
 Password: passw0rd
-Added 'admin' to '/data/servers/rh-sso-7.6.0/standalone/configuration/keycloak-add-user.json', restart server to load user
+Added 'admin' to '/data/servers/rh-sso-7.6.2/standalone/configuration/keycloak-add-user.json', restart server to load user
 ----
 
 The keycloak server is running using standard distribution with shifted ports:
@@ -528,6 +528,13 @@ START LEVEL 100 , List Threshold: 0
 235 │ Active   │  30 │ 7.4.4                       │ OPS4J Pax Web - Undertow, Fragments: 253
 ...
 253 │ Resolved │  80 │ 18.0.0.redhat-00001         │ Keycloak Fuse 7.0 Adapter - Undertow, Hosts: 235
+
+karaf@root()> la | grep Undertow
+...
+235 │ Active   │  30 │ 8.0.17                     │ OPS4J Pax Web - Undertow, Fragments: 252
+...
+252 │ Resolved │  80 │ 18.0.6.redhat-00001        │ Keycloak Fuse 7.0 Adapter - Undertow, Hosts: 235
+...
 ----
 
 Now, pax-web-undertow will look for `io.undertow.servlet.ServletExtension` which is now exposed by
@@ -843,43 +850,32 @@ example however shows additional steps:
 just `http://localhost:8181/info`
 * setting context parameters (accessible later using `javax.servlet.ServletContext.getInitParameter()` so we
 can configure `keycloak.config.resolver` in order to use external `etc/<context>-keycloak.json` configuration file
-* invoking security related methods - registering login configuration and security constraints - just like it was done
-in previous examples
+* registering security configuration - with Pax Web 8 it is now possible using Whiteboard approach
 
 NOTE: pax-web-extender-war tracks several web _components_ registered as OSGi services, to _gather_ them under single
-_web application_. However not all elements (that we can declare in `WEB-INF/web.xml` or register using
-`org.ops4j.pax.web.service.WebContainer`) can be tracked as OSGi services - we have to use `org.ops4j.pax.web.service.WebContainer`.
+_web application_.
 
 The `org.jboss.fuse.quickstarts.security.keycloak.wb.Activator` Java class does these steps:
 
-. obtains OSGi reference to `org.ops4j.pax.web.service.WebContainer` to register these _components_ that can't be
-registered using pax-web-extender-whiteboard approach
-
-. calls `org.ops4j.pax.web.service.WebContainer.createDefaultHttpContext()` to create single instance of
-`org.osgi.service.http.HttpContext` object used as _discriminator_ of different web _components_ (so they end up in single
-_web application_)
-
-. registers `org.ops4j.pax.web.service.whiteboard.HttpContextMapping` instance as OSGi service - this object allows us
+. registers `org.osgi.service.http.context.ServletContextHelper` instance as OSGi service - this object allows us
 to customize two things:
 
 * context name (so we may use `http://localhost:8181/<context>/info` instead of `http://localhost:8181/info`)
 * context parameters (so we may configure `keycloak.config.resolver`
 
-. calls `org.ops4j.pax.web.service.WebContainer.registerLoginConfig()`, so we actually configure `KEYCLOAK` mechanism
-
-. calls `org.ops4j.pax.web.service.WebContainer.registerConstraintMapping()` so we configure security constraints
+. registers Pax Web 8 specific `org.ops4j.pax.web.service.whiteboard.SecurityConstraintMapping`, so we actually configure `KEYCLOAK` mechanism
 
 . registers two `javax.servlet.Servlet` OSGi services to be picked up by pax-web-extender-whiteboard
 +
 [source,java,options="nowrap"]
 ----
 Hashtable<String, Object> infoProperties = new Hashtable<>();
-infoProperties.put(ExtenderConstants.PROPERTY_HTTP_CONTEXT_ID, contextId); <1>
+infoProperties.put(HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_SELECT, "(" + HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_NAME + "=app3)"); <1>
 infoProperties.put(HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_NAME, "info-servlet"); <2>
-infoProperties.put(HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_PATTERN, new String[] { "/info" }); <3>
+infoProperties.put(HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_PATTERN, new String[] { "/info/*" }); <3>
 infoServletRegistration = context.registerService(Servlet.class, new InfoServlet(), infoProperties);
 ----
-<1> We specify `httpContext.id` property, so servlets will be registered in correct _web application_
+<1> We specify `osgi.http.whiteboard.context.select` property, so servlets will be registered in correct _web application_
 <2> `osgi.http.whiteboard.servlet.name` specifies servlet name (`javax.servlet.GenericServlet.getServletName()`)
 <3> `osgi.http.whiteboard.servlet.pattern` specifies an array of URL patterns for the servlet (just like in `web.xml`)
 
@@ -920,52 +916,20 @@ We can check this example by browsing to http://localhost:8181/app3/info.
 `mvn:org.jboss.fuse.quickstarts.security/keycloak-whiteboard-blueprint/<version>` quickstarts builds on what was
 shown in `keycloak-whiteboard` example, but this time with less Java code and with more XML.
 
-As mentioned earlier, `pax-web-extender-war` doesn't track all the possible components that may be registered using
-`org.ops4j.pax.web.service.WebContainer`. However `org.keycloak.adapters.osgi.undertow.PaxWebIntegrationService`
-saves us from some boilerplate code.
-
-`org.keycloak.adapters.osgi.undertow.PaxWebIntegrationService` can be declared in blueprint.xml using:
-[source,xml,options="nowrap"]
-----
-<bean id="keycloakPaxWebIntegration" class="org.keycloak.adapters.osgi.undertow.PaxWebIntegrationService"
-        init-method="start" destroy-method="stop">
-    <property name="bundleContext" ref="blueprintBundleContext" />
-    <property name="constraintMappings">
-        <list>
-            <bean class="org.keycloak.adapters.osgi.PaxWebSecurityConstraintMapping">
-                <property name="url" value="/info/*" />
-                <property name="authentication" value="true" /> <!-- true is default -->
-                <property name="roles">
-                    <list>
-                        <value>admin</value>
-                    </list>
-                </property>
-            </bean>
-        </list>
-    </property>
-</bean>
-----
-
-Thanks to `init-method="start"`, these calls are performed by keycloak utility:
-
-* `org.ops4j.pax.web.service.WebContainer.registerConstraintMapping()`
-* `org.ops4j.pax.web.service.WebContainer.registerLoginConfig()`
-
-With previous quickstarts, it had to be done manually.
+All required services can be registered using pure Blueprint approach without a need to use helper class `org.keycloak.adapters.osgi.undertow.PaxWebIntegrationService`.
 
 The remaining part of blueprint.xml is setting up servlet beans and registering them as OSGi services to be processed
 by pax-web-extender-whiteboard:
 [source,xml,options="nowrap"]
 ----
-<bean id="infoServlet" class="org.jboss.fuse.quickstarts.security.keycloak.wb.servlets.InfoServlet"
-    depends-on="keycloakPaxWebIntegration" />
+<bean id="infoServlet" class="org.jboss.fuse.quickstarts.security.keycloak.wb.servlets.InfoServlet" />
 
 <service ref="infoServlet" interface="javax.servlet.Servlet">
     <service-properties>
         <entry key="osgi.http.whiteboard.servlet.name" value="info-servlet" />
         <entry key="osgi.http.whiteboard.servlet.pattern">
             <array value-type="java.lang.String">
-                <value>/info</value>
+                <value>/info/*</value>
             </array>
         </entry>
     </service-properties>
@@ -1454,16 +1418,10 @@ We should see something like this in logs (indication of servlet context process
 +
 [listing,options="nowrap"]
 ----
-2022-09-21 11:57:53,549 INFO  {fileinstall-/data/servers/fuse-karaf-7.11.1.fuse-7_11_1-00005/etc} [org.apache.felix.fileinstall.internal.Util$OsgiLogger.log()] (Util.java:205) : Updating configuration {org.ops4j.pax.web.context~cxf} from /data/servers/fuse-karaf-7.11.1.fuse-7_11_1-00005/etc/org.ops4j.pax.web.context-cxf.cfg
-2022-09-21 11:57:53,550 INFO  {CM Configuration Updater (Update: pid=org.ops4j.pax.web.context~cxf)} [org.ops4j.pax.web.service.internal.HttpContextProcessing.updated()] (HttpContextProcessing.java:88) : Updated configuration for pid=org.ops4j.pax.web.context~cxf
-2022-09-21 11:57:53,551 INFO  {paxweb-context-4-thread-2} [org.ops4j.pax.web.service.internal.HttpContextProcessing$HttpContextTracker.addingBundle()] (HttpContextProcessing.java:366) : Found bundle "org.apache.cxf.cxf-rt-transports-http", scheduling customization of its WebContainer
-2022-09-21 11:57:53,551 INFO  {paxweb-context-4-thread-2} [org.ops4j.pax.web.service.internal.HttpContextProcessing$HttpContextTracker.processContext()] (HttpContextProcessing.java:216) : Customizing WebContainer for bundle org.apache.cxf.cxf-rt-transports-http/3.3.6.fuse-7_11_1-00004
-2022-09-21 11:57:53,552 INFO  {paxweb-context-4-thread-2} [org.ops4j.pax.web.service.internal.HttpContextProcessing$HttpContextTracker.processContext()] (HttpContextProcessing.java:233) : Setting context parameters in WebContainer for bundle "org.apache.cxf.cxf-rt-transports-http": {keycloak.config.resolver=org.keycloak.adapters.osgi.HierarchicalPathBasedKeycloakConfigResolver}
-2022-09-21 11:57:53,552 INFO  {paxweb-context-4-thread-2} [org.ops4j.pax.web.service.undertow.internal.Context.stop()] (Context.java:176) : Stopping context /
-2022-09-21 11:57:53,552 INFO  {paxweb-context-4-thread-2} [org.ops4j.pax.web.service.undertow.internal.Context.destroy()] (Context.java:232) : destroying context DefaultHttpContext [bundle=org.apache.cxf.cxf-rt-transports-http [116], contextID=default], with context path:
-2022-09-21 11:57:53,556 INFO  {paxweb-context-4-thread-2} [org.ops4j.pax.web.service.internal.HttpContextProcessing$HttpContextTracker.processContext()] (HttpContextProcessing.java:239) : Registering login configuration in WebContainer for bundle "org.apache.cxf.cxf-rt-transports-http": method=KEYCLOAK, realm=4c1af59b-6815-4282-b854-7991e9c06d45
-2022-09-21 11:57:53,557 INFO  {paxweb-context-4-thread-2} [org.ops4j.pax.web.service.internal.HttpContextProcessing$HttpContextTracker.processContext()] (HttpContextProcessing.java:251) : Registering security mappings in WebContainer for bundle "org.apache.cxf.cxf-rt-transports-http": SecurityConstraintsMapping{name='cxf', url='/cxf/*', roles=[admin, superuser]}
-2022-09-21 11:57:53,558 INFO  {paxweb-context-4-thread-2} [org.ops4j.pax.web.service.undertow.internal.Context.start()] (Context.java:165) : Starting context /
+2023-02-28 13:54:22,756 INFO  {paxweb-context-7-thread-1} [org.ops4j.pax.web.service.internal.HttpContextProcessing$HttpContextTracker.processContext()] (HttpContextProcessing.java:247) : Customizing OsgiContextModel{HS,id=OCM-45,name='default',path='/',bundle=org.apache.cxf.cxf-rt-transports-http,context=DefaultHttpContext{bundle=org.apache.cxf.cxf-rt-transports-http [121],contextId='default'}}
+2023-02-28 13:54:22,757 INFO  {paxweb-context-7-thread-1} [org.ops4j.pax.web.service.internal.HttpContextProcessing$HttpContextTracker.processContext()] (HttpContextProcessing.java:399) : Setting context parameters in OsgiContextModel{HS,id=OCM-45,name='default',path='/',bundle=org.apache.cxf.cxf-rt-transports-http,context=DefaultHttpContext{bundle=org.apache.cxf.cxf-rt-transports-http [121],contextId='default'}}
+2023-02-28 13:54:22,758 INFO  {paxweb-context-7-thread-1} [org.ops4j.pax.web.service.internal.HttpContextProcessing$HttpContextTracker.processContext()] (HttpContextProcessing.java:408) : Registering login configuration in OsgiContextModel{HS,id=OCM-45,name='default',path='/',bundle=org.apache.cxf.cxf-rt-transports-http,context=DefaultHttpContext{bundle=org.apache.cxf.cxf-rt-transports-http [121],contextId='default'}}: method=KEYCLOAK, realm=default
+2023-02-28 13:54:22,759 INFO  {paxweb-context-7-thread-1} [org.ops4j.pax.web.service.internal.HttpContextProcessing$HttpContextTracker.processContext()] (HttpContextProcessing.java:427) : Registering security mappings in OsgiContextModel{HS,id=OCM-45,name='default',path='/',bundle=org.apache.cxf.cxf-rt-transports-http,context=DefaultHttpContext{bundle=org.apache.cxf.cxf-rt-transports-http [121],contextId='default'}}
 ----
 . Install the example:
 +

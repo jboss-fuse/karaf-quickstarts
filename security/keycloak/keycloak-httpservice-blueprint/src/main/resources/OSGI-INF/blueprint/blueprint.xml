@@ -30,6 +30,7 @@
         <property name="webContainer" ref="webContainer" />
         <property name="infoServlet" ref="infoServlet" />
         <property name="logoutServlet" ref="logoutServlet" />
+        <property name="bundleContext" ref="blueprintBundleContext" />
     </bean>
 
 </blueprint>

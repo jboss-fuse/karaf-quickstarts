@@ -221,6 +221,7 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Activator>org.jboss.fuse.quickstarts.security.keycloak.wb.Activator</Bundle-Activator>
                         <Import-Package>
+                            org.keycloak.adapters.osgi,
                             *
                         </Import-Package>
                         <Export-Package />

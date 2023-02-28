@@ -21,10 +21,11 @@ import java.util.Hashtable;
 
 import org.jboss.fuse.quickstarts.security.keycloak.hs.servlets.InfoServlet;
 import org.jboss.fuse.quickstarts.security.keycloak.hs.servlets.LogoutServlet;
+import org.ops4j.pax.web.service.PaxWebConstants;
 import org.ops4j.pax.web.service.WebContainer;
-import org.ops4j.pax.web.service.WebContainerConstants;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
 import org.osgi.service.http.HttpContext;
 import org.osgi.service.http.HttpService;
 import org.osgi.util.tracker.ServiceTracker;
@@ -49,19 +50,29 @@ public class NamedHttpContextActivator implements BundleActivator {
         http = wcTracker.waitForService(10000);
 
         if (http != null) {
+            // this call creates bundle-specific instance of org.osgi.service.http.HttpContext
+            // with "default" id. Using the same context to register different objects (servlets, filters,
+            // login configurations, ...) ensures that the objects will be registered in single
+            // web application
             httpContext = http.createDefaultHttpContext();
+
+            // In order to change the context path of HttpService based context, we have to register it with
+            // chose httpContext.path property (legacy method)
+            // so "/info" servlet will be accessible using "http://localhost:8181/app1/info"
+
+            Hashtable<String, Object> properties = new Hashtable<>();
+            properties.put(PaxWebConstants.SERVICE_PROPERTY_HTTP_CONTEXT_ID, "default");
+            properties.put(PaxWebConstants.SERVICE_PROPERTY_HTTP_CONTEXT_PATH, "/app1");
+            context.registerService(HttpContext.class, httpContext, properties);
 
             // equivalent of web.xml's /web-app/context-param to configure Keycloak config resolver
             // <context-param>
             //     <param-name>keycloak.config.resolver</param-name>
             //     <param-value>org.keycloak.adapters.osgi.PathBasedKeycloakConfigResolver</param-value>
             // </context-param>
-            Dictionary<String, String> init = new Hashtable<>();
+            Dictionary<String, Object> init = new Hashtable<>();
             init.put("keycloak.config.resolver", "org.keycloak.adapters.osgi.PathBasedKeycloakConfigResolver");
-            // this is the way to set context path - javax.servlet.http.HttpServletRequest.getContextPath()
-            // so "/info" servlet will be accessible using "http://localhost:8181/app1/info"
-            init.put(WebContainerConstants.CONTEXT_NAME, "app1");
-            http.setContextParam(init, httpContext);
+            http.setContextParams(init, httpContext);
 
             // set login configuration, so we can delegate to Keycloak, equivalent of:
             // <login-config>
@@ -90,7 +101,7 @@ public class NamedHttpContextActivator implements BundleActivator {
     }
 
     @Override
-    public void stop(BundleContext context) throws Exception {
+    public void stop(BundleContext context) {
         if (http != null) {
             http.unregisterConstraintMapping(httpContext);
             http.unregister("/info");

@@ -59,9 +59,9 @@ public class DefaultHttpContextActivator implements BundleActivator {
             //     <param-name>keycloak.config.resolver</param-name>
             //     <param-value>org.keycloak.adapters.osgi.PathBasedKeycloakConfigResolver</param-value>
             // </context-param>
-            Dictionary<String, String> init = new Hashtable<>();
+            Dictionary<String, Object> init = new Hashtable<>();
             init.put("keycloak.config.resolver", "org.keycloak.adapters.osgi.PathBasedKeycloakConfigResolver");
-            http.setContextParam(init, httpContext);
+            http.setContextParams(init, httpContext);
 
             // set login configuration, so we can delegate to Keycloak, equivalent of:
             // <login-config>
@@ -90,7 +90,7 @@ public class DefaultHttpContextActivator implements BundleActivator {
     }
 
     @Override
-    public void stop(BundleContext context) throws Exception {
+    public void stop(BundleContext context) {
         if (http != null) {
             http.unregisterConstraintMapping(httpContext);
             http.unregister("/info");

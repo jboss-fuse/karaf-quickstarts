@@ -231,6 +231,7 @@
                         <Import-Package>
                             javax.servlet,
                             javax.servlet.http,
+                            org.keycloak.adapters,
                             org.slf4j
                         </Import-Package>
                         <Export-Package />

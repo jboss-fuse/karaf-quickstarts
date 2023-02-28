@@ -119,6 +119,11 @@
             <artifactId>pax-web-api</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.ops4j.pax.web</groupId>
+            <artifactId>pax-web-extender-whiteboard</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
         <!-- Logging -->
 
@@ -215,6 +220,7 @@
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Import-Package>
+                            org.keycloak.adapters.osgi,
                             *
                         </Import-Package>
                         <Export-Package />

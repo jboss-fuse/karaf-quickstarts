@@ -39,9 +39,9 @@
         <!-- versions of dependencies not inherited from BOM, but required to filter adoc/md files in assembly -->
         <version.io.hawt>2.0.0.fuse-sb2-7_11_1-00013</version.io.hawt>
         <version.org.fusesource.camel-sap>7.11.1.fuse-sb2-7_11_1-00013</version.org.fusesource.camel-sap>
-        <version.org.keycloak>18.0.0.redhat-00001</version.org.keycloak>
-        <version.org.keycloak.product>18.0.0.redhat-00001</version.org.keycloak.product>
-        <version.org.keycloak.rhsso>7.6.0.GA</version.org.keycloak.rhsso>
+        <version.org.keycloak>18.0.6.redhat-00001</version.org.keycloak>
+        <version.org.keycloak.product>18.0.6.redhat-00001</version.org.keycloak.product>
+        <version.org.keycloak.rhsso>7.6.2.GA</version.org.keycloak.rhsso>
 
         <!-- Plugins from org.apache.maven.plugins -->
         <version.plugin.maven-assembly-plugin>3.1.0</version.plugin.maven-assembly-plugin>

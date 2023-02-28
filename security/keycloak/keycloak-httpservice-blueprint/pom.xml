@@ -215,6 +215,8 @@
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Import-Package>
+                            org.keycloak.adapters,
+                            org.keycloak.adapters.osgi,
                             *
                         </Import-Package>
                         <Export-Package />
