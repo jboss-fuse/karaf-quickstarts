@@ -20,8 +20,9 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 import javax.servlet.Servlet;
 
+import org.ops4j.pax.web.service.PaxWebConstants;
 import org.ops4j.pax.web.service.WebContainer;
-import org.ops4j.pax.web.service.WebContainerConstants;
+import org.osgi.framework.BundleContext;
 import org.osgi.service.http.HttpContext;
 
 public class ServletRegistration {
@@ -31,14 +32,17 @@ public class ServletRegistration {
 
     private WebContainer webContainer;
 
+    private BundleContext bundleContext;
+
     private HttpContext httpContext;
 
     public void start() throws Exception {
         httpContext = webContainer.createDefaultHttpContext();
 
-        Dictionary<String, String> init = new Hashtable<>();
-        init.put(WebContainerConstants.CONTEXT_NAME, "app2");
-        webContainer.setContextParam(init, httpContext);
+        Hashtable<String, Object> properties = new Hashtable<>();
+        properties.put(PaxWebConstants.SERVICE_PROPERTY_HTTP_CONTEXT_ID, "default");
+        properties.put(PaxWebConstants.SERVICE_PROPERTY_HTTP_CONTEXT_PATH, "/app2");
+        bundleContext.registerService(HttpContext.class, httpContext, properties);
 
         webContainer.registerLoginConfig("KEYCLOAK", "hs", null, null, httpContext);
 
@@ -67,6 +71,10 @@ public class ServletRegistration {
 
     public void setLogoutServlet(Servlet logoutServlet) {
         this.logoutServlet = logoutServlet;
+    }
+
+    public void setBundleContext(BundleContext bundleContext) {
+        this.bundleContext = bundleContext;
     }
 
 }

@@ -1,4 +1,4 @@
-/**
+/*
  *  Copyright 2005-2015 Red Hat, Inc.
  *
  *  Red Hat licenses this file to you under the Apache License, version
@@ -18,7 +18,6 @@ package org.jboss.fuse.quickstarts.security.keycloak.hs.servlets;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,17 +30,19 @@ public class InfoServlet extends HttpServlet {
     public static Logger LOG = LoggerFactory.getLogger(InfoServlet.class);
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
 
         if (req.getUserPrincipal() != null) {
             StringWriter sw = new StringWriter();
             byte[] buf = new byte[4096];
-            int read = -1;
+            int read;
             try (InputStream is = getClass().getResourceAsStream("/page.html")) {
-                while ((read = is.read(buf, 0, 4096)) > 0) {
-                    sw.write(new String(buf, 0, read));
+                if (is != null) {
+                    while ((read = is.read(buf, 0, 4096)) > 0) {
+                        sw.write(new String(buf, 0, read));
+                    }
                 }
             }
 
