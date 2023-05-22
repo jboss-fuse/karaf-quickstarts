@@ -22,7 +22,7 @@
 
     <groupId>org.jboss.fuse.quickstarts.security</groupId>
     <artifactId>keycloak-whiteboard-blueprint</artifactId>
-    <version>7.12.0.redhat-SNAPSHOT</version>
+    <version>7.12.0.fuse-7_12_0-00012</version>
     <packaging>bundle</packaging>
 
     <name>Red Hat Fuse :: Quickstarts :: Security :: Keycloak :: HTTP Whiteboard/Blueprint</name>
@@ -35,7 +35,7 @@
         <skip.quickstarts.tests>true</skip.quickstarts.tests>
 
         <!-- version of BOM -->
-        <version.org.jboss.redhat-fuse>7.11.1.fuse-sb2-7_11_1-00017</version.org.jboss.redhat-fuse>
+        <version.org.jboss.redhat-fuse>7.12.0.fuse-7_12_0-00012</version.org.jboss.redhat-fuse>
 
         <!-- Plugins from org.apache.maven.plugins -->
         <version.plugin.maven-compiler-plugin>3.7.0</version.plugin.maven-compiler-plugin>
