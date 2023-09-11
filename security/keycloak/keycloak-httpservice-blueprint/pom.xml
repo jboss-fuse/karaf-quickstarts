@@ -22,7 +22,7 @@
 
     <groupId>org.jboss.fuse.quickstarts.security</groupId>
     <artifactId>keycloak-httpservice-blueprint</artifactId>
-    <version>7.12.0.redhat-SNAPSHOT</version>
+    <version>7.12.1.redhat-SNAPSHOT</version>
     <packaging>bundle</packaging>
 
     <name>Red Hat Fuse :: Quickstarts :: Security :: Keycloak :: HTTP Service/Blueprint</name>
